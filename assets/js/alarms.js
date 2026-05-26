@@ -15,6 +15,36 @@ const Alarms = (() => {
     if (typeof App !== "undefined") App.refresh();
   }
 
+  /* --- Push bildirim --- */
+  function canNotify() { return "Notification" in window; }
+
+  function notifyIfTriggered(alarm) {
+    if (!canNotify() || Notification.permission !== "granted") return;
+    const key = `alm_notified_${alarm.id}`;
+    if (sessionStorage.getItem(key)) return; // bu oturumda zaten bildirildi
+    sessionStorage.setItem(key, "1");
+    const dir = alarm.dir === "below" ? "altına düştü" : "üstüne çıktı";
+    try {
+      new Notification(`⚠️ Alarm: ${alarm.symbol}`, {
+        body: `${alarm.symbol} fiyatı ${alarm.price} ${dir}!`,
+        tag:  String(alarm.id),
+        icon: "/finans-bot/assets/icon.png",
+      });
+    } catch { /* sessiz geç */ }
+  }
+
+  function requestNotification() {
+    if (!canNotify()) { alert("Bu tarayıcı push bildirimlerini desteklemiyor."); return; }
+    Notification.requestPermission().then(p => {
+      const btn = document.getElementById("notifPermBtn");
+      if (p === "granted") {
+        if (btn) { btn.textContent = "🔔 Bildirimler Aktif"; btn.style.background = "var(--green)"; btn.style.color = "#000"; }
+      } else {
+        if (btn) btn.textContent = "🔕 İzin Reddedildi";
+      }
+    });
+  }
+
   function render(stocksFromReport) {
     const el = document.getElementById("alarmsSection");
     if (!el) return;
@@ -28,15 +58,22 @@ const Alarms = (() => {
         (a.dir === "below" && cur < a.price) ||
         (a.dir === "above" && cur > a.price)
       );
+      if (triggered) notifyIfTriggered(a);
       return `
         <tr style="${triggered ? "background:rgba(255,214,0,.08)" : ""}">
           <td><strong>${a.symbol}</strong></td>
-          <td>${sign} $${a.price}</td>
-          <td>${cur != null ? "$" + cur.toFixed(2) : "—"}</td>
+          <td>${sign} ${a.price}</td>
+          <td>${cur != null ? cur.toFixed(2) : "—"}</td>
           <td>${triggered ? "🔔 Tetiklendi" : "⏳ Bekliyor"}</td>
           <td><button onclick="Alarms.remove(${a.id})" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button></td>
         </tr>`;
     }).join("");
+
+    const notifPerm = canNotify() ? Notification.permission : "denied";
+    const notifBtnLabel = notifPerm === "granted" ? "🔔 Bildirimler Aktif" : "🔔 Bildirimlere İzin Ver";
+    const notifBtnStyle = notifPerm === "granted"
+      ? "background:var(--green);color:#000;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:default"
+      : "background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer";
 
     el.innerHTML = `
       <h2 class="section-title">🔔 Fiyat Alarmları</h2>
@@ -50,12 +87,16 @@ const Alarms = (() => {
           <option value="below">Altına düşünce</option>
           <option value="above">Üstüne çıkınca</option>
         </select>
-        <input id="al-price" type="number" placeholder="Hedef fiyat ($)" step="0.01" style="width:140px" />
+        <input id="al-price" type="number" placeholder="Hedef fiyat" step="0.01" style="width:140px" />
         <button onclick="Alarms.addFromUI()">Alarm Ekle</button>
       </div>
-      <p style="font-size:11px;color:var(--muted);margin-top:8px">
-        Alarmlar GitHub Actions tarafından her 30 dakikada kontrol edilir. Telegram'a bildirim gönderilir.
-      </p>`;
+      <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+        <button id="notifPermBtn" onclick="Alarms.requestNotification()" style="${notifBtnStyle}"
+                ${notifPerm === "granted" ? "disabled" : ""}>${notifBtnLabel}</button>
+        <p style="font-size:11px;color:var(--muted);margin:0">
+          Alarm tetiklendiğinde masaüstü bildirimi alırsınız. GitHub Actions ayrıca Telegram'a bildirim gönderir.
+        </p>
+      </div>`;
   }
 
   function addFromUI() {
@@ -67,5 +108,5 @@ const Alarms = (() => {
     if (typeof App !== "undefined") App.refresh();
   }
 
-  return { render, add, remove, addFromUI, load };
+  return { render, add, remove, addFromUI, load, requestNotification };
 })();

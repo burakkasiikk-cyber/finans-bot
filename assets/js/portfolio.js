@@ -94,6 +94,27 @@ const Portfolio = (() => {
       </div>`;
   }
 
+  function buildPnlChart(entries) {
+    const withPnl = entries.filter(e => e.pnl_pct != null);
+    if (!withPnl.length) return "";
+    const maxAbs = Math.max(...withPnl.map(e => Math.abs(e.pnl_pct)), 1);
+    const bars = withPnl.map(e => {
+      const pct   = e.pnl_pct;
+      const color = pct >= 0 ? "var(--green)" : "var(--red)";
+      const w     = (Math.abs(pct) / maxAbs * 60).toFixed(1);
+      const label = `${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%`;
+      return `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+          <div style="width:52px;font-size:11px;font-weight:700;text-align:right;color:var(--text);flex-shrink:0">${e.symbol}</div>
+          <div style="flex:1;background:var(--panel-2);border-radius:4px;height:18px;overflow:hidden">
+            <div style="height:100%;width:${w}%;background:${color};opacity:.85;border-radius:4px;transition:width .5s ease"></div>
+          </div>
+          <div style="width:58px;font-size:11px;font-weight:700;color:${color}">${label}</div>
+        </div>`;
+    }).join("");
+    return `<div class="card" style="margin-bottom:14px"><h2>📊 Getiri Grafiği</h2>${bars}</div>`;
+  }
+
   function renderPortfolio(stocksFromReport, macro) {
     const container = document.getElementById("portfolioSection");
     if (!container) return;
@@ -115,6 +136,7 @@ const Portfolio = (() => {
       </div>`;
 
     const comparisonBlock = buildComparisonBlock(result.total_pnl_pct, macro);
+    const chartBlock      = buildPnlChart(result.entries);
 
     const rows = result.entries.map(e => `
       <tr>
@@ -131,6 +153,7 @@ const Portfolio = (() => {
     container.innerHTML = `
       <h2 class="section-title">💼 Kişisel Portföy</h2>
       ${totalBlock}
+      ${chartBlock}
       ${comparisonBlock}
       <table class="portfolio-table">
         <thead><tr>

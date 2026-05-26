@@ -214,3 +214,28 @@ footer a, .disclaimer a { color: var(--accent); }
 .tab:hover:not(.active) { color: var(--text); }
 #content { padding: 20px 20px 0; }
 .section-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+
+/* === İzleme listesi yıldız butonları === */
+.star-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 15px; padding: 2px 4px; line-height: 1;
+  opacity: .6; transition: opacity .15s, transform .15s;
+}
+.star-btn:hover { opacity: 1; transform: scale(1.2); }
+
+.star-btn-detail {
+  background: none; border: none; cursor: pointer;
+  font-size: 18px; padding: 2px 6px; line-height: 1;
+  opacity: .7; transition: opacity .15s, transform .15s;
+}
+.star-btn-detail:hover { opacity: 1; transform: scale(1.15); }
+
+/* === Dış haber bağlantıları === */
+.ext-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--panel-2); border: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+  padding: 7px 13px; border-radius: 10px; font-size: 12px; font-weight: 600;
+  transition: border-color .15s, color .15s;
+}
+.ext-link:hover { border-color: var(--accent); color: var(--accent); }
