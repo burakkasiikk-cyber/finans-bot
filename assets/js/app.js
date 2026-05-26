@@ -223,9 +223,9 @@ function _renderLWChart(el, bars) {
   });
 
   const series = chart.addCandlestickSeries({
-    upColor:          "var(--green)",  downColor:          "var(--red)",
-    borderUpColor:    "var(--green)",  borderDownColor:    "var(--red)",
-    wickUpColor:      "var(--green)",  wickDownColor:      "var(--red)",
+    upColor:          "#2ecc71",  downColor:          "#ff5c6c",
+    borderUpColor:    "#2ecc71",  borderDownColor:    "#ff5c6c",
+    wickUpColor:      "#2ecc71",  wickDownColor:      "#ff5c6c",
   });
   series.setData(bars);
   chart.timeScale().fitContent();
