@@ -10,7 +10,39 @@ from scripts.fetch_bist import fetch_bist_stock
 from scripts.fetch_macro import fetch_macro
 
 US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
-BIST_STOCKS = ["THYAO", "GARAN", "KCHOL", "TUPRS", "EREGL", "SISE", "ASELS", "EKDMR"]
+BIST_STOCKS = [
+    # Bankalar
+    "AKBNK", "GARAN", "HALKB", "ISCTR", "VAKBN", "YKBNK", "QNBFB", "ALBRK", "SKBNK",
+    # Holdingler
+    "KCHOL", "SAHOL", "AGHOL", "DOHOL", "ECZYT",
+    # Sanayi / Petrokimya / Demir-Çelik
+    "TUPRS", "EREGL", "KRDMD", "PETKM", "SODA", "BRSAN", "GUBRF",
+    # İnşaat / Çimento
+    "AKCNS", "CIMSA", "BSOKE", "CEMTS", "ENKAI", "TKFEN",
+    # Havacılık / Ulaşım
+    "THYAO", "PGSUS", "TAVHL", "RYSAS",
+    # Telekomünikasyon
+    "TCELL", "TTKOM",
+    # Teknoloji / Savunma / Yazılım
+    "ASELS", "EKDMR", "LOGO", "NETAS", "INDES",
+    # Perakende
+    "BIMAS", "MIGROS", "BIZIM", "SOKM",
+    # Otomotiv
+    "TOASO", "FROTO", "OTKAR", "DOAS",
+    # Tüketim / Gıda / İçecek
+    "ARCLK", "VESTL", "ULKER", "AEFES", "CCOLA", "KONTR", "MAVI",
+    # Enerji
+    "AKSEN", "ODAS", "AYEN", "ZOREN",
+    # GYO / Gayrimenkul
+    "EMLAK", "ISGYO", "ALGYO", "AKFGY",
+    # Madencilik
+    "KOZAL", "KOZAA", "ALKIM", "KARSN",
+    # Sigorta
+    "ANHYT", "AKGRT",
+    # Diğer
+    "SISE", "EGEEN", "DEVA", "ECILC", "NTHOL", "KLNMA", "ISDMR", "GOLTS",
+    "TURSG", "HURGZ", "REEDR", "IPEKE", "FENER", "BJKAS", "GSRAY", "TSPOR",
+]
 
 
 def run() -> dict:
@@ -31,6 +63,7 @@ def run() -> dict:
     for sym in BIST_STOCKS:
         print(f"  {sym}")
         stocks.append(fetch_bist_stock(sym))
+        time.sleep(0.5)  # yfinance 429 önlemi
 
     valid  = [s for s in stocks if "error" not in s and s.get("score") is not None]
     errors = [s for s in stocks if "error" in s]
