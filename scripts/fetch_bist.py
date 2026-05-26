@@ -60,18 +60,36 @@ def fetch_bist_stock(symbol: str) -> dict:
 
     verdict_label, verdict_key = verdict_of(overall)
 
+    # Son 60 işlem günü fiyat geçmişi (grafik için)
+    try:
+        hist = ticker.history(period="3mo")
+        price_history = [
+            {
+                "t": int(ts.timestamp()),
+                "o": round(float(row["Open"]),  2),
+                "h": round(float(row["High"]),  2),
+                "l": round(float(row["Low"]),   2),
+                "c": round(float(row["Close"]), 2),
+            }
+            for ts, row in hist.iterrows()
+            if row["Close"] > 0
+        ][-60:]
+    except Exception:
+        price_history = []
+
     return {
-        "symbol":      symbol,
-        "name":        info.get("longName", symbol),
-        "exchange":    "BIST",
-        "price":       price,
-        "change_pct":  change_pct,
-        "score":       overall,
-        "verdict":     verdict_label,
-        "verdict_key": verdict_key,
-        "risk":        risk_level(overall),
-        "dimensions":  dims,
-        "pros":        [],
-        "cons":        [],
-        "dividends":   [],
+        "symbol":        symbol,
+        "name":          info.get("longName", symbol),
+        "exchange":      "BIST",
+        "price":         price,
+        "change_pct":    change_pct,
+        "score":         overall,
+        "verdict":       verdict_label,
+        "verdict_key":   verdict_key,
+        "risk":          risk_level(overall),
+        "dimensions":    dims,
+        "pros":          [],
+        "cons":          [],
+        "dividends":     [],
+        "price_history": price_history,
     }

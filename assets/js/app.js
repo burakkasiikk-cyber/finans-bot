@@ -192,79 +192,83 @@ function renderReportStocks(stocks) {
   document.getElementById("sectorSelect")?.addEventListener("change", refresh);
 }
 
-/* ---- Grafik bölümü ---- */
-function loadTVWidget(symbol, exchange) {
-  const id  = "tv_chart_widget";
-  const el  = document.getElementById(id);
+/* ---- Fiyat Grafiği (Lightweight Charts + Yahoo Finance) ---- */
+function _chartFallback(el, symbol) {
+  el.style.minHeight = "auto";
+  el.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:8px 0">
+    Grafik yüklenemedi.
+    <a href="https://tr.tradingview.com/chart/?symbol=BIST%3A${encodeURIComponent(symbol)}"
+       target="_blank" rel="noopener" style="color:var(--accent)">TradingView'da aç →</a>
+  </div>`;
+}
+
+function _renderLWChart(el, bars) {
+  el.innerHTML = "";
+  const chart = LightweightCharts.createChart(el, {
+    width:  el.clientWidth || 680,
+    height: 300,
+    layout: {
+      background: { type: "solid", color: "#121826" },
+      textColor: "#8a96ad",
+    },
+    grid: {
+      vertLines: { color: "#232c40" },
+      horzLines: { color: "#232c40" },
+    },
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+    rightPriceScale: { borderColor: "#232c40", scaleMargins: { top: 0.08, bottom: 0.08 } },
+    timeScale:       { borderColor: "#232c40", timeVisible: false },
+    handleScroll:    { mouseWheel: false, pressedMouseMove: true },
+    handleScale:     { mouseWheel: false, pinch: false },
+  });
+
+  const series = chart.addCandlestickSeries({
+    upColor:          "var(--green)",  downColor:          "var(--red)",
+    borderUpColor:    "var(--green)",  borderDownColor:    "var(--red)",
+    wickUpColor:      "var(--green)",  wickDownColor:      "var(--red)",
+  });
+  series.setData(bars);
+  chart.timeScale().fitContent();
+
+  new ResizeObserver(() => {
+    if (el.clientWidth > 0) chart.applyOptions({ width: el.clientWidth });
+  }).observe(el);
+}
+
+function loadPriceChart(symbol) {
+  const el = document.getElementById("priceChartContainer");
   if (!el) return;
 
-  const isBIST = (exchange || "BIST") === "BIST";
+  // Veri report.json'dan gelir (GitHub Actions tarafından önceden hesaplanmış)
+  const stock   = (_reportData?.stocks || []).find(s => s.symbol === symbol);
+  const history = stock?.price_history;
 
-  if (isBIST) {
-    /* BIST: TradingView ücretsiz widget BIST hisselerini desteklemiyor.
-       Harici grafik linkleri göster. */
-    el.style.minHeight = "auto";
-    el.innerHTML = `
-      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">
-        Grafik platformlarında aç:
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a href="https://tr.tradingview.com/chart/?symbol=BIST%3A${encodeURIComponent(symbol)}"
-           target="_blank" rel="noopener" class="ext-link">📈 TradingView</a>
-        <a href="https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}.IS/"
-           target="_blank" rel="noopener" class="ext-link">📊 Yahoo Finance</a>
-        <a href="https://tr.investing.com/search/?q=${encodeURIComponent(symbol)}"
-           target="_blank" rel="noopener" class="ext-link">📉 Investing.com TR</a>
-        <a href="https://www.isyatirim.com.tr/analiz-ve-raporlar/hisse?hisse=${encodeURIComponent(symbol)}"
-           target="_blank" rel="noopener" class="ext-link">🏦 İş Yatırım</a>
-      </div>`;
+  if (!history?.length) {
+    _chartFallback(el, symbol);
     return;
   }
 
-  /* US & diğer borsalar: TradingView widget */
-  const tvSym = symbol;
+  // Compact {t,o,h,l,c} → Lightweight Charts {time,open,high,low,close}
+  const bars = history.map(b => ({
+    time:  b.t,
+    open:  b.o,
+    high:  b.h,
+    low:   b.l,
+    close: b.c,
+  }));
 
-  function createWidget() {
-    if (!document.getElementById(id)) return;
-    try {
-      new TradingView.widget({
-        container_id:        id,
-        symbol:              tvSym,
-        theme:               "dark",
-        locale:              "tr",
-        width:               "100%",
-        height:              390,
-        interval:            "D",
-        hide_side_toolbar:   false,
-        allow_symbol_change: false,
-        save_image:          false,
-        style:               "1",
-      });
-    } catch (e) {
-      const el2 = document.getElementById(id);
-      if (el2) el2.innerHTML = `<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">
-        Grafik yüklenemedi.
-        <a href="https://tr.tradingview.com/chart/?symbol=${encodeURIComponent(tvSym)}" target="_blank" style="color:var(--accent)">TradingView'da Aç →</a>
-      </div>`;
-    }
-  }
+  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--muted);font-size:13px">
+    <div class="spinner" style="width:18px;height:18px;border-width:2px;margin:0"></div> Grafik yükleniyor…
+  </div>`;
 
-  if (typeof TradingView !== "undefined") {
-    createWidget();
+  if (typeof LightweightCharts !== "undefined") {
+    _renderLWChart(el, bars);
   } else {
-    let s = document.getElementById("tv_script");
-    if (!s) {
-      s = document.createElement("script");
-      s.id  = "tv_script";
-      s.src = "https://s3.tradingview.com/tv.js";
-      s.onload = createWidget;
-      document.head.appendChild(s);
-    } else {
-      const poll = setInterval(() => {
-        if (typeof TradingView !== "undefined") { clearInterval(poll); createWidget(); }
-      }, 300);
-      setTimeout(() => clearInterval(poll), 8000);
-    }
+    const sc = document.createElement("script");
+    sc.src = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
+    sc.onload  = () => _renderLWChart(el, bars);
+    sc.onerror = () => _chartFallback(el, symbol);
+    document.head.appendChild(sc);
   }
 }
 
@@ -434,8 +438,8 @@ function _showStockDetail(stock) {
     <div class="card"><h2>Temel Veriler</h2><div class="metrics">${metrics}</div></div>
 
     <div class="card">
-      <h2>📈 Fiyat Grafiği</h2>
-      <div id="tv_chart_widget" style="min-height:390px;border-radius:8px;overflow:hidden"></div>
+      <h2>📈 Fiyat Grafiği <span style="font-size:10px;color:var(--muted);font-weight:400">Son 3 ay</span></h2>
+      <div id="priceChartContainer" style="height:300px;border-radius:8px;overflow:hidden"></div>
     </div>
 
     <div class="card">
@@ -445,7 +449,7 @@ function _showStockDetail(stock) {
 
     <div class="disclaimer">⚠️ Bu skor; halka açık temel ve teknik verilerden otomatik, kural tabanlı bir hesaplamadır. Yatırım tavsiyesi değildir.</div>`;
 
-  loadTVWidget(stock.symbol, stock.exchange || "BIST");
+  loadPriceChart(stock.symbol);
   loadBISTNews(stock.symbol);
 }
 
