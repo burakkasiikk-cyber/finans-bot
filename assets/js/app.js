@@ -2,6 +2,11 @@
    Dashboard — report.json'dan beslenen otomatik görünüm
    ============================================================ */
 let _reportData = null;
+let _activeTab  = "scanner";
+
+function _esc(s) {
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
 
 async function loadReport() {
   try {
@@ -44,7 +49,7 @@ function renderReportStocks(stocks) {
   }
   const rows = stocks.map((s, i) => {
     if (s.error) {
-      return `<tr><td>${i+1}</td><td><strong>${s.symbol}</strong></td><td colspan="6" style="color:var(--muted);font-size:11px">Veri alınamadı</td></tr>`;
+      return `<tr><td>${i+1}</td><td><strong>${_esc(s.symbol)}</strong></td><td colspan="6" style="color:var(--muted);font-size:11px">Veri alınamadı</td></tr>`;
     }
     const chg = s.change_pct;
     const chgStr = chg != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(1)}%` : "—";
@@ -52,9 +57,9 @@ function renderReportStocks(stocks) {
     const vColor = _verdictColor(s.verdict_key);
     return `<tr style="cursor:pointer" onclick="App.showDetail(${i})">
       <td style="color:var(--muted)">${i+1}</td>
-      <td><strong>${s.symbol}</strong><br><span style="font-size:10px;color:var(--muted)">${s.exchange || ""}</span></td>
+      <td><strong>${_esc(s.symbol)}</strong><br><span style="font-size:10px;color:var(--muted)">${_esc(s.exchange)}</span></td>
       <td><span style="font-size:18px;font-weight:700;color:${vColor}">${s.score ?? "—"}</span><span style="font-size:10px;color:var(--muted)">/100</span></td>
-      <td><span style="color:${vColor};font-weight:600;font-size:11px">${s.verdict || "—"}</span></td>
+      <td><span style="color:${vColor};font-weight:600;font-size:11px">${_esc(s.verdict)}</span></td>
       <td><div style="display:flex;gap:2px;align-items:flex-end;height:26px">${_dimBars(s.dimensions)}</div></td>
       <td>${_riskBadge(s.risk)}</td>
       <td style="color:${chgColor};font-weight:600">${chgStr}</td>
@@ -94,14 +99,14 @@ function _showStockDetail(stock) {
     </div>`;
   }).join("");
 
-  const prosHtml = (stock.pros || []).map(p => `<li>${p}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
-  const consHtml = (stock.cons || []).map(c => `<li>${c}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
+  const prosHtml = (stock.pros || []).map(p => `<li>${_esc(p)}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
+  const consHtml = (stock.cons || []).map(c => `<li>${_esc(c)}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
 
   el.innerHTML = `
     <div class="card" style="margin-top:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h2 style="margin:0">${stock.symbol} — ${stock.name || ""}</h2>
-        <span style="color:${vColor};font-weight:700;font-size:18px">${stock.score}/100 · ${stock.verdict}</span>
+        <h2 style="margin:0">${_esc(stock.symbol)} — ${_esc(stock.name)}</h2>
+        <span style="color:${vColor};font-weight:700;font-size:18px">${stock.score ?? "—"}/100 · ${_esc(stock.verdict)}</span>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div>${dimRows}</div>
@@ -131,6 +136,7 @@ async function initDashboard() {
 }
 
 function switchTab(tab, btn) {
+  _activeTab = tab;
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (btn) btn.classList.add("active");
 
@@ -138,28 +144,33 @@ function switchTab(tab, btn) {
   allSections.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = "none"; });
 
   const stocks = _reportData?.stocks || [];
-  if (tab === "scanner") {
-    document.getElementById("reportDashboard").style.display = "";
-  } else if (tab === "portfolio") {
-    document.getElementById("portfolioSection").style.display = "";
-    Portfolio.renderPortfolio(stocks, _reportData?.macro);
-  } else if (tab === "alarms") {
-    document.getElementById("alarmsSection").style.display = "";
-    Alarms.render(stocks);
-  } else if (tab === "dividends") {
-    document.getElementById("dividendSection").style.display = "";
-    Dividends.render(stocks);
+  try {
+    if (tab === "scanner") {
+      document.getElementById("reportDashboard").style.display = "";
+    } else if (tab === "portfolio") {
+      document.getElementById("portfolioSection").style.display = "";
+      Portfolio.renderPortfolio(stocks, _reportData?.macro);
+    } else if (tab === "alarms") {
+      document.getElementById("alarmsSection").style.display = "";
+      Alarms.render(stocks);
+    } else if (tab === "dividends") {
+      document.getElementById("dividendSection").style.display = "";
+      Dividends.render(stocks);
+    }
+  } catch (e) {
+    console.error("Tab render error:", e);
   }
 }
 
 function refresh() {
   const stocks = _reportData?.stocks || [];
-  const activeTab = document.querySelector(".tab.active");
-  if (!activeTab) return;
-  const label = activeTab.textContent;
-  if (label.includes("Portföy")) Portfolio.renderPortfolio(stocks, _reportData?.macro);
-  else if (label.includes("Alarm")) Alarms.render(stocks);
-  else if (label.includes("Temettü")) Dividends.render(stocks);
+  try {
+    if (_activeTab === "portfolio") Portfolio.renderPortfolio(stocks, _reportData?.macro);
+    else if (_activeTab === "alarms") Alarms.render(stocks);
+    else if (_activeTab === "dividends") Dividends.render(stocks);
+  } catch (e) {
+    console.error("Refresh error:", e);
+  }
 }
 
 const App = {
