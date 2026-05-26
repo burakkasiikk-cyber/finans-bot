@@ -140,27 +140,33 @@ function switchTab(tab, btn) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (btn) btn.classList.add("active");
 
-  // Sekme bölümlerini gizle (content dışında yaşıyor)
+  // Tüm sekme bölümlerini ve ana content'i gizle
   ["portfolioSection","alarmsSection","dividendSection"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = "none";
   });
+  const contentEl = document.getElementById("content");
 
   const stocks = _reportData?.stocks || [];
   try {
     if (tab === "scanner") {
-      // Tarayıcı: reportDashboard'u göster, hisse tablosunu yeniden çiz
+      // Tarayıcı: content'i göster, reportDashboard'u yeniden çiz
+      if (contentEl) contentEl.style.display = "";
       const rd = document.getElementById("reportDashboard");
       if (rd) { rd.style.display = ""; renderReportStocks(stocks); }
-    } else if (tab === "portfolio") {
-      document.getElementById("portfolioSection").style.display = "";
-      Portfolio.renderPortfolio(stocks, _reportData?.macro);
-    } else if (tab === "alarms") {
-      document.getElementById("alarmsSection").style.display = "";
-      Alarms.render(stocks);
-    } else if (tab === "dividends") {
-      document.getElementById("dividendSection").style.display = "";
-      Dividends.render(stocks);
+    } else {
+      // Diğer sekmeler: arama/analiz içeriğini gizle
+      if (contentEl) contentEl.style.display = "none";
+      if (tab === "portfolio") {
+        document.getElementById("portfolioSection").style.display = "";
+        Portfolio.renderPortfolio(stocks, _reportData?.macro);
+      } else if (tab === "alarms") {
+        document.getElementById("alarmsSection").style.display = "";
+        Alarms.render(stocks);
+      } else if (tab === "dividends") {
+        document.getElementById("dividendSection").style.display = "";
+        Dividends.render(stocks);
+      }
     }
   } catch (e) {
     console.error("Tab render error:", e);
