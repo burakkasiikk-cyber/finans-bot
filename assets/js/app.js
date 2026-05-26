@@ -192,10 +192,37 @@ function renderReportStocks(stocks) {
   document.getElementById("sectorSelect")?.addEventListener("change", refresh);
 }
 
-/* ---- TradingView widget ---- */
+/* ---- Grafik bölümü ---- */
 function loadTVWidget(symbol, exchange) {
-  const id    = "tv_chart_widget";
-  const tvSym = (exchange || "BIST") === "BIST" ? `BIST:${symbol}` : symbol;
+  const id  = "tv_chart_widget";
+  const el  = document.getElementById(id);
+  if (!el) return;
+
+  const isBIST = (exchange || "BIST") === "BIST";
+
+  if (isBIST) {
+    /* BIST: TradingView ücretsiz widget BIST hisselerini desteklemiyor.
+       Harici grafik linkleri göster. */
+    el.style.minHeight = "auto";
+    el.innerHTML = `
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">
+        Grafik platformlarında aç:
+      </p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="https://tr.tradingview.com/chart/?symbol=BIST%3A${encodeURIComponent(symbol)}"
+           target="_blank" rel="noopener" class="ext-link">📈 TradingView</a>
+        <a href="https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}.IS/"
+           target="_blank" rel="noopener" class="ext-link">📊 Yahoo Finance</a>
+        <a href="https://tr.investing.com/search/?q=${encodeURIComponent(symbol)}"
+           target="_blank" rel="noopener" class="ext-link">📉 Investing.com TR</a>
+        <a href="https://www.isyatirim.com.tr/analiz-ve-raporlar/hisse?hisse=${encodeURIComponent(symbol)}"
+           target="_blank" rel="noopener" class="ext-link">🏦 İş Yatırım</a>
+      </div>`;
+    return;
+  }
+
+  /* US & diğer borsalar: TradingView widget */
+  const tvSym = symbol;
 
   function createWidget() {
     if (!document.getElementById(id)) return;
@@ -214,8 +241,8 @@ function loadTVWidget(symbol, exchange) {
         style:               "1",
       });
     } catch (e) {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = `<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">
+      const el2 = document.getElementById(id);
+      if (el2) el2.innerHTML = `<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">
         Grafik yüklenemedi.
         <a href="https://tr.tradingview.com/chart/?symbol=${encodeURIComponent(tvSym)}" target="_blank" style="color:var(--accent)">TradingView'da Aç →</a>
       </div>`;
