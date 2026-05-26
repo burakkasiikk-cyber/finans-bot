@@ -100,50 +100,123 @@ function renderReportStocks(stocks) {
   document.getElementById("scannerFilter").addEventListener("input", e => applyFilter(e.target.value.trim()));
 }
 
-function _showStockDetail(stock) {
-  const el = document.getElementById("stockDetail");
-  if (!el || !stock || stock.error) return;
-  const dims = stock.dimensions || {};
-  const dimNames = { valuation:"Değerleme", profit:"Kârlılık", growth:"Büyüme", health:"Finansal Sağlık", technical:"Teknik/Momentum", analyst:"Analist Görüşü" };
-  const vColor = _verdictColor(stock.verdict_key);
+function _autoProscons(dims) {
+  const pros = [], cons = [];
+  const m = {};
+  for (const [k, d] of Object.entries(dims)) { Object.assign(m, d.metrics || {}); }
 
-  const dimRows = Object.entries(dims).map(([key, dim]) => {
-    const sc = dim.score;
-    const color = sc == null ? "var(--muted)" : sc >= 70 ? "var(--green)" : sc >= 45 ? "var(--yellow)" : "var(--red)";
-    return `<div style="margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-        <span>${dimNames[key] || key}</span>
-        <span style="color:${color};font-weight:700">${sc ?? "Veri yok"}</span>
+  const pe = m.pe, pb = m.pb, roe = m.roe, revG = m.rev_growth;
+  const cr = m.current_ratio, de = m.debt_equity, r52 = m.ret52, rp = m.range_pos;
+
+  if (pe != null && pe > 0 && pe < 12)  pros.push(`Düşük F/K oranı (${pe.toFixed(1)}×) — değerleme cazip`);
+  if (pe != null && pe > 35)             cons.push(`Yüksek F/K oranı (${pe.toFixed(1)}×) — pahalı fiyatlanmış olabilir`);
+  if (pb != null && pb < 1.5)            pros.push(`Düşük PD/DD (${pb.toFixed(2)}×) — defter değerinin altında`);
+  if (pb != null && pb > 6)              cons.push(`Yüksek PD/DD (${pb.toFixed(2)}×)`);
+  if (roe != null && roe > 15)           pros.push(`Güçlü özkaynak kârlılığı (ROE: %${roe.toFixed(1)})`);
+  if (roe != null && roe < 5)            cons.push(`Düşük özkaynak kârlılığı (ROE: %${roe != null ? roe.toFixed(1) : "—"})`);
+  if (revG != null && revG > 15)         pros.push(`Güçlü gelir büyümesi (%${revG.toFixed(1)} YoY)`);
+  if (revG != null && revG < -5)         cons.push(`Gelir daralması (%${revG.toFixed(1)} YoY)`);
+  if (cr != null && cr > 1.8)            pros.push(`Sağlıklı cari oran (${cr.toFixed(2)}×)`);
+  if (cr != null && cr < 1)              cons.push(`Düşük cari oran (${cr.toFixed(2)}×) — likidite riski`);
+  if (de != null && de < 0.5)            pros.push(`Düşük borçluluk (Borç/Özkaynak: ${de.toFixed(2)}×)`);
+  if (de != null && de > 2)              cons.push(`Yüksek borç yükü (Borç/Özkaynak: ${de.toFixed(2)}×)`);
+  if (r52 != null && r52 > 20)           pros.push(`Güçlü 52 haftalık getiri (%${r52.toFixed(1)})`);
+  if (r52 != null && r52 < -20)          cons.push(`Zayıf 52 haftalık performans (%${r52.toFixed(1)})`);
+  if (rp != null && rp > 75)             pros.push(`52 hafta zirvesine yakın (konum: %${rp.toFixed(0)})`);
+  if (rp != null && rp < 25)             cons.push(`52 hafta tabanına yakın (konum: %${rp.toFixed(0)})`);
+
+  return { pros, cons };
+}
+
+function _showStockDetail(stock) {
+  if (!stock || stock.error) return;
+  const content = document.getElementById("content");
+  if (!content) return;
+
+  const dims    = stock.dimensions || {};
+  const vColor  = _verdictColor(stock.verdict_key);
+  const score   = stock.score ?? null;
+  const ringDeg = score != null ? score * 3.6 : 0;
+
+  const dimNames = { valuation:"Değerleme", profit:"Kârlılık", growth:"Büyüme", health:"Finansal Sağlık", technical:"Teknik/Momentum", analyst:"Analist Görüşü" };
+  const dimWeights = { valuation:"20%", profit:"20%", growth:"20%", health:"15%", technical:"15%", analyst:"10%" };
+
+  const dimBars = Object.entries(dims).map(([key, dim]) => {
+    const sc  = dim.score;
+    const col = sc == null ? "var(--muted)" : sc >= 70 ? "var(--green)" : sc >= 45 ? "var(--yellow)" : "var(--red)";
+    return `<div class="dim">
+      <div class="dim-top">
+        <div class="dim-name">${dimNames[key] || key}<span class="w">ağırlık ${dimWeights[key] || ""}</span></div>
+        <div class="dim-score" style="color:${col}">${sc ?? "—"}</div>
       </div>
-      <div style="height:5px;background:var(--border);border-radius:3px">
-        <div style="height:100%;width:${sc ?? 0}%;background:${color};border-radius:3px"></div>
-      </div>
+      <div class="track"><div class="fill" style="width:${sc ?? 0}%;background:${col}"></div></div>
     </div>`;
   }).join("");
 
-  const prosHtml = (stock.pros || []).map(p => `<li>${_esc(p)}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
-  const consHtml = (stock.cons || []).map(c => `<li>${_esc(c)}</li>`).join("") || "<li style='color:var(--muted)'>—</li>";
+  // Metrik tablosu — dims içinden topla
+  const m = {};
+  for (const [, d] of Object.entries(dims)) Object.assign(m, d.metrics || {});
+  const fmtPct = v => (v != null ? (v >= 0 ? "+" : "") + v.toFixed(1) + "%" : "—");
+  const fmtFx  = v => (v != null ? v.toFixed(2) + "×" : "—");
+  const metrics = [
+    ["F/K (TTM)",        fmtFx(m.pe)],
+    ["PD/DD",            fmtFx(m.pb)],
+    ["ROE",              fmtPct(m.roe)],
+    ["Gelir Büyümesi",   fmtPct(m.rev_growth)],
+    ["Cari Oran",        fmtFx(m.current_ratio)],
+    ["Borç/Özkaynak",    fmtFx(m.debt_equity)],
+    ["52H Getiri",       fmtPct(m.ret52)],
+    ["52H Bant Konum",   m.range_pos != null ? "%" + m.range_pos.toFixed(0) : "—"],
+  ].map(([l, v]) => `<div class="metric"><div class="label">${l}</div><div class="val">${v}</div></div>`).join("");
 
-  el.innerHTML = `
-    <div class="card" style="margin-top:16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h2 style="margin:0">${_esc(stock.symbol)} — ${_esc(stock.name)}</h2>
-        <span style="color:${vColor};font-weight:700;font-size:18px">${stock.score ?? "—"}/100 · ${_esc(stock.verdict)}</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div>${dimRows}</div>
-        <div>
-          <div style="margin-bottom:12px">
-            <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">✅ Güçlü Yönler</div>
-            <ul style="padding-left:16px;margin:0;font-size:12px">${prosHtml}</ul>
-          </div>
-          <div>
-            <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">⚠️ Zayıf Yönler</div>
-            <ul style="padding-left:16px;margin:0;font-size:12px">${consHtml}</ul>
-          </div>
+  const { pros, cons } = _autoProscons(dims);
+  const prosHtml = pros.length ? pros.map(p => `<div class="pc-item pro"><div class="ic">+</div><div>${p}</div></div>`).join("") : `<div class="pc-empty">Öne çıkan güçlü yön tespit edilmedi.</div>`;
+  const consHtml = cons.length ? cons.map(c => `<div class="pc-item con"><div class="ic">!</div><div>${c}</div></div>`).join("") : `<div class="pc-empty">Belirgin risk öne çıkmıyor.</div>`;
+
+  const chg = stock.change_pct;
+  const up  = (chg ?? 0) >= 0;
+  const chgStr = chg != null ? `${up ? "▲" : "▼"} ${Math.abs(chg).toFixed(2)}%` : "";
+
+  content.style.display = "";
+  content.innerHTML = `
+    <button onclick="App.goHome()" style="background:var(--panel-2);border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;margin-bottom:16px">
+      ← Tarayıcıya Dön
+    </button>
+
+    <div class="card"><div class="verdict">
+      <div class="ring" style="background:conic-gradient(${vColor} ${ringDeg}deg, var(--border) 0deg)">
+        <div class="inner">
+          <div class="score-num" style="color:${vColor}">${score ?? "—"}</div>
+          <div class="score-100">/ 100</div>
         </div>
       </div>
-    </div>`;
+      <div>
+        <div class="head">
+          <div class="ph">${stock.symbol[0]}</div>
+          <div>
+            <div class="name">${_esc(stock.name || stock.symbol)}</div>
+            <div class="sub">${_esc(stock.symbol)} · BIST · Borsa İstanbul</div>
+          </div>
+        </div>
+        <div class="badge" style="background:${vColor}22;color:${vColor}">${_esc(stock.verdict)}</div>
+        <div style="margin:6px 0 10px">
+          <span class="price">${stock.price != null ? stock.price.toFixed(2) + " ₺" : "—"}</span>
+          ${chg != null ? `<span class="chg ${up ? "up" : "down"}">${chgStr}</span>` : ""}
+        </div>
+        <div class="summary">Genel skor ${score ?? "—"}/100 → <strong style="color:${vColor}">${_esc(stock.verdict)}</strong>. ${_riskBadge(stock.risk)} risk seviyesi.</div>
+      </div>
+    </div></div>
+
+    <div class="card"><h2>Boyut Bazlı Skorlama</h2>${dimBars}</div>
+
+    <div class="grid2">
+      <div class="card"><h2>✅ Güçlü Yönler</h2><div class="pc-list">${prosHtml}</div></div>
+      <div class="card"><h2>⚠️ Zayıf Yönler / Riskler</h2><div class="pc-list">${consHtml}</div></div>
+    </div>
+
+    <div class="card"><h2>Temel Veriler</h2><div class="metrics">${metrics}</div></div>
+
+    <div class="disclaimer">⚠️ Bu skor; halka açık temel ve teknik verilerden otomatik, kural tabanlı bir hesaplamadır. Yatırım tavsiyesi değildir.</div>`;
 }
 
 async function initDashboard() {
