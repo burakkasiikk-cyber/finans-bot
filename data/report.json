@@ -1,16 +1,705 @@
 {
-  "generated_at": "2026-05-26T10:49:33.169400+00:00",
+  "generated_at": "2026-05-26T11:35:37.299190+00:00",
   "macro": {
     "usd_try": 45.855,
     "eur_try": 53.3756,
     "gold_usd": null,
     "sp500": 745.64,
     "sp500_change_pct": 0.3931,
-    "bist100": null,
+    "bist100": 13662.75,
     "bist100_change_pct": null,
     "tr_interest_rate": 46.0
   },
   "stocks": [
+    {
+      "symbol": "VAKBN",
+      "name": "Türkiye Vakiflar Bankasi Türk Anonim Ortakligi",
+      "exchange": "BIST",
+      "price": 30.84,
+      "change_pct": -2.033035,
+      "score": 90,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 4.015625,
+            "pb": 0.9309346
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 25.11
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 34.2
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 38.68,
+            "range_pos": 43.6
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "YKBNK",
+      "name": "Yapi ve Kredi Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 33.16,
+      "change_pct": -0.5398929,
+      "score": 90,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 5.942652,
+            "pb": 1.0331184
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 23.48
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 55.4
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 30.95,
+            "range_pos": 40.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "AKBNK",
+      "name": "Akbank T.A.S.",
+      "exchange": "BIST",
+      "price": 64.0,
+      "change_pct": -2.140675,
+      "score": 88,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 5.311203,
+            "pb": 1.0997887
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 22.96
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 43.7
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 28.36,
+            "range_pos": 30.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "HALKB",
+      "name": "Türkiye Halk Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 42.1,
+      "change_pct": 0.5253042,
+      "score": 87,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 10.0,
+            "pb": 1.3851874
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 15.84
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 37.3
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 104.09,
+            "range_pos": 68.8
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TURSG",
+      "name": "Türkiye Sigorta A.S.",
+      "exchange": "BIST",
+      "price": 12.62,
+      "change_pct": -2.548262,
+      "score": 87,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 6.4717946,
+            "pb": 2.5417924
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 49.39
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 29.2
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.36,
+            "debt_equity": 0.0
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 64.55,
+            "range_pos": 68.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "GARAN",
+      "name": "Turkiye Garanti Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 122.9,
+      "change_pct": -1.8370571,
+      "score": 86,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 4.37834,
+            "pb": 1.1449172
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 30.11
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 49.7
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 13.41,
+            "range_pos": 27.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ISCTR",
+      "name": "Türkiye Is Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 13.14,
+      "change_pct": -0.9796542,
+      "score": 86,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 4.308197,
+            "pb": 0.78019243
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 22.37
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 62.0
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 21.97,
+            "range_pos": 32.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ANHYT",
+      "name": "Anadolu Hayat Emeklilik Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 101.6,
+      "change_pct": -3.696684,
+      "score": 86,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 6.719577,
+            "pb": 3.8515487
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 65.8
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 33.4
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 7.516,
+            "debt_equity": 0.03
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 44.52,
+            "range_pos": 58.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "AKGRT",
+      "name": "Aksigorta A.S.",
+      "exchange": "BIST",
+      "price": 7.18,
+      "change_pct": -0.27777752,
+      "score": 86,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 4.662338,
+            "pb": 1.4819402
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 36.3
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 45.3
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.199,
+            "debt_equity": 0.03
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 18.81,
+            "range_pos": 53.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "SKBNK",
+      "name": "Sekerbank T.A.S.",
+      "exchange": "BIST",
+      "price": 13.17,
+      "change_pct": -3.232914,
+      "score": 85,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 11.353449,
+            "pb": 1.7006716
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 14.13
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 43.0
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 184.13,
+            "range_pos": 82.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TOASO",
+      "name": "Tofas Türk Otomobil Fabrikasi Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 296.0,
+      "change_pct": -2.3907666,
+      "score": 85,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 12.841649,
+            "pb": 2.465393
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 22.18
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 255.4
+          }
+        },
+        "health": {
+          "score": 64,
+          "metrics": {
+            "current_ratio": 1.569,
+            "debt_equity": 1.18
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 59.61,
+            "range_pos": 69.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "AKFGY",
+      "name": "Akfen Gayrimenkul Yatirim Ortakligi A.S.",
+      "exchange": "BIST",
+      "price": 2.78,
+      "change_pct": 0.0,
+      "score": 84,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 6.177778,
+            "pb": 0.3008658
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 5.66
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 41.4
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 2.893,
+            "debt_equity": 0.18
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 29.3,
+            "range_pos": 68.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "RYSAS",
+      "name": "Reysas Tasimacilik ve Lojistik Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 22.2,
+      "change_pct": 9.90099,
+      "score": 83,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 11.935484,
+            "pb": 1.8325905
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 15.82
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 34.4
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.219,
+            "debt_equity": 0.3
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 48.64,
+            "range_pos": 83.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
     {
       "symbol": "GOOGL",
       "name": "Alphabet Inc",
@@ -79,6 +768,165 @@
       "cons": [
         "Değerleme skoru zayıf (44/100)"
       ],
+      "dividends": []
+    },
+    {
+      "symbol": "TUPRS",
+      "name": "Türkiye Petrol Rafinerileri A.S.",
+      "exchange": "BIST",
+      "price": 236.2,
+      "change_pct": 0.8970486,
+      "score": 81,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 13.748545,
+            "pb": 1.2868148
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 10.37
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 24.4
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.1,
+            "debt_equity": 0.15
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 85.65,
+            "range_pos": 72.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "CCOLA",
+      "name": "Coca-Cola Içecek Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 80.05,
+      "change_pct": -0.92821777,
+      "score": 81,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 12.706349,
+            "pb": 2.6844401
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 21.99
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 10.7
+          }
+        },
+        "health": {
+          "score": 64,
+          "metrics": {
+            "current_ratio": 1.142,
+            "debt_equity": 0.54
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 57.2,
+            "range_pos": 79.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ENKAI",
+      "name": "Enka Insaat ve Sanayi A.S.",
+      "exchange": "BIST",
+      "price": 100.5,
+      "change_pct": 1.5151515,
+      "score": 80,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 16.448444,
+            "pb": 1.5787241
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 11.66
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 40.2
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 3.788,
+            "debt_equity": 0.02
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 60.84,
+            "range_pos": 75.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
       "dividends": []
     },
     {
@@ -152,6 +1000,165 @@
       "dividends": []
     },
     {
+      "symbol": "AGHOL",
+      "name": "AG Anadolu Grubu Holding A.S.",
+      "exchange": "BIST",
+      "price": 33.6,
+      "change_pct": -0.65050626,
+      "score": 79,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.6470497
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 6.72
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 29.6
+          }
+        },
+        "health": {
+          "score": 65,
+          "metrics": {
+            "current_ratio": 0.944,
+            "debt_equity": 0.47
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 26.9,
+            "range_pos": 69.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "INDES",
+      "name": "Indeks Bilgisayar Sistemleri Mühendislik Sanayi ve Ticaret Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 11.47,
+      "change_pct": 0.7908625,
+      "score": 79,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 11.947917,
+            "pb": 1.2867401
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 9.9
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 53.5
+          }
+        },
+        "health": {
+          "score": 64,
+          "metrics": {
+            "current_ratio": 1.141,
+            "debt_equity": 0.58
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 67.85,
+            "range_pos": 92.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "KLNMA",
+      "name": "Türkiye Kalkinma ve Yatirim Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 9.09,
+      "change_pct": 1.5642496,
+      "score": 79,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 55,
+          "metrics": {
+            "pe": 10.1,
+            "pb": 216.42857
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 34.08
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 38.2
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 31.81,
+            "range_pos": 30.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
       "symbol": "AMZN",
       "name": "Amazon.com Inc",
       "exchange": "NASDAQ",
@@ -216,6 +1223,112 @@
         "Teknik/Momentum skoru güçlü (92/100)",
         "Analist Görüşü skoru güçlü (92/100)"
       ],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ECZYT",
+      "name": "Eczacibasi Yatirim Holding Ortakligi A.S.",
+      "exchange": "BIST",
+      "price": 358.5,
+      "change_pct": -0.13927576,
+      "score": 77,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 1.3551569
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.0
+          }
+        },
+        "growth": {
+          "score": null,
+          "metrics": {
+            "rev_growth": null
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 70.882,
+            "debt_equity": 0.0
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 101.35,
+            "range_pos": 74.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "BIMAS",
+      "name": "BIM Birlesik Magazalar A.S.",
+      "exchange": "BIST",
+      "price": 373.0,
+      "change_pct": -1.5181518,
+      "score": 77,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 20.779943,
+            "pb": 2.3404803
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 13.43
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 10.1
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.068,
+            "debt_equity": 0.3
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 57.89,
+            "range_pos": 73.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
       "cons": [],
       "dividends": []
     },
@@ -287,6 +1400,218 @@
       "cons": [
         "Teknik/Momentum skoru zayıf (49/100)"
       ],
+      "dividends": []
+    },
+    {
+      "symbol": "GUBRF",
+      "name": "Gübre Fabrikalari Türk Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 550.0,
+      "change_pct": -3.7620296,
+      "score": 75,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 46,
+          "metrics": {
+            "pe": 32.953865,
+            "pb": 6.164675
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 17.23
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 37.2
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.475,
+            "debt_equity": 0.27
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 120.66,
+            "range_pos": 81.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TTKOM",
+      "name": "Türk Telekomünikasyon Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 61.25,
+      "change_pct": 1.4072822,
+      "score": 75,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "strong_buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 8.027523,
+            "pb": 0.87991494
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 13.07
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 8.7
+          }
+        },
+        "health": {
+          "score": 64,
+          "metrics": {
+            "current_ratio": 1.008,
+            "debt_equity": 0.58
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 1.09,
+            "range_pos": 48.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "NETAS",
+      "name": "Netas Telekomünikasyon A.S.",
+      "exchange": "BIST",
+      "price": 67.15,
+      "change_pct": 1.2057319,
+      "score": 74,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": -14.456405
+          }
+        },
+        "profit": {
+          "score": null,
+          "metrics": {
+            "roe": null
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 61.6
+          }
+        },
+        "health": {
+          "score": 18,
+          "metrics": {
+            "current_ratio": 0.777,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 33.66,
+            "range_pos": 46.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ULKER",
+      "name": "Ülker Bisküvi Sanayi A.S.",
+      "exchange": "BIST",
+      "price": 115.8,
+      "change_pct": -1.3628607,
+      "score": 74,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 12.9675255,
+            "pb": 0.9875406
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 8.06
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 18.6
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 2.555,
+            "debt_equity": 1.12
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 8.1,
+            "range_pos": 42.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
       "dividends": []
     },
     {
@@ -430,6 +1755,430 @@
       "dividends": []
     },
     {
+      "symbol": "AEFES",
+      "name": "Anadolu Efes Biracilik ve Malt Sanayii Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 19.3,
+      "change_pct": -1.2282583,
+      "score": 73,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 13.129251,
+            "pb": 0.95772123
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 8.14
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 7.6
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.027,
+            "debt_equity": 0.41
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 32.74,
+            "range_pos": 60.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "SISE",
+      "name": "Türkiye Sise Ve Cam Fabrikalari A.S.",
+      "exchange": "BIST",
+      "price": 45.8,
+      "change_pct": -1.9691823,
+      "score": 73,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 12.1485405,
+            "pb": 0.5654181
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.6
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 19.3
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.68,
+            "debt_equity": 0.69
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 34.48,
+            "range_pos": 62.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "BRSAN",
+      "name": "Borusan Birlesik Boru Fabrikalari Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 489.0,
+      "change_pct": -1.609658,
+      "score": 72,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 64,
+          "metrics": {
+            "pe": 37.848297,
+            "pb": 1.7603669
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 5.13
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 59.2
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.121,
+            "debt_equity": 0.41
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 47.04,
+            "range_pos": 39.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TCELL",
+      "name": "Turkcell Iletisim Hizmetleri A.S.",
+      "exchange": "BIST",
+      "price": 101.0,
+      "change_pct": -4.8067846,
+      "score": 72,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 11.952663,
+            "pb": 0.84709513
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 7.35
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 8.9
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.692,
+            "debt_equity": 0.71
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 8.27,
+            "range_pos": 32.8
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ODAS",
+      "name": "Odas Elektrik Üretim Sanayi Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 7.44,
+      "change_pct": 2.6206903,
+      "score": 72,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 35.428574,
+            "pb": 0.6702099
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -1.11
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 60.1
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 2.316,
+            "debt_equity": 0.04
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 48.57,
+            "range_pos": 73.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "KARSN",
+      "name": "Karsan Otomotiv Sanayii ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 12.79,
+      "change_pct": 0.15661319,
+      "score": 72,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 18.536232,
+            "pb": 1.5913899
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 9.04
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 195.7
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.998,
+            "debt_equity": 1.17
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 25.2,
+            "range_pos": 62.8
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "LOGO",
+      "name": "Logo Yazilim Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 158.2,
+      "change_pct": 3.46632,
+      "score": 71,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 64,
+          "metrics": {
+            "pe": 21.911358,
+            "pb": 3.311078
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 18.96
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 37.0
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.738,
+            "debt_equity": 0.0
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 6.55,
+            "range_pos": 44.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "MAVI",
+      "name": "Mavi Giyim Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 41.22,
+      "change_pct": -1.9505225,
+      "score": 71,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 14.262976,
+            "pb": 2.3582585
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 14.95
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": -1.4
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.634,
+            "debt_equity": 0.32
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 31.95,
+            "range_pos": 54.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
       "symbol": "AAPL",
       "name": "Apple Inc",
       "exchange": "NASDAQ",
@@ -498,6 +2247,1543 @@
         "Finansal Sağlık skoru zayıf (49/100)",
         "Değerleme skoru zayıf (37/100)"
       ],
+      "dividends": []
+    },
+    {
+      "symbol": "ASELS",
+      "name": "ASELSAN Elektronik Sanayi ve Ticaret Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 380.25,
+      "change_pct": -5.351587,
+      "score": 70,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 38,
+          "metrics": {
+            "pe": 53.48101,
+            "pb": 6.168984
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 14.84
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 15.0
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.54,
+            "debt_equity": 0.19
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 191.97,
+            "range_pos": 78.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ISDMR",
+      "name": "Iskenderun Demir ve Çelik A.S.",
+      "exchange": "BIST",
+      "price": 57.7,
+      "change_pct": 0.0,
+      "score": 70,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": 25.418503,
+            "pb": 1.1338403
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 4.94
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 17.7
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.81,
+            "debt_equity": 0.27
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 66.38,
+            "range_pos": 85.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "AKCNS",
+      "name": "Akçansa Çimento Sanayi ve Ticaret Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 227.5,
+      "change_pct": 4.6458173,
+      "score": 68,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 46,
+          "metrics": {
+            "pe": 68.93939,
+            "pb": 1.7393497
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 2.61
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 23.2
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.597,
+            "debt_equity": 0.16
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 55.51,
+            "range_pos": 98.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ALBRK",
+      "name": "Albaraka Türk Katilim Bankasi A.S.",
+      "exchange": "BIST",
+      "price": 7.94,
+      "change_pct": -0.7499993,
+      "score": 67,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 2.4060607,
+            "pb": 0.67425275
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 33.08
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -42.6
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 22.14,
+            "range_pos": 36.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "THYAO",
+      "name": "Türk Hava Yollari Anonim Ortakligi",
+      "exchange": "BIST",
+      "price": 296.75,
+      "change_pct": -0.25210086,
+      "score": 67,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 36,
+          "metrics": {
+            "pe": 30.783194,
+            "pb": 18.77214
+          }
+        },
+        "profit": {
+          "score": 74,
+          "metrics": {
+            "roe": 15.56
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 21.1
+          }
+        },
+        "health": {
+          "score": 56,
+          "metrics": {
+            "current_ratio": 0.976,
+            "debt_equity": 0.84
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 8.18,
+            "range_pos": 46.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "DOAS",
+      "name": "Dogus Otomotiv Servis ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 184.8,
+      "change_pct": 0.43478426,
+      "score": 67,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 13.739778,
+            "pb": 0.60546494
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 4.64
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 11.3
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.248,
+            "debt_equity": 0.48
+          }
+        },
+        "technical": {
+          "score": 55,
+          "metrics": {
+            "ret52": 2.45,
+            "range_pos": 25.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "EREGL",
+      "name": "Eregli Demir ve Çelik Fabrikalari T.A.S.",
+      "exchange": "BIST",
+      "price": 39.18,
+      "change_pct": -0.7598765,
+      "score": 66,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 55,
+          "metrics": {
+            "pe": 559.7143,
+            "pb": 0.89134586
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 0.23
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 11.5
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 2.03,
+            "debt_equity": 0.51
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 65.88,
+            "range_pos": 78.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ECILC",
+      "name": "EIS Eczacibasi Ilaç, Sinai ve Finansal Yatirimlar Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 88.9,
+      "change_pct": 4.8349037,
+      "score": 66,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.9980242
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.49
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": -2.5
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 2.009,
+            "debt_equity": 0.05
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 91.86,
+            "range_pos": 52.6
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "NTHOL",
+      "name": "Net Holding A.S.",
+      "exchange": "BIST",
+      "price": 37.56,
+      "change_pct": -0.10637527,
+      "score": 66,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 11.27928,
+            "pb": 0.22476482
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 2.98
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 34.6
+          }
+        },
+        "health": {
+          "score": 65,
+          "metrics": {
+            "current_ratio": 0.962,
+            "debt_equity": 0.12
+          }
+        },
+        "technical": {
+          "score": 38,
+          "metrics": {
+            "ret52": -9.18,
+            "range_pos": 12.8
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "KRDMD",
+      "name": "Kardemir Karabük Demir Çelik Sanayi Ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 39.74,
+      "change_pct": -0.6996471,
+      "score": 65,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.5351684
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 0.38
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": 1.3
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.448,
+            "debt_equity": 0.09
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 72.95,
+            "range_pos": 71.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ALGYO",
+      "name": "Alarko Gayrimenkul Yatirim Ortakligi A.S.",
+      "exchange": "BIST",
+      "price": 7.12,
+      "change_pct": 0.28168988,
+      "score": 65,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.9040122
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -13.26
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 15.2
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.618,
+            "debt_equity": 0.29
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 170.4,
+            "range_pos": 79.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "DOHOL",
+      "name": "Dogan Sirketler Grubu Holding A.S.",
+      "exchange": "BIST",
+      "price": 23.52,
+      "change_pct": 2.7074273,
+      "score": 64,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 21.577982,
+            "pb": 0.7227361
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.37
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": -1.8
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.61,
+            "debt_equity": 0.39
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 55.25,
+            "range_pos": 84.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "BSOKE",
+      "name": "Batisöke Söke Çimento Sanayii T.A.S.",
+      "exchange": "BIST",
+      "price": 38.46,
+      "change_pct": 3.27604,
+      "score": 64,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 55,
+          "metrics": {
+            "pe": null,
+            "pb": 4.873289
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -1.07
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 22.1
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.159,
+            "debt_equity": 0.24
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 106.89,
+            "range_pos": 94.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "CEMTS",
+      "name": "Çemtas Çelik Makina Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 10.49,
+      "change_pct": -1.0377415,
+      "score": 64,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.803893
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -3.01
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 11.4
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 4.412,
+            "debt_equity": 0.26
+          }
+        },
+        "technical": {
+          "score": 46,
+          "metrics": {
+            "ret52": -5.36,
+            "range_pos": 21.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "PGSUS",
+      "name": "Pegasus Hava Tasimaciligi Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 170.1,
+      "change_pct": -1.5054955,
+      "score": 64,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 9.86087,
+            "pb": 0.72783136
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 8.79
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 38.9
+          }
+        },
+        "health": {
+          "score": 38,
+          "metrics": {
+            "current_ratio": 0.969,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 28,
+          "metrics": {
+            "ret52": -26.73,
+            "range_pos": 7.6
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "AKSEN",
+      "name": "Aksa Enerji Üretim A.S.",
+      "exchange": "BIST",
+      "price": 80.0,
+      "change_pct": 2.629895,
+      "score": 64,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 13.377927,
+            "pb": 0.62650263
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 7.41
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": -2.5
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.629,
+            "debt_equity": 0.82
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 138.96,
+            "range_pos": 82.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "EKDMR",
+      "name": "EKDMR",
+      "exchange": "BIST",
+      "price": 59.85,
+      "change_pct": 9.917351,
+      "score": 63,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 1.1696306
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.47
+          }
+        },
+        "growth": {
+          "score": null,
+          "metrics": {
+            "rev_growth": null
+          }
+        },
+        "health": {
+          "score": 38,
+          "metrics": {
+            "current_ratio": 0.966,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 10.0,
+            "range_pos": 100.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "DEVA",
+      "name": "Deva Holding A.S.",
+      "exchange": "BIST",
+      "price": 65.0,
+      "change_pct": 0.9316746,
+      "score": 63,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.4507347
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -3.57
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 7.9
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.995,
+            "debt_equity": 0.23
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 17.09,
+            "range_pos": 45.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "GOLTS",
+      "name": "Göltas Göller Bölgesi Cimento Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 343.0,
+      "change_pct": -0.6517017,
+      "score": 63,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 55,
+          "metrics": {
+            "pe": 519.69696,
+            "pb": 0.6275879
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.61
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 23.4
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.18,
+            "debt_equity": 0.22
+          }
+        },
+        "technical": {
+          "score": 55,
+          "metrics": {
+            "ret52": -1.07,
+            "range_pos": 39.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "SAHOL",
+      "name": "Haci Ömer Sabanci Holding A.S.",
+      "exchange": "BIST",
+      "price": 92.0,
+      "change_pct": 1.8826101,
+      "score": 62,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 23.77261,
+            "pb": 0.5274443
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 2.42
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 7.4
+          }
+        },
+        "health": {
+          "score": null,
+          "metrics": {
+            "current_ratio": null,
+            "debt_equity": null
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 17.5,
+            "range_pos": 44.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "PETKM",
+      "name": "Petkim Petrokimya Holding Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 22.1,
+      "change_pct": -1.2511116,
+      "score": 62,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.8246577
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -10.26
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 16.7
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.555,
+            "debt_equity": 0.77
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 35.47,
+            "range_pos": 51.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TSPOR",
+      "name": "Trabzonspor Sportif Yatirim ve Futbol Isletmeciligi Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 1.02,
+      "change_pct": 7.36842,
+      "score": 62,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.6836461
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -5.66
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 12.2
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.454,
+            "debt_equity": 0.0
+          }
+        },
+        "technical": {
+          "score": 74,
+          "metrics": {
+            "ret52": 26.67,
+            "range_pos": 34.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "KCHOL",
+      "name": "Koç Holding A.S.",
+      "exchange": "BIST",
+      "price": 189.1,
+      "change_pct": -0.94289565,
+      "score": 61,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 19.656965,
+            "pb": 0.67085046
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 3.94
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 4.8
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.865,
+            "debt_equity": 1.21
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 33.78,
+            "range_pos": 55.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "CIMSA",
+      "name": "Çimsa Çimento Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 50.65,
+      "change_pct": -2.8763182,
+      "score": 61,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": 14.148046,
+            "pb": 1.3778188
+          }
+        },
+        "profit": {
+          "score": 55,
+          "metrics": {
+            "roe": 10.5
+          }
+        },
+        "growth": {
+          "score": 38,
+          "metrics": {
+            "rev_growth": -0.2
+          }
+        },
+        "health": {
+          "score": 56,
+          "metrics": {
+            "current_ratio": 0.965,
+            "debt_equity": 0.63
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 1.16,
+            "range_pos": 50.3
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "SOKM",
+      "name": "Sok Marketler Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 47.84,
+      "change_pct": -2.8037405,
+      "score": 61,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.74433655
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -6.33
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 7.5
+          }
+        },
+        "health": {
+          "score": 65,
+          "metrics": {
+            "current_ratio": 0.849,
+            "debt_equity": 0.41
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 37.26,
+            "range_pos": 42.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "FROTO",
+      "name": "Ford Otomotiv Sanayi A.S.",
+      "exchange": "BIST",
+      "price": 84.15,
+      "change_pct": -3.9383528,
+      "score": 61,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 83,
+          "metrics": {
+            "pe": 9.519231,
+            "pb": 1.7957747
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 21.43
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -8.6
+          }
+        },
+        "health": {
+          "score": 64,
+          "metrics": {
+            "current_ratio": 1.258,
+            "debt_equity": 1.0
+          }
+        },
+        "technical": {
+          "score": 46,
+          "metrics": {
+            "ret52": 1.68,
+            "range_pos": 9.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "TAVHL",
+      "name": "TAV Havalimanlari Holding A.S.",
+      "exchange": "BIST",
+      "price": 251.75,
+      "change_pct": -2.7992277,
+      "score": 60,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 65,
+          "metrics": {
+            "pe": 43.18182,
+            "pb": 1.1493124
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 4.1
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 28.3
+          }
+        },
+        "health": {
+          "score": 36,
+          "metrics": {
+            "current_ratio": 0.783,
+            "debt_equity": 1.32
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 16.88,
+            "range_pos": 24.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "HURGZ",
+      "name": "Hürriyet Gazetecilik ve Matbaacilik A.S.",
+      "exchange": "BIST",
+      "price": 7.76,
+      "change_pct": -3.8413813,
+      "score": 59,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": null,
+            "pb": 1.8067521
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -43.77
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 4.3
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.182,
+            "debt_equity": 0.04
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 32.3,
+            "range_pos": 56.0
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "GSRAY",
+      "name": "Galatasaray Sportif Sinai ve Ticari Yatirimlar A.S.",
+      "exchange": "BIST",
+      "price": 1.05,
+      "change_pct": 0.0,
+      "score": 57,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.889077
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -9.52
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 25.7
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.319,
+            "debt_equity": 0.2
+          }
+        },
+        "technical": {
+          "score": 18,
+          "metrics": {
+            "ret52": -42.31,
+            "range_pos": 4.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
       "dividends": []
     },
     {
@@ -572,39 +3858,757 @@
       "dividends": []
     },
     {
-      "symbol": "THYAO",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "TKFEN",
+      "name": "Tekfen Holding Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 140.8,
+      "change_pct": 3.2258134,
+      "score": 56,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": null,
+            "pb": 1.550217
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -15.54
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 2.6
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.772,
+            "debt_equity": 0.43
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 12.82,
+            "range_pos": 79.4
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "GARAN",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "ISGYO",
+      "name": "Is Gayrimenkul Yatirim Ortakligi A.S.",
+      "exchange": "BIST",
+      "price": 20.46,
+      "change_pct": -1.0638356,
+      "score": 56,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.35930666
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -0.87
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -28.3
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.839,
+            "debt_equity": 0.03
+          }
+        },
+        "technical": {
+          "score": 83,
+          "metrics": {
+            "ret52": 35.25,
+            "range_pos": 59.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "KCHOL",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "ZOREN",
+      "name": "Zorlu Enerji Elektrik Üretim A.S.",
+      "exchange": "BIST",
+      "price": 3.09,
+      "change_pct": 0.0,
+      "score": 55,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.26846218
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -21.9
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 3.8
+          }
+        },
+        "health": {
+          "score": 56,
+          "metrics": {
+            "current_ratio": 0.967,
+            "debt_equity": 0.98
+          }
+        },
+        "technical": {
+          "score": 55,
+          "metrics": {
+            "ret52": 0.0,
+            "range_pos": 22.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "TUPRS",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "KONTR",
+      "name": "Kontrolmatik Teknoloji Enerji Ve Muhendislik Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 7.85,
+      "change_pct": 0.0,
+      "score": 52,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.87348384
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -20.22
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 8.8
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.947,
+            "debt_equity": 1.68
+          }
+        },
+        "technical": {
+          "score": 18,
+          "metrics": {
+            "ret52": -68.85,
+            "range_pos": 0.7
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "EREGL",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "FENER",
+      "name": "Fenerbahçe Futbol A.S.",
+      "exchange": "BIST",
+      "price": 4.02,
+      "change_pct": 4.960837,
+      "score": 52,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": null,
+            "pb": 2.8033473
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -52.48
+          }
+        },
+        "growth": {
+          "score": 92,
+          "metrics": {
+            "rev_growth": 27.3
+          }
+        },
+        "health": {
+          "score": 46,
+          "metrics": {
+            "current_ratio": 0.597,
+            "debt_equity": 0.71
+          }
+        },
+        "technical": {
+          "score": 18,
+          "metrics": {
+            "ret52": -91.67,
+            "range_pos": 2.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "SISE",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "AYEN",
+      "name": "Ayen Enerji A.S.",
+      "exchange": "BIST",
+      "price": 33.7,
+      "change_pct": -0.8823507,
+      "score": 51,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 65,
+          "metrics": {
+            "pe": 40.602413,
+            "pb": 0.50046784
+          }
+        },
+        "profit": {
+          "score": 38,
+          "metrics": {
+            "roe": 1.8
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -19.0
+          }
+        },
+        "health": {
+          "score": 55,
+          "metrics": {
+            "current_ratio": 0.776,
+            "debt_equity": 0.36
+          }
+        },
+        "technical": {
+          "score": 92,
+          "metrics": {
+            "ret52": 39.34,
+            "range_pos": 60.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     },
     {
-      "symbol": "ASELS",
-      "error": "Expecting value: line 1 column 1 (char 0)"
+      "symbol": "ALKIM",
+      "name": "Alkim Alkali Kimya A.S.",
+      "exchange": "BIST",
+      "price": 17.65,
+      "change_pct": -0.28249234,
+      "score": 49,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 18,
+          "metrics": {
+            "pe": null,
+            "pb": 118.45637
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -11.05
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 15.2
+          }
+        },
+        "health": {
+          "score": 83,
+          "metrics": {
+            "current_ratio": 1.551,
+            "debt_equity": 0.08
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 23.6,
+            "range_pos": 36.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "REEDR",
+      "name": "Reeder Teknoloji Sanayi ve Ticaret Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 7.09,
+      "change_pct": -0.83916,
+      "score": 48,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.8710073
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -15.2
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -60.1
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 3.04,
+            "debt_equity": 0.05
+          }
+        },
+        "technical": {
+          "score": 28,
+          "metrics": {
+            "ret52": -38.52,
+            "range_pos": 19.9
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "OTKAR",
+      "name": "Otokar Otomotiv ve Savunma Sanayi A.S.",
+      "exchange": "BIST",
+      "price": 369.0,
+      "change_pct": 0.5449591,
+      "score": 45,
+      "verdict": "TUT / NÖTR",
+      "verdict_key": "hold",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 55,
+          "metrics": {
+            "pe": null,
+            "pb": 5.1796746
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -30.21
+          }
+        },
+        "growth": {
+          "score": 74,
+          "metrics": {
+            "rev_growth": 13.1
+          }
+        },
+        "health": {
+          "score": 36,
+          "metrics": {
+            "current_ratio": 1.264,
+            "debt_equity": 5.52
+          }
+        },
+        "technical": {
+          "score": 38,
+          "metrics": {
+            "ret52": -6.08,
+            "range_pos": 8.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "EGEEN",
+      "name": "Ege Endüstri ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 5635.0,
+      "change_pct": -1.1403508,
+      "score": 42,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 64,
+          "metrics": {
+            "pe": 28.73827,
+            "pb": 2.2710483
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -3.46
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -19.0
+          }
+        },
+        "health": {
+          "score": 92,
+          "metrics": {
+            "current_ratio": 3.648,
+            "debt_equity": 0.19
+          }
+        },
+        "technical": {
+          "score": 28,
+          "metrics": {
+            "ret52": -30.17,
+            "range_pos": 8.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "ARCLK",
+      "name": "Arçelik Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 103.7,
+      "change_pct": -1.2380981,
+      "score": 41,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "medium",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.85836554
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -11.97
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -8.8
+          }
+        },
+        "health": {
+          "score": 28,
+          "metrics": {
+            "current_ratio": 0.955,
+            "debt_equity": 3.18
+          }
+        },
+        "technical": {
+          "score": 46,
+          "metrics": {
+            "ret52": -2.42,
+            "range_pos": 8.5
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "BIZIM",
+      "name": "Bizim Toptan Satis Magazalari A.S.",
+      "exchange": "BIST",
+      "price": 27.56,
+      "change_pct": 0.0,
+      "score": 38,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "high",
+      "dimensions": {
+        "valuation": {
+          "score": 38,
+          "metrics": {
+            "pe": null,
+            "pb": 6.6489744
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -155.21
+          }
+        },
+        "growth": {
+          "score": 55,
+          "metrics": {
+            "rev_growth": 3.0
+          }
+        },
+        "health": {
+          "score": 18,
+          "metrics": {
+            "current_ratio": 0.568,
+            "debt_equity": 27.12
+          }
+        },
+        "technical": {
+          "score": 64,
+          "metrics": {
+            "ret52": 11.94,
+            "range_pos": 36.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "VESTL",
+      "name": "Vestel Elektronik Sanayi ve Ticaret Anonim Sirketi",
+      "exchange": "BIST",
+      "price": 26.36,
+      "change_pct": 0.3044137,
+      "score": 38,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "high",
+      "dimensions": {
+        "valuation": {
+          "score": 92,
+          "metrics": {
+            "pe": null,
+            "pb": 0.32898596
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -62.54
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -37.0
+          }
+        },
+        "health": {
+          "score": 28,
+          "metrics": {
+            "current_ratio": 0.368,
+            "debt_equity": 2.7
+          }
+        },
+        "technical": {
+          "score": 28,
+          "metrics": {
+            "ret52": -29.47,
+            "range_pos": 8.1
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
+    },
+    {
+      "symbol": "BJKAS",
+      "name": "Besiktas Futbol Yatirimlari Sanayi ve Ticaret A.S.",
+      "exchange": "BIST",
+      "price": 1.56,
+      "change_pct": 0.6451607,
+      "score": 37,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "high",
+      "dimensions": {
+        "valuation": {
+          "score": 74,
+          "metrics": {
+            "pe": null,
+            "pb": 1.9548872
+          }
+        },
+        "profit": {
+          "score": 18,
+          "metrics": {
+            "roe": -402.0
+          }
+        },
+        "growth": {
+          "score": 18,
+          "metrics": {
+            "rev_growth": -12.9
+          }
+        },
+        "health": {
+          "score": 36,
+          "metrics": {
+            "current_ratio": 0.57,
+            "debt_equity": 1.56
+          }
+        },
+        "technical": {
+          "score": 38,
+          "metrics": {
+            "ret52": -12.92,
+            "range_pos": 12.2
+          }
+        },
+        "analyst": {
+          "score": null,
+          "metrics": {}
+        }
+      },
+      "pros": [],
+      "cons": [],
+      "dividends": []
     }
   ],
   "top3": [
-    "GOOGL",
-    "NVDA",
-    "AMZN"
+    "VAKBN",
+    "YKBNK",
+    "AKBNK"
   ],
-  "risk_alerts": [],
+  "risk_alerts": [
+    "BIZIM",
+    "VESTL",
+    "BJKAS"
+  ],
   "weekly_summary": null
 }
