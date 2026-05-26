@@ -212,4 +212,5 @@ footer a, .disclaimer a { color: var(--accent); }
 .tab { background: none; border: none; color: var(--muted); padding: 8px 16px; cursor: pointer; font-size: 13px; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s; }
 .tab.active { color: var(--text); border-bottom-color: #448aff; font-weight: 600; }
 .tab:hover:not(.active) { color: var(--text); }
-.section-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 16px 0 12px; }
+#content { padding: 20px 20px 0; }
+.section-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
