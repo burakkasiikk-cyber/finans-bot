@@ -40,14 +40,8 @@ function _dimBars(dimensions) {
   }).join("");
 }
 
-function renderReportStocks(stocks) {
-  const el = document.getElementById("reportDashboard");
-  if (!el) return;
-  if (!stocks || !stocks.length) {
-    el.innerHTML = `<div class="placeholder"><div>Henüz analiz verisi yok. GitHub Actions sabah 09:00'da çalışacak.</div></div>`;
-    return;
-  }
-  const rows = stocks.map((s, i) => {
+function _renderRows(stocks) {
+  return stocks.map((s, i) => {
     if (s.error) {
       return `<tr><td>${i+1}</td><td><strong>${_esc(s.symbol)}</strong></td><td colspan="6" style="color:var(--muted);font-size:11px">Veri alınamadı</td></tr>`;
     }
@@ -55,7 +49,7 @@ function renderReportStocks(stocks) {
     const chgStr = chg != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(1)}%` : "—";
     const chgColor = chg != null ? (chg >= 0 ? "var(--green)" : "var(--red)") : "var(--muted)";
     const vColor = _verdictColor(s.verdict_key);
-    return `<tr style="cursor:pointer" onclick="App.showDetail(${i})">
+    return `<tr style="cursor:pointer" onclick="App.showDetail(${s._origIndex})">
       <td style="color:var(--muted)">${i+1}</td>
       <td><strong>${_esc(s.symbol)}</strong><br><span style="font-size:10px;color:var(--muted)">${_esc(s.exchange)}</span></td>
       <td><span style="font-size:18px;font-weight:700;color:${vColor}">${s.score ?? "—"}</span><span style="font-size:10px;color:var(--muted)">/100</span></td>
@@ -65,17 +59,45 @@ function renderReportStocks(stocks) {
       <td style="color:${chgColor};font-weight:600">${chgStr}</td>
     </tr>`;
   }).join("");
+}
+
+function renderReportStocks(stocks) {
+  const el = document.getElementById("reportDashboard");
+  if (!el) return;
+  if (!stocks || !stocks.length) {
+    el.innerHTML = `<div class="placeholder"><div>Henüz analiz verisi yok. GitHub Actions sabah 09:00'da çalışacak.</div></div>`;
+    return;
+  }
+
+  // Orijinal index'i sakla (detay için)
+  const indexed = stocks.map((s, i) => ({ ...s, _origIndex: i }));
+
+  function applyFilter(q) {
+    const tbody = document.getElementById("scannerTbody");
+    if (!tbody) return;
+    const filtered = q
+      ? indexed.filter(s => s.symbol.includes(q.toUpperCase()) || (s.name || "").toUpperCase().includes(q.toUpperCase()))
+      : indexed;
+    tbody.innerHTML = _renderRows(filtered) || `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">Sonuç bulunamadı.</td></tr>`;
+  }
 
   el.innerHTML = `
-    <h2 class="section-title">📊 Fırsat Tarayıcı</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+      <h2 class="section-title" style="margin:0">📊 Fırsat Tarayıcı</h2>
+      <input id="scannerFilter" type="text" placeholder="🔍 Hisse filtrele (ör: EKDMR, THYAO…)"
+        style="background:var(--panel-2);border:1px solid var(--border);color:var(--text);
+               padding:7px 12px;border-radius:9px;font-size:13px;width:240px;outline:none" />
+    </div>
     <table class="portfolio-table" style="min-width:500px">
       <thead><tr>
         <th>#</th><th>Hisse</th><th>Skor</th><th>Karar</th>
         <th style="min-width:60px">Boyutlar</th><th>Risk</th><th>Günlük</th>
       </tr></thead>
-      <tbody>${rows}</tbody>
+      <tbody id="scannerTbody">${_renderRows(indexed)}</tbody>
     </table>
     <div id="stockDetail"></div>`;
+
+  document.getElementById("scannerFilter").addEventListener("input", e => applyFilter(e.target.value.trim()));
 }
 
 function _showStockDetail(stock) {
