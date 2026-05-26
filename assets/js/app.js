@@ -16,7 +16,20 @@ function _stopLivePrice() {
 
 function _startLivePrice(symbol, exchange) {
   _stopLivePrice();
-  if (!FinnhubAPI.hasKey()) return;
+
+  const dotEl = document.getElementById("liveDot");
+
+  if (!FinnhubAPI.hasKey()) {
+    // Anahtar yoksa badge'i gösterme
+    return;
+  }
+
+  // Anahtar var — hemen "bekliyor" durumunu göster
+  if (dotEl) {
+    dotEl.style.opacity = "1";
+    dotEl.innerHTML = `<span style="width:6px;height:6px;background:var(--muted);border-radius:50%;display:inline-block"></span>
+      <span style="color:var(--muted)">güncelleniyor…</span>`;
+  }
 
   const finnSym = exchange === "BIST" ? `${symbol}.IS` : symbol;
 
@@ -27,23 +40,27 @@ function _startLivePrice(symbol, exchange) {
 
       const priceEl = document.getElementById("livePrice");
       const chgEl   = document.getElementById("liveChg");
-      const dotEl   = document.getElementById("liveDot");
-      if (!priceEl) { _stopLivePrice(); return; } // detay sayfası kapandı
+      const dot     = document.getElementById("liveDot");
+      if (!priceEl) { _stopLivePrice(); return; } // sayfa kapandı
 
       const currency = exchange === "BIST" ? " ₺" : " $";
       priceEl.textContent = q.c.toFixed(2) + currency;
 
       if (chgEl && q.dp != null) {
         const up = q.dp >= 0;
-        chgEl.textContent  = `${up ? "▲" : "▼"} ${Math.abs(q.dp).toFixed(2)}%`;
-        chgEl.className    = `chg ${up ? "up" : "down"}`;
+        chgEl.textContent = `${up ? "▲" : "▼"} ${Math.abs(q.dp).toFixed(2)}%`;
+        chgEl.className   = `chg ${up ? "up" : "down"}`;
       }
-      if (dotEl) dotEl.style.opacity = "1";
-    } catch { /* sessiz geç — anahtar yoksa veya rate limit */ }
+      if (dot) {
+        dot.style.opacity = "1";
+        dot.innerHTML = `<span style="width:6px;height:6px;background:#2ecc71;border-radius:50%;display:inline-block;animation:pulse 1.4s ease-in-out infinite"></span>
+          <span style="color:#2ecc71">CANLI</span>`;
+      }
+    } catch { /* sessiz geç */ }
   }
 
-  poll(); // hemen çalıştır
-  _liveTimer = setInterval(poll, 15000); // 15 saniyede bir
+  poll();
+  _liveTimer = setInterval(poll, 15000);
 }
 
 const BIST_SECTORS = {
@@ -538,9 +555,7 @@ function _showStockDetail(stock) {
           <div style="margin:6px 0 10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px">
             <span class="price" id="livePrice">${stock.price != null ? stock.price.toFixed(2) + " ₺" : "—"}</span>
             ${chg != null ? `<span class="chg ${up ? "up" : "down"}" id="liveChg">${chgStr}</span>` : `<span class="chg" id="liveChg"></span>`}
-            <span id="liveDot" style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:#2ecc71;opacity:0;transition:opacity .4s">
-              <span style="width:6px;height:6px;background:#2ecc71;border-radius:50%;display:inline-block;animation:pulse 1.4s ease-in-out infinite"></span>CANLI
-            </span>
+            <span id="liveDot" style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;opacity:0;transition:opacity .4s"></span>
           </div>
           <div class="summary">Genel skor ${score ?? "—"}/100 → <strong style="color:${vColor}">${_esc(stock.verdict)}</strong>. ${_riskBadge(stock.risk)} risk seviyesi.</div>
         </div>
