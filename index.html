@@ -23,6 +23,9 @@
     </div>
   </header>
 
+<!-- Makro Şerit -->
+<div id="macroStrip">Yükleniyor…</div>
+
   <div class="search">
     <span class="icon">🔍</span>
     <input id="searchInput" type="text" placeholder="Hisse ara ve analiz et (örn: AAPL, Tesla, Nvidia)…" autocomplete="off" />
@@ -30,6 +33,14 @@
   </div>
 
   <div class="chips" id="chips"></div>
+
+  <!-- Sekmeler -->
+  <div class="tab-bar">
+    <button class="tab active" onclick="App.switchTab('scanner', this)">📊 Tarayıcı</button>
+    <button class="tab" onclick="App.switchTab('portfolio', this)">💼 Portföy</button>
+    <button class="tab" onclick="App.switchTab('alarms', this)">🔔 Alarmlar</button>
+    <button class="tab" onclick="App.switchTab('dividends', this)">📅 Temettüler</button>
+  </div>
 
   <div id="content">
     <div class="placeholder">
@@ -40,6 +51,11 @@
         Anahtarınız yok mu? <a href="https://finnhub.io/register" target="_blank" rel="noopener">finnhub.io/register</a> — ücretsiz.
       </div>
     </div>
+    <!-- Dashboard bölümleri (sekmelere göre gösterilir/gizlenir) -->
+    <div id="reportDashboard" style="display:none"></div>
+    <div id="portfolioSection" style="display:none"></div>
+    <div id="alarmsSection"    style="display:none"></div>
+    <div id="dividendSection"  style="display:none"></div>
   </div>
 
   <footer>Veriler <a href="https://finnhub.io" target="_blank" rel="noopener">Finnhub.io</a> · Eğitim/bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</footer>
@@ -51,5 +67,9 @@
 <script src="assets/js/analysis.js"></script>
 <script src="assets/js/ui.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/macro.js"></script>
+<script src="assets/js/portfolio.js"></script>
+<script src="assets/js/alarms.js"></script>
+<script src="assets/js/dividend.js"></script>
 </body>
 </html>

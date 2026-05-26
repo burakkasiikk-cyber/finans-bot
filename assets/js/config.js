@@ -50,4 +50,10 @@ const CONFIG = {
     ret13:     { dir: "up",   t: [15, 3, -5, -15]  },
     rangePos:  { dir: "up",   t: [60, 40, 20, 5]   },
   },
+
+  // report.json URL (GitHub Pages'te mutlak URL olur, lokalda relative çalışır)
+  REPORT_URL: "./data/report.json",
+
+  // BIST hisseleri hızlı erişim
+  BIST_POPULAR: ["THYAO", "GARAN", "KCHOL", "TUPRS", "EREGL", "SISE", "ASELS"],
 };
