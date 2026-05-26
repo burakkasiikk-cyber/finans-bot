@@ -266,6 +266,32 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 .sc-title{font-size:12px;font-weight:800;margin-bottom:3px}
 .sc-desc{font-size:10.5px;color:var(--t2);text-align:center;line-height:1.5}
 
+/* ── Performans İstatistik Şeridi ── */
+.pstat{background:var(--bg3);border-radius:9px;padding:10px 12px;text-align:center}
+.pstat-lbl{font-size:9.5px;color:var(--t3);margin-bottom:5px;white-space:nowrap}
+.pstat-val{font-size:16px;font-weight:900;transition:color .3s}
+@media(max-width:600px){#perf-stats{grid-template-columns:repeat(3,1fr)}}
+
+/* ── Haber Detay Modal ── */
+#news-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9100;align-items:center;justify-content:center;padding:16px}
+#news-modal-overlay.open{display:flex}
+#news-modal{background:var(--bg2);border:1px solid var(--border);border-radius:14px;width:100%;max-width:600px;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.7)}
+.nm-close{position:sticky;top:0;float:right;margin:12px 14px 0 0;background:rgba(255,255,255,.07);border:none;color:var(--t1);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;z-index:10;line-height:32px;text-align:center}
+.nm-close:hover{background:rgba(255,255,255,.15)}
+.nm-body{padding:22px 24px}
+.nm-sent-bar{width:6px;border-radius:3px;min-height:60px;flex-shrink:0;align-self:stretch}
+.nm-header{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.nm-title{font-size:17px;font-weight:800;line-height:1.5;color:var(--t1);margin-bottom:8px}
+.nm-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.nm-analysis{background:var(--bg3);border-radius:10px;padding:16px;font-size:12.5px;color:var(--t2);line-height:1.7}
+.nm-analysis strong{color:var(--t1)}
+.nm-impact{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.nm-imp-item{flex:1;min-width:120px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.nm-imp-lbl{font-size:9.5px;color:var(--t3);margin-bottom:4px}
+.nm-imp-val{font-size:13px;font-weight:800}
+.news-item{cursor:pointer;transition:background .15s}
+.news-item:hover{background:rgba(255,255,255,.03)}
+
 /* ── Hisse Detay Modal ── */
 #stock-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;padding:16px}
 #stock-modal-overlay.open{display:flex}
@@ -433,6 +459,14 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     </div>
     <div class="cb" style="padding:12px 16px">
       <canvas id="perfChart" height="90"></canvas>
+      <!-- Dönem istatistikleri -->
+      <div id="perf-stats" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+        <div class="pstat"><div class="pstat-lbl">Portföy Getirisi</div><div class="pstat-val up" id="ps-ret">—</div></div>
+        <div class="pstat"><div class="pstat-lbl">BIST 100 Getirisi</div><div class="pstat-val" id="ps-bist">—</div></div>
+        <div class="pstat"><div class="pstat-lbl">S&P 500 Getirisi</div><div class="pstat-val" id="ps-sp">—</div></div>
+        <div class="pstat"><div class="pstat-lbl">En İyi Gün</div><div class="pstat-val up" id="ps-best">—</div></div>
+        <div class="pstat"><div class="pstat-lbl">En Kötü Gün</div><div class="pstat-val down" id="ps-worst">—</div></div>
+      </div>
     </div>
   </div>
 
@@ -505,45 +539,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
           <thead><tr><th>Hisse</th><th>RSI(14)</th><th>MACD</th><th>Bollinger</th><th>MA50/200</th><th>Genel Sinyal</th></tr></thead>
           <tbody id="us-tech"></tbody>
         </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── ROW 7: Korelasyon + Yabancı Akış ── -->
-  <div class="g2">
-    <!-- Korelasyon Matrisi -->
-    <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Korelasyon Matrisi</div><div class="chip">Portföy Hisseleri</div></div>
-      <div class="cb" style="overflow-x:auto">
-        <table class="heatmap-table" id="corr-table"></table>
-      </div>
-    </div>
-    <!-- Yabancı Yatırımcı Akışı -->
-    <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--blue)"></div>Yabancı Yatırımcı Akışı — BIST</div><span style="font-size:9.5px;color:var(--t3)">Son 10 İşlem Günü</span></div>
-      <div class="cb">
-        <div style="display:flex;justify-content:space-between;font-size:9.5px;color:var(--t3);margin-bottom:10px">
-          <span style="color:var(--green)">■ Alım</span>
-          <span style="color:var(--red)">■ Satım</span>
-        </div>
-        <div id="ff-rows"></div>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-          <canvas id="ffChart" height="80"></canvas>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">
-          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:10px;text-align:center">
-            <div style="font-size:9.5px;color:var(--t3)">10G Net</div>
-            <div style="font-size:15px;font-weight:900;color:var(--red)">-₺2,4 Mlr</div>
-          </div>
-          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:10px;text-align:center">
-            <div style="font-size:9.5px;color:var(--t3)">Yabancı Payı</div>
-            <div style="font-size:15px;font-weight:900;color:var(--yellow)">%31,4</div>
-          </div>
-          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:10px;text-align:center">
-            <div style="font-size:9.5px;color:var(--t3)">Yön</div>
-            <div style="font-size:15px;font-weight:900;color:var(--red)">⬇ Çıkış</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -739,14 +734,30 @@ const TICKER_DATA=[
   {s:'VIX',p:'13,2',c:'-5,4%',u:false},{s:'10Y-US',p:'%4,48',c:'-4bps',u:false},
 ];
 const NEWS=[
-  {sent:'pos',title:'NVDA beklentilerin üzerinde kazanç açıkladı, yapay zeka talebi rekor seviyede',src:'Bloomberg',time:'1sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff'},
-  {sent:'pos',title:'TCMB enflasyon görünümünde iyileşme sinyali verdi, faiz indirimi beklentisi arttı',src:'Reuters',time:'2sa',tag:'Makro',tagC:'#00d4aa22',tagT:'#00d4aa'},
-  {sent:'pos',title:'THYAO Mayıs yolcu trafiği geçen yılı %18 aştı, yükseliş devam ediyor',src:'AA Finans',time:'3sa',tag:'BIST',tagC:'#00d4aa22',tagT:'#00d4aa'},
-  {sent:'neg',title:'İsrail-Hamas gerilimi petrol fiyatlarında belirsizliği artırıyor',src:'FT',time:'4sa',tag:'Jeopolitik',tagC:'#ff4d6d22',tagT:'#ff4d6d'},
-  {sent:'pos',title:'S&P 500 Fed faiz indirim beklentileriyle 6 haftanın zirvesine çıktı',src:'WSJ',time:'5sa',tag:'ABD',tagC:'#4a9eff22',tagT:'#4a9eff'},
-  {sent:'neu',title:'ABD Hazine tahvil ihalesi beklenenden güçlü, piyasalar sakin seyrediyor',src:'Bloomberg',time:'6sa',tag:'Tahvil',tagC:'#f5a62322',tagT:'#f5a623'},
-  {sent:'neg',title:'PETKM 1Ç2024 net karı %34 geriledi, marjlar baskı altında',src:'KAP',time:'8sa',tag:'BIST',tagC:'#ff4d6d22',tagT:'#ff4d6d'},
-  {sent:'pos',title:'META yapay zeka reklam gelirleri %40 arttı, analistler hedef fiyatı yükseltti',src:'CNBC',time:'10sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff'},
+  {sent:'pos',title:'NVDA beklentilerin üzerinde kazanç açıkladı, yapay zeka talebi rekor seviyede',src:'Bloomberg',time:'1sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff',
+   body:'NVIDIA, piyasa beklentilerini önemli ölçüde aşan çeyrek sonuçlarını açıkladı. Veri merkezi geliri yıllık bazda %%427 artarak <strong>22,6 milyar dolar</strong>a ulaştı. CEO Jensen Huang, yapay zeka chip talebinin 2025 yılına kadar arzın önünde kalacağını belirtti. H100 GPU siparişleri için bekleme süreleri hâlâ 6-8 ay.',
+   impact:[{lbl:'NVDA Hedef',val:'+12%',up:true},{lbl:'Sektör',val:'Pozitif',up:true},{lbl:'AI Teması',val:'Güçleniyor',up:true}]},
+  {sent:'pos',title:'TCMB enflasyon görünümünde iyileşme sinyali verdi, faiz indirimi beklentisi arttı',src:'Reuters',time:'2sa',tag:'Makro',tagC:'#00d4aa22',tagT:'#00d4aa',
+   body:'Türkiye Cumhuriyet Merkez Bankası yetkilileri, enflasyonun zirve yapacağı Mayıs-Haziran döneminin ardından <strong>belirgin bir düşüş trendi</strong> beklentisini dile getirdi. Piyasalar, yılın ikinci yarısında temkinli bir faiz indirim döngüsünü fiyatlamaya başladı. TL varlıkları için olumlu bir sinyal.',
+   impact:[{lbl:'TL Etkisi',val:'Pozitif',up:true},{lbl:'Banka Hisseleri',val:'İzle',up:true},{lbl:'Tahvil',val:'Alım Fırsatı',up:true}]},
+  {sent:'pos',title:'THYAO Mayıs yolcu trafiği geçen yılı %18 aştı, yükseliş devam ediyor',src:'AA Finans',time:'3sa',tag:'BIST',tagC:'#00d4aa22',tagT:'#00d4aa',
+   body:'Türk Hava Yolları, Mayıs ayında <strong>6,2 milyon yolcu</strong> taşıdığını açıkladı; bu rakam geçen yılın aynı dönemine göre %18 artış anlamına geliyor. Koltuk doluluk oranı %88,4 ile yüksek seyrediyor. Avrupa ve Körfez hatlarındaki kapasite artışı yaz sezonunda güçlü kârlılığa işaret ediyor.',
+   impact:[{lbl:'THYAO',val:'Güçlü Al',up:true},{lbl:'Hedef Fiyat',val:'₺340',up:true},{lbl:'Risk',val:'Düşük',up:true}]},
+  {sent:'neg',title:'İsrail-Hamas gerilimi petrol fiyatlarında belirsizliği artırıyor',src:'FT',time:'4sa',tag:'Jeopolitik',tagC:'#ff4d6d22',tagT:'#ff4d6d',
+   body:'Orta Doğu'daki çatışmanın Lübnan'a sıçrama riski, Brent ham petrol fiyatlarını <strong>yeniden 90 dolar eşiğine</strong> taşıdı. Süveyş Kanalı trafiği normal seyrediyor; ancak piyasalar olası bir genişleme senaryosunu fiyatlamaya başladı. Enerji hisseleri kısa vadede oynaklıkla karşılaşabilir.',
+   impact:[{lbl:'Brent Petrol',val:'+3,2%',up:true},{lbl:'TUPRS',val:'İzle',up:false},{lbl:'Portföy Riski',val:'Artıyor',up:false}]},
+  {sent:'pos',title:'S&P 500 Fed faiz indirim beklentileriyle 6 haftanın zirvesine çıktı',src:'WSJ',time:'5sa',tag:'ABD',tagC:'#4a9eff22',tagT:'#4a9eff',
+   body:'ABD Merkez Bankası üyelerinin Eylül'de faiz indirimine kapı aralayan açıklamalarının ardından S&P 500 <strong>6 haftanın en yüksek kapanışına</strong> ulaştı. Teknoloji ve büyüme hisseleri liderliği sürdürüyor. Piyasa fiyatlamasına göre 2024 sonuna kadar iki indirim bekleniyor.',
+   impact:[{lbl:'S&P 500',val:'+0,9%',up:true},{lbl:'MSFT / AAPL',val:'Pozitif',up:true},{lbl:'ABD Hisseleri',val:'Al',up:true}]},
+  {sent:'neu',title:'ABD Hazine tahvil ihalesi beklenenden güçlü, piyasalar sakin seyrediyor',src:'Bloomberg',time:'6sa',tag:'Tahvil',tagC:'#f5a62322',tagT:'#f5a623',
+   body:'ABD Hazinesi'nin 30 yıllık tahvil ihalesine beklenenden <strong>yüksek talep</strong> geldi; bu durum 10 yıllık faizlerin %4,45 düzeyinde stabilize olmasına katkı sağladı. Tahvil-hisse ayrışması devam ediyor; güvenli liman talebi orta düzeyde kalıyor.',
+   impact:[{lbl:'10Y Faiz',val:'%4,45',up:false},{lbl:'Dolar Endeksi',val:'Nötr',up:false},{lbl:'Altın',val:'Destekli',up:true}]},
+  {sent:'neg',title:'PETKM 1Ç2024 net karı %34 geriledi, marjlar baskı altında',src:'KAP',time:'8sa',tag:'BIST',tagC:'#ff4d6d22',tagT:'#ff4d6d',
+   body:'Petkim, yılın ilk çeyreğinde net karının <strong>yıllık %34 düştüğünü</strong> açıkladı. Yüksek hammadde maliyetleri ve düşen polietilen spread'leri baskıyı sürdürüyor. Kapasite kullanım oranı %72'ye geriledi. Analistler, bu yıl için kar tahminlerini aşağı yönlü revize ediyor.',
+   impact:[{lbl:'PETKM',val:'Sat',up:false},{lbl:'Kimya Sektörü',val:'Zayıf',up:false},{lbl:'Hedef',val:'₺28 ↓',up:false}]},
+  {sent:'pos',title:'META yapay zeka reklam gelirleri %40 arttı, analistler hedef fiyatı yükseltti',src:'CNBC',time:'10sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff',
+   body:'Meta Platforms'ın yapay zeka destekli reklam optimizasyon araçları, Q1 reklamlardaki harcama verimliliğini <strong>%40 artırdı</strong>. Reels reklam geliri Instagram Stories'i geçti. Goldman Sachs ve Morgan Stanley hedef fiyatlarını 550-600 dolar bandına çekti. Llama 3 modelinin ticari lisanslanması ek gelir kapısı açıyor.',
+   impact:[{lbl:'META',val:'Güçlü Al',up:true},{lbl:'Hedef Fiyat',val:'$580',up:true},{lbl:'AI Reklam',val:'Büyüyor',up:true}]},
 ];
 const CALENDAR=[
   {d:'28',m:'May',name:'ABD Kişisel Tüketim Harcamaları (PCE)',prev:'Önceki: +0,3%',imp:3},
@@ -758,10 +769,6 @@ const CALENDAR=[
   {d:'20',m:'Haz',name:'Türkiye Merkez Bankası Faiz Kararı',prev:'Beklenti: Sabit',imp:3},
   {d:'25',m:'Haz',name:'ABD GDP Nihai (Q1 2024)',prev:'Önceki: %1,6',imp:2},
 ];
-const CORR_SYMS=['THYAO','EREGL','ASELS','MSFT','NVDA','AKBNK'];
-const CORR_DATA=[[1,.28,.32,.15,.12,.45],[.28,1,.41,.08,.05,.38],[.32,.41,1,.10,.08,.30],[.15,.08,.10,1,.72,.12],[.12,.05,.08,.72,1,.09],[.45,.38,.30,.12,.09,1]];
-const FF_DAYS=['16M','17S','20P','21S','22Ç','23P','24C','27P','28S','Bugün'];
-const FF_NET=[-180,120,-250,-90,80,-320,-150,90,-410,-180]; // milyon TL
 
 let WATCHES=[
   {sym:'ISCTR',nm:'İş Bankası',px:'11,82',chg:'+1,4%',up:true},
@@ -832,8 +839,8 @@ function renderPortfolio(){
 }
 
 function renderNews(){
-  document.getElementById('news-list').innerHTML=NEWS.map(n=>`
-    <div class="news-item">
+  document.getElementById('news-list').innerHTML=NEWS.map((n,i)=>`
+    <div class="news-item" onclick="openNewsModal(${i})">
       <div class="news-sent" style="background:${n.sent==='pos'?'var(--green)':n.sent==='neg'?'var(--red)':'var(--yellow)'}"></div>
       <div class="news-body">
         <div class="news-title">${n.title}</div>
@@ -842,6 +849,7 @@ function renderNews(){
           <span class="news-time">· ${n.time} önce</span>
           <span class="news-tag" style="background:${n.tagC};color:${n.tagT}">${n.tag}</span>
           <span class="badge" style="background:${n.sent==='pos'?'var(--green2)':n.sent==='neg'?'var(--red2)':'var(--yellow2)'};color:${n.sent==='pos'?'var(--green)':n.sent==='neg'?'var(--red)':'var(--yellow)'};border:none;font-size:9px">${n.sent==='pos'?'⬆ Pozitif':n.sent==='neg'?'⬇ Negatif':'→ Nötr'}</span>
+          <span style="font-size:9px;color:var(--t3);margin-left:auto">Detay →</span>
         </div>
       </div>
     </div>`).join('');
@@ -856,42 +864,6 @@ function renderCalendar(){
     </div>`).join('');
 }
 
-function renderCorr(){
-  const n=CORR_SYMS.length;
-  let h=`<tr><th></th>${CORR_SYMS.map(s=>`<th>${s}</th>`).join('')}</tr>`;
-  for(let i=0;i<n;i++){
-    h+=`<tr><th>${CORR_SYMS[i]}</th>`;
-    for(let j=0;j<n;j++){
-      const v=CORR_DATA[i][j];
-      const abs=Math.abs(v);
-      let bg,tc;
-      if(i===j){bg='#1a2235';tc='var(--t2)'}
-      else if(v>=.7){bg='rgba(255,77,109,.35)';tc='#ff8fa3'}
-      else if(v>=.4){bg='rgba(245,166,35,.25)';tc='var(--yellow)'}
-      else{bg='rgba(0,212,170,.15)';tc='var(--green)'}
-      h+=`<td style="background:${bg};color:${tc}">${i===j?'—':v.toFixed(2)}</td>`;
-    }
-    h+='</tr>';
-  }
-  document.getElementById('corr-table').innerHTML=h;
-}
-
-function renderFF(){
-  const max=Math.max(...FF_NET.map(Math.abs));
-  document.getElementById('ff-rows').innerHTML=FF_DAYS.map((d,i)=>{
-    const v=FF_NET[i];const pos=v>0;
-    const pct=Math.abs(v)/max*100;
-    return`<div class="ff-row">
-      <div class="ff-lbl" style="font-size:10px">${d}</div>
-      <div style="flex:1">
-        <div class="ff-bar">
-          ${pos?`<div class="ff-buy" style="width:${pct}%;background:var(--green)"></div><div style="flex:1"></div>`:`<div style="flex:1"></div><div class="ff-sell" style="width:${pct}%"></div>`}
-        </div>
-        <div class="ff-nums"><span style="color:var(--green)">${pos?'+'+Math.abs(v)+'M':''}</span><span style="color:var(--red)">${!pos?'-'+Math.abs(v)+'M':''}</span></div>
-      </div>
-    </div>`;
-  }).join('');
-}
 
 /* ══ Watchlist ══ */
 function renderWatches(){
@@ -1016,6 +988,27 @@ function buildPerfChart(pts){
     ]},
     options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(10,14,26,.95)',borderColor:'rgba(30,45,69,.8)',borderWidth:1,callbacks:{label:(c)=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}`}}},scales:{x:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},maxTicksLimit:12}},y:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},callback:v=>v.toFixed(0)}}}},
   });
+  // Dinamik performans istatistiklerini güncelle
+  const pRet = ((port[port.length-1]-port[0])/port[0]*100).toFixed(1);
+  const bRet = ((bist[bist.length-1]-bist[0])/bist[0]*100).toFixed(1);
+  const sRet = ((sp[sp.length-1]-sp[0])/sp[0]*100).toFixed(1);
+  // Günlük değişimler (getiri dizisinden)
+  const dailyChg = port.slice(1).map((v,i) => v - port[i]);
+  const best  = Math.max(...dailyChg).toFixed(2);
+  const worst = Math.min(...dailyChg).toFixed(2);
+  function setPS(id,val,isUp){
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.textContent=(parseFloat(val)>=0?'+':'')+val+'%';
+    el.className='pstat-val '+(isUp?'up':'down');
+  }
+  setPS('ps-ret', pRet, parseFloat(pRet)>=0);
+  setPS('ps-bist',bRet, parseFloat(bRet)>=0);
+  setPS('ps-sp',  sRet, parseFloat(sRet)>=0);
+  const bEl=document.getElementById('ps-best');
+  const wEl=document.getElementById('ps-worst');
+  if(bEl){bEl.textContent='+'+best+'%';bEl.className='pstat-val up';}
+  if(wEl){wEl.textContent=worst+'%';wEl.className='pstat-val down';}
 }
 
 function updatePerfChart(range,btn){
@@ -1035,10 +1028,6 @@ function buildPortChart(){
   new Chart(ctx,{type:'doughnut',data:{labels:PORTFOLIO.map(p=>p.sym),datasets:[{data:PORTFOLIO.map(p=>p.w),backgroundColor:PORTFOLIO.map(p=>p.color),borderColor:'#07090f',borderWidth:2,hoverOffset:5}]},options:{responsive:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.label}: %${c.parsed}`}}}}});
 }
 
-function buildFFChart(){
-  const ctx=document.getElementById('ffChart').getContext('2d');
-  new Chart(ctx,{type:'bar',data:{labels:FF_DAYS,datasets:[{data:FF_NET,backgroundColor:FF_NET.map(v=>v>=0?'rgba(0,212,170,.6)':'rgba(255,77,109,.6)'),borderRadius:3}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw}M ₺`}}},scales:{x:{grid:{display:false},ticks:{color:'#4a5a70',font:{size:9}}},y:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:9},callback:v=>v+'M'}}}}});
-}
 
 /* ════════════════════════ CLOCK & LIVE PRICE ════════════════════════ */
 function updateClock(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('tr-TR');}
@@ -1066,15 +1055,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderPortfolio();
   renderNews();
   renderCalendar();
-  renderCorr();
-  renderFF();
   renderWatches();
   renderAlarms();
   updateScen();
   buildScoreChart();
   buildPortChart();
   buildPerfChart(30);
-  buildFFChart();
 
   // Gerçek veriyi yükle
   loadReport();
@@ -1286,6 +1272,40 @@ async function loadReport() {
   }
 }
 
+/* ════════════════════════ HABER MODAL ════════════════════════ */
+function openNewsModal(idx) {
+  var n = NEWS[idx];
+  if (!n) return;
+  var sentColor = n.sent==='pos' ? 'var(--green)' : n.sent==='neg' ? 'var(--red)' : 'var(--yellow)';
+  var sentLabel = n.sent==='pos' ? '⬆ Pozitif' : n.sent==='neg' ? '⬇ Negatif' : '→ Nötr';
+  var sentBg    = n.sent==='pos' ? 'var(--green2)' : n.sent==='neg' ? 'var(--red2)' : 'var(--yellow2)';
+
+  document.getElementById('nm-sent-bar').style.background = sentColor;
+  document.getElementById('nm-title').textContent = n.title;
+  document.getElementById('nm-src').textContent   = n.src;
+  document.getElementById('nm-time').textContent  = '· ' + n.time + ' önce';
+  var tagEl = document.getElementById('nm-tag');
+  tagEl.textContent  = n.tag;
+  tagEl.style.background = n.tagC;
+  tagEl.style.color      = n.tagT;
+  document.getElementById('nm-sent-badge').innerHTML =
+    `<span style="font-size:9px;padding:2px 7px;border-radius:3px;font-weight:800;background:${sentBg};color:${sentColor}">${sentLabel}</span>`;
+  document.getElementById('nm-analysis').innerHTML = n.body || '<span style="color:var(--t3)">Detay mevcut değil.</span>';
+
+  var impacts = n.impact || [];
+  document.getElementById('nm-impact').innerHTML = impacts.map(function(im){
+    var c = im.up ? 'var(--green)' : 'var(--red)';
+    return `<div class="nm-imp-item"><div class="nm-imp-lbl">${im.lbl}</div><div class="nm-imp-val" style="color:${c}">${im.val}</div></div>`;
+  }).join('');
+
+  document.getElementById('news-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeNewsModal() {
+  document.getElementById('news-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 /* ════════════════════════ HİSSE DETAY MODAL ════════════════════════ */
 function openStockModal(sym) {
   if (!_rawReport || !_rawReport.stocks) return;
@@ -1426,14 +1446,19 @@ function closeStockModal() {
 
 // Olay dinleyicileri (event delegation)
 document.addEventListener('DOMContentLoaded', function() {
-  // Kapat butonu ve overlay tıklaması
+  // Haber modal kapat
+  document.getElementById('nm-close-btn').addEventListener('click', closeNewsModal);
+  document.getElementById('news-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeNewsModal();
+  });
+  // Hisse modal kapat
   document.getElementById('sm-close-btn').addEventListener('click', closeStockModal);
   document.getElementById('stock-modal-overlay').addEventListener('click', function(e) {
     if (e.target === this) closeStockModal();
   });
-  // ESC tuşu
+  // ESC tuşu her iki modalı da kapatır
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeStockModal();
+    if (e.key === 'Escape') { closeStockModal(); closeNewsModal(); }
   });
 
   // Tablo satırlarına tıklama (event delegation)
@@ -1449,6 +1474,29 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<!-- ════════ Haber Detay Modal ════════ -->
+<div id="news-modal-overlay">
+  <div id="news-modal">
+    <button class="nm-close" id="nm-close-btn">✕</button>
+    <div class="nm-body">
+      <div class="nm-header">
+        <div class="nm-sent-bar" id="nm-sent-bar"></div>
+        <div style="flex:1">
+          <div class="nm-title" id="nm-title"></div>
+          <div class="nm-meta">
+            <span class="news-tag" id="nm-tag" style="font-size:9px;padding:3px 7px;border-radius:4px;font-weight:800;text-transform:uppercase"></span>
+            <span class="news-src" id="nm-src"></span>
+            <span class="news-time" id="nm-time"></span>
+            <span id="nm-sent-badge"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nm-analysis" id="nm-analysis"></div>
+      <div class="nm-impact" id="nm-impact"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ════════ Hisse Detay Modal ════════ -->
 <div id="stock-modal-overlay">
