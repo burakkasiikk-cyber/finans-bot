@@ -4,6 +4,8 @@
 let _reportData     = null;
 let _activeTab      = "scanner";
 let _scannerRefresh = null; // watchlist/segment refresh için closure ref
+let _chartBars      = null; // aktif grafik verisi (toggle için)
+let _chartType      = "candle"; // "candle" | "line"
 
 const BIST_SECTORS = {
   "Bankacılık":   ["VAKBN","YKBNK","AKBNK","HALKB","TURSG","GARAN","ISCTR","SKBNK","ALBRK"],
@@ -202,7 +204,8 @@ function _chartFallback(el, symbol) {
   </div>`;
 }
 
-function _renderLWChart(el, bars) {
+function _renderLWChart(el, bars, type) {
+  type = type || _chartType || "candle";
   el.innerHTML = "";
   const chart = LightweightCharts.createChart(el, {
     width:  el.clientWidth || 680,
@@ -222,14 +225,26 @@ function _renderLWChart(el, bars) {
     handleScale:     { mouseWheel: false, pinch: false },
   });
 
-  const series = chart.addCandlestickSeries({
-    upColor:          "#2ecc71",  downColor:          "#ff5c6c",
-    borderUpColor:    "#2ecc71",  borderDownColor:    "#ff5c6c",
-    wickUpColor:      "#2ecc71",  wickDownColor:      "#ff5c6c",
-  });
-  series.setData(bars);
-  chart.timeScale().fitContent();
+  if (type === "line") {
+    const series = chart.addLineSeries({
+      color:                   "#5b7cf7",
+      lineWidth:               2,
+      crosshairMarkerVisible:  true,
+      crosshairMarkerRadius:   4,
+      crosshairMarkerBorderColor: "#5b7cf7",
+      crosshairMarkerBackgroundColor: "#121826",
+    });
+    series.setData(bars.map(b => ({ time: b.time, value: b.close })));
+  } else {
+    const series = chart.addCandlestickSeries({
+      upColor:       "#2ecc71",  downColor:       "#ff5c6c",
+      borderUpColor: "#2ecc71",  borderDownColor: "#ff5c6c",
+      wickUpColor:   "#2ecc71",  wickDownColor:   "#ff5c6c",
+    });
+    series.setData(bars);
+  }
 
+  chart.timeScale().fitContent();
   new ResizeObserver(() => {
     if (el.clientWidth > 0) chart.applyOptions({ width: el.clientWidth });
   }).observe(el);
@@ -249,7 +264,7 @@ function loadPriceChart(symbol) {
   }
 
   // Compact {t,o,h,l,c} → Lightweight Charts {time,open,high,low,close}
-  const bars = history.map(b => ({
+  _chartBars = history.map(b => ({
     time:  b.t,
     open:  b.o,
     high:  b.h,
@@ -261,12 +276,14 @@ function loadPriceChart(symbol) {
     <div class="spinner" style="width:18px;height:18px;border-width:2px;margin:0"></div> Grafik yükleniyor…
   </div>`;
 
+  function render() { _renderLWChart(el, _chartBars, _chartType); }
+
   if (typeof LightweightCharts !== "undefined") {
-    _renderLWChart(el, bars);
+    render();
   } else {
     const sc = document.createElement("script");
     sc.src = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
-    sc.onload  = () => _renderLWChart(el, bars);
+    sc.onload  = render;
     sc.onerror = () => _chartFallback(el, symbol);
     document.head.appendChild(sc);
   }
@@ -341,6 +358,8 @@ function _showStockDetail(stock) {
   if (!stock || stock.error) return;
   const content = document.getElementById("content");
   if (!content) return;
+  _chartBars = null;
+  _chartType = "candle"; // her detay açılışında muma sıfırla
 
   const dims      = stock.dimensions || {};
   const vColor    = _verdictColor(stock.verdict_key);
@@ -438,7 +457,15 @@ function _showStockDetail(stock) {
     <div class="card"><h2>Temel Veriler</h2><div class="metrics">${metrics}</div></div>
 
     <div class="card">
-      <h2>📈 Fiyat Grafiği <span style="font-size:10px;color:var(--muted);font-weight:400">Son 3 ay</span></h2>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h2 style="margin:0">📈 Fiyat Grafiği <span style="font-size:10px;color:var(--muted);font-weight:400">Son 3 ay</span></h2>
+        <div style="display:flex;gap:4px" id="chartToggle">
+          <button onclick="App.switchChartType('candle',this)" id="btnCandle"
+            style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer">🕯 Mum</button>
+          <button onclick="App.switchChartType('line',this)" id="btnLine"
+            style="background:var(--panel-2);color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer">📈 Çizgi</button>
+        </div>
+      </div>
       <div id="priceChartContainer" style="height:300px;border-radius:8px;overflow:hidden"></div>
     </div>
 
@@ -544,6 +571,21 @@ const App = {
       btn.textContent = nowWatched ? "⭐" : "☆";
       btn.title = nowWatched ? "İzlemeden çıkar" : "İzlemeye ekle";
     }
+  },
+  switchChartType: (type, btn) => {
+    _chartType = type;
+    // Toggle buton stillerini güncelle
+    const candle = document.getElementById("btnCandle");
+    const line   = document.getElementById("btnLine");
+    if (candle && line) {
+      const active   = "background:var(--accent);color:#fff;border:none;";
+      const inactive = "background:var(--panel-2);color:var(--muted);border:1px solid var(--border);";
+      candle.style.cssText = (type === "candle" ? active : inactive) + "border-radius:8px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer";
+      line.style.cssText   = (type === "line"   ? active : inactive) + "border-radius:8px;padding:4px 11px;font-size:11px;font-weight:600;cursor:pointer";
+    }
+    // Grafiği yeniden çiz
+    const el = document.getElementById("priceChartContainer");
+    if (el && _chartBars?.length) _renderLWChart(el, _chartBars, type);
   },
 };
 
