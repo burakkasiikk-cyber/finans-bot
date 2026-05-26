@@ -152,7 +152,12 @@ function switchTab(tab, btn) {
     if (tab === "scanner") {
       // Tarayıcı: content'i göster, reportDashboard'u yeniden çiz
       if (contentEl) contentEl.style.display = "";
-      const rd = document.getElementById("reportDashboard");
+      // Arama sonrası reportDashboard silinmiş olabilir — yoksa yeniden oluştur
+      let rd = document.getElementById("reportDashboard");
+      if (!rd && contentEl) {
+        contentEl.innerHTML = `<div id="reportDashboard"></div>`;
+        rd = document.getElementById("reportDashboard");
+      }
       if (rd) { rd.style.display = ""; renderReportStocks(stocks); }
     } else {
       // Diğer sekmeler: arama/analiz içeriğini gizle
@@ -184,9 +189,20 @@ function refresh() {
   }
 }
 
+function goHome() {
+  // Aramayı temizle
+  const si = document.getElementById("searchInput");
+  if (si) si.value = "";
+  try { UI.hideSuggestions(); } catch {}
+  // Scanner tab'a geç (reportDashboard da yeniden oluşturulur)
+  const scannerBtn = document.querySelector('.tab');
+  switchTab("scanner", scannerBtn);
+}
+
 const App = {
   switchTab,
   refresh,
+  goHome,
   showDetail: (index) => {
     const stocks = _reportData?.stocks || [];
     _showStockDetail(stocks[index]);
