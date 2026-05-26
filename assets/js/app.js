@@ -82,14 +82,15 @@ function renderReportStocks(stocks) {
   }
 
   el.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
-      <h2 class="section-title" style="margin:0">📊 Fırsat Tarayıcı</h2>
-      <div style="display:flex;align-items:center;gap:8px;background:var(--panel-2);
-                  border:1px solid var(--border);border-radius:20px;padding:5px 14px 5px 10px">
-        <span style="color:var(--muted);font-size:13px">🔍</span>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+      <h2 class="section-title" style="margin:0;flex:1">📊 Fırsat Tarayıcı</h2>
+      <div style="display:flex;align-items:center;gap:6px;background:var(--panel-2);
+                  border:1px solid var(--border);border-radius:20px;padding:6px 14px;
+                  flex-shrink:0">
+        <span style="color:var(--muted);font-size:12px">🔍</span>
         <input id="scannerFilter" type="text" placeholder="Filtrele…"
           style="background:transparent;border:none;color:var(--text);font-size:13px;
-                 width:160px;outline:none;" />
+                 width:130px;outline:none;" />
       </div>
     </div>
     <table class="portfolio-table" style="min-width:500px">
@@ -183,14 +184,14 @@ function _showStockDetail(stock) {
 
   content.style.display = "";
   content.innerHTML = `
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px">
-      <span onclick="App.goHome()" style="color:var(--accent);cursor:pointer;transition:opacity .15s"
-            onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">📊 Tarayıcı</span>
-      <span style="color:var(--muted)">›</span>
-      <span style="color:var(--text);font-weight:600">${_esc(stock.symbol)}</span>
-    </div>
-
-    <div class="card"><div class="verdict">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+        <span onclick="App.goHome()" style="color:var(--accent);cursor:pointer"
+              onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">📊 Tarayıcı</span>
+        <span style="color:var(--muted)">›</span>
+        <span style="color:var(--text);font-weight:600">${_esc(stock.symbol)}</span>
+      </div>
+    <div class="verdict">
       <div class="ring" style="background:conic-gradient(${vColor} ${ringDeg}deg, var(--border) 0deg)">
         <div class="inner">
           <div class="score-num" style="color:${vColor}">${score ?? "—"}</div>
@@ -212,7 +213,7 @@ function _showStockDetail(stock) {
         </div>
         <div class="summary">Genel skor ${score ?? "—"}/100 → <strong style="color:${vColor}">${_esc(stock.verdict)}</strong>. ${_riskBadge(stock.risk)} risk seviyesi.</div>
       </div>
-    </div></div>
+    </div></div></div>
 
     <div class="card"><h2>Boyut Bazlı Skorlama</h2>${dimBars}</div>
 
