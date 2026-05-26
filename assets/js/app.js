@@ -82,11 +82,15 @@ function renderReportStocks(stocks) {
   }
 
   el.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
       <h2 class="section-title" style="margin:0">📊 Fırsat Tarayıcı</h2>
-      <input id="scannerFilter" type="text" placeholder="🔍 Hisse filtrele (ör: EKDMR, THYAO…)"
-        style="background:var(--panel-2);border:1px solid var(--border);color:var(--text);
-               padding:7px 12px;border-radius:9px;font-size:13px;width:240px;outline:none" />
+      <div style="display:flex;align-items:center;gap:8px;background:var(--panel-2);
+                  border:1px solid var(--border);border-radius:20px;padding:5px 14px 5px 10px">
+        <span style="color:var(--muted);font-size:13px">🔍</span>
+        <input id="scannerFilter" type="text" placeholder="Filtrele…"
+          style="background:transparent;border:none;color:var(--text);font-size:13px;
+                 width:160px;outline:none;" />
+      </div>
     </div>
     <table class="portfolio-table" style="min-width:500px">
       <thead><tr>
@@ -179,9 +183,12 @@ function _showStockDetail(stock) {
 
   content.style.display = "";
   content.innerHTML = `
-    <button onclick="App.goHome()" style="background:var(--panel-2);border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;margin-bottom:16px">
-      ← Tarayıcıya Dön
-    </button>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px">
+      <span onclick="App.goHome()" style="color:var(--accent);cursor:pointer;transition:opacity .15s"
+            onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">📊 Tarayıcı</span>
+      <span style="color:var(--muted)">›</span>
+      <span style="color:var(--text);font-weight:600">${_esc(stock.symbol)}</span>
+    </div>
 
     <div class="card"><div class="verdict">
       <div class="ring" style="background:conic-gradient(${vColor} ${ringDeg}deg, var(--border) 0deg)">
