@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-05-26T06:03:00Z",
+  "macro": {
+    "usd_try": 32.45,
+    "eur_try": 35.12,
+    "gold_usd": 2318.50,
+    "sp500": 5280.30,
+    "sp500_change_pct": 0.42,
+    "bist100": 9850.20,
+    "bist100_change_pct": -0.18,
+    "tr_interest_rate": 46.0
+  },
+  "stocks": [
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "exchange": "NASDAQ",
+      "price": 1125.40,
+      "change_pct": 2.4,
+      "score": 89,
+      "verdict": "GÜÇLÜ AL",
+      "verdict_key": "STRONG_BUY",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 78,
+          "metrics": { "pe": 45.2, "pb": 28.1, "ps": 18.3 }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": { "roe": 124.0, "roa": 55.0, "net_margin": 55.0, "gross_margin": 76.0 }
+        },
+        "growth": {
+          "score": 95,
+          "metrics": { "rev_growth": 77.0, "eps_growth": 85.0, "rev_5y": 42.0 }
+        },
+        "health": {
+          "score": 65,
+          "metrics": { "current_ratio": 4.2, "debt_equity": 0.42, "quick_ratio": 3.8 }
+        },
+        "technical": {
+          "score": 88,
+          "metrics": { "ret52": 210.0, "ret13": 38.0, "range_pos": 88.0 }
+        },
+        "analyst": {
+          "score": 80,
+          "metrics": { "buy": 38, "hold": 5, "sell": 1 }
+        }
+      },
+      "pros": ["Gelir büyümesi YoY +77%", "Net marj %55", "Analist konsensüsü güçlü"],
+      "cons": ["F/K oranı 45x — tarihsel ortalamanın üstü", "Beta 1.8"],
+      "dividends": []
+    },
+    {
+      "symbol": "GARAN",
+      "name": "Garanti BBVA",
+      "exchange": "BIST",
+      "price": 85.40,
+      "change_pct": -2.1,
+      "score": 41,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "high",
+      "dimensions": {
+        "valuation": { "score": 35, "metrics": { "pe": 7.0, "pb": 1.1 } },
+        "profit":    { "score": 48, "metrics": { "roe": 14.0, "net_margin": 8.0 } },
+        "growth":    { "score": 28, "metrics": { "rev_growth": -4.0, "eps_growth": -8.0 } },
+        "health":    { "score": 55, "metrics": { "current_ratio": 1.2, "debt_equity": 2.8 } },
+        "technical": { "score": 22, "metrics": { "ret52": -18.0, "ret13": -9.0, "range_pos": 12.0 } },
+        "analyst":   { "score": 58, "metrics": { "buy": 6, "hold": 8, "sell": 4 } }
+      },
+      "pros": ["Düşük F/K oranı"],
+      "cons": ["Gelir küçülüyor", "Teknik trend bozuk", "Yüksek borç/özkaynak"],
+      "dividends": []
+    }
+  ],
+  "top3": ["NVDA"],
+  "risk_alerts": ["GARAN"],
+  "weekly_summary": null
+}
