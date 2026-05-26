@@ -162,7 +162,8 @@ header::after {
 .placeholder .big { font-size: 44px; margin-bottom: 12px; }
 .error { color: var(--red); }
 .spinner { width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 14px; }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin  { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.4; transform:scale(1.3); } }
 .disclaimer { font-size: 12px; color: var(--muted); background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-top: 8px; }
 footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 30px; }
 footer a, .disclaimer a { color: var(--accent); }
