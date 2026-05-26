@@ -10,7 +10,7 @@ from scripts.fetch_bist import fetch_bist_stock
 from scripts.fetch_macro import fetch_macro
 
 US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
-BIST_STOCKS = ["THYAO", "GARAN", "KCHOL", "TUPRS", "EREGL", "SISE", "ASELS"]
+BIST_STOCKS = ["THYAO", "GARAN", "KCHOL", "TUPRS", "EREGL", "SISE", "ASELS", "EKDMR"]
 
 
 def run() -> dict:
