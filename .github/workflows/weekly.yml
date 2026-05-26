@@ -1,0 +1,61 @@
+name: Weekly Summary
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # Every Monday 09:00 TR
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run analysis
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
+          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+          TR_INTEREST_RATE: ${{ secrets.TR_INTEREST_RATE }}
+        run: python -m scripts.analyze
+
+      - name: Send weekly summary
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python -c "
+          import json, os
+          from scripts.notify import build_morning_message, send_telegram, send_gmail
+          with open('data/report.json') as f:
+              report = json.load(f)
+          msg = '📅 HAFTALIK ÖZET\n\n' + build_morning_message(report)
+          token   = os.environ.get('TELEGRAM_BOT_TOKEN','')
+          chat_id = os.environ.get('TELEGRAM_CHAT_ID','')
+          gmail   = os.environ.get('GMAIL_ADDRESS','')
+          pw      = os.environ.get('GMAIL_APP_PASSWORD','')
+          if token and chat_id:
+              send_telegram(msg, token, chat_id)
+          if gmail and pw:
+              send_gmail('📅 Haftalık Hisse Özeti', msg, gmail, pw)
+          print('Weekly summary sent')
+          "
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/report.json
+          git diff --staged --quiet || git commit -m "chore: weekly report $(date -u +%Y-%m-%d)"
+          git push

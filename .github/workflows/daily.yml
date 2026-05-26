@@ -1,0 +1,52 @@
+name: Daily Analysis & Notify
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 09:00 TR (UTC+3 = UTC 06:00)
+  workflow_dispatch:        # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run analysis
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
+          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+          TR_INTEREST_RATE: ${{ secrets.TR_INTEREST_RATE }}
+        run: python -m scripts.analyze
+
+      - name: Send notifications
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python -c "
+          import json
+          from scripts.notify import notify_morning
+          with open('data/report.json') as f:
+              report = json.load(f)
+          notify_morning(report)
+          "
+
+      - name: Commit report.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/report.json
+          git diff --staged --quiet || git commit -m "chore: daily report $(date -u +%Y-%m-%d)"
+          git push
