@@ -1,0 +1,100 @@
+<h2>Dashboard nasıl görünsün?</h2>
+<p class="subtitle">Günlük 09:00 raporunuzu ve anlık takibinizi hangi düzende görmek istersiniz?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;padding:12px;border-radius:6px;font-family:monospace;font-size:11px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+        <div style="background:#1a1f2e;border-radius:4px;padding:8px;text-align:center;">
+          <div style="color:#00c853;font-size:16px;font-weight:bold;">📈 +12%</div>
+          <div style="color:#888;font-size:9px;">AAPL</div>
+        </div>
+        <div style="background:#1a1f2e;border-radius:4px;padding:8px;text-align:center;">
+          <div style="color:#ff5252;font-size:16px;font-weight:bold;">📉 -3%</div>
+          <div style="color:#888;font-size:9px;">GARAN</div>
+        </div>
+        <div style="background:#1a1f2e;border-radius:4px;padding:8px;text-align:center;">
+          <div style="color:#00c853;font-size:16px;font-weight:bold;">📈 +7%</div>
+          <div style="color:#888;font-size:9px;">NVDA</div>
+        </div>
+      </div>
+      <div style="background:#1a1f2e;border-radius:4px;padding:8px;">
+        <div style="color:#ffd600;font-size:10px;margin-bottom:4px;">🏆 EN İYİ FIRSATLAR</div>
+        <div style="color:#ccc;font-size:9px;">1. NVDA — Güçlü Al (87/100)</div>
+        <div style="color:#ccc;font-size:9px;">2. AAPL — Al (74/100)</div>
+        <div style="color:#ccc;font-size:9px;">3. THYAO — Al (71/100)</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Özet Kart Görünümü</h3>
+      <p>Üstte skor kartları, altında sıralı fırsat listesi. Hızlı bakış için ideal.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;padding:12px;border-radius:6px;font-family:monospace;font-size:11px;">
+      <div style="display:flex;gap:6px;">
+        <div style="flex:1;background:#1a1f2e;border-radius:4px;padding:8px;">
+          <div style="color:#ffd600;font-size:9px;margin-bottom:6px;">📊 SKOR TABLOSU</div>
+          <div style="display:flex;justify-content:space-between;color:#ccc;font-size:9px;border-bottom:1px solid #333;padding-bottom:3px;margin-bottom:3px;">
+            <span>NVDA</span><span style="color:#00c853">87 🟢</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;color:#ccc;font-size:9px;border-bottom:1px solid #333;padding-bottom:3px;margin-bottom:3px;">
+            <span>AAPL</span><span style="color:#00c853">74 🟢</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;color:#ccc;font-size:9px;border-bottom:1px solid #333;padding-bottom:3px;margin-bottom:3px;">
+            <span>THYAO</span><span style="color:#ffd600">62 🟡</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;color:#ccc;font-size:9px;">
+            <span>GARAN</span><span style="color:#ff5252">38 🔴</span>
+          </div>
+        </div>
+        <div style="flex:1;background:#1a1f2e;border-radius:4px;padding:8px;">
+          <div style="color:#ffd600;font-size:9px;margin-bottom:6px;">⚠️ RİSK METRİĞİ</div>
+          <div style="color:#ccc;font-size:9px;margin-bottom:3px;">Düşük risk: 2 hisse</div>
+          <div style="color:#ccc;font-size:9px;margin-bottom:3px;">Orta risk: 1 hisse</div>
+          <div style="color:#ccc;font-size:9px;margin-bottom:3px;">Yüksek risk: 1 hisse</div>
+          <div style="margin-top:6px;height:4px;background:#333;border-radius:2px;">
+            <div style="width:50%;height:4px;background:#00c853;border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Tablo + Risk Paneli</h3>
+      <p>Sol tarafta sıralı skor tablosu, sağda risk özeti. Karşılaştırma için iyi.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;padding:12px;border-radius:6px;font-family:monospace;font-size:11px;">
+      <div style="background:#1a1f2e;border-radius:4px;padding:8px;margin-bottom:6px;">
+        <div style="color:#ffd600;font-size:10px;margin-bottom:4px;">☀️ SABAH RAPORU — 26 May 09:00</div>
+        <div style="color:#00c853;font-size:9px;">✅ 3 AL fırsatı tespit edildi</div>
+        <div style="color:#ff5252;font-size:9px;">⚠️ 1 hisse risk bölgesinde</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="background:#1a1f2e;border-radius:4px;padding:6px;">
+          <div style="color:#888;font-size:8px;">NVDA</div>
+          <div style="background:#333;height:3px;border-radius:2px;margin:3px 0;">
+            <div style="width:87%;height:3px;background:#00c853;border-radius:2px;"></div>
+          </div>
+          <div style="color:#00c853;font-size:9px;">87/100 GÜÇLÜ AL</div>
+        </div>
+        <div style="background:#1a1f2e;border-radius:4px;padding:6px;">
+          <div style="color:#888;font-size:8px;">GARAN</div>
+          <div style="background:#333;height:3px;border-radius:2px;margin:3px 0;">
+            <div style="width:38%;height:3px;background:#ff5252;border-radius:2px;"></div>
+          </div>
+          <div style="color:#ff5252;font-size:9px;">38/100 SAT</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Sabah Raporu Odaklı</h3>
+      <p>Günlük özet en üstte, altında progress bar'lı hisse kartları. Sabah rutinine uygun.</p>
+    </div>
+  </div>
+
+</div>

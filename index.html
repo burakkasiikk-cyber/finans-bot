@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hisse Analiz Motoru · Finnhub</title>
+<meta name="description" content="Hisseleri 6 boyutta puanlayan analiz motoru: değerleme, kârlılık, büyüme, finansal sağlık, teknik momentum ve analist görüşü. AL/TUT/SAT kararı üretir." />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="dot">📊</div>
+      <div>
+        <h1>Hisse Analiz Motoru</h1>
+        <span>6 boyutlu skorlama · AL / TUT / SAT kararı</span>
+      </div>
+    </div>
+    <div class="key-box">
+      <input id="apiKey" type="password" placeholder="Finnhub API anahtarı" autocomplete="off" />
+      <button id="saveKey">Kaydet</button>
+    </div>
+  </header>
+
+  <div class="search">
+    <span class="icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="Hisse ara ve analiz et (örn: AAPL, Tesla, Nvidia)…" autocomplete="off" />
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div id="content">
+    <div class="placeholder">
+      <div class="big">🧠</div>
+      <div style="font-size:16px;color:var(--text);font-weight:600;margin-bottom:8px">Bir hisse seç, motor analiz etsin</div>
+      <div>Değerleme, kârlılık, büyüme, finansal sağlık, teknik momentum ve analist görüşünü tek skorda toplar.</div>
+      <div style="margin-top:12px;font-size:13px;">
+        Anahtarınız yok mu? <a href="https://finnhub.io/register" target="_blank" rel="noopener">finnhub.io/register</a> — ücretsiz.
+      </div>
+    </div>
+  </div>
+
+  <footer>Veriler <a href="https://finnhub.io" target="_blank" rel="noopener">Finnhub.io</a> · Eğitim/bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</footer>
+</div>
+
+<!-- Uygulama modülleri (yükleme sırası önemli) -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/analysis.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

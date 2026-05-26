@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dashboard Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0d14; color: #e0e0e0; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; padding: 0; }
+
+  /* TOP BAR */
+  .topbar { background: #0f1320; border-bottom: 1px solid #1e2540; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar .logo { font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .topbar .status { display: flex; align-items: center; gap: 16px; font-size: 12px; color: #888; }
+  .topbar .status .dot { width: 7px; height: 7px; border-radius: 50%; background: #00e676; display: inline-block; margin-right: 5px; box-shadow: 0 0 6px #00e676; }
+  .topbar .status .time { color: #ccc; font-weight: 600; }
+
+  /* STAT STRIP */
+  .stat-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: #1e2540; border-bottom: 1px solid #1e2540; }
+  .stat-box { background: #0f1320; padding: 12px 16px; }
+  .stat-box .label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .stat-box .val { font-size: 20px; font-weight: 700; color: #fff; }
+  .stat-box .sub { font-size: 11px; margin-top: 2px; }
+  .green { color: #00e676; } .red { color: #ff5252; } .yellow { color: #ffd600; } .blue { color: #448aff; }
+
+  /* MAIN GRID */
+  .main { display: grid; grid-template-columns: 1fr 340px; gap: 0; height: calc(100vh - 117px); }
+
+  /* LEFT PANEL */
+  .left { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+  /* SECTION HEADER */
+  .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .sec-head h3 { font-size: 12px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: .5px; }
+  .badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .badge-green { background: rgba(0,230,118,.15); color: #00e676; }
+  .badge-red { background: rgba(255,82,82,.15); color: #ff5252; }
+  .badge-yellow { background: rgba(255,214,0,.15); color: #ffd600; }
+
+  /* STOCK TABLE */
+  .stock-table { width: 100%; border-collapse: collapse; }
+  .stock-table thead tr { border-bottom: 1px solid #1e2540; }
+  .stock-table th { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: .4px; padding: 6px 8px; text-align: left; }
+  .stock-table th:not(:first-child) { text-align: center; }
+  .stock-table td { padding: 9px 8px; border-bottom: 1px solid #111827; vertical-align: middle; }
+  .stock-table tbody tr:hover { background: #141929; }
+  .stock-table td:not(:first-child) { text-align: center; }
+
+  .ticker { font-weight: 700; font-size: 13px; color: #fff; }
+  .exch { font-size: 10px; color: #555; margin-left: 4px; }
+  .name { font-size: 11px; color: #666; margin-top: 1px; }
+
+  .score-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; }
+  .pill-green { background: rgba(0,230,118,.18); color: #00e676; }
+  .pill-ltgreen { background: rgba(0,200,83,.15); color: #69f0ae; }
+  .pill-yellow { background: rgba(255,214,0,.15); color: #ffd600; }
+  .pill-orange { background: rgba(255,152,0,.15); color: #ffa726; }
+  .pill-red { background: rgba(255,82,82,.15); color: #ff5252; }
+
+  .verdict { font-size: 10px; font-weight: 700; }
+  .dim-bar { display: flex; gap: 2px; justify-content: center; }
+  .dim-seg { width: 14px; height: 5px; border-radius: 2px; }
+
+  .risk-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 600; }
+  .risk-low { background: rgba(0,230,118,.12); color: #00e676; }
+  .risk-mid { background: rgba(255,214,0,.12); color: #ffd600; }
+  .risk-hi  { background: rgba(255,82,82,.12); color: #ff5252; }
+
+  .chg { font-size: 12px; font-weight: 600; }
+
+  /* RIGHT PANEL */
+  .right { border-left: 1px solid #1e2540; overflow-y: auto; display: flex; flex-direction: column; }
+
+  .panel { padding: 14px 16px; border-bottom: 1px solid #1e2540; }
+  .panel h3 { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+
+  /* SABAH RAPORU */
+  .morning { background: linear-gradient(135deg, #0d1f35, #0f1320); }
+  .morning-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .morning-sub { font-size: 11px; color: #888; margin-bottom: 12px; }
+  .alert-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 0; border-bottom: 1px solid #111827; }
+  .alert-row:last-child { border-bottom: none; }
+  .alert-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .alert-text { font-size: 11px; color: #ccc; line-height: 1.4; }
+  .alert-text strong { color: #fff; }
+
+  /* BOYUT SKORLARI */
+  .dim-list { display: flex; flex-direction: column; gap: 8px; }
+  .dim-row { display: flex; align-items: center; gap: 8px; }
+  .dim-name { font-size: 11px; color: #888; width: 110px; flex-shrink: 0; }
+  .dim-track { flex: 1; background: #1e2540; border-radius: 3px; height: 6px; }
+  .dim-fill { height: 6px; border-radius: 3px; }
+  .dim-num { font-size: 11px; font-weight: 700; width: 26px; text-align: right; }
+
+  /* RİSK DAĞILIMı */
+  .risk-bars { display: flex; flex-direction: column; gap: 8px; }
+  .risk-row { display: flex; align-items: center; gap: 8px; }
+  .risk-label { font-size: 11px; color: #888; width: 70px; }
+  .risk-track { flex: 1; background: #1e2540; border-radius: 3px; height: 10px; }
+  .risk-fill { height: 10px; border-radius: 3px; display: flex; align-items: center; justify-content: flex-end; padding-right: 5px; }
+  .risk-count { font-size: 9px; font-weight: 700; color: #fff; }
+
+  /* HABERLEr */
+  .news-item { padding: 8px 0; border-bottom: 1px solid #111827; }
+  .news-item:last-child { border-bottom: none; }
+  .news-ticker { font-size: 10px; font-weight: 700; color: #448aff; margin-bottom: 2px; }
+  .news-headline { font-size: 11px; color: #ccc; line-height: 1.4; }
+  .news-time { font-size: 10px; color: #555; margin-top: 2px; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #2a3050; border-radius: 2px; }
+
+  /* SEÇIM NOTU */
+  .pick-note { background: #0f1320; border: 1px solid #1e2540; border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-size: 12px; color: #aaa; text-align: center; }
+  .pick-note strong { color: #ffd600; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">📊 Hisse Analiz Motoru</div>
+  <div class="status">
+    <span><span class="dot"></span>Canlı</span>
+    <span class="time">☀️ Son güncelleme: 09:03</span>
+    <span>26 Mayıs 2026</span>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-box">
+    <div class="label">Takip edilen</div>
+    <div class="val">18</div>
+    <div class="sub" style="color:#888">10 ABD · 8 BIST</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Güçlü Al</div>
+    <div class="val green">4</div>
+    <div class="sub green">↑ 1 yeni bugün</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Al sinyali</div>
+    <div class="val" style="color:#69f0ae">6</div>
+    <div class="sub" style="color:#888">fırsat penceresi</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Risk Alarmı</div>
+    <div class="val red">3</div>
+    <div class="sub red">↑ dikkat gerektiriyor</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Ortalama Skor</div>
+    <div class="val yellow">61</div>
+    <div class="sub yellow">Pazar nötr</div>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+
+  <!-- LEFT: STOCK TABLE -->
+  <div class="left">
+    <div>
+      <div class="sec-head">
+        <h3>Hisse Sıralaması — Fırsat & Risk</h3>
+        <span class="badge badge-green">18 hisse analiz edildi</span>
+      </div>
+      <table class="stock-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th style="text-align:left">Hisse</th>
+            <th>Skor</th>
+            <th>Karar</th>
+            <th>Boyutlar</th>
+            <th>Risk</th>
+            <th>Günlük %</th>
+            <th>Borsa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#ffd600;font-weight:700">1</td>
+            <td><div class="ticker">NVDA</div><div class="name">NVIDIA Corp.</div></td>
+            <td><span class="score-pill pill-green">89</span></td>
+            <td><span class="verdict green">GÜÇLÜ AL</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#00e676" title="Değerleme:78"></div>
+                <div class="dim-seg" style="background:#00e676" title="Kârlılık:92"></div>
+                <div class="dim-seg" style="background:#00e676" title="Büyüme:95"></div>
+                <div class="dim-seg" style="background:#ffd600" title="Sağlık:65"></div>
+                <div class="dim-seg" style="background:#00e676" title="Teknik:88"></div>
+                <div class="dim-seg" style="background:#69f0ae" title="Analist:80"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-low">⬇ Düşük</span></td>
+            <td class="chg green">+2.4%</td>
+            <td><span style="color:#448aff;font-size:11px">NASDAQ</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">2</td>
+            <td><div class="ticker">AAPL</div><div class="name">Apple Inc.</div></td>
+            <td><span class="score-pill pill-ltgreen">76</span></td>
+            <td><span class="verdict" style="color:#69f0ae">GÜÇLÜ AL</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-low">⬇ Düşük</span></td>
+            <td class="chg green">+0.8%</td>
+            <td><span style="color:#448aff;font-size:11px">NASDAQ</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">3</td>
+            <td><div class="ticker">THYAO</div><div class="name">Türk Hava Yolları</div></td>
+            <td><span class="score-pill pill-ltgreen">71</span></td>
+            <td><span class="verdict" style="color:#69f0ae">AL</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-mid">◆ Orta</span></td>
+            <td class="chg green">+1.2%</td>
+            <td><span style="color:#ff9800;font-size:11px">BIST</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">4</td>
+            <td><div class="ticker">MSFT</div><div class="name">Microsoft Corp.</div></td>
+            <td><span class="score-pill pill-ltgreen">68</span></td>
+            <td><span class="verdict" style="color:#69f0ae">AL</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#00e676"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-low">⬇ Düşük</span></td>
+            <td class="chg red">-0.3%</td>
+            <td><span style="color:#448aff;font-size:11px">NASDAQ</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">5</td>
+            <td><div class="ticker">KCHOL</div><div class="name">Koç Holding</div></td>
+            <td><span class="score-pill pill-yellow">58</span></td>
+            <td><span class="verdict yellow">TUT/NÖTR</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ff8f00"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ff8f00"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-mid">◆ Orta</span></td>
+            <td class="chg red">-0.6%</td>
+            <td><span style="color:#ff9800;font-size:11px">BIST</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">6</td>
+            <td><div class="ticker">TSLA</div><div class="name">Tesla Inc.</div></td>
+            <td><span class="score-pill pill-yellow">52</span></td>
+            <td><span class="verdict yellow">TUT/NÖTR</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#ff5252"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ff8f00"></div>
+                <div class="dim-seg" style="background:#69f0ae"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-hi">⬆ Yüksek</span></td>
+            <td class="chg red">-1.8%</td>
+            <td><span style="color:#448aff;font-size:11px">NASDAQ</span></td>
+          </tr>
+          <tr>
+            <td style="color:#ccc">7</td>
+            <td><div class="ticker">GARAN</div><div class="name">Garanti BBVA</div></td>
+            <td><span class="score-pill pill-orange">41</span></td>
+            <td><span class="verdict" style="color:#ffa726">SAT</span></td>
+            <td>
+              <div class="dim-bar">
+                <div class="dim-seg" style="background:#ff5252"></div>
+                <div class="dim-seg" style="background:#ffa726"></div>
+                <div class="dim-seg" style="background:#ff5252"></div>
+                <div class="dim-seg" style="background:#ffd600"></div>
+                <div class="dim-seg" style="background:#ff5252"></div>
+                <div class="dim-seg" style="background:#ffa726"></div>
+              </div>
+            </td>
+            <td><span class="risk-chip risk-hi">⬆ Yüksek</span></td>
+            <td class="chg red">-2.1%</td>
+            <td><span style="color:#ff9800;font-size:11px">BIST</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pick-note">
+      <strong>Bu bir mockup.</strong> Gerçek uygulamada tüm hisseler canlı API verisiyle dolar, skorlar otomatik hesaplanır. Her sabah 09:00'da otomatik güncellenir.
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+
+    <!-- SABAH RAPORU -->
+    <div class="panel morning">
+      <p class="morning-title">☀️ Sabah Raporu</p>
+      <p class="morning-sub">26 Mayıs 2026 · 09:03 otomatik çalıştı</p>
+      <div class="alert-row"><div class="alert-icon">🟢</div><div class="alert-text"><strong>NVDA</strong> skoru 82 → 89'a yükseldi. Güçlü Al bölgesine girdi.</div></div>
+      <div class="alert-row"><div class="alert-icon">🔴</div><div class="alert-text"><strong>GARAN</strong> risk alarmı: Skor 41'e geriledi, Sat sinyali güçlendi.</div></div>
+      <div class="alert-row"><div class="alert-icon">🟡</div><div class="alert-text"><strong>TSLA</strong> değerleme skoru düşük, yüksek riskli bölgede izlemeye devam.</div></div>
+      <div class="alert-row"><div class="alert-icon">📢</div><div class="alert-text"><strong>THYAO</strong> pozitif momentum: 3 aylık getiri güçlü seyirde.</div></div>
+    </div>
+
+    <!-- BOYUT BREAKDOWN (seçili hisse için) -->
+    <div class="panel">
+      <h3>Boyut Analizi — NVDA</h3>
+      <div class="dim-list">
+        <div class="dim-row">
+          <div class="dim-name">Değerleme</div>
+          <div class="dim-track"><div class="dim-fill" style="width:78%;background:#ffd600"></div></div>
+          <div class="dim-num yellow">78</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Kârlılık</div>
+          <div class="dim-track"><div class="dim-fill" style="width:92%;background:#00e676"></div></div>
+          <div class="dim-num green">92</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Büyüme</div>
+          <div class="dim-track"><div class="dim-fill" style="width:95%;background:#00e676"></div></div>
+          <div class="dim-num green">95</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Fin. Sağlık</div>
+          <div class="dim-track"><div class="dim-fill" style="width:65%;background:#69f0ae"></div></div>
+          <div class="dim-num" style="color:#69f0ae">65</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Teknik</div>
+          <div class="dim-track"><div class="dim-fill" style="width:88%;background:#00e676"></div></div>
+          <div class="dim-num green">88</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-name">Analist</div>
+          <div class="dim-track"><div class="dim-fill" style="width:80%;background:#00e676"></div></div>
+          <div class="dim-num green">80</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RİSK DAĞILIMI -->
+    <div class="panel">
+      <h3>Risk Dağılımı (18 hisse)</h3>
+      <div class="risk-bars">
+        <div class="risk-row">
+          <div class="risk-label green">Düşük Risk</div>
+          <div class="risk-track"><div class="risk-fill" style="width:55%;background:#00e676"><span class="risk-count">10</span></div></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-label yellow">Orta Risk</div>
+          <div class="risk-track"><div class="risk-fill" style="width:28%;background:#ffd600"><span class="risk-count">5</span></div></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-label red">Yüksek Risk</div>
+          <div class="risk-track"><div class="risk-fill" style="width:17%;background:#ff5252"><span class="risk-count">3</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SON HABERLER -->
+    <div class="panel">
+      <h3>Son Haberler</h3>
+      <div class="news-item">
+        <div class="news-ticker">NVDA</div>
+        <div class="news-headline">NVIDIA Q1 geliri beklentilerin üzerinde: %77 YoY büyüme</div>
+        <div class="news-time">2 saat önce · Reuters</div>
+      </div>
+      <div class="news-item">
+        <div class="news-ticker">THYAO</div>
+        <div class="news-headline">THY Mayıs yolcu sayısında rekor kırdı</div>
+        <div class="news-time">4 saat önce · AA</div>
+      </div>
+      <div class="news-item">
+        <div class="news-ticker">GARAN</div>
+        <div class="news-headline">Merkez Bankası faiz kararı bankacılık sektörünü etkiliyor</div>
+        <div class="news-time">6 saat önce · Bloomberg HT</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

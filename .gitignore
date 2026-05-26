@@ -1,0 +1,17 @@
+# Hassas bilgiler — public repo'ya ASLA girmemeli
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+config.local.*
+
+# Sistem / editör
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Bağımlılıklar (gerekmez ama güvenlik için)
+node_modules/

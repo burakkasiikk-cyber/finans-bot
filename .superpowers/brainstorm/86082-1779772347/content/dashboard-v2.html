@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dashboard v2</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0d14; color: #e0e0e0; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; }
+
+.topbar { background: #0f1320; border-bottom: 1px solid #1e2540; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+.topbar .logo { font-size: 15px; font-weight: 700; color: #fff; }
+.topbar .status { font-size: 12px; color: #888; display: flex; align-items: center; gap: 14px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: #00e676; display: inline-block; margin-right: 4px; box-shadow: 0 0 6px #00e676; }
+
+.stat-strip { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: #1e2540; border-bottom: 1px solid #1e2540; }
+.stat-box { background: #0f1320; padding: 11px 16px; }
+.stat-box .lbl { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+.stat-box .val { font-size: 20px; font-weight: 700; color: #fff; }
+.stat-box .sub { font-size: 11px; margin-top: 1px; color: #666; }
+.green{color:#00e676} .red{color:#ff5252} .yellow{color:#ffd600} .blue{color:#448aff} .ltgreen{color:#69f0ae}
+
+/* 3-col layout: table | right-panel | detail-drawer */
+.main { display: grid; grid-template-columns: 1fr 300px; height: calc(100vh - 116px); }
+.left { overflow-y: auto; padding: 14px 16px; }
+.right { border-left: 1px solid #1e2540; overflow-y: auto; display: flex; flex-direction: column; }
+
+/* when detail open, shrink left */
+body.detail-open .main { grid-template-columns: 1fr 0; }
+body.detail-open .right { display: none; }
+
+.sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.sec-head h3 { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: .5px; }
+
+/* STOCK TABLE */
+.stock-table { width: 100%; border-collapse: collapse; }
+.stock-table thead tr { border-bottom: 1px solid #1e2540; }
+.stock-table th { font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: .4px; padding: 6px 8px; text-align: left; white-space: nowrap; }
+.stock-table th:not(:first-child):not(:nth-child(2)) { text-align: center; }
+.stock-table td { padding: 10px 8px; border-bottom: 1px solid #0d1018; vertical-align: middle; }
+.stock-table td:not(:first-child):not(:nth-child(2)) { text-align: center; }
+.stock-table tbody tr { cursor: pointer; transition: background .12s; }
+.stock-table tbody tr:hover { background: #141929; }
+.stock-table tbody tr.active { background: #141e38; border-left: 3px solid #448aff; }
+
+.rank { color: #ffd600; font-weight: 700; font-size: 13px; }
+.ticker { font-weight: 700; font-size: 13px; color: #fff; }
+.co-name { font-size: 10px; color: #555; margin-top: 1px; }
+.exch-pill { font-size: 10px; padding: 2px 6px; border-radius: 8px; font-weight: 600; }
+.exch-us { background: rgba(68,138,255,.12); color: #448aff; }
+.exch-tr { background: rgba(255,152,0,.12); color: #ffa726; }
+
+.score-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; }
+.pill-g  { background: rgba(0,230,118,.18); color: #00e676; }
+.pill-lg { background: rgba(105,240,174,.15); color: #69f0ae; }
+.pill-y  { background: rgba(255,214,0,.15); color: #ffd600; }
+.pill-o  { background: rgba(255,152,0,.15); color: #ffa726; }
+.pill-r  { background: rgba(255,82,82,.15); color: #ff5252; }
+
+.verdict { font-size: 11px; font-weight: 700; white-space: nowrap; }
+.dim-bar { display: flex; gap: 2px; justify-content: center; }
+.dim-seg { width: 13px; height: 5px; border-radius: 2px; }
+.risk-chip { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 600; }
+.risk-lo { background: rgba(0,230,118,.1); color: #00e676; }
+.risk-md { background: rgba(255,214,0,.1); color: #ffd600; }
+.risk-hi { background: rgba(255,82,82,.1); color: #ff5252; }
+.chg { font-size: 12px; font-weight: 600; }
+
+/* RIGHT PANEL */
+.panel { padding: 13px 15px; border-bottom: 1px solid #1e2540; }
+.panel h3 { font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+.morning-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.morning-sub { font-size: 11px; color: #666; margin-bottom: 10px; }
+.alert-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid #0d1018; font-size: 11px; color: #bbb; line-height: 1.4; }
+.alert-row:last-child { border-bottom: none; }
+.alert-icon { flex-shrink: 0; }
+
+/* DETAIL DRAWER (full-height overlay on right) */
+.detail-drawer {
+  position: fixed; top: 0; right: -520px; width: 520px; height: 100vh;
+  background: #0c101d; border-left: 1px solid #1e2540;
+  overflow-y: auto; transition: right .25s ease; z-index: 100;
+  display: flex; flex-direction: column;
+}
+.detail-drawer.open { right: 0; }
+
+.drawer-header {
+  background: #0f1320; border-bottom: 1px solid #1e2540;
+  padding: 16px 20px; display: flex; align-items: flex-start; justify-content: space-between; position: sticky; top: 0; z-index: 10;
+}
+.drawer-ticker { font-size: 22px; font-weight: 800; color: #fff; }
+.drawer-name { font-size: 12px; color: #666; margin-top: 2px; }
+.drawer-close { background: none; border: none; color: #555; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; }
+.drawer-close:hover { color: #ccc; }
+
+.drawer-score-row {
+  padding: 16px 20px; background: #0f1320; border-bottom: 1px solid #1e2540;
+  display: flex; align-items: center; gap: 16px;
+}
+.big-score { font-size: 48px; font-weight: 800; line-height: 1; }
+.score-meta { flex: 1; }
+.score-verdict { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.score-sub { font-size: 12px; color: #666; }
+
+/* KARAR GEREKÇESİ */
+.rationale { padding: 16px 20px; border-bottom: 1px solid #1e2540; }
+.rationale h4 { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+.rationale p { font-size: 12px; color: #bbb; line-height: 1.6; }
+.pro-con { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.pro-box, .con-box { border-radius: 6px; padding: 10px 12px; }
+.pro-box { background: rgba(0,230,118,.07); border: 1px solid rgba(0,230,118,.15); }
+.con-box { background: rgba(255,82,82,.07); border: 1px solid rgba(255,82,82,.15); }
+.pro-box h5 { font-size: 10px; color: #00e676; margin-bottom: 6px; text-transform: uppercase; }
+.con-box h5 { font-size: 10px; color: #ff5252; margin-bottom: 6px; text-transform: uppercase; }
+.pro-box li, .con-box li { font-size: 11px; color: #bbb; margin-left: 12px; margin-bottom: 3px; line-height: 1.4; }
+
+/* BOYUT DETAYLARI */
+.dim-section { padding: 16px 20px; border-bottom: 1px solid #1e2540; }
+.dim-section h4 { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+.dim-card { background: #111827; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+.dim-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.dim-card-name { font-size: 12px; font-weight: 700; color: #fff; }
+.dim-card-score { font-size: 14px; font-weight: 800; }
+.dim-track { background: #1e2540; border-radius: 3px; height: 6px; margin-bottom: 8px; }
+.dim-fill { height: 6px; border-radius: 3px; }
+.dim-metrics { display: flex; flex-wrap: wrap; gap: 6px; }
+.metric-chip { background: #1a2035; border-radius: 5px; padding: 4px 8px; font-size: 10px; }
+.metric-chip .mk { color: #555; margin-right: 3px; }
+.metric-chip .mv { color: #ccc; font-weight: 600; }
+.metric-chip .ms { margin-left: 4px; font-size: 9px; }
+.dim-card-why { font-size: 11px; color: #888; line-height: 1.5; margin-top: 8px; padding-top: 8px; border-top: 1px solid #1e2540; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a3050; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">📊 Hisse Analiz Motoru</div>
+  <div class="status">
+    <span><span class="dot"></span>Canlı · 09:03</span>
+    <span>26 Mayıs 2026</span>
+  </div>
+</div>
+
+<div class="stat-strip">
+  <div class="stat-box"><div class="lbl">Takip edilen</div><div class="val">18</div><div class="sub">10 ABD · 8 BIST</div></div>
+  <div class="stat-box"><div class="lbl">Güçlü Al</div><div class="val green">4</div><div class="sub green">↑ 1 yeni</div></div>
+  <div class="stat-box"><div class="lbl">Al sinyali</div><div class="val ltgreen">6</div><div class="sub">fırsat</div></div>
+  <div class="stat-box"><div class="lbl">Risk Alarmı</div><div class="val red">3</div><div class="sub red">dikkat</div></div>
+  <div class="stat-box"><div class="lbl">Ort. Skor</div><div class="val yellow">61</div><div class="sub">pazar nötr</div></div>
+</div>
+
+<div class="main">
+  <!-- LEFT TABLE -->
+  <div class="left">
+    <div class="sec-head">
+      <h3>Hisse Sıralaması — Fırsat & Risk</h3>
+      <span style="font-size:11px;color:#555">Hisseye tıklayarak karar gerekçesini görün</span>
+    </div>
+    <table class="stock-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Hisse</th><th>Skor</th><th>Karar</th><th>Boyutlar</th><th>Risk</th><th>Günlük</th><th>Borsa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="openDetail('nvda')" id="row-nvda">
+          <td class="rank">1</td>
+          <td><div class="ticker">NVDA</div><div class="co-name">NVIDIA Corp.</div></td>
+          <td><span class="score-pill pill-g">89</span></td>
+          <td><span class="verdict green">GÜÇLÜ AL</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#00e676"></div></div></td>
+          <td><span class="risk-chip risk-lo">⬇ Düşük</span></td>
+          <td class="chg green">+2.4%</td>
+          <td><span class="exch-pill exch-us">NASDAQ</span></td>
+        </tr>
+        <tr onclick="openDetail('aapl')" id="row-aapl">
+          <td style="color:#aaa">2</td>
+          <td><div class="ticker">AAPL</div><div class="co-name">Apple Inc.</div></td>
+          <td><span class="score-pill pill-lg">76</span></td>
+          <td><span class="verdict ltgreen">GÜÇLÜ AL</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#00e676"></div></div></td>
+          <td><span class="risk-chip risk-lo">⬇ Düşük</span></td>
+          <td class="chg green">+0.8%</td>
+          <td><span class="exch-pill exch-us">NASDAQ</span></td>
+        </tr>
+        <tr onclick="openDetail('thyao')" id="row-thyao">
+          <td style="color:#aaa">3</td>
+          <td><div class="ticker">THYAO</div><div class="co-name">Türk Hava Yolları</div></td>
+          <td><span class="score-pill pill-lg">71</span></td>
+          <td><span class="verdict ltgreen">AL</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#ffd600"></div></div></td>
+          <td><span class="risk-chip risk-md">◆ Orta</span></td>
+          <td class="chg green">+1.2%</td>
+          <td><span class="exch-pill exch-tr">BIST</span></td>
+        </tr>
+        <tr onclick="openDetail('msft')" id="row-msft">
+          <td style="color:#aaa">4</td>
+          <td><div class="ticker">MSFT</div><div class="co-name">Microsoft Corp.</div></td>
+          <td><span class="score-pill pill-lg">68</span></td>
+          <td><span class="verdict ltgreen">AL</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#00e676"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#00e676"></div></div></td>
+          <td><span class="risk-chip risk-lo">⬇ Düşük</span></td>
+          <td class="chg red">-0.3%</td>
+          <td><span class="exch-pill exch-us">NASDAQ</span></td>
+        </tr>
+        <tr onclick="openDetail('tsla')" id="row-tsla">
+          <td style="color:#aaa">5</td>
+          <td><div class="ticker">TSLA</div><div class="co-name">Tesla Inc.</div></td>
+          <td><span class="score-pill pill-y">52</span></td>
+          <td><span class="verdict yellow">TUT/NÖTR</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#ff5252"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#ff8f00"></div><div class="dim-seg" style="background:#69f0ae"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#ffd600"></div></div></td>
+          <td><span class="risk-chip risk-hi">⬆ Yüksek</span></td>
+          <td class="chg red">-1.8%</td>
+          <td><span class="exch-pill exch-us">NASDAQ</span></td>
+        </tr>
+        <tr onclick="openDetail('garan')" id="row-garan">
+          <td style="color:#aaa">6</td>
+          <td><div class="ticker">GARAN</div><div class="co-name">Garanti BBVA</div></td>
+          <td><span class="score-pill pill-o">41</span></td>
+          <td><span class="verdict" style="color:#ffa726">SAT</span></td>
+          <td><div class="dim-bar"><div class="dim-seg" style="background:#ff5252"></div><div class="dim-seg" style="background:#ffa726"></div><div class="dim-seg" style="background:#ff5252"></div><div class="dim-seg" style="background:#ffd600"></div><div class="dim-seg" style="background:#ff5252"></div><div class="dim-seg" style="background:#ffa726"></div></div></td>
+          <td><span class="risk-chip risk-hi">⬆ Yüksek</span></td>
+          <td class="chg red">-2.1%</td>
+          <td><span class="exch-pill exch-tr">BIST</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RIGHT PANEL (sabah raporu) -->
+  <div class="right">
+    <div class="panel morning">
+      <p class="morning-title">☀️ Sabah Raporu</p>
+      <p class="morning-sub">26 Mayıs · otomatik 09:00</p>
+      <div class="alert-row"><span class="alert-icon">🟢</span><span><strong>NVDA</strong> Güçlü Al bölgesine girdi (89/100)</span></div>
+      <div class="alert-row"><span class="alert-icon">🔴</span><span><strong>GARAN</strong> risk alarmı: Sat sinyali güçlendi</span></div>
+      <div class="alert-row"><span class="alert-icon">🟡</span><span><strong>TSLA</strong> değerleme zayıf, izlemede</span></div>
+      <div class="alert-row"><span class="alert-icon">📢</span><span><strong>THYAO</strong> pozitif momentum sürüyor</span></div>
+    </div>
+    <div class="panel">
+      <h3>Risk Dağılımı</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:70px;font-size:11px;color:#00e676">Düşük</span><div style="flex:1;background:#1e2540;border-radius:3px;height:10px"><div style="width:55%;height:10px;background:#00e676;border-radius:3px"></div></div><span style="font-size:11px;color:#666;width:20px;text-align:right">10</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:70px;font-size:11px;color:#ffd600">Orta</span><div style="flex:1;background:#1e2540;border-radius:3px;height:10px"><div style="width:28%;height:10px;background:#ffd600;border-radius:3px"></div></div><span style="font-size:11px;color:#666;width:20px;text-align:right">5</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:70px;font-size:11px;color:#ff5252">Yüksek</span><div style="flex:1;background:#1e2540;border-radius:3px;height:10px"><div style="width:17%;height:10px;background:#ff5252;border-radius:3px"></div></div><span style="font-size:11px;color:#666;width:20px;text-align:right">3</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL DRAWER -->
+<div class="detail-drawer" id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-ticker" id="d-ticker">—</div>
+      <div class="drawer-name" id="d-name">—</div>
+    </div>
+    <button class="drawer-close" onclick="closeDetail()">✕</button>
+  </div>
+
+  <div class="drawer-score-row">
+    <div class="big-score" id="d-score">—</div>
+    <div class="score-meta">
+      <div class="score-verdict" id="d-verdict">—</div>
+      <div class="score-sub" id="d-risk">—</div>
+    </div>
+    <div id="d-chg" style="font-size:18px;font-weight:700"></div>
+  </div>
+
+  <!-- KARAR GEREKÇESİ -->
+  <div class="rationale">
+    <h4>🧠 Karar Gerekçesi</h4>
+    <p id="d-rationale"></p>
+    <div class="pro-con">
+      <div class="pro-box">
+        <h5>✅ Güçlü Yönler</h5>
+        <ul id="d-pros"></ul>
+      </div>
+      <div class="con-box">
+        <h5>⚠️ Zayıf Yönler</h5>
+        <ul id="d-cons"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOYUT DETAYLARI -->
+  <div class="dim-section">
+    <h4>📊 Boyut Detayları</h4>
+    <div id="d-dims"></div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  nvda: {
+    ticker:'NVDA', name:'NVIDIA Corporation', score:89, verdict:'GÜÇLÜ AL', verdictColor:'#00e676',
+    risk:'Düşük Risk', chg:'+2.4%', chgColor:'#00e676',
+    rationale:'NVDA, yapay zeka altyapısına olan küresel talebin merkezinde yer alan, son derece kârlı bir büyüme şirketidir. Veri merkezi GPU segmentinde pazar hâkimiyeti, rekor kıran gelir büyümesi ve güçlü analist konsensüsü, 89/100 skorun temel sürücüleridir. Değerleme biraz yüksek görünse de büyüme hızı bu primleri haklı kılıyor.',
+    pros:['Gelir büyümesi YoY +77% (rekor)', 'Net marj %55 — sektörün en iyisi', '52 hafta getirisi +210%', 'Analist konsensüs: %92 AL'],
+    cons:['F/K oranı 45x — tarihsel ortalamanın üstü', 'Beta 1.8 — piyasaya duyarlı'],
+    dims:[
+      { name:'Değerleme', score:78, color:'#ffd600', pct:78,
+        metrics:[{k:'F/K',v:'45x',s:'⚠️'},{k:'PD/DD',v:'28x',s:'⚠️'},{k:'P/S',v:'18x',s:'🟡'}],
+        why:'F/K ve PD/DD yüksek; ancak büyüme hızı göz önüne alındığında PEG oranı 0.8 ile makul seviyede.' },
+      { name:'Kârlılık', score:92, color:'#00e676', pct:92,
+        metrics:[{k:'ROE',v:'%124',s:'🟢'},{k:'Net Marj',v:'%55',s:'🟢'},{k:'Brüt Marj',v:'%76',s:'🟢'}],
+        why:'Tüm kârlılık göstergeleri sektörün çok üzerinde. Yüksek marj yapısı sürdürülebilir rekabet avantajına işaret ediyor.' },
+      { name:'Büyüme', score:95, color:'#00e676', pct:95,
+        metrics:[{k:'Gelir Büy.',v:'+77%',s:'🟢'},{k:'EPS Büy.',v:'+85%',s:'🟢'},{k:'5Y CAGR',v:'+42%',s:'🟢'}],
+        why:'AI altyapısı talebi nedeniyle hem yıllık hem çeyreklik büyüme ivmesi rekor kırıyor. Büyüme boyutunda en yüksek skor.' },
+      { name:'Finansal Sağlık', score:65, color:'#69f0ae', pct:65,
+        metrics:[{k:'Cari Oran',v:'4.2',s:'🟢'},{k:'Borç/Özkaynak',v:'0.42',s:'🟢'},{k:'Hızlı Oran',v:'3.8',s:'🟢'}],
+        why:'Bilanço sağlıklı, borç düzeyi düşük. Stok birikimi nedeniyle döngüsel risk taşıyor ancak genel tablo olumlu.' },
+      { name:'Teknik/Momentum', score:88, color:'#00e676', pct:88,
+        metrics:[{k:'52H Getiri',v:'+210%',s:'🟢'},{k:'3A Getiri',v:'+38%',s:'🟢'},{k:'52H Bant',v:'%88',s:'🟢'}],
+        why:'Güçlü yukarı trend. 52 haftalık zirveye yakın konumda. Momentum tüm zaman dilimlerinde pozitif.' },
+      { name:'Analist Görüşü', score:80, color:'#00e676', pct:80,
+        metrics:[{k:'Al/Tut/Sat',v:'38/5/1',s:'🟢'},{k:'Hedef Fiyat',v:'+18%',s:'🟢'}],
+        why:'Analistlerin %86\'sı AL diyor. Ortalama hedef fiyat mevcut fiyatın %18 üzerinde.' },
+    ]
+  },
+  garan: {
+    ticker:'GARAN', name:'Garanti BBVA', score:41, verdict:'SAT', verdictColor:'#ffa726',
+    risk:'Yüksek Risk', chg:'-2.1%', chgColor:'#ff5252',
+    rationale:'GARAN, yüksek enflasyon ve faiz ortamında baskı altındaki bir banka olarak çok sayıda olumsuz faktör taşıyor. Değerleme kârlılık sorunlarını gizliyor; büyüme yavaşlıyor ve teknik görünüm bozuk. Toplam 41/100 skor SAT bandına giriyor.',
+    pros:['Cari oran makul', 'Kısa vadeli analist önerileri karışık (fırsat sinyali olabilir)'],
+    cons:['Net marj baskı altında', 'Faiz riski yüksek', '52 hafta getirisi negatif', 'Teknik trend bozuk'],
+    dims:[
+      { name:'Değerleme', score:35, color:'#ff5252', pct:35,
+        metrics:[{k:'F/K',v:'7x',s:'🟢'},{k:'PD/DD',v:'1.1x',s:'🟡'},{k:'P/S',v:'1.8x',s:'🟡'}],
+        why:'Düşük F/K cazip görünebilir ancak kârlılık baskısını yansıtıyor. "Değer tuzağı" riski var.' },
+      { name:'Kârlılık', score:48, color:'#ffa726', pct:48,
+        metrics:[{k:'ROE',v:'%14',s:'🟡'},{k:'Net Marj',v:'%8',s:'🟡'},{k:'Brüt Marj',v:'%22',s:'🟡'}],
+        why:'Kârlılık göstergeleri orta seviyede. Yüksek faiz ortamı marjları sıkıştırıyor.' },
+      { name:'Büyüme', score:28, color:'#ff5252', pct:28,
+        metrics:[{k:'Gelir Büy.',v:'-4%',s:'🔴'},{k:'EPS Büy.',v:'-8%',s:'🔴'}],
+        why:'Hem gelir hem EPS küçülüyor. Büyüme momentumu tamamen kaybolmuş durumda.' },
+      { name:'Finansal Sağlık', score:55, color:'#ffd600', pct:55,
+        metrics:[{k:'Cari Oran',v:'1.2',s:'🟡'},{k:'Borç/Özkaynak',v:'2.8',s:'🔴'}],
+        why:'Borç/özkaynak oranı yüksek. Faiz artışı senaryosunda kırılganlık artıyor.' },
+      { name:'Teknik/Momentum', score:22, color:'#ff5252', pct:22,
+        metrics:[{k:'52H Getiri',v:'-18%',s:'🔴'},{k:'3A Getiri',v:'-9%',s:'🔴'},{k:'52H Bant',v:'%12',s:'🔴'}],
+        why:'52 haftalık düşüğe yakın. Tüm teknik göstergeler baskı altında. Güçlü aşağı yönlü baskı var.' },
+      { name:'Analist Görüşü', score:58, color:'#ffd600', pct:58,
+        metrics:[{k:'Al/Tut/Sat',v:'6/8/4',s:'🟡'},{k:'Hedef Fiyat',v:'+5%',s:'🟡'}],
+        why:'Analistler arasında görüş ayrılığı var. Hedef fiyat potansiyeli düşük.' },
+    ]
+  }
+};
+
+// default: copy nvda data for other tickers (mockup)
+['aapl','thyao','msft','tsla'].forEach(k => {
+  DATA[k] = {...DATA.nvda,
+    ticker: k.toUpperCase(),
+    name: {aapl:'Apple Inc.',thyao:'Türk Hava Yolları',msft:'Microsoft Corp.',tsla:'Tesla Inc.'}[k],
+    score: {aapl:76,thyao:71,msft:68,tsla:52}[k],
+    verdict: {aapl:'GÜÇLÜ AL',thyao:'AL',msft:'AL',tsla:'TUT/NÖTR'}[k],
+    verdictColor: {aapl:'#69f0ae',thyao:'#69f0ae',msft:'#69f0ae',tsla:'#ffd600'}[k],
+    risk: {aapl:'Düşük Risk',thyao:'Orta Risk',msft:'Düşük Risk',tsla:'Yüksek Risk'}[k],
+    chg: {aapl:'+0.8%',thyao:'+1.2%',msft:'-0.3%',tsla:'-1.8%'}[k],
+    chgColor: {aapl:'#00e676',thyao:'#00e676',msft:'#ff5252',tsla:'#ff5252'}[k],
+  };
+});
+
+let activeRow = null;
+function openDetail(id) {
+  const d = DATA[id]; if (!d) return;
+  if (activeRow) document.getElementById('row-'+activeRow)?.classList.remove('active');
+  activeRow = id;
+  document.getElementById('row-'+id)?.classList.add('active');
+
+  document.getElementById('d-ticker').textContent = d.ticker;
+  document.getElementById('d-name').textContent = d.name;
+  document.getElementById('d-score').textContent = d.score;
+  document.getElementById('d-score').style.color = d.verdictColor;
+  document.getElementById('d-verdict').textContent = d.verdict;
+  document.getElementById('d-verdict').style.color = d.verdictColor;
+  document.getElementById('d-risk').textContent = d.risk;
+  document.getElementById('d-chg').textContent = d.chg;
+  document.getElementById('d-chg').style.color = d.chgColor;
+  document.getElementById('d-rationale').textContent = d.rationale;
+
+  const pros = document.getElementById('d-pros'); pros.innerHTML = '';
+  d.pros.forEach(p => { const li = document.createElement('li'); li.textContent = p; pros.appendChild(li); });
+  const cons = document.getElementById('d-cons'); cons.innerHTML = '';
+  d.cons.forEach(c => { const li = document.createElement('li'); li.textContent = c; cons.appendChild(li); });
+
+  const dims = document.getElementById('d-dims'); dims.innerHTML = '';
+  d.dims.forEach(dim => {
+    const metrics = dim.metrics.map(m =>
+      `<div class="metric-chip"><span class="mk">${m.k}</span><span class="mv">${m.v}</span><span class="ms">${m.s}</span></div>`
+    ).join('');
+    dims.innerHTML += `
+      <div class="dim-card">
+        <div class="dim-card-header">
+          <span class="dim-card-name">${dim.name}</span>
+          <span class="dim-card-score" style="color:${dim.color}">${dim.score}/100</span>
+        </div>
+        <div class="dim-track"><div class="dim-fill" style="width:${dim.pct}%;background:${dim.color}"></div></div>
+        <div class="dim-metrics">${metrics}</div>
+        <div class="dim-card-why">💡 ${dim.why}</div>
+      </div>`;
+  });
+
+  document.getElementById('drawer').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('drawer').classList.remove('open');
+  if (activeRow) { document.getElementById('row-'+activeRow)?.classList.remove('active'); activeRow = null; }
+}
+</script>
+</body>
+</html>
