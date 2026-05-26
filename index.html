@@ -265,6 +265,59 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 .sc-lbl{font-size:9px;color:var(--t3)}
 .sc-title{font-size:12px;font-weight:800;margin-bottom:3px}
 .sc-desc{font-size:10.5px;color:var(--t2);text-align:center;line-height:1.5}
+
+/* ── Hisse Detay Modal ── */
+#stock-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;padding:16px}
+#stock-modal-overlay.open{display:flex}
+#stock-modal{background:var(--bg2);border:1px solid var(--border);border-radius:14px;width:100%;max-width:820px;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.7)}
+.sm-close{position:sticky;top:0;float:right;margin:12px 14px 0 0;background:rgba(255,255,255,.07);border:none;color:var(--t1);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;z-index:10;line-height:32px;text-align:center}
+.sm-close:hover{background:rgba(255,255,255,.15)}
+.sm-header{padding:22px 24px 14px;border-bottom:1px solid var(--border)}
+.sm-sym{font-size:32px;font-weight:900;letter-spacing:-1px}
+.sm-name{font-size:13px;color:var(--t2);margin-top:2px}
+.sm-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.sm-px{font-size:22px;font-weight:800}
+.sm-chg{font-size:14px;font-weight:700;padding:3px 9px;border-radius:6px}
+.sm-chg.up{background:rgba(0,212,170,.15);color:var(--green)}
+.sm-chg.dn{background:rgba(255,77,109,.15);color:var(--red)}
+.sm-badge{font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+.sm-badge.b-sb{background:rgba(0,212,170,.2);color:var(--green);border:1px solid var(--green)}
+.sm-badge.b-b{background:rgba(0,212,170,.12);color:#00b38f;border:1px solid #00b38f}
+.sm-badge.b-h{background:rgba(245,166,35,.15);color:var(--yellow);border:1px solid var(--yellow)}
+.sm-badge.b-s{background:rgba(255,120,50,.15);color:var(--orange);border:1px solid var(--orange)}
+.sm-badge.b-ss{background:rgba(255,77,109,.2);color:var(--red);border:1px solid var(--red)}
+.sm-score{font-size:13px;color:var(--t2)}
+.sm-score span{color:var(--t1);font-weight:700}
+.sm-body{padding:20px 24px}
+.sm-section{margin-bottom:22px}
+.sm-sec-title{font-size:11px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.sm-chart-wrap{background:var(--bg3);border-radius:10px;padding:12px;position:relative;height:200px}
+.sm-chart-wrap canvas{width:100%!important}
+.sm-grid4{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.sm-ind{background:var(--bg3);border-radius:10px;padding:12px 14px}
+.sm-ind-lbl{font-size:10px;color:var(--t3);margin-bottom:4px;font-weight:700}
+.sm-ind-val{font-size:15px;font-weight:800}
+.sm-ind-val.good{color:var(--green)}
+.sm-ind-val.warn{color:var(--yellow)}
+.sm-ind-val.bad{color:var(--red)}
+.sm-ind-val.neu{color:var(--t1)}
+.sm-dims{display:flex;flex-direction:column;gap:9px}
+.sm-dim-row{display:flex;align-items:center;gap:10px}
+.sm-dim-label{font-size:11px;color:var(--t2);width:80px;flex-shrink:0}
+.sm-dim-bar-bg{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+.sm-dim-bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.sm-dim-val{font-size:11px;color:var(--t1);width:32px;text-align:right;flex-shrink:0}
+.sm-pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sm-pc-col{background:var(--bg3);border-radius:10px;padding:14px}
+.sm-pc-title{font-size:11px;font-weight:800;margin-bottom:10px;color:var(--t2)}
+.sm-pc-title.pros{color:var(--green)}
+.sm-pc-title.cons{color:var(--red)}
+.sm-pc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.sm-pc-list li{font-size:11.5px;color:var(--t2);line-height:1.4;padding-left:14px;position:relative}
+.sm-pc-list li::before{content:'•';position:absolute;left:0;top:0}
+.sm-pc-list.pros li::before{color:var(--green)}
+.sm-pc-list.cons li::before{color:var(--red)}
+@media(max-width:540px){.sm-pc-grid{grid-template-columns:1fr}.sm-grid4{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -622,6 +675,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 
 <script>
 /* ════════════════════════ DATA ════════════════════════ */
+var _rawReport = null;  // Gerçek rapor verisi buraya kaydedilir (modal için)
+var _smChart = null;    // Modal fiyat chart instance
+
 const BIST = [
   {sym:'THYAO',nm:'Türk Hava Yolları',px:'281,40',chg:'+3,2%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'340',tu:true,risk:1,conf:92,rsi:42,rsiC:'rsi-os',macd:'Buy',macdC:'mac-buy',bol:'Alt Band',ma:'Golden Cross'},
   {sym:'ASELS',nm:'Aselsan',px:'66,45',chg:'+4,1%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'85',tu:true,risk:2,conf:90,rsi:48,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Golden Cross'},
@@ -730,7 +786,7 @@ function riskDots(lv){
 
 function renderTable(tbodyId,data){
   document.getElementById(tbodyId).innerHTML=data.map(s=>`
-    <tr>
+    <tr data-sym="${s.sym}" style="cursor:pointer">
       <td><div class="sym">${s.sym}</div><div class="nm">${s.nm}</div></td>
       <td><div class="px">${s.px}</div></td>
       <td><div class="chg ${s.up?'up':'down'}">${s.chg}</div></td>
@@ -755,7 +811,7 @@ function filterTbl(mkt,f,btn){
 
 function renderTech(tbodyId,data){
   document.getElementById(tbodyId).innerHTML=data.map(s=>`
-    <tr>
+    <tr data-sym="${s.sym}" style="cursor:pointer">
       <td><div class="sym">${s.sym}</div></td>
       <td><span class="${s.rsiC}">${s.rsi}</span></td>
       <td><span class="${s.macdC}">${s.macd}</span></td>
@@ -1121,6 +1177,7 @@ async function loadReport() {
     var res = await fetch(url + '?_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var report = await res.json();
+    _rawReport = report;
     var m = report.macro || {};
 
     /* ── Makro kartları güncelle ── */
@@ -1228,6 +1285,223 @@ async function loadReport() {
     console.warn('report.json yuklenemedi:', err.message);
   }
 }
+
+/* ════════════════════════ HİSSE DETAY MODAL ════════════════════════ */
+function openStockModal(sym) {
+  if (!_rawReport || !_rawReport.stocks) return;
+  var s = _rawReport.stocks.find(function(x){ return x.symbol === sym; });
+  if (!s) return;
+
+  var isBist = s.exchange === 'BIST';
+  var fmtPx  = isBist
+    ? s.price.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' ₺'
+    : '$' + s.price.toFixed(2);
+  var chgTxt = (s.change_pct >= 0 ? '+' : '') + s.change_pct.toFixed(2) + '%';
+  var recMap = {strong_buy:'b-sb',buy:'b-b',hold:'b-h',sell:'b-s',strong_sell:'b-ss'};
+  var rlMap  = {strong_buy:'GÜÇLÜ AL',buy:'AL',hold:'TUT',sell:'SAT',strong_sell:'GÜÇLÜ SAT'};
+  var rec    = recMap[s.verdict_key] || 'b-h';
+  var rl     = rlMap[s.verdict_key]  || 'TUT';
+
+  // Header
+  document.getElementById('sm-sym').textContent  = s.symbol;
+  document.getElementById('sm-name').textContent = (s.name || s.symbol) + (s.exchange ? ' • ' + s.exchange : '');
+  document.getElementById('sm-px').textContent   = fmtPx;
+  var chgEl = document.getElementById('sm-chg');
+  chgEl.textContent  = chgTxt;
+  chgEl.className    = 'sm-chg ' + (s.change_pct >= 0 ? 'up' : 'dn');
+  document.getElementById('sm-score').textContent = (s.score || 0) + ' / 100';
+  document.getElementById('sm-badge-wrap').innerHTML =
+    '<span class="sm-badge ' + rec + '">' + rl + '</span>';
+
+  // Teknik göstergeler
+  var closes = s.price_history ? s.price_history.map(function(b){ return b.c; }) : [];
+  var rsi    = calcRSI(closes);
+  var mr     = calcMACDSignal(closes);
+  var bol    = calcBollingerPos(closes);
+  var ma     = calcMASignal(closes);
+
+  function indClass(label) {
+    if (!label) return 'neu';
+    var l = label.toLowerCase();
+    if (l.indexOf('buy') >= 0 || l.indexOf('al') >= 0 || l.indexOf('yüksel') >= 0 || l.indexOf('alt') >= 0) return 'good';
+    if (l.indexOf('sell') >= 0 || l.indexOf('sat') >= 0 || l.indexOf('düş') >= 0 || l.indexOf('üst') >= 0) return 'bad';
+    return 'warn';
+  }
+  var rsiClass = rsi >= 70 ? 'bad' : rsi <= 30 ? 'good' : 'neu';
+  document.getElementById('sm-indicators').innerHTML =
+    '<div class="sm-ind"><div class="sm-ind-lbl">RSI (14)</div><div class="sm-ind-val ' + rsiClass + '">' + (rsi ? rsi.toFixed(1) : '—') + (rsi >= 70 ? ' — Aşırı Al.' : rsi <= 30 ? ' — Aşırı Sat.' : '') + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">MACD</div><div class="sm-ind-val ' + indClass(mr.sig) + '">' + (mr.sig || '—') + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">Bollinger</div><div class="sm-ind-val ' + indClass(bol) + '">' + (bol || '—') + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(ma) + '">' + (ma || '—') + '</div></div>';
+
+  // Boyut skorları
+  var dims = s.dimensions || {};
+  var dimLabels = {valuation:'Değerleme',profit:'Kârlılık',growth:'Büyüme',health:'Finansal Sağlık',technical:'Teknik',analyst:'Analist'};
+  var dimColors = {valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
+  var dimHtml = '';
+  Object.keys(dimLabels).forEach(function(key) {
+    var val = dims[key] != null ? Math.round(dims[key]) : null;
+    if (val == null) return;
+    var color = dimColors[key] || 'var(--green)';
+    dimHtml += '<div class="sm-dim-row">' +
+      '<div class="sm-dim-label">' + dimLabels[key] + '</div>' +
+      '<div class="sm-dim-bar-bg"><div class="sm-dim-bar-fill" style="width:' + Math.min(100,val) + '%;background:' + color + '"></div></div>' +
+      '<div class="sm-dim-val">' + val + '</div>' +
+      '</div>';
+  });
+  var dimsSection = document.getElementById('sm-dims-section');
+  document.getElementById('sm-dims').innerHTML = dimHtml || '<span style="color:var(--t3);font-size:12px">Veri yok</span>';
+  dimsSection.style.display = dimHtml ? '' : 'none';
+
+  // Artı / Eksi
+  var pros = s.pros || [];
+  var cons = s.cons || [];
+  document.getElementById('sm-pros').innerHTML = pros.length
+    ? pros.map(function(p){ return '<li>' + p + '</li>'; }).join('')
+    : '<li style="color:var(--t3)">Veri yok</li>';
+  document.getElementById('sm-cons').innerHTML = cons.length
+    ? cons.map(function(p){ return '<li>' + p + '</li>'; }).join('')
+    : '<li style="color:var(--t3)">Veri yok</li>';
+
+  // Fiyat grafiği
+  buildModalChart(s);
+
+  // Göster
+  document.getElementById('stock-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildModalChart(s) {
+  var closes = s.price_history ? s.price_history.map(function(b){ return b.c; }) : [];
+  var labels  = s.price_history ? s.price_history.map(function(b){ return b.t || ''; }) : [];
+  if (_smChart) { _smChart.destroy(); _smChart = null; }
+  var ctx = document.getElementById('sm-price-chart').getContext('2d');
+  if (!closes.length) {
+    ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+    ctx.fillStyle='rgba(255,255,255,.15)'; ctx.font='13px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Fiyat verisi yok', ctx.canvas.width/2, 90);
+    return;
+  }
+  var isUp = closes[closes.length-1] >= closes[0];
+  var lineColor = isUp ? '#00d4aa' : '#ff4d6d';
+  _smChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: closes,
+        borderColor: lineColor,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.3,
+        fill: true,
+        backgroundColor: (function(){
+          var grad = ctx.createLinearGradient(0,0,0,180);
+          grad.addColorStop(0, isUp ? 'rgba(0,212,170,.25)' : 'rgba(255,77,109,.25)');
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          return grad;
+        })()
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{
+        callbacks:{ label: function(c){ return ' ' + (s.exchange==='BIST' ? c.parsed.y.toLocaleString('tr-TR',{minimumFractionDigits:2}) + ' ₺' : '$'+c.parsed.y.toFixed(2)); } }
+      }},
+      scales: {
+        x: { display: false },
+        y: { grid:{color:'rgba(30,45,69,.5)'}, ticks:{color:'#4a5a70',font:{size:9},
+          callback: function(v){ return s.exchange==='BIST' ? v.toLocaleString('tr-TR',{minimumFractionDigits:0}) : '$'+v.toFixed(0); }
+        }}
+      }
+    }
+  });
+}
+
+function closeStockModal() {
+  document.getElementById('stock-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Olay dinleyicileri (event delegation)
+document.addEventListener('DOMContentLoaded', function() {
+  // Kapat butonu ve overlay tıklaması
+  document.getElementById('sm-close-btn').addEventListener('click', closeStockModal);
+  document.getElementById('stock-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeStockModal();
+  });
+  // ESC tuşu
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeStockModal();
+  });
+
+  // Tablo satırlarına tıklama (event delegation)
+  ['bist-body','us-body','bist-tech','us-tech'].forEach(function(tbodyId) {
+    var el = document.getElementById(tbodyId);
+    if (!el) return;
+    el.addEventListener('click', function(e) {
+      var tr = e.target.closest('tr');
+      if (!tr) return;
+      var sym = tr.getAttribute('data-sym');
+      if (sym) openStockModal(sym);
+    });
+  });
+});
 </script>
+
+<!-- ════════ Hisse Detay Modal ════════ -->
+<div id="stock-modal-overlay">
+  <div id="stock-modal">
+    <button class="sm-close" id="sm-close-btn">✕</button>
+    <div class="sm-header">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div class="sm-sym" id="sm-sym">—</div>
+          <div class="sm-name" id="sm-name">—</div>
+        </div>
+        <div id="sm-badge-wrap"></div>
+      </div>
+      <div class="sm-meta">
+        <span class="sm-px" id="sm-px">—</span>
+        <span class="sm-chg" id="sm-chg">—</span>
+        <span class="sm-score">AI Skor: <span id="sm-score">—</span></span>
+      </div>
+    </div>
+    <div class="sm-body">
+      <!-- Fiyat grafiği -->
+      <div class="sm-section">
+        <div class="sm-sec-title">Fiyat Geçmişi</div>
+        <div class="sm-chart-wrap">
+          <canvas id="sm-price-chart"></canvas>
+        </div>
+      </div>
+      <!-- Teknik göstergeler -->
+      <div class="sm-section">
+        <div class="sm-sec-title">Teknik Göstergeler</div>
+        <div class="sm-grid4" id="sm-indicators"></div>
+      </div>
+      <!-- Boyut skorları -->
+      <div class="sm-section" id="sm-dims-section">
+        <div class="sm-sec-title">Boyut Analizi</div>
+        <div class="sm-dims" id="sm-dims"></div>
+      </div>
+      <!-- Artı / Eksi -->
+      <div class="sm-section" id="sm-pc-section">
+        <div class="sm-sec-title">Güçlü &amp; Zayıf Yönler</div>
+        <div class="sm-pc-grid">
+          <div class="sm-pc-col">
+            <div class="sm-pc-title pros">✔ Güçlü Yönler</div>
+            <ul class="sm-pc-list pros" id="sm-pros"></ul>
+          </div>
+          <div class="sm-pc-col">
+            <div class="sm-pc-title cons">✘ Riskler</div>
+            <ul class="sm-pc-list cons" id="sm-cons"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
