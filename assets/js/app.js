@@ -69,40 +69,53 @@ function renderReportStocks(stocks) {
     return;
   }
 
-  // Orijinal index'i sakla (detay için)
   const indexed = stocks.map((s, i) => ({ ...s, _origIndex: i }));
+  const bist    = indexed.filter(s => s.exchange === "BIST");
+  const us      = indexed.filter(s => s.exchange !== "BIST");
 
-  function applyFilter(q) {
-    const tbody = document.getElementById("scannerTbody");
-    if (!tbody) return;
-    const filtered = q
-      ? indexed.filter(s => s.symbol.includes(q.toUpperCase()) || (s.name || "").toUpperCase().includes(q.toUpperCase()))
-      : indexed;
-    tbody.innerHTML = _renderRows(filtered) || `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">Sonuç bulunamadı.</td></tr>`;
-  }
+  const thead = `<thead><tr>
+    <th>#</th><th>Hisse</th><th>Skor</th><th>Karar</th>
+    <th style="min-width:60px">Boyutlar</th><th>Risk</th><th>Günlük</th>
+  </tr></thead>`;
+
+  const sectionHtml = (id, list) => `
+    <table class="portfolio-table" style="min-width:500px">
+      ${thead}
+      <tbody id="${id}">${_renderRows(list)}</tbody>
+    </table>`;
 
   el.innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
       <h2 class="section-title" style="margin:0;flex:1">📊 Fırsat Tarayıcı</h2>
       <div style="display:flex;align-items:center;gap:6px;background:var(--panel-2);
-                  border:1px solid var(--border);border-radius:20px;padding:6px 14px;
-                  flex-shrink:0">
+                  border:1px solid var(--border);border-radius:20px;padding:6px 14px;flex-shrink:0">
         <span style="color:var(--muted);font-size:12px">🔍</span>
         <input id="scannerFilter" type="text" placeholder="Filtrele…"
-          style="background:transparent;border:none;color:var(--text);font-size:13px;
-                 width:130px;outline:none;" />
+          style="background:transparent;border:none;color:var(--text);font-size:13px;width:130px;outline:none" />
       </div>
     </div>
-    <table class="portfolio-table" style="min-width:500px">
-      <thead><tr>
-        <th>#</th><th>Hisse</th><th>Skor</th><th>Karar</th>
-        <th style="min-width:60px">Boyutlar</th><th>Risk</th><th>Günlük</th>
-      </tr></thead>
-      <tbody id="scannerTbody">${_renderRows(indexed)}</tbody>
-    </table>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:13px;font-weight:700">🇺🇸 ABD</span>
+      <span style="font-size:11px;color:var(--muted)">${us.filter(s=>!s.error).length} hisse</span>
+    </div>
+    ${sectionHtml("usTableBody", us)}
+
+    <div style="display:flex;align-items:center;gap:8px;margin:24px 0 12px">
+      <span style="font-size:13px;font-weight:700">🇹🇷 BIST</span>
+      <span style="font-size:11px;color:var(--muted)">${bist.filter(s=>!s.error).length} hisse</span>
+    </div>
+    ${sectionHtml("bistTableBody", bist)}
+
     <div id="stockDetail"></div>`;
 
-  document.getElementById("scannerFilter").addEventListener("input", e => applyFilter(e.target.value.trim()));
+  document.getElementById("scannerFilter").addEventListener("input", function() {
+    const q = this.value.trim().toUpperCase();
+    const empty = `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:16px">Sonuç bulunamadı.</td></tr>`;
+    const filter = list => list.filter(s => !q || s.symbol.includes(q) || (s.name||"").toUpperCase().includes(q));
+    document.getElementById("usTableBody").innerHTML   = _renderRows(filter(us))   || empty;
+    document.getElementById("bistTableBody").innerHTML = _renderRows(filter(bist)) || empty;
+  });
 }
 
 function _autoProscons(dims) {
