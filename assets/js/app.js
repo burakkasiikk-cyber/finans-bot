@@ -140,13 +140,18 @@ function switchTab(tab, btn) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (btn) btn.classList.add("active");
 
-  const allSections = ["reportDashboard","portfolioSection","alarmsSection","dividendSection"];
-  allSections.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = "none"; });
+  // Sekme bölümlerini gizle (content dışında yaşıyor)
+  ["portfolioSection","alarmsSection","dividendSection"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
 
   const stocks = _reportData?.stocks || [];
   try {
     if (tab === "scanner") {
-      document.getElementById("reportDashboard").style.display = "";
+      // Tarayıcı: reportDashboard'u göster, hisse tablosunu yeniden çiz
+      const rd = document.getElementById("reportDashboard");
+      if (rd) { rd.style.display = ""; renderReportStocks(stocks); }
     } else if (tab === "portfolio") {
       document.getElementById("portfolioSection").style.display = "";
       Portfolio.renderPortfolio(stocks, _reportData?.macro);
