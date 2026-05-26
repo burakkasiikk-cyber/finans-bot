@@ -207,8 +207,23 @@ function _chartFallback(el, symbol) {
 function _renderLWChart(el, bars, type) {
   type = type || _chartType || "candle";
   el.innerHTML = "";
-  const chart = LightweightCharts.createChart(el, {
-    width:  el.clientWidth || 680,
+
+  // Tooltip overlay
+  const wrap = document.createElement("div");
+  wrap.style.cssText = "position:relative;width:100%;height:300px";
+  el.appendChild(wrap);
+
+  const tooltip = document.createElement("div");
+  tooltip.style.cssText = [
+    "position:absolute;top:10px;left:10px;z-index:10;pointer-events:none",
+    "background:rgba(18,24,38,.92);border:1px solid #232c40;border-radius:8px",
+    "padding:7px 11px;font-size:11px;line-height:1.7;min-width:130px",
+    "display:none;color:#c8cdd8",
+  ].join(";");
+  wrap.appendChild(tooltip);
+
+  const chart = LightweightCharts.createChart(wrap, {
+    width:  wrap.clientWidth || 680,
     height: 300,
     layout: {
       background: { type: "solid", color: "#121826" },
@@ -225,18 +240,19 @@ function _renderLWChart(el, bars, type) {
     handleScale:     { mouseWheel: false, pinch: false },
   });
 
+  let series;
   if (type === "line") {
-    const series = chart.addLineSeries({
-      color:                   "#5b7cf7",
-      lineWidth:               2,
-      crosshairMarkerVisible:  true,
-      crosshairMarkerRadius:   4,
-      crosshairMarkerBorderColor: "#5b7cf7",
+    series = chart.addLineSeries({
+      color:                          "#5b7cf7",
+      lineWidth:                      2,
+      crosshairMarkerVisible:         true,
+      crosshairMarkerRadius:          4,
+      crosshairMarkerBorderColor:     "#5b7cf7",
       crosshairMarkerBackgroundColor: "#121826",
     });
     series.setData(bars.map(b => ({ time: b.time, value: b.close })));
   } else {
-    const series = chart.addCandlestickSeries({
+    series = chart.addCandlestickSeries({
       upColor:       "#2ecc71",  downColor:       "#ff5c6c",
       borderUpColor: "#2ecc71",  borderDownColor: "#ff5c6c",
       wickUpColor:   "#2ecc71",  wickDownColor:   "#ff5c6c",
@@ -245,9 +261,51 @@ function _renderLWChart(el, bars, type) {
   }
 
   chart.timeScale().fitContent();
+
+  // Hover tooltip
+  const barMap = {};
+  bars.forEach((b, i) => { barMap[b.time] = { ...b, idx: i }; });
+
+  chart.subscribeCrosshairMove(param => {
+    if (!param.time || !param.point || param.point.x < 0) {
+      tooltip.style.display = "none";
+      return;
+    }
+    const bar = barMap[param.time];
+    if (!bar) { tooltip.style.display = "none"; return; }
+
+    const date = new Date(bar.time * 1000);
+    const dateStr = date.toLocaleDateString("tr-TR", { day:"2-digit", month:"short", year:"numeric" });
+
+    let prev = bars[bar.idx - 1];
+    const chg = prev ? ((bar.close - prev.close) / prev.close * 100) : null;
+    const chgStr = chg != null
+      ? `<span style="color:${chg >= 0 ? "#2ecc71" : "#ff5c6c"};font-weight:700">${chg >= 0 ? "▲" : "▼"} ${Math.abs(chg).toFixed(2)}%</span>`
+      : "";
+
+    const fmt = v => v != null ? v.toFixed(2) : "—";
+
+    if (type === "line") {
+      tooltip.innerHTML = `
+        <div style="color:#8a96ad;font-size:10px;margin-bottom:3px">${dateStr}</div>
+        <div><span style="color:#8a96ad">Kapanış </span><strong style="color:#c8cdd8">₺${fmt(bar.close)}</strong> ${chgStr}</div>`;
+    } else {
+      const upColor   = bar.close >= bar.open ? "#2ecc71" : "#ff5c6c";
+      tooltip.innerHTML = `
+        <div style="color:#8a96ad;font-size:10px;margin-bottom:3px">${dateStr} ${chgStr}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px">
+          <span style="color:#8a96ad">Açılış</span>  <strong>₺${fmt(bar.open)}</strong>
+          <span style="color:#8a96ad">Kapanış</span> <strong style="color:${upColor}">₺${fmt(bar.close)}</strong>
+          <span style="color:#8a96ad">Yüksek</span>  <strong style="color:#2ecc71">₺${fmt(bar.high)}</strong>
+          <span style="color:#8a96ad">Düşük</span>   <strong style="color:#ff5c6c">₺${fmt(bar.low)}</strong>
+        </div>`;
+    }
+    tooltip.style.display = "block";
+  });
+
   new ResizeObserver(() => {
-    if (el.clientWidth > 0) chart.applyOptions({ width: el.clientWidth });
-  }).observe(el);
+    if (wrap.clientWidth > 0) chart.applyOptions({ width: wrap.clientWidth });
+  }).observe(wrap);
 }
 
 function loadPriceChart(symbol) {
