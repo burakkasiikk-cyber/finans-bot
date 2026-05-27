@@ -86,6 +86,35 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 .g-risk{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:16px}
 .mb16{margin-bottom:16px}
 
+/* ── Responsive Grids ── */
+@media (max-width: 1200px) {
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .g-risk { grid-template-columns: repeat(3, 1fr); }
+  .g23 { grid-template-columns: 1fr; }
+  .hdr-stats { gap: 14px; }
+}
+@media (max-width: 768px) {
+  .hdr { padding: 12px 14px; }
+  .hdr-stats { gap: 10px; font-size: 11px; }
+  .hdr-stat .lbl { font-size: 9px }
+  .hdr-stat .val { font-size: 13px }
+  .main { padding: 14px 12px; }
+  .g4 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .g2 { grid-template-columns: 1fr; gap: 10px; }
+  .g3 { grid-template-columns: 1fr; gap: 10px; }
+  .g13 { grid-template-columns: 1fr; gap: 10px; }
+  .g23 { grid-template-columns: 1fr; gap: 10px; }
+  .g-risk { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .sum-main { font-size: 22px; }
+  #perf-stats { grid-template-columns: repeat(2, 1fr) !important; }
+  .scroll-y { max-height: 320px; overflow-y: auto; }
+}
+@media (max-width: 480px) {
+  .g4 { grid-template-columns: 1fr; }
+  .g-risk { grid-template-columns: 1fr 1fr; }
+  .hdr-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+}
+
 /* ── SUMMARY CARDS ── */
 .sum-main{font-size:26px;font-weight:900;line-height:1;margin:6px 0 4px}
 .sum-chg{font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px}
@@ -362,14 +391,14 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <div class="logo-icon">F</div>
     <div class="logo-txt">Finans<span>AI</span></div>
   </div>
-  <div class="hdr-stats">
-    <div class="hdr-stat"><div class="lbl">Portföy Değeri</div><div class="val" style="color:var(--green)">₺842.350</div></div>
-    <div class="hdr-stat"><div class="lbl">Günlük G/Z</div><div class="val up">+₺12.480 (+1,5%)</div></div>
-    <div class="hdr-stat"><div class="lbl">Toplam Getiri</div><div class="val up">+%34,2</div></div>
-    <div class="hdr-stat"><div class="lbl">Sharpe Oranı</div><div class="val">1,84</div></div>
-    <div class="hdr-stat"><div class="lbl">Max Drawdown</div><div class="val down">-%8,4</div></div>
-    <div class="hdr-stat"><div class="lbl">Beta</div><div class="val">0,92</div></div>
-    <div class="hdr-stat"><div class="lbl">VaR %95</div><div class="val down">-₺18.340</div></div>
+  <div class="hdr-stats" id="hdr-stats">
+    <div class="hdr-stat"><div class="lbl">AI Skor</div><div class="val" id="hs-score" style="color:var(--green)">—</div></div>
+    <div class="hdr-stat"><div class="lbl">Analiz Edilen</div><div class="val" id="hs-total">—</div></div>
+    <div class="hdr-stat"><div class="lbl">GÜÇLÜ AL</div><div class="val up" id="hs-sb">—</div></div>
+    <div class="hdr-stat"><div class="lbl">AL</div><div class="val" style="color:#00b38f" id="hs-b">—</div></div>
+    <div class="hdr-stat"><div class="lbl">TUT</div><div class="val" style="color:var(--yellow)" id="hs-h">—</div></div>
+    <div class="hdr-stat"><div class="lbl">SAT</div><div class="val down" id="hs-s">—</div></div>
+    <div class="hdr-stat"><div class="lbl">Son Güncelleme</div><div class="val" id="hs-time" style="font-size:14px">—</div></div>
   </div>
   <div class="hdr-right">
     <div class="live-badge"><div class="live-dot"></div>CANLI</div>
@@ -388,9 +417,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--green)"></div>BIST 100</div><div class="live-badge"><div class="live-dot"></div>CANLI</div></div>
       <div class="cb">
         <div style="font-size:10px;color:var(--t3)">Borsa İstanbul</div>
-        <div class="sum-main" id="bist-val">9.847,23</div>
-        <div class="sum-chg up" id="bist-chg">▲ +127,45 (+1,31%)</div>
-        <div class="sum-sub">52H: 7.240 — 10.320 &nbsp;|&nbsp; Hacim: ₺48,2 Mlr</div>
+        <div class="sum-main" id="bist-val">—</div>
+        <div class="sum-chg" id="bist-chg">Yükleniyor…</div>
+        <div class="sum-sub">EUR/TRY: — &nbsp;|&nbsp; TCMB: —</div>
         <div class="mini-bar"><div class="mini-fill" style="width:78%;background:linear-gradient(90deg,var(--green),#00a888)"></div></div>
       </div>
     </div>
@@ -399,9 +428,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--blue)"></div>S&P 500</div><div class="live-badge"><div class="live-dot" style="background:var(--blue)"></div>CANLI</div></div>
       <div class="cb">
         <div style="font-size:10px;color:var(--t3)">ABD Geniş Endeks</div>
-        <div class="sum-main" id="sp-val">5.342,18</div>
-        <div class="sum-chg up">▲ +43,21 (+0,82%)</div>
-        <div class="sum-sub">52H: 4.280 — 5.680 &nbsp;|&nbsp; VIX: 13,2</div>
+        <div class="sum-main" id="sp-val">—</div>
+        <div class="sum-chg" id="sp-chg">Yükleniyor…</div>
+        <div class="sum-sub" id="sp-sub">ABD Geniş Endeks · Yapılan analizler</div>
         <div class="mini-bar"><div class="mini-fill" style="width:65%;background:linear-gradient(90deg,#0066ff,var(--blue))"></div></div>
       </div>
     </div>
@@ -410,9 +439,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--yellow)"></div>USD/TRY</div><span style="font-size:9.5px;color:var(--t3)">Döviz</span></div>
       <div class="cb">
         <div style="font-size:10px;color:var(--t3)">Amerikan Doları</div>
-        <div class="sum-main" id="usd-val" style="color:var(--yellow)">32,48</div>
-        <div class="sum-chg down">▼ -0,18 (-0,55%)</div>
-        <div class="sum-sub">EUR: 35,12 &nbsp;|&nbsp; GBP: 41,05 &nbsp;|&nbsp; XAU: 2.108₺/gr</div>
+        <div class="sum-main" id="usd-val" style="color:var(--yellow)">—</div>
+        <div class="sum-chg" id="usd-chg">Döviz Kuru</div>
+        <div class="sum-sub">EUR: — &nbsp;|&nbsp; Altın: —</div>
         <div class="mini-bar"><div class="mini-fill" style="width:86%;background:linear-gradient(90deg,var(--yellow),var(--orange))"></div></div>
       </div>
     </div>
@@ -430,14 +459,14 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     </div>
   </div>
 
-  <!-- ── ROW 2: Risk Metrikleri ── -->
+  <!-- ── ROW 2: Piyasa İstatistikleri (rapor tabanlı) ── -->
   <div class="g-risk mb16">
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--green)"></div>Sharpe</div></div><div class="cb"><div class="rl">Risk-Getiri</div><div class="rv" style="color:var(--green)">1,84</div><div class="rs">Piyasa ort: 0,9</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--blue)"></div>Sortino</div></div><div class="cb"><div class="rl">Negatif Volatilite</div><div class="rv" style="color:var(--blue)">2,31</div><div class="rs">Piyasa ort: 1,1</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--red)"></div>Max DD</div></div><div class="cb"><div class="rl">Max Drawdown</div><div class="rv down">-8,4%</div><div class="rs">Kurtarma: 42 gün</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--red)"></div>VaR %95</div></div><div class="cb"><div class="rl">Günlük Risk</div><div class="rv down">-₺18.340</div><div class="rs">%-2,18 portföy</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--yellow)"></div>Beta</div></div><div class="cb"><div class="rl">Piyasa Duyarlılığı</div><div class="rv" style="color:var(--yellow)">0,92</div><div class="rs">Piyasadan az oynak</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--purple)"></div>Alpha</div></div><div class="cb"><div class="rl">Fazladan Getiri</div><div class="rv" style="color:var(--purple)">+6,8%</div><div class="rs">Yıllık alpha değeri</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--green)"></div>En Yüksek Skor</div></div><div class="cb"><div class="rl" id="rs-top-nm">—</div><div class="rv" id="rs-top-val" style="color:var(--green)">—</div><div class="rs" id="rs-top-sub">—</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--red)"></div>En Düşük Skor</div></div><div class="cb"><div class="rl" id="rs-bot-nm">—</div><div class="rv" id="rs-bot-val" style="color:var(--red)">—</div><div class="rs" id="rs-bot-sub">—</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--green)"></div>En Çok Yükselen</div></div><div class="cb"><div class="rl" id="rs-up-nm">—</div><div class="rv" id="rs-up-val" style="color:var(--green)">—</div><div class="rs" id="rs-up-sub">—</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--red)"></div>En Çok Düşen</div></div><div class="cb"><div class="rl" id="rs-dn-nm">—</div><div class="rv" id="rs-dn-val" style="color:var(--red)">—</div><div class="rs" id="rs-dn-sub">—</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--blue)"></div>BIST Ort. Skor</div></div><div class="cb"><div class="rl">Borsa İstanbul</div><div class="rv" id="rs-bist-avg" style="color:var(--blue)">—</div><div class="rs" id="rs-bist-sub">—</div></div></div>
+    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--purple)"></div>ABD Ort. Skor</div></div><div class="cb"><div class="rl">NASDAQ + NYSE</div><div class="rv" id="rs-us-avg" style="color:var(--purple)">—</div><div class="rs" id="rs-us-sub">—</div></div></div>
   </div>
 
   <!-- ── ROW 3: Portföy Performans Grafiği ── -->
@@ -545,15 +574,15 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 
   <!-- ── ROW 8: Portföy + AI Yorumlar ── -->
   <div class="g23">
-    <!-- Portföy -->
+    <!-- Piyasa Özeti -->
     <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Portföyüm</div><div class="chip">📊 Diversifikasyon: İyi</div></div>
+      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Piyasa Özeti</div><div class="chip" id="mx-chip">AI Dağılımı</div></div>
       <div class="cb">
         <div class="port-stats">
-          <div class="ps"><div class="pl">Toplam Değer</div><div class="pv" style="color:var(--green)">₺842.350</div><div class="pp">+₺12.480 bugün</div></div>
-          <div class="ps"><div class="pl">Yatırılan</div><div class="pv">₺628.000</div><div class="pp">+%34,2 toplam</div></div>
-          <div class="ps"><div class="pl">BIST Payı</div><div class="pv" style="color:var(--green)">%48</div><div class="pp">₺404.328</div></div>
-          <div class="ps"><div class="pl">ABD Payı</div><div class="pv" style="color:var(--blue)">%52</div><div class="pp">₺438.022</div></div>
+          <div class="ps"><div class="pl">Analiz Edilen</div><div class="pv" id="mx-total">—</div><div class="pp" id="mx-total-sub">BIST + ABD</div></div>
+          <div class="ps"><div class="pl">Ortalama Skor</div><div class="pv" id="mx-avg" style="color:var(--green)">—</div><div class="pp" id="mx-avg-sub">0–100 arası</div></div>
+          <div class="ps"><div class="pl">Pozitif Tavsiye</div><div class="pv" id="mx-pos" style="color:var(--green)">—</div><div class="pp" id="mx-pos-sub">Al + Güçlü Al</div></div>
+          <div class="ps"><div class="pl">Negatif Tavsiye</div><div class="pv" id="mx-neg" style="color:var(--red)">—</div><div class="pp" id="mx-neg-sub">Sat + Güçlü Sat</div></div>
         </div>
         <div style="display:flex;justify-content:center;margin:8px 0 12px">
           <canvas id="portChart" width="180" height="180"></canvas>
@@ -564,33 +593,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 
     <!-- AI Yorumlar + Sektör -->
     <div class="card">
-      <div class="ch"><div class="ct"><div class="dot"></div>AI Yorumlar & Sektör Analizi</div><div class="ai-badge">⚡ AI</div></div>
-      <div class="cb scroll-y">
-        <div class="ai-cmt">
-          <div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Portföy Analizi</div><div class="ai-when">Az önce</div></div><span class="badge b-sb">Güçlü Al</span></div>
-          <div class="ai-body">21 hisseli portföyünüz <strong style="color:var(--green)">güçlü biçimde çeşitlendirilmiş</strong>. BIST ağırlığı %48, ABD ağırlığı %52. NVDA, MSFT ve META yapay zeka temasıyla outperform ediyor. THYAO ve ASELS tarihi F/K ortalamalarının altında; teknik göstergeler Golden Cross veriyor. Portföydeki 4 Sat/Tut hisse (%10 ağırlık) toplam riski sınırlı tutuyor. Weighted ortalama güven skoru: <strong style="color:var(--green)">%82</strong>.</div>
-          <div class="sent-bar"><div style="flex:7;background:var(--green)"></div><div style="flex:2;background:var(--yellow)"></div><div style="flex:1;background:var(--red)"></div></div>
-        </div>
-        <div class="ai-cmt">
-          <div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Makro Görünüm</div><div class="ai-when">Bugün 09:15</div></div><span class="badge b-b">Al</span></div>
-          <div class="ai-body">ABD enflasyonunun düşmesi Fed'in <strong style="color:var(--blue)">Eylül'de faiz indirebileceği</strong> beklentisini güçlendirdi. BIST için yabancı sermaye girişi hızlanabilir. Bankacılık sektörü <strong style="color:var(--green)">özellikle izlenmeli</strong>.</div>
-          <div class="sent-bar"><div style="flex:6;background:var(--green)"></div><div style="flex:3;background:var(--yellow)"></div><div style="flex:1;background:var(--red)"></div></div>
-        </div>
-        <div class="ai-cmt">
-          <div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Risk Uyarısı</div><div class="ai-when">Bugün 08:30</div></div><span class="badge b-h">Dikkat</span></div>
-          <div class="ai-body">Jeopolitik riskler kısa vadede <strong style="color:var(--yellow)">belirsizliği artırabilir</strong>. Enerji sektörü ağırlığını %10 altında tutun. Stop-loss seviyeleri güncellenmeli.</div>
-          <div class="sent-bar"><div style="flex:3;background:var(--green)"></div><div style="flex:4;background:var(--yellow)"></div><div style="flex:3;background:var(--red)"></div></div>
-        </div>
-        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:10px">Sektör Momentum (AI)</div>
-          <div class="sec-row"><div class="sec-nm">Teknoloji</div><div class="sec-wrap"><div class="sec-fill" style="width:88%;background:var(--green)"></div></div><div class="sec-val up">+8,8%</div></div>
-          <div class="sec-row"><div class="sec-nm">Savunma</div><div class="sec-wrap"><div class="sec-fill" style="width:82%;background:var(--green)"></div></div><div class="sec-val up">+8,2%</div></div>
-          <div class="sec-row"><div class="sec-nm">Bankacılık</div><div class="sec-wrap"><div class="sec-fill" style="width:72%;background:var(--green)"></div></div><div class="sec-val up">+7,2%</div></div>
-          <div class="sec-row"><div class="sec-nm">Demir-Çelik</div><div class="sec-wrap"><div class="sec-fill" style="width:60%;background:var(--blue)"></div></div><div class="sec-val up">+6,0%</div></div>
-          <div class="sec-row"><div class="sec-nm">Perakende</div><div class="sec-wrap"><div class="sec-fill" style="width:42%;background:var(--yellow)"></div></div><div class="sec-val" style="color:var(--yellow)">+4,2%</div></div>
-          <div class="sec-row"><div class="sec-nm">Enerji</div><div class="sec-wrap"><div class="sec-fill" style="width:28%;background:var(--yellow)"></div></div><div class="sec-val" style="color:var(--yellow)">+2,8%</div></div>
-          <div class="sec-row"><div class="sec-nm">Emlak (GYO)</div><div class="sec-wrap"><div class="sec-fill" style="width:15%;background:var(--red)"></div></div><div class="sec-val down">-1,8%</div></div>
-        </div>
+      <div class="ch"><div class="ct"><div class="dot"></div>AI Yorumlar & İçgörüler</div><div class="ai-badge">⚡ AI</div></div>
+      <div class="cb scroll-y" id="ai-comments">
+        <div style="text-align:center;color:var(--t3);font-size:11px;padding:24px">Rapor yorumları hesaplanıyor…</div>
       </div>
     </div>
   </div>
@@ -643,18 +648,18 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       <div class="cb">
         <div class="scen-slider-row">
           <div class="scen-lbl">USD/TRY</div>
-          <input class="scen-range" type="range" min="28" max="45" value="32.48" step="0.5" oninput="updateScen()" id="s-usd">
-          <div class="scen-val" id="sv-usd">32,48</div>
+          <input class="scen-range" type="range" min="30" max="60" value="45.86" step="0.5" oninput="updateScen()" id="s-usd">
+          <div class="scen-val" id="sv-usd">45,86</div>
         </div>
         <div class="scen-slider-row">
           <div class="scen-lbl">BIST 100</div>
-          <input class="scen-range" type="range" min="7000" max="13000" value="9847" step="100" oninput="updateScen()" id="s-bist">
-          <div class="scen-val" id="sv-bist">9.847</div>
+          <input class="scen-range" type="range" min="10000" max="18000" value="13662" step="100" oninput="updateScen()" id="s-bist">
+          <div class="scen-val" id="sv-bist">13.662</div>
         </div>
         <div class="scen-slider-row">
           <div class="scen-lbl">Faiz (TCMB)</div>
-          <input class="scen-range" type="range" min="20" max="60" value="50" step="1" oninput="updateScen()" id="s-faiz">
-          <div class="scen-val" id="sv-faiz">%50</div>
+          <input class="scen-range" type="range" min="20" max="60" value="46" step="1" oninput="updateScen()" id="s-faiz">
+          <div class="scen-val" id="sv-faiz">%46</div>
         </div>
         <div class="scen-slider-row">
           <div class="scen-lbl">Brent Petrol</div>
@@ -673,7 +678,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 var _rawReport = null;  // Gerçek rapor verisi buraya kaydedilir (modal için)
 var _smChart = null;    // Modal fiyat chart instance
 
-const BIST = [
+let BIST = [
   {sym:'THYAO',nm:'Türk Hava Yolları',px:'281,40',chg:'+3,2%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'340',tu:true,risk:1,conf:92,rsi:42,rsiC:'rsi-os',macd:'Buy',macdC:'mac-buy',bol:'Alt Band',ma:'Golden Cross'},
   {sym:'ASELS',nm:'Aselsan',px:'66,45',chg:'+4,1%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'85',tu:true,risk:2,conf:90,rsi:48,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Golden Cross'},
   {sym:'EREGL',nm:'Ereğli Demir Çelik',px:'38,76',chg:'+1,8%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'48',tu:true,risk:2,conf:88,rsi:45,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta-Alt',ma:'Golden Cross'},
@@ -686,7 +691,7 @@ const BIST = [
   {sym:'PETKM',nm:'Petkim',px:'17,84',chg:'-1,1%',up:false,rec:'b-s',rl:'Sat',tgt:'15',tu:false,risk:4,conf:71,rsi:68,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
   {sym:'EKGYO',nm:'Emlak Konut GYO',px:'26,40',chg:'-0,8%',up:false,rec:'b-s',rl:'Sat',tgt:'22',tu:false,risk:4,conf:68,rsi:65,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
 ];
-const US = [
+let US = [
   {sym:'NVDA',nm:'NVIDIA Corp',px:'$875,40',chg:'+4,6%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$1,050',tu:true,risk:3,conf:95,rsi:44,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta-Alt',ma:'Golden Cross'},
   {sym:'META',nm:'Meta Platforms',px:'$488,70',chg:'+2,3%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$580',tu:true,risk:2,conf:88,rsi:48,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Golden Cross'},
   {sym:'MSFT',nm:'Microsoft Corp',px:'$418,30',chg:'+1,2%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$500',tu:true,risk:1,conf:92,rsi:55,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Yükseliş'},
@@ -698,31 +703,7 @@ const US = [
   {sym:'XOM',nm:'ExxonMobil',px:'$113,40',chg:'-0,3%',up:false,rec:'b-h',rl:'Tut',tgt:'$118',tu:true,risk:3,conf:63,rsi:57,rsiC:'rsi-n',macd:'Nötr',macdC:'mac-neu',bol:'Orta',ma:'Yatay'},
   {sym:'INTC',nm:'Intel Corp',px:'$30,12',chg:'-2,1%',up:false,rec:'b-s',rl:'Sat',tgt:'$25',tu:false,risk:4,conf:73,rsi:66,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
 ];
-const PORTFOLIO = [
-  /* ── BIST ─────────────────────────────────────────── */
-  {sym:'THYAO',nm:'Türk Hava Yolları',w:7, color:'#00d4aa',pnl:'+18,4%',pnlv:'+₺28.420',up:true},
-  {sym:'ASELS',nm:'Aselsan',          w:7, color:'#9b59b6',pnl:'+22,7%',pnlv:'+₺18.640',up:true},
-  {sym:'EREGL',nm:'Ereğli D.Ç.',      w:6, color:'#4a9eff',pnl:'+12,1%',pnlv:'+₺15.230',up:true},
-  {sym:'KCHOL',nm:'Koç Holding',      w:5, color:'#27ae60',pnl:'+9,8%', pnlv:'+₺12.110',up:true},
-  {sym:'AKBNK',nm:'Akbank',           w:5, color:'#1abc9c',pnl:'+9,3%', pnlv:'+₺7.640', up:true},
-  {sym:'BIMAS',nm:'BİM Mağazalar',    w:4, color:'#f39c12',pnl:'+7,6%', pnlv:'+₺8.920', up:true},
-  {sym:'TUPRS',nm:'Tüpraş',           w:4, color:'#d35400',pnl:'+5,2%', pnlv:'+₺6.340', up:true},
-  {sym:'GARAN',nm:'Garanti BBVA',     w:3, color:'#2980b9',pnl:'+2,1%', pnlv:'+₺2.840', up:true},
-  {sym:'SASA', nm:'SASA Polyester',   w:3, color:'#8e44ad',pnl:'-3,8%', pnlv:'-₺2.760', up:false},
-  {sym:'PETKM',nm:'Petkim',           w:2, color:'#c0392b',pnl:'-7,2%', pnlv:'-₺4.190', up:false},
-  {sym:'EKGYO',nm:'Emlak GYO',        w:2, color:'#7f8c8d',pnl:'-4,5%', pnlv:'-₺2.580', up:false},
-  /* ── ABD ──────────────────────────────────────────── */
-  {sym:'NVDA', nm:'NVIDIA',           w:10,color:'#e74c3c',pnl:'+68,4%',pnlv:'+₺42.100',up:true},
-  {sym:'MSFT', nm:'Microsoft',        w:8, color:'#f5a623',pnl:'+31,2%',pnlv:'+₺34.820',up:true},
-  {sym:'META', nm:'Meta Platforms',   w:7, color:'#3498db',pnl:'+44,6%',pnlv:'+₺38.220',up:true},
-  {sym:'GOOGL',nm:'Alphabet',         w:6, color:'#16a085',pnl:'+19,8%',pnlv:'+₺22.540',up:true},
-  {sym:'AAPL', nm:'Apple',            w:5, color:'#e67e22',pnl:'+14,8%',pnlv:'+₺11.230',up:true},
-  {sym:'AMZN', nm:'Amazon',           w:5, color:'#ff6b35',pnl:'+21,3%',pnlv:'+₺18.470',up:true},
-  {sym:'JPM',  nm:'JPMorgan',         w:4, color:'#2ecc71',pnl:'+11,6%',pnlv:'+₺9.880', up:true},
-  {sym:'TSLA', nm:'Tesla',            w:3, color:'#cc5500',pnl:'-8,4%', pnlv:'-₺7.290', up:false},
-  {sym:'XOM',  nm:'ExxonMobil',       w:2, color:'#95a5a6',pnl:'+3,2%', pnlv:'+₺2.140', up:true},
-  {sym:'INTC', nm:'Intel',            w:2, color:'#bdc3c7',pnl:'-12,3%',pnlv:'-₺6.820', up:false},
-];
+// PORTFOLIO statik veriden silindi — Piyasa Özeti loadReport'tan beslenir.
 const TICKER_DATA=[
   {s:'BIST100',p:'9.847',c:'+1,31%',u:true},{s:'XU030',p:'10.122',c:'+1,54%',u:true},
   {s:'S&P500',p:'5.342',c:'+0,82%',u:true},{s:'NASDAQ',p:'16.724',c:'+1,12%',u:true},
@@ -770,16 +751,23 @@ const CALENDAR=[
   {d:'25',m:'Haz',name:'ABD GDP Nihai (Q1 2024)',prev:'Önceki: %1,6',imp:2},
 ];
 
-let WATCHES=[
-  {sym:'ISCTR',nm:'İş Bankası',px:'11,82',chg:'+1,4%',up:true},
-  {sym:'HEKTS',nm:'Hektaş',px:'32,60',chg:'-0,8%',up:false},
-  {sym:'NVDA', nm:'NVIDIA',  px:'$875',chg:'+4,6%',up:true},
-];
-let ALARMS=[
-  {sym:'THYAO',dir:'above',tgt:300,cur:281.40,up:true},
-  {sym:'BIST',dir:'above',tgt:10000,cur:9847,up:true},
-  {sym:'USD',dir:'below',tgt:32.00,cur:32.48,up:false},
-];
+/* Watchlist & Alarmlar — localStorage'da kalıcı tutuluyor */
+const WATCH_KEY='fa_watches', ALARM_KEY='fa_alarms';
+function loadWatches(){
+  try{ const j=localStorage.getItem(WATCH_KEY); if(j) return JSON.parse(j); }catch(e){}
+  return [
+    {sym:'THYAO',nm:'Türk Hava Yolları',px:'—',chg:'—',up:true},
+    {sym:'NVDA', nm:'NVIDIA',           px:'—',chg:'—',up:true},
+  ];
+}
+function loadAlarms(){
+  try{ const j=localStorage.getItem(ALARM_KEY); if(j) return JSON.parse(j); }catch(e){}
+  return [];
+}
+function persistWatches(){ try{ localStorage.setItem(WATCH_KEY, JSON.stringify(WATCHES)); }catch(e){} }
+function persistAlarms(){ try{ localStorage.setItem(ALARM_KEY, JSON.stringify(ALARMS)); }catch(e){} }
+let WATCHES = loadWatches();
+let ALARMS  = loadAlarms();
 
 /* ════════════════════════ RENDER FUNCTIONS ════════════════════════ */
 function riskDots(lv){
@@ -829,13 +817,40 @@ function renderTech(tbodyId,data){
 }
 
 function renderPortfolio(){
-  document.getElementById('port-list').innerHTML=PORTFOLIO.map(p=>`
-    <div class="port-item">
-      <div class="pc" style="background:${p.color}"></div>
-      <div class="pi"><div class="pis">${p.sym}</div><div class="pin">${p.nm}</div></div>
-      <div class="pw">${p.w}%</div>
-      <div class="pnl"><div class="pnlv ${p.up?'up':'down'}">${p.pnl}</div><div class="pnls">${p.pnlv}</div></div>
-    </div>`).join('');
+  // Piyasa Özeti listesi: rapordaki en yüksek skorlu 8 hisse
+  const list = document.getElementById('port-list');
+  if (!list) return;
+  if (!_rawReport || !_rawReport.stocks) {
+    list.innerHTML = '<div style="text-align:center;color:var(--t3);font-size:11px;padding:14px">Veri yükleniyor…</div>';
+    return;
+  }
+  const top = _rawReport.stocks
+    .filter(s => !s.error)
+    .sort((a,b) => (b.score||0) - (a.score||0))
+    .slice(0, 8);
+  const colors = ['#00d4aa','#4a9eff','#9b59b6','#f5a623','#e74c3c','#27ae60','#3498db','#e67e22'];
+  list.innerHTML = top.map((s,i) => {
+    const isBist = s.exchange === 'BIST';
+    const px = isBist
+      ? s.price.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' ₺'
+      : '$' + s.price.toFixed(2);
+    const chg = (s.change_pct>=0?'+':'') + s.change_pct.toFixed(2).replace('.',',') + '%';
+    const up  = s.change_pct >= 0;
+    const shortNm = (s.name || s.symbol).split(' ').slice(0,2).join(' ');
+    return `<div class="port-item" data-sym="${s.symbol}" style="cursor:pointer">
+      <div class="pc" style="background:${colors[i % colors.length]}"></div>
+      <div class="pi"><div class="pis">${s.symbol}</div><div class="pin">${shortNm}</div></div>
+      <div class="pw">${s.score || 0}</div>
+      <div class="pnl"><div class="pnlv ${up?'up':'down'}">${chg}</div><div class="pnls">${px}</div></div>
+    </div>`;
+  }).join('');
+  // Tıklama → hisse detay modalı
+  list.querySelectorAll('.port-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const sym = el.getAttribute('data-sym');
+      if (sym && typeof openStockModal === 'function') openStockModal(sym);
+    });
+  });
 }
 
 function renderNews(){
@@ -881,12 +896,27 @@ function addWatch(){
   const v=inp.value.trim().toUpperCase();
   if(!v)return;
   if(!WATCHES.find(w=>w.sym===v)){
-    WATCHES.push({sym:v,nm:'Bilinmiyor',px:'—',chg:'—',up:true});
+    // Eğer rapor verisi yüklendiyse ad/fiyat oradan alınır
+    let entry={sym:v,nm:'Bilinmiyor',px:'—',chg:'—',up:true};
+    if(_rawReport && _rawReport.stocks){
+      const f=_rawReport.stocks.find(s=>s.symbol===v);
+      if(f){
+        const isBist=f.exchange==='BIST';
+        entry.nm = (f.name||v).split(' ').slice(0,2).join(' ');
+        entry.px = isBist
+          ? f.price.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})
+          : '$'+f.price.toFixed(2);
+        entry.chg = (f.change_pct>=0?'+':'')+f.change_pct.toFixed(2).replace('.',',')+'%';
+        entry.up  = f.change_pct>=0;
+      }
+    }
+    WATCHES.push(entry);
+    persistWatches();
     renderWatches();
   }
   inp.value='';
 }
-function removeWatch(i){WATCHES.splice(i,1);renderWatches();}
+function removeWatch(i){WATCHES.splice(i,1);persistWatches();renderWatches();}
 
 /* ══ Alarmlar ══ */
 function renderAlarms(){
@@ -912,12 +942,18 @@ function addAlarm(){
   const d=document.getElementById('al-dir').value;
   const t=parseFloat(document.getElementById('al-tgt').value);
   if(!s||!t)return;
-  ALARMS.push({sym:s,dir:d,tgt:t,cur:t*(d==='above'?.95:1.05)});
+  let cur=t*(d==='above'?.95:1.05);
+  if(_rawReport && _rawReport.stocks){
+    const f=_rawReport.stocks.find(x=>x.symbol===s);
+    if(f) cur=f.price;
+  }
+  ALARMS.push({sym:s,dir:d,tgt:t,cur:cur});
+  persistAlarms();
   document.getElementById('al-sym').value='';
   document.getElementById('al-tgt').value='';
   renderAlarms();
 }
-function removeAlarm(i){ALARMS.splice(i,1);renderAlarms();}
+function removeAlarm(i){ALARMS.splice(i,1);persistAlarms();renderAlarms();}
 
 /* ══ Senaryo Simülatörü ══ */
 function updateScen(){
@@ -930,29 +966,36 @@ function updateScen(){
   document.getElementById('sv-faiz').textContent='%'+faiz;
   document.getElementById('sv-petrol').textContent='$'+petrol;
 
-  const basePort=842350;
-  const bistDelta=(bist-9847)/9847;
-  const usdDelta=(usd-32.48)/32.48;
-  const faizDelta=(faiz-50)/50;
+  // Senaryo baseline değerleri (loadReport varsa gerçek makro verisi ile override edilir)
+  const baseBist = window._sc_baseBist || 13662;
+  const baseUsd  = window._sc_baseUsd  || 45.86;
+  const baseFaiz = window._sc_baseFaiz || 46;
+  const bistDelta=(bist-baseBist)/baseBist;
+  const usdDelta=(usd-baseUsd)/baseUsd;
+  const faizDelta=(faiz-baseFaiz)/baseFaiz;
   const petDelta=(petrol-84)/84;
 
-  const portChg=bistDelta*0.65+(-usdDelta*0.10)+(-faizDelta*0.05)+petDelta*0.03;
-  const newPort=Math.round(basePort*(1+portChg));
-  const diff=newPort-basePort;
-  const pct=(portChg*100).toFixed(1);
-  const isPos=diff>=0;
+  // Tahmini sektörel etki (yüzde olarak)
+  const bankPct  = (bistDelta*1.10 + (-faizDelta)*0.40 + (-usdDelta)*0.10) * 100;
+  const energyPct= (bistDelta*0.70 + petDelta*0.50 + usdDelta*0.15) * 100;
+  const exporter = (bistDelta*1.05 + usdDelta*0.35) * 100;     // USD geliri olan (THY/ASELS gibi)
+  const retailPct= (bistDelta*0.85 + (-faizDelta)*0.20 + (-usdDelta)*0.10) * 100;
+  const usTech   = (bistDelta*0.20 + (-usdDelta)*0.80) * 100;
+  // Genel piyasa yönü
+  const overallPct = (bistDelta*0.7 + (-usdDelta)*0.1 + (-faizDelta)*0.1 + petDelta*0.05) * 100;
+  const isPos = overallPct >= 0;
+  const row = (k, v, hint) => `<div class="scen-row"><span class="scen-key">${k}${hint?'<br><span style="font-size:9px;color:var(--t3)">'+hint+'</span>':''}</span><span class="scen-v" style="color:${v>=0?'var(--green)':'var(--red)'}">${v>=0?'+':''}${v.toFixed(1)}%</span></span></div>`;
 
-  const thyaoChg=(bistDelta*1.2+usdDelta*0.15)*100;
-  const msftChg=(bistDelta*0.2+(-usdDelta)*0.8)*100;
-  const ereg=(bistDelta*0.9+petDelta*0.2)*100;
-
-  document.getElementById('scen-result').innerHTML=`
-    <div class="scen-row"><span class="scen-key">Portföy Değişimi</span><span class="scen-v" style="color:${isPos?'var(--green)':'var(--red)'}">${isPos?'+':''}${diff.toLocaleString('tr-TR')}₺ (%${pct})</span></div>
-    <div class="scen-row"><span class="scen-key">Tahmini Değer</span><span class="scen-v" style="color:${isPos?'var(--green)':'var(--red)'}">₺${newPort.toLocaleString('tr-TR')}</span></div>
-    <div class="scen-row"><span class="scen-key">THYAO Etkisi</span><span class="scen-v" style="color:${thyaoChg>=0?'var(--green)':'var(--red)'}">${thyaoChg>=0?'+':''}${thyaoChg.toFixed(1)}%</span></div>
-    <div class="scen-row"><span class="scen-key">MSFT Etkisi</span><span class="scen-v" style="color:${msftChg>=0?'var(--green)':'var(--red)'}">${msftChg>=0?'+':''}${msftChg.toFixed(1)}%</span></div>
-    <div class="scen-row"><span class="scen-key">EREGL Etkisi</span><span class="scen-v" style="color:${ereg>=0?'var(--green)':'var(--red)'}">${ereg>=0?'+':''}${ereg.toFixed(1)}%</span></div>
-  `;
+  document.getElementById('scen-result').innerHTML =
+    `<div class="scen-row" style="border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:8px">
+       <span class="scen-key" style="font-weight:800">Genel Piyasa Yönü</span>
+       <span class="scen-v" style="font-size:16px;font-weight:900;color:${isPos?'var(--green)':'var(--red)'}">${isPos?'+':''}${overallPct.toFixed(1)}%</span>
+     </div>` +
+    row('Bankacılık',  bankPct,   'AKBNK · GARAN · ISCTR') +
+    row('İhracatçılar', exporter, 'THYAO · ASELS') +
+    row('Enerji',       energyPct,'TUPRS · PETKM') +
+    row('Perakende',    retailPct,'BIMAS · MGROS') +
+    row('ABD Teknoloji',usTech,   'NVDA · MSFT · GOOGL');
 }
 
 /* ════════════════════════ CHARTS ════════════════════════ */
@@ -1018,14 +1061,26 @@ function updatePerfChart(range,btn){
   buildPerfChart(pts);
 }
 
-function buildScoreChart(){
-  const ctx=document.getElementById('scoreChart').getContext('2d');
-  new Chart(ctx,{type:'doughnut',data:{datasets:[{data:[74,26],backgroundColor:['#00d4aa','#1e2d45'],borderWidth:0,circumference:270,rotation:225}]},options:{responsive:false,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}}}});
+function buildScoreChart(value){
+  if(value==null) value=74;
+  const canvas=document.getElementById('scoreChart');
+  const existing=Chart.getChart(canvas);
+  if(existing) existing.destroy();
+  const ctx=canvas.getContext('2d');
+  new Chart(ctx,{type:'doughnut',data:{datasets:[{data:[value,100-value],backgroundColor:['#00d4aa','#1e2d45'],borderWidth:0,circumference:270,rotation:225}]},options:{responsive:false,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}}}});
 }
 
-function buildPortChart(){
-  const ctx=document.getElementById('portChart').getContext('2d');
-  new Chart(ctx,{type:'doughnut',data:{labels:PORTFOLIO.map(p=>p.sym),datasets:[{data:PORTFOLIO.map(p=>p.w),backgroundColor:PORTFOLIO.map(p=>p.color),borderColor:'#07090f',borderWidth:2,hoverOffset:5}]},options:{responsive:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.label}: %${c.parsed}`}}}}});
+function buildPortChart(counts){
+  const canvas=document.getElementById('portChart');
+  if(!canvas) return;
+  const existing=Chart.getChart(canvas);
+  if(existing) existing.destroy();
+  const c = counts || {strong_buy:0,buy:0,hold:1,sell:0,strong_sell:0};
+  const labels=['Güçlü Al','Al','Tut','Sat','Güçlü Sat'];
+  const data=[c.strong_buy||0, c.buy||0, c.hold||0, c.sell||0, c.strong_sell||0];
+  const colors=['#00d4aa','#00b38f','#f5a623','#ff7832','#ff4d6d'];
+  const ctx=canvas.getContext('2d');
+  new Chart(ctx,{type:'doughnut',data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderColor:'#07090f',borderWidth:2,hoverOffset:5}]},options:{responsive:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c2=>` ${c2.label}: ${c2.parsed} hisse`}}}}});
 }
 
 
@@ -1043,7 +1098,8 @@ function simPrices(){
   chgEl.textContent=`${d>=0?'▲ +':'▼ '}${d} (${pct>=0?'+':''}${pct}%)`;
   chgEl.className=`sum-chg ${d>=0?'up':'down'}`;
 }
-setInterval(simPrices,2500);
+// simPrices artık çalıştırılmıyor — gerçek BIST 100 değeri loadReport'tan geliyor.
+// İsteyenler için fonksiyon hala mevcut, sadece interval kaldırıldı.
 
 /* ════════════════════════ INIT ════════════════════════ */
 document.addEventListener('DOMContentLoaded',()=>{
@@ -1177,17 +1233,35 @@ async function loadReport() {
         var cp = m.bist100_change_pct;
         bc.className = 'sum-chg ' + (cp>=0?'up':'down');
         bc.innerHTML = (cp>=0?'▲ +':'▼ ') + Math.abs(cp).toFixed(2) + '%';
+      } else {
+        bc.className = 'sum-chg';
+        bc.style.color = 'var(--t2)';
+        bc.textContent = 'Borsa İstanbul Endeksi';
       }
     }
     if (sv && m.sp500) sv.textContent = m.sp500.toFixed(2);
+    var spChg = document.getElementById('sp-chg');
+    if (spChg) {
+      if (m.sp500_change_pct != null) {
+        var sc = m.sp500_change_pct;
+        spChg.className = 'sum-chg ' + (sc>=0?'up':'down');
+        spChg.innerHTML = (sc>=0?'▲ +':'▼ ') + Math.abs(sc).toFixed(2) + '%';
+      } else {
+        spChg.textContent = 'ABD Geniş Endeks';
+      }
+    }
     if (uv && m.usd_try) {
       uv.textContent = m.usd_try.toFixed(3);
-      var us = document.getElementById('bist-val'); // reuse for sub line update below
     }
+    var usdChg = document.getElementById('usd-chg');
+    if (usdChg) usdChg.textContent = 'Amerikan Doları';
     // USD sub line
     var usdSub = document.querySelector('#usd-val')?.closest('.cb')?.querySelector('.sum-sub');
-    if (usdSub && m.eur_try) {
-      usdSub.textContent = 'EUR: ' + m.eur_try.toFixed(3) + (m.gold_usd ? '  |  XAU: $'+Math.round(m.gold_usd)+'/oz' : '');
+    if (usdSub) {
+      var parts = [];
+      if (m.eur_try) parts.push('EUR: ' + m.eur_try.toFixed(3));
+      if (m.gold_usd) parts.push('Altın: $' + Math.round(m.gold_usd) + '/oz');
+      if (parts.length) usdSub.textContent = parts.join('  |  ');
     }
 
     /* ── BIST sub line ── */
@@ -1195,6 +1269,30 @@ async function loadReport() {
     if (bistSub) {
       bistSub.textContent = 'EUR/TRY: ' + (m.eur_try ? m.eur_try.toFixed(3) : '—') + '  |  TCMB: %' + (m.tr_interest_rate || '—');
     }
+
+    /* ── Senaryo Simülatörü gerçek değerlerle sıfırla ── */
+    if (m.usd_try) {
+      window._sc_baseUsd = m.usd_try;
+      var sUsd = document.getElementById('s-usd');
+      if (sUsd) { sUsd.min = Math.max(20, Math.floor(m.usd_try*0.7)); sUsd.max = Math.ceil(m.usd_try*1.4); sUsd.value = m.usd_try; }
+      var svUsd = document.getElementById('sv-usd');
+      if (svUsd) svUsd.textContent = m.usd_try.toFixed(2).replace('.',',');
+    }
+    if (m.bist100) {
+      window._sc_baseBist = m.bist100;
+      var sBist = document.getElementById('s-bist');
+      if (sBist) { sBist.min = Math.floor(m.bist100*0.7/100)*100; sBist.max = Math.ceil(m.bist100*1.4/100)*100; sBist.value = Math.round(m.bist100); }
+      var svBist = document.getElementById('sv-bist');
+      if (svBist) svBist.textContent = Math.round(m.bist100).toLocaleString('tr-TR');
+    }
+    if (m.tr_interest_rate) {
+      window._sc_baseFaiz = m.tr_interest_rate;
+      var sFaiz = document.getElementById('s-faiz');
+      if (sFaiz) sFaiz.value = m.tr_interest_rate;
+      var svFaiz = document.getElementById('sv-faiz');
+      if (svFaiz) svFaiz.textContent = '%' + m.tr_interest_rate;
+    }
+    if (typeof updateScen === 'function') updateScen();
 
     /* ── Makro grid güncelle ── */
     var macItems = document.querySelectorAll('.mac-item');
@@ -1221,20 +1319,108 @@ async function loadReport() {
     /* ── AI skor ring güncelle ── */
     var scores = rawStocks.map(function(s){return s.score||50;});
     var avg = scores.length ? Math.round(scores.reduce(function(a,b){return a+b;},0)/scores.length) : 74;
-    // Skor ring'i yeniden çiz
-    var sc = document.getElementById('scoreChart');
-    if (sc && sc._chartInst) sc._chartInst.destroy();
-    var ctx2 = sc ? sc.getContext('2d') : null;
-    if (ctx2) {
-      var ni = new Chart(ctx2, {
-        type:'doughnut',
-        data:{datasets:[{data:[avg,100-avg],backgroundColor:['#00d4aa','#1e2d45'],borderWidth:0,circumference:270,rotation:225}]},
-        options:{responsive:false,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}}}
-      });
-      if (sc) sc._chartInst = ni;
-    }
+    buildScoreChart(avg);
     var sn = document.querySelector('.sc-num');
     if (sn) sn.textContent = avg;
+
+    /* ── Header özet (verdict dağılımı) ── */
+    var counts = {strong_buy:0, buy:0, hold:0, sell:0, strong_sell:0};
+    rawStocks.forEach(function(s){
+      var k = s.verdict_key || 'hold';
+      if (counts[k] != null) counts[k]++;
+    });
+    var setH = function(id, val, color) {
+      var el = document.getElementById(id);
+      if (el) { el.textContent = val; if (color) el.style.color = color; }
+    };
+    setH('hs-score', avg + ' / 100', avg >= 65 ? 'var(--green)' : avg >= 50 ? 'var(--yellow)' : 'var(--red)');
+    setH('hs-total', rawStocks.length);
+    setH('hs-sb',    counts.strong_buy);
+    setH('hs-b',     counts.buy);
+    setH('hs-h',     counts.hold);
+    setH('hs-s',     counts.sell + counts.strong_sell);
+    var ts = report.generated_at ? new Date(report.generated_at) : new Date();
+    setH('hs-time', ts.toLocaleDateString('tr-TR', {day:'2-digit', month:'2-digit'}) + ' ' + ts.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'}));
+
+    /* ── Piyasa Özeti kartı (mx-*) ── */
+    var bistCount = rawStocks.filter(function(s){return s.exchange==='BIST';}).length;
+    var usCount   = rawStocks.length - bistCount;
+    var pos = counts.strong_buy + counts.buy;
+    var neg = counts.sell + counts.strong_sell;
+    setH('mx-total',     rawStocks.length);
+    setH('mx-total-sub', bistCount + ' BIST · ' + usCount + ' ABD');
+    setH('mx-avg',       avg, avg >= 65 ? 'var(--green)' : avg >= 50 ? 'var(--yellow)' : 'var(--red)');
+    setH('mx-pos',       pos);
+    setH('mx-pos-sub',   counts.strong_buy + ' Güçlü Al · ' + counts.buy + ' Al');
+    setH('mx-neg',       neg);
+    setH('mx-neg-sub',   counts.sell + ' Sat · ' + counts.strong_sell + ' Güçlü Sat');
+    buildPortChart(counts);
+    renderPortfolio();
+
+    /* ── Piyasa İstatistikleri satırı (rs-*) ── */
+    function shortNm(s){ return (s.name||s.symbol).split(' ').slice(0,2).join(' '); }
+    var byScore = rawStocks.slice().sort(function(a,b){return (b.score||0)-(a.score||0);});
+    var byChg   = rawStocks.slice().sort(function(a,b){return (b.change_pct||0)-(a.change_pct||0);});
+    if (byScore.length) {
+      var top = byScore[0], bot = byScore[byScore.length-1];
+      setH('rs-top-nm', shortNm(top));
+      setH('rs-top-val', top.score + ' / 100', 'var(--green)');
+      setH('rs-top-sub', top.symbol + ' · ' + (top.exchange || ''));
+      setH('rs-bot-nm', shortNm(bot));
+      setH('rs-bot-val', bot.score + ' / 100', 'var(--red)');
+      setH('rs-bot-sub', bot.symbol + ' · ' + (bot.exchange || ''));
+    }
+    if (byChg.length) {
+      var up1 = byChg[0], dn1 = byChg[byChg.length-1];
+      setH('rs-up-nm', shortNm(up1));
+      setH('rs-up-val', (up1.change_pct>=0?'+':'')+up1.change_pct.toFixed(2)+'%', 'var(--green)');
+      setH('rs-up-sub', up1.symbol);
+      setH('rs-dn-nm', shortNm(dn1));
+      setH('rs-dn-val', dn1.change_pct.toFixed(2)+'%', 'var(--red)');
+      setH('rs-dn-sub', dn1.symbol);
+    }
+    var bistArr = rawStocks.filter(function(s){return s.exchange==='BIST';});
+    var usArr   = rawStocks.filter(function(s){return s.exchange!=='BIST';});
+    var bistAvg = bistArr.length ? Math.round(bistArr.reduce(function(a,b){return a+(b.score||0);},0)/bistArr.length) : 0;
+    var usAvg   = usArr.length   ? Math.round(usArr.reduce(function(a,b){return a+(b.score||0);},0)/usArr.length)   : 0;
+    setH('rs-bist-avg', bistAvg + ' / 100');
+    setH('rs-bist-sub', bistArr.length + ' hisse analiz edildi');
+    setH('rs-us-avg',   usAvg + ' / 100');
+    setH('rs-us-sub',   usArr.length + ' hisse analiz edildi');
+
+    /* ── AI Yorumlar (dinamik) ── */
+    var aiList = document.getElementById('ai-comments');
+    if (aiList) {
+      var pos = counts.strong_buy + counts.buy;
+      var posPct = rawStocks.length ? Math.round(pos / rawStocks.length * 100) : 0;
+      var marketTone = avg >= 65 ? 'pozitif' : avg >= 50 ? 'temkinli pozitif' : avg >= 40 ? 'nötr' : 'temkinli';
+      var marketBadge = avg >= 65 ? {c:'b-sb', t:'Güçlü Al'} : avg >= 55 ? {c:'b-b', t:'Al'} : avg >= 45 ? {c:'b-h', t:'Tut'} : {c:'b-s', t:'Sat'};
+      var topNames  = byScore.slice(0, 3).map(function(s){return s.symbol;}).join(', ');
+      var botNames  = byScore.slice(-3).map(function(s){return s.symbol;}).reverse().join(', ');
+      var bistTone  = bistAvg >= usAvg ? 'BIST tarafı ABD pazarına göre <strong style="color:var(--green)">daha güçlü</strong>' : 'ABD tarafı BIST pazarına göre <strong style="color:var(--blue)">daha güçlü</strong>';
+      var html = '';
+      // 1) Genel Piyasa Görünümü
+      html += '<div class="ai-cmt">'+
+        '<div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Piyasa Görünümü</div><div class="ai-when">Az önce</div></div><span class="badge '+marketBadge.c+'">'+marketBadge.t+'</span></div>'+
+        '<div class="ai-body">Toplam <strong>'+rawStocks.length+'</strong> hisse analiz edildi. Ortalama AI skoru <strong style="color:var(--green)">'+avg+'/100</strong> — genel görünüm <strong>'+marketTone+'</strong>. Pozitif tavsiye oranı: <strong style="color:var(--green)">%'+posPct+'</strong> ('+pos+' hisse). En yüksek skorlu öneriler: <strong>'+topNames+'</strong>.</div>'+
+        '<div class="sent-bar"><div style="flex:'+pos+';background:var(--green)"></div><div style="flex:'+counts.hold+';background:var(--yellow)"></div><div style="flex:'+(counts.sell+counts.strong_sell)+';background:var(--red)"></div></div>'+
+        '</div>';
+      // 2) BIST vs ABD
+      html += '<div class="ai-cmt">'+
+        '<div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Pazar Karşılaştırması</div><div class="ai-when">Bugün</div></div><span class="badge b-b">Bilgi</span></div>'+
+        '<div class="ai-body">BIST ortalama skoru <strong style="color:var(--blue)">'+bistAvg+'</strong> ('+bistArr.length+' hisse), ABD ortalama skoru <strong style="color:var(--purple)">'+usAvg+'</strong> ('+usArr.length+' hisse). '+bistTone+'. USD/TRY: <strong>'+(m.usd_try?m.usd_try.toFixed(2):'—')+'</strong> · TCMB faizi: <strong>%'+(m.tr_interest_rate||'—')+'</strong>.</div>'+
+        '<div class="sent-bar"><div style="flex:6;background:var(--green)"></div><div style="flex:3;background:var(--yellow)"></div><div style="flex:1;background:var(--red)"></div></div>'+
+        '</div>';
+      // 3) Riskler
+      if (counts.sell + counts.strong_sell > 0) {
+        html += '<div class="ai-cmt">'+
+          '<div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Risk Uyarısı</div><div class="ai-when">Bugün</div></div><span class="badge b-h">Dikkat</span></div>'+
+          '<div class="ai-body">Modelimiz <strong style="color:var(--red)">'+(counts.sell+counts.strong_sell)+'</strong> hisseyi Sat/Güçlü Sat kategorisinde değerlendiriyor. En düşük skorlu hisseler: <strong>'+botNames+'</strong>. Bu hisselerde temel ya da teknik göstergeler zayıf — pozisyon almadan önce ayrıntı analizi önerilir.</div>'+
+          '<div class="sent-bar"><div style="flex:2;background:var(--green)"></div><div style="flex:3;background:var(--yellow)"></div><div style="flex:5;background:var(--red)"></div></div>'+
+          '</div>';
+      }
+      aiList.innerHTML = html;
+    }
     var st = document.querySelector('.sc-title');
     if (st) st.textContent = avg>=80?'Güçlü Boğa':avg>=65?'Orta-Güçlü Boğa':avg>=50?'Yükseliş Eğilimi':'Temkinli';
     var sd = document.querySelector('.sc-desc');
@@ -1254,17 +1440,19 @@ async function loadReport() {
       return '<div class="ti"><span class="s">'+x.s+'</span><span class="p">'+x.p+'</span>'+(x.c?'<span class="'+(x.u?'u':'d')+'">'+(x.u?'▲':'▼')+' '+x.c+'</span>':'')+'</div>';
     }).join('');
 
-    /* ── Watchlist fiyatlarını güncelle ── */
+    /* ── Watchlist & Alarm fiyatlarını güncelle ── */
     var allStocks = BIST.concat(US);
     WATCHES.forEach(function(w){
       var f = allStocks.find(function(s){return s.sym===w.sym;});
       if (f) { w.px=f.px; w.chg=f.chg; w.up=f.up; w.nm=f.nm; }
     });
+    persistWatches();
     renderWatches();
     ALARMS.forEach(function(a){
       var f = allStocks.find(function(s){return s.sym===a.sym;});
       if (f) a.cur = f.rawPrice || a.cur;
     });
+    persistAlarms();
     renderAlarms();
 
   } catch(err) {
