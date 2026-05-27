@@ -574,20 +574,27 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 
   <!-- ── ROW 8: Portföy + AI Yorumlar ── -->
   <div class="g23">
-    <!-- Piyasa Özeti -->
+    <!-- Portföyüm -->
     <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Piyasa Özeti</div><div class="chip" id="mx-chip">AI Dağılımı</div></div>
+      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Portföyüm</div><div class="chip" id="mx-chip">0 hisse</div></div>
       <div class="cb">
         <div class="port-stats">
-          <div class="ps"><div class="pl">Analiz Edilen</div><div class="pv" id="mx-total">—</div><div class="pp" id="mx-total-sub">BIST + ABD</div></div>
-          <div class="ps"><div class="pl">Ortalama Skor</div><div class="pv" id="mx-avg" style="color:var(--green)">—</div><div class="pp" id="mx-avg-sub">0–100 arası</div></div>
-          <div class="ps"><div class="pl">Pozitif Tavsiye</div><div class="pv" id="mx-pos" style="color:var(--green)">—</div><div class="pp" id="mx-pos-sub">Al + Güçlü Al</div></div>
-          <div class="ps"><div class="pl">Negatif Tavsiye</div><div class="pv" id="mx-neg" style="color:var(--red)">—</div><div class="pp" id="mx-neg-sub">Sat + Güçlü Sat</div></div>
+          <div class="ps"><div class="pl">Toplam Değer</div><div class="pv" id="mx-total">—</div><div class="pp" id="mx-total-sub">Tüm hisseler</div></div>
+          <div class="ps"><div class="pl">Toplam Maliyet</div><div class="pv" id="mx-avg">—</div><div class="pp" id="mx-avg-sub">Alış toplamı</div></div>
+          <div class="ps"><div class="pl">Toplam G/Z</div><div class="pv" id="mx-pos" style="color:var(--green)">—</div><div class="pp" id="mx-pos-sub">Kar/Zarar tutarı</div></div>
+          <div class="ps"><div class="pl">G/Z Yüzdesi</div><div class="pv" id="mx-neg" style="color:var(--green)">—</div><div class="pp" id="mx-neg-sub">Net getiri</div></div>
         </div>
         <div style="display:flex;justify-content:center;margin:8px 0 12px">
           <canvas id="portChart" width="180" height="180"></canvas>
         </div>
-        <div id="port-list"></div>
+        <div id="port-list" style="margin-bottom:10px"></div>
+        <!-- Hisse ekleme formu -->
+        <div style="display:grid;grid-template-columns:1fr 70px 90px auto;gap:6px;margin-top:8px;padding-top:10px;border-top:1px solid var(--border)">
+          <input id="pf-sym" type="text" placeholder="Sembol (THYAO)" style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:7px 8px;border-radius:6px;font-size:11px">
+          <input id="pf-qty" type="number" placeholder="Adet" min="0" step="any" style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:7px 8px;border-radius:6px;font-size:11px">
+          <input id="pf-price" type="number" placeholder="Alış" min="0" step="any" style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:7px 8px;border-radius:6px;font-size:11px">
+          <button class="btn-add" onclick="addPortfolio()">+ Ekle</button>
+        </div>
       </div>
     </div>
 
@@ -703,7 +710,55 @@ let US = [
   {sym:'XOM',nm:'ExxonMobil',px:'$113,40',chg:'-0,3%',up:false,rec:'b-h',rl:'Tut',tgt:'$118',tu:true,risk:3,conf:63,rsi:57,rsiC:'rsi-n',macd:'Nötr',macdC:'mac-neu',bol:'Orta',ma:'Yatay'},
   {sym:'INTC',nm:'Intel Corp',px:'$30,12',chg:'-2,1%',up:false,rec:'b-s',rl:'Sat',tgt:'$25',tu:false,risk:4,conf:73,rsi:66,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
 ];
-// PORTFOLIO statik veriden silindi — Piyasa Özeti loadReport'tan beslenir.
+/* ── Genel helper (modal/header/portföy hepsi kullanır) ── */
+function setH(id, val, color) {
+  var el = document.getElementById(id);
+  if (el) { el.textContent = val; if (color) el.style.color = color; }
+}
+
+/* ── Kullanıcı portföyü (localStorage'da kalıcı) ── */
+const PORT_KEY = 'fa_portfolio';
+function loadPortfolio(){
+  try { const j = localStorage.getItem(PORT_KEY); if (j) return JSON.parse(j); } catch(e){}
+  return [];
+}
+function persistPortfolio(){ try { localStorage.setItem(PORT_KEY, JSON.stringify(PORTFOLIO)); } catch(e){} }
+let PORTFOLIO = loadPortfolio();  // [{sym, qty, buy}]
+
+function addPortfolio(){
+  const sym = document.getElementById('pf-sym').value.trim().toUpperCase();
+  const qty = parseFloat(document.getElementById('pf-qty').value);
+  let buy   = parseFloat(document.getElementById('pf-price').value);
+  if (!sym || !qty || qty <= 0) return;
+  // Alış fiyatı boşsa güncel fiyatı al
+  if ((!buy || buy <= 0) && _rawReport && _rawReport.stocks) {
+    const f = _rawReport.stocks.find(s => s.symbol === sym);
+    if (f) buy = f.price;
+  }
+  if (!buy || buy <= 0) { alert('Alış fiyatı gerekli (rapor verisi yoksa)'); return; }
+  // Aynı sembol varsa ortalama maliyet
+  const existing = PORTFOLIO.find(p => p.sym === sym);
+  if (existing) {
+    const totalQty = existing.qty + qty;
+    existing.buy = (existing.qty * existing.buy + qty * buy) / totalQty;
+    existing.qty = totalQty;
+  } else {
+    PORTFOLIO.push({sym, qty, buy});
+  }
+  persistPortfolio();
+  document.getElementById('pf-sym').value = '';
+  document.getElementById('pf-qty').value = '';
+  document.getElementById('pf-price').value = '';
+  renderPortfolio();
+  if (typeof updatePerfChart === 'function') buildPerfChart(window._perfPts || 30);
+}
+function removePortfolio(i){
+  if (!confirm('Bu hisseyi portföyden çıkarmak istiyor musunuz?')) return;
+  PORTFOLIO.splice(i, 1);
+  persistPortfolio();
+  renderPortfolio();
+  if (typeof buildPerfChart === 'function') buildPerfChart(window._perfPts || 30);
+}
 const TICKER_DATA=[
   {s:'BIST100',p:'9.847',c:'+1,31%',u:true},{s:'XU030',p:'10.122',c:'+1,54%',u:true},
   {s:'S&P500',p:'5.342',c:'+0,82%',u:true},{s:'NASDAQ',p:'16.724',c:'+1,12%',u:true},
@@ -817,41 +872,78 @@ function renderTech(tbodyId,data){
 }
 
 function renderPortfolio(){
-  // Piyasa Özeti listesi: rapordaki en yüksek skorlu 8 hisse
   const list = document.getElementById('port-list');
   if (!list) return;
-  if (!_rawReport || !_rawReport.stocks) {
-    list.innerHTML = '<div style="text-align:center;color:var(--t3);font-size:11px;padding:14px">Veri yükleniyor…</div>';
+
+  // Boş portföy
+  if (!PORTFOLIO.length) {
+    list.innerHTML = '<div style="text-align:center;color:var(--t3);font-size:11.5px;padding:18px 8px;line-height:1.6">Portföyünüz boş.<br><span style="font-size:10px">Aşağıdaki formdan hisse ekleyin (sembol · adet · alış fiyatı).</span></div>';
+    setH('mx-total', '—', 'var(--t1)');
+    setH('mx-avg', '—', 'var(--t1)');
+    setH('mx-pos', '—', 'var(--t3)');
+    setH('mx-neg', '—', 'var(--t3)');
+    var chip = document.getElementById('mx-chip');
+    if (chip) chip.textContent = '0 hisse';
+    buildPortChart([]);
     return;
   }
-  const top = _rawReport.stocks
-    .filter(s => !s.error)
-    .sort((a,b) => (b.score||0) - (a.score||0))
-    .slice(0, 8);
-  const colors = ['#00d4aa','#4a9eff','#9b59b6','#f5a623','#e74c3c','#27ae60','#3498db','#e67e22'];
-  list.innerHTML = top.map((s,i) => {
-    const isBist = s.exchange === 'BIST';
-    const px = isBist
-      ? s.price.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' ₺'
-      : '$' + s.price.toFixed(2);
-    const chg = (s.change_pct>=0?'+':'') + s.change_pct.toFixed(2).replace('.',',') + '%';
-    const up  = s.change_pct >= 0;
-    const shortNm = (s.name || s.symbol).split(' ').slice(0,2).join(' ');
-    return `<div class="port-item" data-sym="${s.symbol}" style="cursor:pointer">
+
+  // Güncel fiyatlarla zenginleştir
+  const stocks = (_rawReport && _rawReport.stocks) || [];
+  const rows = PORTFOLIO.map((p, i) => {
+    const f = stocks.find(s => s.symbol === p.sym);
+    const cur  = f ? f.price : p.buy;
+    const isBist = f ? (f.exchange === 'BIST') : true;
+    const cost = p.qty * p.buy;
+    const value= p.qty * cur;
+    const pnl  = value - cost;
+    const pnlPct = cost > 0 ? (pnl / cost * 100) : 0;
+    return { ...p, cur, isBist, cost, value, pnl, pnlPct, idx:i, nm: f ? (f.name||p.sym).split(' ').slice(0,2).join(' ') : p.sym };
+  });
+  const colors = ['#00d4aa','#4a9eff','#9b59b6','#f5a623','#e74c3c','#27ae60','#3498db','#e67e22','#f472b6','#a78bfa'];
+
+  list.innerHTML = rows.map((r, i) => {
+    const fmt = v => r.isBist
+      ? v.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₺'
+      : '$'+v.toFixed(2);
+    const pctTxt = (r.pnlPct>=0?'+':'') + r.pnlPct.toFixed(2) + '%';
+    const up = r.pnl >= 0;
+    return `<div class="port-item" style="cursor:pointer" data-sym="${r.sym}">
       <div class="pc" style="background:${colors[i % colors.length]}"></div>
-      <div class="pi"><div class="pis">${s.symbol}</div><div class="pin">${shortNm}</div></div>
-      <div class="pw">${s.score || 0}</div>
-      <div class="pnl"><div class="pnlv ${up?'up':'down'}">${chg}</div><div class="pnls">${px}</div></div>
+      <div class="pi"><div class="pis">${r.sym}</div><div class="pin">${r.nm} · ${r.qty} adet</div></div>
+      <div class="pw" style="text-align:right;font-size:10px;color:var(--t3)">${fmt(r.cur)}<br><span style="font-size:9px">alış: ${fmt(r.buy)}</span></div>
+      <div class="pnl"><div class="pnlv ${up?'up':'down'}">${pctTxt}</div><div class="pnls">${(r.pnl>=0?'+':'')+Math.round(r.pnl).toLocaleString('tr-TR')}</div></div>
+      <button class="wi-del" onclick="event.stopPropagation();removePortfolio(${r.idx})" style="margin-left:4px">✕</button>
     </div>`;
   }).join('');
-  // Tıklama → hisse detay modalı
+
+  // Sembol click → modal
   list.querySelectorAll('.port-item').forEach(el => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
+      if (e.target.classList.contains('wi-del')) return;
       const sym = el.getAttribute('data-sym');
       if (sym && typeof openStockModal === 'function') openStockModal(sym);
     });
   });
+
+  // Toplamlar
+  const totalCost  = rows.reduce((a,b) => a + b.cost, 0);
+  const totalValue = rows.reduce((a,b) => a + b.value, 0);
+  const totalPnl   = totalValue - totalCost;
+  const totalPct   = totalCost > 0 ? (totalPnl / totalCost * 100) : 0;
+  const isPos = totalPnl >= 0;
+  // Hisseler farklı borsalardan olabilir, basitlik için TRY ile göster
+  setH('mx-total', Math.round(totalValue).toLocaleString('tr-TR') + ' ₺', 'var(--t1)');
+  setH('mx-avg',   Math.round(totalCost).toLocaleString('tr-TR') + ' ₺', 'var(--t1)');
+  setH('mx-pos',   (isPos?'+':'') + Math.round(totalPnl).toLocaleString('tr-TR') + ' ₺', isPos?'var(--green)':'var(--red)');
+  setH('mx-neg',   (totalPct>=0?'+':'') + totalPct.toFixed(2) + '%', totalPct>=0?'var(--green)':'var(--red)');
+  var chip = document.getElementById('mx-chip');
+  if (chip) chip.textContent = rows.length + ' hisse';
+
+  // Donut: portföy dağılımı
+  buildPortChart(rows.map((r,i) => ({label:r.sym, value:r.value, color:colors[i % colors.length]})));
 }
+
 
 function renderNews(){
   document.getElementById('news-list').innerHTML=NEWS.map((n,i)=>`
@@ -1013,51 +1105,171 @@ function genPerfData(pts,base,drift,vol){
 
 let perfChart;
 function buildPerfChart(pts){
-  const labels=Array.from({length:pts},(_,i)=>{
-    const d=new Date();d.setDate(d.getDate()-(pts-1-i));
-    return pts<=30?`${d.getDate()}/${d.getMonth()+1}`:pts<=90?`${d.getDate()}/${d.getMonth()+1}`:`${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`;
-  });
-  const port=genPerfData(pts,100,.342,.8);
-  const bist=genPerfData(pts,100,.18,.9);
-  const sp  =genPerfData(pts,100,.22,.7);
-  if(perfChart)perfChart.destroy();
-  const ctx=document.getElementById('perfChart').getContext('2d');
-  perfChart=new Chart(ctx,{
-    type:'line',
-    data:{labels,datasets:[
-      {label:'Portföyüm',data:port,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,.05)',borderWidth:2,pointRadius:0,tension:.4,fill:true},
-      {label:'BIST 100', data:bist,borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,.03)',borderWidth:1.5,pointRadius:0,tension:.4,fill:true,borderDash:[4,4]},
-      {label:'S&P500(TRY)',data:sp,borderColor:'#9b59b6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:.4,borderDash:[2,4]},
-    ]},
-    options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(10,14,26,.95)',borderColor:'rgba(30,45,69,.8)',borderWidth:1,callbacks:{label:(c)=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}`}}},scales:{x:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},maxTicksLimit:12}},y:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},callback:v=>v.toFixed(0)}}}},
-  });
-  // Dinamik performans istatistiklerini güncelle
-  const pRet = ((port[port.length-1]-port[0])/port[0]*100).toFixed(1);
-  const bRet = ((bist[bist.length-1]-bist[0])/bist[0]*100).toFixed(1);
-  const sRet = ((sp[sp.length-1]-sp[0])/sp[0]*100).toFixed(1);
-  // Günlük değişimler (getiri dizisinden)
-  const dailyChg = port.slice(1).map((v,i) => v - port[i]);
-  const best  = Math.max(...dailyChg).toFixed(2);
-  const worst = Math.min(...dailyChg).toFixed(2);
-  function setPS(id,val,isUp){
-    const el=document.getElementById(id);
-    if(!el)return;
-    el.textContent=(parseFloat(val)>=0?'+':'')+val+'%';
-    el.className='pstat-val '+(isUp?'up':'down');
+  window._perfPts = pts;
+  const canvas = document.getElementById('perfChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (perfChart) { perfChart.destroy(); perfChart = null; }
+
+  const stocks = (_rawReport && _rawReport.stocks) || [];
+  const hasPortfolio = PORTFOLIO && PORTFOLIO.length > 0;
+
+  // Boş portföy → bilgilendirme mesajı çiz, istatistikleri sıfırla
+  if (!hasPortfolio) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(255,255,255,.4)';
+    ctx.font = '14px Segoe UI, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Portföyünüze hisse ekleyin', canvas.width / 2, 100);
+    ctx.font = '11px Segoe UI, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,.25)';
+    ctx.fillText('Performans grafiği gerçek fiyat geçmişine göre çizilecek', canvas.width / 2, 124);
+    ['ps-ret','ps-bist','ps-sp','ps-best','ps-worst'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = '—'; el.className = 'pstat-val'; el.style.color = 'var(--t3)'; }
+    });
+    return;
   }
-  setPS('ps-ret', pRet, parseFloat(pRet)>=0);
-  setPS('ps-bist',bRet, parseFloat(bRet)>=0);
-  setPS('ps-sp',  sRet, parseFloat(sRet)>=0);
-  const bEl=document.getElementById('ps-best');
-  const wEl=document.getElementById('ps-worst');
-  if(bEl){bEl.textContent='+'+best+'%';bEl.className='pstat-val up';}
-  if(wEl){wEl.textContent=worst+'%';wEl.className='pstat-val down';}
+
+  // Her hisse için price_history al, normalize et
+  const enriched = PORTFOLIO.map(p => {
+    const f = stocks.find(s => s.symbol === p.sym);
+    const hist = (f && f.price_history) ? f.price_history : [];
+    return {...p, hist, cur: f ? f.price : p.buy};
+  }).filter(p => p.hist.length > 0);
+
+  if (!enriched.length) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(255,255,255,.4)';
+    ctx.font = '13px Segoe UI, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Portföydeki hisseler için geçmiş fiyat verisi yok', canvas.width / 2, 100);
+    return;
+  }
+
+  // Tüm price_history dizilerini ortak uzunluğa getir (en kısa olana göre)
+  const minLen = Math.min(pts, ...enriched.map(e => e.hist.length));
+  const N = Math.max(2, minLen);
+
+  // Portföy değer serisi: Σ (qty × close_i) — TRY'de
+  const portValues = [];
+  const labels = [];
+  // BIST hissesi mi USD mi ayrımı: USD ise USD/TRY makro ile çarpılır
+  const usdTry = (_rawReport && _rawReport.macro && _rawReport.macro.usd_try) || 1;
+  for (let i = 0; i < N; i++) {
+    let total = 0;
+    enriched.forEach(e => {
+      const offset = e.hist.length - N + i;
+      const px = e.hist[offset] ? e.hist[offset].c : e.cur;
+      const isBist = e.sym && e.hist[0] && (stocks.find(s => s.symbol===e.sym)||{}).exchange === 'BIST';
+      total += e.qty * px * (isBist ? 1 : usdTry);
+    });
+    portValues.push(total);
+    // Label
+    const ref = enriched[0].hist[enriched[0].hist.length - N + i];
+    let lbl = '';
+    if (ref && ref.t != null) {
+      if (typeof ref.t === 'string') lbl = ref.t.slice(5);
+      else { const d = new Date(ref.t > 1e12 ? ref.t : ref.t * 1000); lbl = (d.getMonth()+1)+'/'+d.getDate(); }
+    }
+    labels.push(lbl);
+  }
+  // 100 normalize
+  const port0 = portValues[0] || 1;
+  const port = portValues.map(v => (v / port0) * 100);
+
+  // BIST 100 baseline: makroda price_history yok, en yüksek değerli BIST hissesini proxy yap
+  // Şimdilik portföyün BIST tarafının kendi geçmişi
+  const bistHist = enriched.filter(e => (stocks.find(s => s.symbol===e.sym)||{}).exchange==='BIST');
+  let bist = null;
+  if (bistHist.length) {
+    const bistValues = [];
+    for (let i = 0; i < N; i++) {
+      let t = 0;
+      bistHist.forEach(e => {
+        const offset = e.hist.length - N + i;
+        const px = e.hist[offset] ? e.hist[offset].c : e.cur;
+        t += e.qty * px;
+      });
+      bistValues.push(t);
+    }
+    const b0 = bistValues[0] || 1;
+    bist = bistValues.map(v => (v / b0) * 100);
+  }
+
+  // ABD tarafı
+  const usHist = enriched.filter(e => (stocks.find(s => s.symbol===e.sym)||{}).exchange!=='BIST');
+  let sp = null;
+  if (usHist.length) {
+    const usValues = [];
+    for (let i = 0; i < N; i++) {
+      let t = 0;
+      usHist.forEach(e => {
+        const offset = e.hist.length - N + i;
+        const px = e.hist[offset] ? e.hist[offset].c : e.cur;
+        t += e.qty * px * usdTry;
+      });
+      usValues.push(t);
+    }
+    const u0 = usValues[0] || 1;
+    sp = usValues.map(v => (v / u0) * 100);
+  }
+
+  const datasets = [{label:'Portföyüm',data:port,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,.08)',borderWidth:2.5,pointRadius:0,tension:.3,fill:true}];
+  if (bist) datasets.push({label:'BIST Bölümü',data:bist,borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,.03)',borderWidth:1.5,pointRadius:0,tension:.3,borderDash:[4,4]});
+  if (sp)   datasets.push({label:'ABD Bölümü',data:sp,borderColor:'#9b59b6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:.3,borderDash:[2,4]});
+
+  perfChart = new Chart(ctx, {
+    type:'line',
+    data: { labels, datasets },
+    options: {
+      responsive:true,
+      maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'rgba(10,14,26,.95)',
+          borderColor:'rgba(30,45,69,.8)',
+          borderWidth:1,
+          callbacks:{ label:(c)=>` ${c.dataset.label}: ${c.parsed.y.toFixed(1)}` }
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},maxTicksLimit:12}},
+        y:{grid:{color:'rgba(30,45,69,.4)'},ticks:{color:'#4a5a70',font:{size:10},callback:v=>v.toFixed(0)}}
+      }
+    }
+  });
+
+  // Stat'lar
+  const pRet = ((port[port.length-1] - port[0]) / port[0] * 100);
+  const bRet = bist ? ((bist[bist.length-1] - bist[0]) / bist[0] * 100) : null;
+  const sRet = sp   ? ((sp[sp.length-1]   - sp[0])   / sp[0]   * 100) : null;
+  const dailyChg = port.slice(1).map((v,i) => ((v - port[i]) / port[i] * 100));
+  const best  = dailyChg.length ? Math.max(...dailyChg) : 0;
+  const worst = dailyChg.length ? Math.min(...dailyChg) : 0;
+
+  function setPS(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (val == null) { el.textContent = '—'; el.className='pstat-val'; el.style.color='var(--t3)'; return; }
+    const isUp = val >= 0;
+    el.textContent = (isUp?'+':'') + val.toFixed(2) + '%';
+    el.className = 'pstat-val ' + (isUp?'up':'down');
+    el.style.color = isUp ? 'var(--green)' : 'var(--red)';
+  }
+  setPS('ps-ret',  pRet);
+  setPS('ps-bist', bRet);
+  setPS('ps-sp',   sRet);
+  setPS('ps-best', best);
+  setPS('ps-worst', worst);
 }
 
-function updatePerfChart(range,btn){
+function updatePerfChart(range, btn){
   btn.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  const pts={'1m':30,'3m':90,'6m':180,'1y':365,'all':730}[range]||30;
+  const pts={'1m':30,'3m':60,'6m':60,'1y':60,'all':60}[range]||30;  // price_history max 60 bar
   buildPerfChart(pts);
 }
 
@@ -1070,17 +1282,43 @@ function buildScoreChart(value){
   new Chart(ctx,{type:'doughnut',data:{datasets:[{data:[value,100-value],backgroundColor:['#00d4aa','#1e2d45'],borderWidth:0,circumference:270,rotation:225}]},options:{responsive:false,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}}}});
 }
 
-function buildPortChart(counts){
+function buildPortChart(items){
   const canvas=document.getElementById('portChart');
   if(!canvas) return;
   const existing=Chart.getChart(canvas);
   if(existing) existing.destroy();
-  const c = counts || {strong_buy:0,buy:0,hold:1,sell:0,strong_sell:0};
-  const labels=['Güçlü Al','Al','Tut','Sat','Güçlü Sat'];
-  const data=[c.strong_buy||0, c.buy||0, c.hold||0, c.sell||0, c.strong_sell||0];
-  const colors=['#00d4aa','#00b38f','#f5a623','#ff7832','#ff4d6d'];
   const ctx=canvas.getContext('2d');
-  new Chart(ctx,{type:'doughnut',data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderColor:'#07090f',borderWidth:2,hoverOffset:5}]},options:{responsive:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c2=>` ${c2.label}: ${c2.parsed} hisse`}}}}});
+  // Boş portföy → ortada "+ Hisse Ekle" yazısı
+  if (!items || !items.length) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    new Chart(ctx,{type:'doughnut',data:{labels:['Boş'],datasets:[{data:[1],backgroundColor:['#1e2d45'],borderColor:'#07090f',borderWidth:2}]},options:{responsive:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{enabled:false}}}});
+    return;
+  }
+  new Chart(ctx,{
+    type:'doughnut',
+    data:{
+      labels: items.map(i=>i.label),
+      datasets:[{
+        data: items.map(i=>i.value),
+        backgroundColor: items.map(i=>i.color),
+        borderColor:'#07090f',
+        borderWidth:2,
+        hoverOffset:5
+      }]
+    },
+    options:{
+      responsive:false,
+      cutout:'62%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label: c => ' ' + c.label + ': ' + Math.round(c.parsed).toLocaleString('tr-TR') + ' ₺'
+          }
+        }
+      }
+    }
+  });
 }
 
 
@@ -1115,8 +1353,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderAlarms();
   updateScen();
   buildScoreChart();
-  buildPortChart();
-  buildPerfChart(30);
+  buildPortChart([]);  // boş başlat
+  buildPerfChart(30);  // veri gelmeden de "portföy boş" mesajı çizer
 
   // Gerçek veriyi yükle
   loadReport();
@@ -1329,10 +1567,6 @@ async function loadReport() {
       var k = s.verdict_key || 'hold';
       if (counts[k] != null) counts[k]++;
     });
-    var setH = function(id, val, color) {
-      var el = document.getElementById(id);
-      if (el) { el.textContent = val; if (color) el.style.color = color; }
-    };
     setH('hs-score', avg + ' / 100', avg >= 65 ? 'var(--green)' : avg >= 50 ? 'var(--yellow)' : 'var(--red)');
     setH('hs-total', rawStocks.length);
     setH('hs-sb',    counts.strong_buy);
@@ -1342,20 +1576,10 @@ async function loadReport() {
     var ts = report.generated_at ? new Date(report.generated_at) : new Date();
     setH('hs-time', ts.toLocaleDateString('tr-TR', {day:'2-digit', month:'2-digit'}) + ' ' + ts.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'}));
 
-    /* ── Piyasa Özeti kartı (mx-*) ── */
-    var bistCount = rawStocks.filter(function(s){return s.exchange==='BIST';}).length;
-    var usCount   = rawStocks.length - bistCount;
-    var pos = counts.strong_buy + counts.buy;
-    var neg = counts.sell + counts.strong_sell;
-    setH('mx-total',     rawStocks.length);
-    setH('mx-total-sub', bistCount + ' BIST · ' + usCount + ' ABD');
-    setH('mx-avg',       avg, avg >= 65 ? 'var(--green)' : avg >= 50 ? 'var(--yellow)' : 'var(--red)');
-    setH('mx-pos',       pos);
-    setH('mx-pos-sub',   counts.strong_buy + ' Güçlü Al · ' + counts.buy + ' Al');
-    setH('mx-neg',       neg);
-    setH('mx-neg-sub',   counts.sell + ' Sat · ' + counts.strong_sell + ' Güçlü Sat');
-    buildPortChart(counts);
+    /* ── Kullanıcı portföyünü güncel fiyatlarla yeniden çiz ── */
     renderPortfolio();
+    /* ── Portföy performans grafiğini gerçek price_history ile çiz ── */
+    if (typeof buildPerfChart === 'function') buildPerfChart(window._perfPts || 30);
 
     /* ── Piyasa İstatistikleri satırı (rs-*) ── */
     function shortNm(s){ return (s.name||s.symbol).split(' ').slice(0,2).join(' '); }
@@ -1542,34 +1766,84 @@ function openStockModal(sym) {
     '<div class="sm-ind"><div class="sm-ind-lbl">Bollinger</div><div class="sm-ind-val ' + indClass(bol) + '">' + (bol || '—') + '</div></div>' +
     '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(ma) + '">' + (ma || '—') + '</div></div>';
 
-  // Boyut skorları
+  // Boyut skorları (yeni format: dimensions[k] = {score, metrics})
   var dims = s.dimensions || {};
   var dimLabels = {valuation:'Değerleme',profit:'Kârlılık',growth:'Büyüme',health:'Finansal Sağlık',technical:'Teknik',analyst:'Analist'};
   var dimColors = {valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
+  var metricFmt = {
+    pe:           function(v){ return 'F/K: '   + v.toFixed(1); },
+    pb:           function(v){ return 'F/DD: '  + v.toFixed(1); },
+    ps:           function(v){ return 'F/S: '   + v.toFixed(1); },
+    roe:          function(v){ return 'ROE: %'  + v.toFixed(1); },
+    roa:          function(v){ return 'ROA: %'  + v.toFixed(1); },
+    netMargin:    function(v){ return 'Net Marj: %' + v.toFixed(1); },
+    grossMargin:  function(v){ return 'Brüt Marj: %' + v.toFixed(1); },
+    rev_growth:   function(v){ return 'Satış Büy.: %' + v.toFixed(1); },
+    eps_growth:   function(v){ return 'EPS Büy.: %' + v.toFixed(1); },
+    rev_5y:       function(v){ return '5Y Satış: %' + v.toFixed(1); },
+    current_ratio:function(v){ return 'Cari: '  + v.toFixed(2); },
+    quick_ratio:  function(v){ return 'Asit-Test: ' + v.toFixed(2); },
+    debt_equity:  function(v){ return 'Borç/Öz: ' + v.toFixed(2); },
+    ret52:        function(v){ return '52H: %'  + v.toFixed(1); },
+    ret13:        function(v){ return '13H: %'  + v.toFixed(1); },
+    range_pos:    function(v){ return 'Bant Pos.: %' + v.toFixed(0); }
+  };
   var dimHtml = '';
   Object.keys(dimLabels).forEach(function(key) {
-    var val = dims[key] != null ? Math.round(dims[key]) : null;
+    var d = dims[key];
+    if (!d) return;
+    // Eski format (sayı) ve yeni format (obje) ikisini de destekle
+    var val = typeof d === 'number' ? d : (d && typeof d === 'object' ? d.score : null);
     if (val == null) return;
+    val = Math.round(val);
     var color = dimColors[key] || 'var(--green)';
+    var metricsText = '';
+    if (d && d.metrics) {
+      var bits = [];
+      Object.keys(d.metrics).forEach(function(mk){
+        var mv = d.metrics[mk];
+        if (mv == null) return;
+        if (metricFmt[mk]) bits.push(metricFmt[mk](mv));
+        else bits.push(mk + ': ' + (typeof mv === 'number' ? mv.toFixed(2) : mv));
+      });
+      if (bits.length) metricsText = ' · <span style="color:var(--t3);font-size:10px">' + bits.join(' · ') + '</span>';
+    }
     dimHtml += '<div class="sm-dim-row">' +
       '<div class="sm-dim-label">' + dimLabels[key] + '</div>' +
       '<div class="sm-dim-bar-bg"><div class="sm-dim-bar-fill" style="width:' + Math.min(100,val) + '%;background:' + color + '"></div></div>' +
       '<div class="sm-dim-val">' + val + '</div>' +
-      '</div>';
+      '</div>' +
+      (metricsText ? '<div style="margin:-4px 0 4px 90px">' + metricsText + '</div>' : '');
   });
   var dimsSection = document.getElementById('sm-dims-section');
   document.getElementById('sm-dims').innerHTML = dimHtml || '<span style="color:var(--t3);font-size:12px">Veri yok</span>';
   dimsSection.style.display = dimHtml ? '' : 'none';
 
-  // Artı / Eksi
-  var pros = s.pros || [];
-  var cons = s.cons || [];
+  // Artı / Eksi — rapor boşsa boyut skorlarından otomatik üret
+  var pros = (s.pros || []).slice();
+  var cons = (s.cons || []).slice();
+  if (!pros.length && !cons.length && dims) {
+    Object.keys(dimLabels).forEach(function(key) {
+      var d = dims[key];
+      if (!d) return;
+      var sc = typeof d === 'number' ? d : (d && typeof d === 'object' ? d.score : null);
+      if (sc == null) return;
+      if (sc >= 70) pros.push(dimLabels[key] + ' güçlü (' + Math.round(sc) + '/100)');
+      else if (sc <= 35) cons.push(dimLabels[key] + ' zayıf (' + Math.round(sc) + '/100)');
+    });
+    if (rsi >= 70) cons.push('RSI aşırı alım bölgesinde (' + rsi.toFixed(0) + ')');
+    if (rsi > 0 && rsi <= 30) pros.push('RSI aşırı satım bölgesinde (alım fırsatı)');
+    if (mr && mr.sig === 'Buy') pros.push('MACD alım sinyali veriyor');
+    if (mr && mr.sig === 'Sell') cons.push('MACD satım sinyali veriyor');
+    if (s.change_pct >= 5) pros.push('Günlük güçlü artış: +' + s.change_pct.toFixed(2) + '%');
+    if (s.change_pct <= -5) cons.push('Günlük sert düşüş: ' + s.change_pct.toFixed(2) + '%');
+  }
   document.getElementById('sm-pros').innerHTML = pros.length
     ? pros.map(function(p){ return '<li>' + p + '</li>'; }).join('')
-    : '<li style="color:var(--t3)">Veri yok</li>';
+    : '<li style="color:var(--t3)">Bu hisse için belirgin güçlü yön tespit edilmedi.</li>';
   document.getElementById('sm-cons').innerHTML = cons.length
     ? cons.map(function(p){ return '<li>' + p + '</li>'; }).join('')
-    : '<li style="color:var(--t3)">Veri yok</li>';
+    : '<li style="color:var(--t3)">Bu hisse için belirgin risk tespit edilmedi.</li>';
 
   // Fiyat grafiği
   buildModalChart(s);
