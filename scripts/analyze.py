@@ -46,23 +46,56 @@ BIST_STOCKS = [
 
 
 def run() -> dict:
-    key          = os.environ["FINNHUB_KEY"]
+    key          = os.environ.get("FINNHUB_KEY", "")
     exchange_key = os.environ.get("EXCHANGE_API_KEY", "")
+    has_finnhub  = bool(key)
 
     print("Fetching macro data...")
-    macro = fetch_macro(key, exchange_key)
+    try:
+        macro = fetch_macro(key, exchange_key) if has_finnhub else {}
+    except Exception as e:
+        print(f"  ! macro fetch failed: {e}")
+        macro = {}
 
-    print("Analyzing US stocks...")
+    # Eski raporu yükle: Finnhub yoksa ABD verisini ve eski macro alanlarını korumak için
+    old_report = {}
+    old_path = Path("data/report.json")
+    if old_path.exists():
+        try:
+            old_report = json.loads(old_path.read_text())
+        except Exception:
+            old_report = {}
+
+    # Macro eksik alanları eski raporundan tamamla
+    old_macro = old_report.get("macro", {}) or {}
+    for k, v in old_macro.items():
+        if not macro.get(k) and v is not None:
+            macro[k] = v
+
     stocks = []
-    for sym in US_STOCKS:
-        print(f"  {sym}")
-        stocks.append(fetch_us_stock(sym, key))
-        time.sleep(1)
+
+    if has_finnhub:
+        print("Analyzing US stocks...")
+        for sym in US_STOCKS:
+            print(f"  {sym}")
+            try:
+                stocks.append(fetch_us_stock(sym, key))
+            except Exception as e:
+                stocks.append({"symbol": sym, "error": str(e)})
+            time.sleep(1)
+    else:
+        print("FINNHUB_KEY yok — ABD verisi eski rapordan korunuyor.")
+        for s in old_report.get("stocks", []):
+            if s.get("exchange") and s["exchange"] != "BIST":
+                stocks.append(s)
 
     print("Analyzing BIST stocks...")
     for sym in BIST_STOCKS:
         print(f"  {sym}")
-        stocks.append(fetch_bist_stock(sym))
+        try:
+            stocks.append(fetch_bist_stock(sym))
+        except Exception as e:
+            stocks.append({"symbol": sym, "error": str(e)})
         time.sleep(0.5)  # yfinance 429 önlemi
 
     valid  = [s for s in stocks if "error" not in s and s.get("score") is not None]

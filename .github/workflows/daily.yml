@@ -3,7 +3,18 @@ name: Daily Analysis & Notify
 on:
   schedule:
     - cron: "0 6 * * *"   # 09:00 TR (UTC+3 = UTC 06:00)
-  workflow_dispatch:        # Manual trigger (updated)
+    - cron: "0 13 * * *"  # 16:00 TR — kapanış sonrası ikinci güncelleme
+  workflow_dispatch:        # Manuel tetikleme
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'data/report.json'  # raporun kendisi commit edilince tetikleme (sonsuz döngü)
+      - '**.md'
+      - 'docs/**'
+
+concurrency:
+  group: daily-analysis
+  cancel-in-progress: false
 
 permissions:
   contents: write
