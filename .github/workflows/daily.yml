@@ -29,6 +29,7 @@ jobs:
         run: python -m scripts.analyze
 
       - name: Send notifications
+        continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -36,11 +37,14 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
           python -c "
-          import json
-          from scripts.notify import notify_morning
-          with open('data/report.json') as f:
-              report = json.load(f)
-          notify_morning(report)
+          import json, os
+          if not (os.environ.get('TELEGRAM_BOT_TOKEN') or os.environ.get('GMAIL_ADDRESS')):
+              print('Notification secrets not set, skipping.')
+          else:
+              from scripts.notify import notify_morning
+              with open('data/report.json') as f:
+                  report = json.load(f)
+              notify_morning(report)
           "
 
       - name: Commit report.json
