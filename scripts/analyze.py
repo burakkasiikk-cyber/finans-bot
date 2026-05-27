@@ -52,7 +52,9 @@ def run() -> dict:
 
     print("Fetching macro data...")
     try:
-        macro = fetch_macro(key, exchange_key) if has_finnhub else {}
+        # Her durumda fetch_macro çağır: yfinance ile altın + BIST100 değişimini alır,
+        # Finnhub key varsa döviz/S&P500/altın da Finnhub'dan gelir.
+        macro = fetch_macro(key, exchange_key)
     except Exception as e:
         print(f"  ! macro fetch failed: {e}")
         macro = {}

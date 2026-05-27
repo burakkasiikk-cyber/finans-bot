@@ -49,13 +49,30 @@ def fetch_macro(finnhub_key: str, exchange_key: str) -> dict:
     except Exception:
         pass
 
-    # BIST 100 — yfinance
+    # BIST 100 — yfinance (fiyat + günlük değişim)
     try:
         import yfinance as yf
         xu = yf.Ticker("XU100.IS")
-        info = xu.fast_info
-        result["bist100"] = round(float(info.last_price), 2) if info.last_price else None
+        xu_info = xu.info
+        last = xu_info.get("regularMarketPrice") or xu_info.get("currentPrice")
+        if last is None:
+            last = xu.fast_info.last_price
+        result["bist100"] = round(float(last), 2) if last else None
+        chg_pct = xu_info.get("regularMarketChangePercent")
+        if chg_pct is not None:
+            result["bist100_change_pct"] = round(float(chg_pct), 4)
     except Exception:
         pass
+
+    # Altın — yfinance fallback (GC=F vadeli)
+    if not result.get("gold_usd"):
+        try:
+            import yfinance as yf
+            gold = yf.Ticker("GC=F")
+            gold_price = gold.fast_info.last_price
+            if gold_price:
+                result["gold_usd"] = round(float(gold_price), 2)
+        except Exception:
+            pass
 
     return result
