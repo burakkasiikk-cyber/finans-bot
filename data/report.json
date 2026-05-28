@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-28T17:54:53.904029+00:00",
+  "generated_at": "2026-05-28T21:05:07.596200+00:00",
   "macro": {
     "usd_try": 45.8961,
     "eur_try": 53.3862,
-    "gold_usd": 4535.1,
-    "sp500": 754.78,
-    "sp500_change_pct": 0.5756,
+    "gold_usd": 4526.8,
+    "sp500": 754.6,
+    "sp500_change_pct": 0.5517,
     "bist100": 13662.75,
     "bist100_change_pct": -1.6425,
     "tr_interest_rate": 46.0
@@ -6008,8 +6008,8 @@
       "symbol": "GOOGL",
       "name": "Alphabet Inc",
       "exchange": "NASDAQ",
-      "price": 390.45,
-      "change_pct": 0.4166,
+      "price": 390.13,
+      "change_pct": 0.3343,
       "score": 81,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -6053,7 +6053,7 @@
           "metrics": {
             "ret52": 124.8872,
             "ret13": 25.0659,
-            "range_pos": 92.6
+            "range_pos": 92.5
           }
         },
         "analyst": {
@@ -7461,8 +7461,8 @@
       "symbol": "NVDA",
       "name": "NVIDIA Corp",
       "exchange": "NASDAQ",
-      "price": 215.17,
-      "change_pct": 1.2088,
+      "price": 214.25,
+      "change_pct": 0.7761,
       "score": 79,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -7471,9 +7471,9 @@
         "valuation": {
           "score": 30,
           "metrics": {
-            "pe": 32.1215,
+            "pe": 32.2962,
             "pb": 28.8075,
-            "ps": 20.2256
+            "ps": 20.3356
           }
         },
         "profit": {
@@ -7506,7 +7506,7 @@
           "metrics": {
             "ret52": 56.9004,
             "ret13": 10.2411,
-            "range_pos": 79.4
+            "range_pos": 78.5
           }
         },
         "analyst": {
@@ -8453,8 +8453,8 @@
       "symbol": "META",
       "name": "Meta Platforms Inc",
       "exchange": "NASDAQ",
-      "price": 632.19,
-      "change_pct": -0.4825,
+      "price": 635.29,
+      "change_pct": 0.0055,
       "score": 78,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -8498,7 +8498,7 @@
           "metrics": {
             "ret52": -1.0999,
             "ret13": -0.6327,
-            "range_pos": 40.6
+            "range_pos": 41.7
           }
         },
         "analyst": {
@@ -8521,8 +8521,8 @@
       "symbol": "AMZN",
       "name": "Amazon.com Inc",
       "exchange": "NASDAQ",
-      "price": 272.32,
-      "change_pct": 0.1729,
+      "price": 274,
+      "change_pct": 0.7909,
       "score": 77,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -8566,7 +8566,7 @@
           "metrics": {
             "ret52": 31.9532,
             "ret13": 30.3462,
-            "range_pos": 92.4
+            "range_pos": 94.5
           }
         },
         "analyst": {
@@ -10905,81 +10905,11 @@
       ]
     },
     {
-      "symbol": "MSFT",
-      "name": "Microsoft Corp",
-      "exchange": "NASDAQ",
-      "price": 427.41,
-      "change_pct": 3.5719,
-      "score": 73,
-      "verdict": "AL",
-      "verdict_key": "buy",
-      "risk": "low",
-      "dimensions": {
-        "valuation": {
-          "score": 49,
-          "metrics": {
-            "pe": 24.4178,
-            "pb": 10.7635,
-            "ps": 9.6065
-          }
-        },
-        "profit": {
-          "score": 92,
-          "metrics": {
-            "roe": 33.129999999999995,
-            "roa": 19.15,
-            "net_margin": 39.34,
-            "gross_margin": 68.31
-          }
-        },
-        "growth": {
-          "score": 80,
-          "metrics": {
-            "rev_growth": 17.87,
-            "eps_growth": 29.75,
-            "rev_5y": 14.52
-          }
-        },
-        "health": {
-          "score": 74,
-          "metrics": {
-            "current_ratio": 1.3534,
-            "debt_equity": 0.2601,
-            "quick_ratio": 1.3468
-          }
-        },
-        "technical": {
-          "score": 56,
-          "metrics": {
-            "ret52": -10.4235,
-            "ret13": 6.0848,
-            "range_pos": 35.7
-          }
-        },
-        "analyst": {
-          "score": 92,
-          "metrics": {
-            "buy": 36,
-            "hold": 6,
-            "sell": 0
-          }
-        }
-      },
-      "pros": [
-        "Kârlılık skoru güçlü (92/100)",
-        "Analist Görüşü skoru güçlü (92/100)"
-      ],
-      "cons": [
-        "Değerleme skoru zayıf (49/100)"
-      ],
-      "dividends": []
-    },
-    {
       "symbol": "AMD",
       "name": "Advanced Micro Devices Inc",
       "exchange": "NASDAQ",
-      "price": 519.61,
-      "change_pct": 4.8573,
+      "price": 518.09,
+      "change_pct": 4.5506,
       "score": 73,
       "verdict": "AL",
       "verdict_key": "buy",
@@ -11023,7 +10953,7 @@
           "metrics": {
             "ret52": 332.5594,
             "ret13": 131.734,
-            "range_pos": 102.3
+            "range_pos": 102.0
           }
         },
         "analyst": {
@@ -12426,6 +12356,76 @@
           "c": 45.8
         }
       ]
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corp",
+      "exchange": "NASDAQ",
+      "price": 426.99,
+      "change_pct": 3.4701,
+      "score": 72,
+      "verdict": "AL",
+      "verdict_key": "buy",
+      "risk": "low",
+      "dimensions": {
+        "valuation": {
+          "score": 43,
+          "metrics": {
+            "pe": 25.315,
+            "pb": 10.7635,
+            "ps": 9.9595
+          }
+        },
+        "profit": {
+          "score": 92,
+          "metrics": {
+            "roe": 33.129999999999995,
+            "roa": 19.15,
+            "net_margin": 39.34,
+            "gross_margin": 68.31
+          }
+        },
+        "growth": {
+          "score": 80,
+          "metrics": {
+            "rev_growth": 17.87,
+            "eps_growth": 29.75,
+            "rev_5y": 14.52
+          }
+        },
+        "health": {
+          "score": 74,
+          "metrics": {
+            "current_ratio": 1.3534,
+            "debt_equity": 0.2601,
+            "quick_ratio": 1.3468
+          }
+        },
+        "technical": {
+          "score": 56,
+          "metrics": {
+            "ret52": -10.4235,
+            "ret13": 6.0848,
+            "range_pos": 35.5
+          }
+        },
+        "analyst": {
+          "score": 92,
+          "metrics": {
+            "buy": 36,
+            "hold": 6,
+            "sell": 0
+          }
+        }
+      },
+      "pros": [
+        "Kârlılık skoru güçlü (92/100)",
+        "Analist Görüşü skoru güçlü (92/100)"
+      ],
+      "cons": [
+        "Değerleme skoru zayıf (43/100)"
+      ],
+      "dividends": []
     },
     {
       "symbol": "BRSAN",
@@ -16580,8 +16580,8 @@
       "symbol": "AAPL",
       "name": "Apple Inc",
       "exchange": "NASDAQ",
-      "price": 310.19,
-      "change_pct": -0.2123,
+      "price": 312.51,
+      "change_pct": 0.534,
       "score": 69,
       "verdict": "AL",
       "verdict_key": "buy",
@@ -16625,7 +16625,7 @@
           "metrics": {
             "ret52": 55.262,
             "ret13": 14.2243,
-            "range_pos": 97.4
+            "range_pos": 99.4
           }
         },
         "analyst": {
@@ -28637,8 +28637,8 @@
       "symbol": "TSLA",
       "name": "Tesla Inc",
       "exchange": "NASDAQ",
-      "price": 442.19,
-      "change_pct": 0.4156,
+      "price": 442.1,
+      "change_pct": 0.3951,
       "score": 56,
       "verdict": "TUT / NÖTR",
       "verdict_key": "hold",
