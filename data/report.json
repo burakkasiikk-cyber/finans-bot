@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-31T11:53:54.272471+00:00",
+  "generated_at": "2026-05-31T16:47:03.537747+00:00",
   "macro": {
     "usd_try": 45.887,
     "eur_try": 53.4938,
     "gold_usd": 4593.0,
-    "sp500": 756.48,
-    "sp500_change_pct": 0.2491,
+    "sp500": 756.5,
+    "sp500_change_pct": 0.2518,
     "bist100": 13662.75,
     "bist100_change_pct": -1.6425,
     "tr_interest_rate": 46.0
@@ -6190,8 +6190,8 @@
       "symbol": "GOOGL",
       "name": "Alphabet Inc",
       "exchange": "NASDAQ",
-      "price": 380.34,
-      "change_pct": -2.5094,
+      "price": 380.36,
+      "change_pct": -2.5043,
       "score": 81,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -7210,8 +7210,8 @@
       "symbol": "NVDA",
       "name": "NVIDIA Corp",
       "exchange": "NASDAQ",
-      "price": 211.14,
-      "change_pct": -1.4516,
+      "price": 211.16,
+      "change_pct": -1.4422,
       "score": 79,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -8230,8 +8230,8 @@
       "symbol": "META",
       "name": "Meta Platforms Inc",
       "exchange": "NASDAQ",
-      "price": 632.51,
-      "change_pct": -0.4376,
+      "price": 632.53,
+      "change_pct": -0.4344,
       "score": 78,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -8298,8 +8298,8 @@
       "symbol": "AMZN",
       "name": "Amazon.com Inc",
       "exchange": "NASDAQ",
-      "price": 270.64,
-      "change_pct": -1.2263,
+      "price": 270.66,
+      "change_pct": -1.219,
       "score": 77,
       "verdict": "GÜÇLÜ AL",
       "verdict_key": "strong_buy",
@@ -10741,8 +10741,8 @@
       "symbol": "AMD",
       "name": "Advanced Micro Devices Inc",
       "exchange": "NASDAQ",
-      "price": 516.1,
-      "change_pct": -0.3841,
+      "price": 516.12,
+      "change_pct": -0.3802,
       "score": 73,
       "verdict": "AL",
       "verdict_key": "buy",
@@ -10786,7 +10786,7 @@
           "metrics": {
             "ret52": 356.6044,
             "ret13": 153.3877,
-            "range_pos": 97.3
+            "range_pos": 97.4
           }
         },
         "analyst": {
@@ -11761,8 +11761,8 @@
       "symbol": "MSFT",
       "name": "Microsoft Corp",
       "exchange": "NASDAQ",
-      "price": 450.24,
-      "change_pct": 5.4451,
+      "price": 450.26,
+      "change_pct": 5.4498,
       "score": 72,
       "verdict": "AL",
       "verdict_key": "buy",
@@ -16106,8 +16106,8 @@
       "symbol": "AAPL",
       "name": "Apple Inc",
       "exchange": "NASDAQ",
-      "price": 312.06,
-      "change_pct": -0.144,
+      "price": 312.08,
+      "change_pct": -0.1376,
       "score": 69,
       "verdict": "AL",
       "verdict_key": "buy",
@@ -16151,7 +16151,7 @@
           "metrics": {
             "ret52": 56.069,
             "ret13": 14.3286,
-            "range_pos": 97.5
+            "range_pos": 97.6
           }
         },
         "analyst": {
@@ -29002,8 +29002,8 @@
       "symbol": "TSLA",
       "name": "Tesla Inc",
       "exchange": "NASDAQ",
-      "price": 435.79,
-      "change_pct": -1.4273,
+      "price": 435.81,
+      "change_pct": -1.4228,
       "score": 56,
       "verdict": "TUT / NÖTR",
       "verdict_key": "hold",
