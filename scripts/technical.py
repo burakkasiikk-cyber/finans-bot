@@ -364,40 +364,44 @@ def simple_signal(closes: List[float], bars: list, score: Optional[int]) -> dict
     boll = boll_label(bollinger_pos(closes))
     macd_sig = m["sig"] if m else "—"
 
-    trend_up = ma in ("Yükseliş", "Golden Cross") and macd_sig == "AL"
-    trend_dn = ma in ("Düşüş", "Death Cross") or macd_sig == "SAT"
     overbought = (r is not None and r >= 75) or (st and st["k"] >= 85) or boll == "Üst Band"
     oversold = (r is not None and 0 < r <= 30) or (st and st["k"] <= 15) or boll == "Alt Band"
+    death_cross = ma == "Death Cross"
 
-    if trend_up and not overbought:
-        action = "AL"
-        key = "strong_buy" if (score or 0) >= 75 else "buy"
-        head = "🟢 AL BÖLGESİ"
-        detail = "Trend yukarı ve momentum sağlıklı. Alım için uygun görünüyor."
-    elif trend_up and overbought:
-        action = "KÂR-AL"
-        key = "hold"
-        head = "🟡 KÂR-AL / TEMKİNLİ"
-        detail = ("Trend yukarı ama hisse aşırı alımda — kısa vadeli düzeltme gelebilir. "
-                  "Yeni alımda acele etme, elindekinde kâr almayı düşünebilirsin.")
-    elif oversold and not trend_dn:
-        action = "İZLE"
-        key = "hold"
-        head = "🟡 DİP İZLE"
-        detail = ("Hisse aşırı satımda; tepki yükselişi olabilir. "
-                  "Trend yukarı dönmeden alım riskli — teyit bekle.")
-    elif trend_dn:
-        action = "SAT"
-        key = "strong_sell" if (score or 100) < 32 else "sell"
-        head = "🔴 SAT / UZAK DUR"
-        detail = "Trend aşağı döndü. Yeni alım için uygun değil; elindekini gözden geçir."
+    # ANA KARAR doğrudan SKORDAN gelir → en yüksek skorlu hisse her zaman en olumlu
+    # etiketi alır (rozet = sinyal = skor, hepsi tutarlı). Aşırı alım/satım gibi
+    # nüanslar yalnızca açıklama metnine eklenir, kararı değiştirmez.
+    s = score if score is not None else 50
+    if s >= 75:
+        action, key, head = "AL", "strong_buy", "🟢 GÜÇLÜ AL"
+        base = "Teknik tablo güçlü — alım için en olumlu grup."
+    elif s >= 60:
+        action, key, head = "AL", "buy", "🟢 AL"
+        base = "Teknik görünüm olumlu."
+    elif s >= 45:
+        action, key, head = "BEKLE", "hold", "🟡 TUT / NÖTR"
+        base = "Kararsız bölge — net bir sinyal yok, kenarda kalmak mantıklı."
+    elif s >= 32:
+        action, key, head = "SAT", "sell", "🔴 SAT"
+        base = "Teknik görünüm zayıf — alım için uygun değil."
     else:
-        action = "BEKLE"
-        key = "hold"
-        head = "⚪ BEKLE"
-        detail = "Net bir sinyal yok. Kenarda kalıp daha belirgin bir kurulum beklemek mantıklı."
+        action, key, head = "SAT", "strong_sell", "🔴 GÜÇLÜ SAT"
+        base = "Teknik tablo çok zayıf."
 
-    return {"action": action, "key": key, "headline": head, "detail": detail}
+    notes = []
+    if overbought and key in ("strong_buy", "buy"):
+        notes.append("Ancak hisse AŞIRI ALIMDA — şu an tepe bölgesinde; geri çekilmede "
+                     "(destek yakınında) girmek daha mantıklı, elindekinde kâr-al düşünülebilir.")
+    if oversold and key in ("sell", "strong_sell"):
+        notes.append("Hisse aşırı satımda — kısa vadeli tepki yükselişi gelebilir.")
+    if death_cross and key in ("strong_buy", "buy"):
+        notes.append("Dikkat: hareketli ortalamalar düşüş kesişiminde (Death Cross).")
+    detail = base + (" " + " ".join(notes) if notes else "")
+
+    LABELS = {"strong_buy": "GÜÇLÜ AL", "buy": "AL", "hold": "TUT / NÖTR",
+              "sell": "SAT", "strong_sell": "GÜÇLÜ SAT"}
+    return {"action": action, "key": key, "headline": head, "detail": detail,
+            "verdict": LABELS[key]}
 
 
 def verdict_of(score: Optional[int]) -> tuple:
@@ -469,14 +473,13 @@ def score_from_history(price_history: list) -> Optional[dict]:
             total_w += w
     overall = round(weighted / total_w) if total_w else None
 
-    # Rozet (verdict) artık basit sinyalle AYNI kaynaktan gelir → çelişmez
+    # Rozet (verdict) basit sinyalle AYNI kaynaktan gelir → çelişmez.
+    # NOT: haber düzeltmesi varsa rescore_report nihai skora göre yeniden hesaplar.
     sig = simple_signal(closes, bars, overall)
-    LABELS = {"strong_buy": "GÜÇLÜ AL", "buy": "AL", "hold": "TUT / NÖTR",
-              "sell": "SAT", "strong_sell": "GÜÇLÜ SAT"}
 
     return {
         "score": overall,
-        "verdict": LABELS.get(sig["key"], "TUT / NÖTR"),
+        "verdict": sig["verdict"],
         "verdict_key": sig["key"],
         "risk": _risk_from_vol(vol_pct),
         "dimensions": dims,
@@ -500,8 +503,16 @@ def rescore_report(report: dict) -> int:
             base = res["score"]
             adj = (s.get("news") or {}).get("adjustment", 0) or 0
             if base is not None and adj:
-                res["score"] = max(0, min(100, base + adj))
+                final = max(0, min(100, base + adj))
+                res["score"] = final
                 res["score_base"] = base   # haber öncesi teknik skor (şeffaflık)
+                # Rozet/sinyali NİHAİ skora göre yeniden hesapla (band değişmiş olabilir)
+                bars = [b for b in s.get("price_history", []) if b.get("c")]
+                closes = [b["c"] for b in bars]
+                sig = simple_signal(closes, bars, final)
+                res["signal"] = sig
+                res["verdict"] = sig["verdict"]
+                res["verdict_key"] = sig["key"]
             s.update(res)
             s["pros"] = []
             s["cons"] = []
