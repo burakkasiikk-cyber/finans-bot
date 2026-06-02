@@ -1434,7 +1434,8 @@ function processStock(s) {
   var rec = recMap[s.verdict_key] || 'b-h';
   var rl  = rlMap[s.verdict_key]  || 'Tut';
   var rn  = {low:1,medium:3,high:5}[s.risk] || 3;
-  var mult = {strong_buy:1.20,buy:1.12,hold:1.05,sell:0.90,strong_sell:0.80}[s.verdict_key] || 1.0;
+  // Kısa vadeli (trader) hedef çarpanları — uzun vadeli %20 yerine dar bantlar
+  var mult = {strong_buy:1.06,buy:1.03,hold:1.00,sell:0.97,strong_sell:0.94}[s.verdict_key] || 1.0;
   var tgt  = Math.round(s.price * mult * 100)/100;
   var tgtU = s.verdict_key==='strong_buy'||s.verdict_key==='buy';
   var fmt  = function(p){return p.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2});};
@@ -1768,9 +1769,19 @@ function openStockModal(sym) {
 
   // Boyut skorları (yeni format: dimensions[k] = {score, metrics})
   var dims = s.dimensions || {};
-  var dimLabels = {valuation:'Değerleme',profit:'Kârlılık',growth:'Büyüme',health:'Finansal Sağlık',technical:'Teknik',analyst:'Analist'};
-  var dimColors = {valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
+  // TRADER MODU boyutları (eski temel-veri boyutları da geriye dönük desteklenir)
+  var dimLabels = {trend:'Trend',momentum:'Momentum',volatility:'Volatilite / Bant',
+                   valuation:'Değerleme',profit:'Kârlılık',growth:'Büyüme',health:'Finansal Sağlık',technical:'Teknik',analyst:'Analist'};
+  var dimColors = {trend:'#4a9eff',momentum:'#00d4aa',volatility:'#f5a623',
+                   valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
   var metricFmt = {
+    rsi:          function(v){ return 'RSI: '   + v.toFixed(0); },
+    ret_1w:       function(v){ return '1H: %'   + v.toFixed(1); },
+    ret_1m:       function(v){ return '1A: %'   + v.toFixed(1); },
+    ma:           function(v){ return 'MA: '    + v; },
+    macd:         function(v){ return 'MACD: '  + v; },
+    boll:         function(v){ return 'Bollinger: ' + v; },
+    vol:          function(v){ return 'Volat.: %' + v.toFixed(1); },
     pe:           function(v){ return 'F/K: '   + v.toFixed(1); },
     pb:           function(v){ return 'F/DD: '  + v.toFixed(1); },
     ps:           function(v){ return 'F/S: '   + v.toFixed(1); },

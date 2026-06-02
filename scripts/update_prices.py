@@ -9,6 +9,8 @@ from pathlib import Path
 
 import yfinance as yf
 
+from scripts.technical import rescore_report
+
 
 def run():
     out = Path("data/report.json")
@@ -44,6 +46,10 @@ def run():
         except Exception as e:
             print(f"  {sym}: HATA {e}")
         time.sleep(0.35)   # yfinance 429 önlemi
+
+    # Fiyat geçmişi tazelendi — trader skorlarını da güncelle
+    n = rescore_report(report)
+    print(f"⚡ Trader modu: {n} hisse yeniden skorlandı.")
 
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"\n✅ {updated}/{len(stocks)} hisse güncellendi.")

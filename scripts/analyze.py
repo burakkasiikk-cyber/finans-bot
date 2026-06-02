@@ -8,6 +8,7 @@ from pathlib import Path
 from scripts.fetch_us import fetch_us_stock
 from scripts.fetch_bist import fetch_bist_stock
 from scripts.fetch_macro import fetch_macro
+from scripts.technical import rescore_report
 
 US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
 BIST_STOCKS = [
@@ -110,14 +111,20 @@ def run() -> dict:
     top3        = [s["symbol"] for s in valid[:3]]
     risk_alerts = [s["symbol"] for s in valid if s.get("risk") == "high"]
 
-    return {
+    report = {
         "generated_at":   datetime.now(timezone.utc).isoformat(),
         "macro":          macro,
         "stocks":         valid + errors,
         "top3":           top3,
         "risk_alerts":    risk_alerts,
         "weekly_summary": None,
+        "mode":           "trader",
     }
+
+    # TRADER MODU: skoru tamamen teknik göstergelere dayandır (price_history'den)
+    n = rescore_report(report)
+    print(f"⚡ Trader modu: {n} hisse teknik göstergelerle yeniden skorlandı.")
+    return report
 
 
 if __name__ == "__main__":
