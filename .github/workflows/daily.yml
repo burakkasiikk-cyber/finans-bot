@@ -72,12 +72,18 @@ jobs:
             echo "ℹ️  report.json değişmedi (fiyatlar aynı kalmış)"
             exit 0
           fi
-          git commit -m "chore: daily report $(date -u +%Y-%m-%dT%H:%MZ)"
-          # Dayanıklı push: başka workflow araya girdiyse pull --rebase + tekrar dene
+          MSG="chore: daily report $(date -u +%Y-%m-%dT%H:%MZ)"
+          git commit -m "$MSG"
+          # Dayanıklı push: çakışma üretmeden remote'un üstüne taze raporu koy
           for i in 1 2 3 4 5; do
-            git pull --rebase --autostash origin main && git push && { echo "✅ push başarılı (deneme $i)"; exit 0; }
-            echo "⚠️  push denemesi $i başarısız, tekrar deneniyor…"
-            sleep $((RANDOM % 8 + 4))
+            if git push origin HEAD:main; then echo "✅ push başarılı (deneme $i)"; exit 0; fi
+            echo "⚠️  push reddedildi, remote ile senkron (deneme $i)…"
+            git fetch origin main
+            git reset --soft origin/main   # üretilen dosya tree'de kalır, HEAD remote ucuna gelir
+            git add data/report.json
+            if git diff --staged --quiet; then echo "ℹ️  remote zaten güncel"; exit 0; fi
+            git commit -m "$MSG"
+            sleep $((RANDOM % 6 + 3))
           done
           echo "::error::push 5 denemede başarısız oldu"
           exit 1

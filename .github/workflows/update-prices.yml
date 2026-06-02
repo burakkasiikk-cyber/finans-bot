@@ -38,11 +38,17 @@ jobs:
             echo "ℹ️  değişiklik yok"
             exit 0
           fi
-          git commit -m "chore: price history guncellendi $(date -u +%Y-%m-%d)"
+          MSG="chore: price history guncellendi $(date -u +%Y-%m-%d)"
+          git commit -m "$MSG"
           for i in 1 2 3 4 5; do
-            git pull --rebase --autostash origin main && git push && { echo "✅ push başarılı (deneme $i)"; exit 0; }
-            echo "⚠️  push denemesi $i başarısız, tekrar deneniyor…"
-            sleep $((RANDOM % 8 + 4))
+            if git push origin HEAD:main; then echo "✅ push başarılı (deneme $i)"; exit 0; fi
+            echo "⚠️  push reddedildi, remote ile senkron (deneme $i)…"
+            git fetch origin main
+            git reset --soft origin/main
+            git add data/report.json
+            if git diff --staged --quiet; then echo "ℹ️  remote zaten güncel"; exit 0; fi
+            git commit -m "$MSG"
+            sleep $((RANDOM % 6 + 3))
           done
           echo "::error::push 5 denemede başarısız oldu"
           exit 1
