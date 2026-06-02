@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-02T17:22:45.595997+00:00",
+  "generated_at": "2026-06-02T17:26:24.409950+00:00",
   "macro": {
-    "usd_try": 45.8978,
-    "eur_try": 53.4877,
-    "gold_usd": 4516.5,
-    "sp500": 758.54,
-    "sp500_change_pct": 0.2723,
+    "usd_try": 45.9425,
+    "eur_try": 53.4464,
+    "gold_usd": 4519.2,
+    "sp500": 759.16,
+    "sp500_change_pct": 0.0817,
     "bist100": 14200.2,
     "bist100_change_pct": 3.6211,
     "tr_interest_rate": 46.0
@@ -15,8 +15,8 @@
       "symbol": "AAPL",
       "name": "Apple Inc.",
       "exchange": "NASDAQ",
-      "price": 314.66,
-      "change_pct": 2.73,
+      "price": 314.55,
+      "change_pct": 2.69,
       "price_history": [
         {
           "t": 1773028800,
@@ -495,8 +495,8 @@
           "o": 307.46,
           "h": 315.1,
           "l": 306.72,
-          "c": 314.6601,
-          "v": 20710908
+          "c": 314.56,
+          "v": 20969977
         }
       ],
       "news": {
@@ -523,16 +523,16 @@
           "score": 72,
           "metrics": {
             "rsi": 75.2,
-            "stoch": 98.0,
-            "ret_1w": 2.05,
-            "ret_1m": 12.43
+            "stoch": 97.5,
+            "ret_1w": 2.02,
+            "ret_1m": 12.39
           }
         },
         "volatility": {
           "score": 80,
           "metrics": {
             "boll": "Orta-Üst",
-            "vol": 1.08
+            "vol": 1.07
           }
         },
         "setup": {
@@ -543,9 +543,9 @@
         }
       },
       "trade_setup": {
-        "entry": 314.66,
+        "entry": 314.56,
         "stop": 294.94,
-        "target": 344.24,
+        "target": 343.99,
         "rr": 1.5,
         "support": 276.25,
         "resistance": 315.1,
@@ -2211,8 +2211,8 @@
       "symbol": "MSFT",
       "name": "Microsoft Corporation",
       "exchange": "NASDAQ",
-      "price": 444.72,
-      "change_pct": -3.43,
+      "price": 444.3,
+      "change_pct": -3.52,
       "price_history": [
         {
           "t": 1773028800,
@@ -2691,8 +2691,8 @@
           "o": 447.169,
           "h": 453.5,
           "l": 442.34,
-          "c": 444.705,
-          "v": 21269841
+          "c": 444.32,
+          "v": 21424308
         }
       ],
       "news": {
@@ -2718,31 +2718,31 @@
         "momentum": {
           "score": 80,
           "metrics": {
-            "rsi": 68.6,
-            "stoch": 67.4,
-            "ret_1w": 6.89,
-            "ret_1m": 7.54
+            "rsi": 68.3,
+            "stoch": 66.8,
+            "ret_1w": 6.8,
+            "ret_1m": 7.44
           }
         },
         "volatility": {
           "score": 80,
           "metrics": {
             "boll": "Üst Band",
-            "vol": 1.97
+            "vol": 1.98
           }
         },
         "setup": {
           "score": 32,
           "metrics": {
-            "rr": 0.56
+            "rr": 0.58
           }
         }
       },
       "trade_setup": {
-        "entry": 444.7,
+        "entry": 444.32,
         "stop": 406.38,
         "target": 466.32,
-        "rr": 0.56,
+        "rr": 0.58,
         "support": 400.01,
         "resistance": 466.32,
         "atr": 12.79
@@ -3309,8 +3309,8 @@
       "symbol": "NVDA",
       "name": "NVIDIA Corporation",
       "exchange": "NASDAQ",
-      "price": 224.35,
-      "change_pct": -0.0,
+      "price": 224.08,
+      "change_pct": -0.12,
       "price_history": [
         {
           "t": 1773028800,
@@ -3788,9 +3788,9 @@
           "t": 1780372800,
           "o": 227.19,
           "h": 232.28,
-          "l": 224.15,
-          "c": 224.33,
-          "v": 120475561
+          "l": 224.02,
+          "c": 224.0801,
+          "v": 121779838
         }
       ],
       "news": {
@@ -3798,9 +3798,9 @@
         "sentiment": "olumlu",
         "pos": 1,
         "neg": 0,
-        "count": 4
+        "count": 5
       },
-      "score": 76,
+      "score": 78,
       "verdict": "SAT",
       "verdict_key": "sell",
       "risk": "medium",
@@ -3816,10 +3816,10 @@
         "momentum": {
           "score": 80,
           "metrics": {
-            "rsi": 52.9,
-            "stoch": 56.0,
-            "ret_1w": 4.41,
-            "ret_1m": 13.04
+            "rsi": 52.7,
+            "stoch": 55.1,
+            "ret_1w": 4.29,
+            "ret_1m": 12.92
           }
         },
         "volatility": {
@@ -3830,20 +3830,20 @@
           }
         },
         "setup": {
-          "score": 32,
+          "score": 44,
           "metrics": {
-            "rr": 0.69
+            "rr": 0.72
           }
         }
       },
       "trade_setup": {
-        "entry": 224.33,
-        "stop": 206.75,
+        "entry": 224.08,
+        "stop": 206.74,
         "target": 236.54,
-        "rr": 0.69,
+        "rr": 0.72,
         "support": 196.03,
         "resistance": 236.54,
-        "atr": 8.14
+        "atr": 8.15
       },
       "signal": {
         "action": "SAT",
@@ -3851,7 +3851,7 @@
         "headline": "🔴 SAT / UZAK DUR",
         "detail": "Trend aşağı döndü. Yeni alım için uygun değil; elindekini gözden geçir."
       },
-      "score_base": 74,
+      "score_base": 76,
       "pros": [],
       "cons": []
     },
@@ -4408,8 +4408,8 @@
       "symbol": "AMD",
       "name": "Advanced Micro Devices, Inc.",
       "exchange": "NASDAQ",
-      "price": 512.2,
-      "change_pct": 0.4,
+      "price": 511.92,
+      "change_pct": 0.35,
       "price_history": [
         {
           "t": 1773028800,
@@ -4888,8 +4888,8 @@
           "o": 506.3,
           "h": 519.94,
           "l": 501.22,
-          "c": 512.195,
-          "v": 13955892
+          "c": 511.92,
+          "v": 14052835
         }
       ],
       "news": {
@@ -4897,7 +4897,7 @@
         "sentiment": "nötr",
         "pos": 0,
         "neg": 0,
-        "count": 3
+        "count": 2
       },
       "score": 75,
       "verdict": "TUT / NÖTR",
@@ -4909,23 +4909,23 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "AL",
-            "vol_x": 0.71
+            "vol_x": 0.72
           }
         },
         "momentum": {
           "score": 73,
           "metrics": {
             "rsi": 68.4,
-            "stoch": 88.8,
-            "ret_1w": 1.65,
-            "ret_1m": 42.06
+            "stoch": 88.6,
+            "ret_1w": 1.59,
+            "ret_1m": 41.99
           }
         },
         "volatility": {
           "score": 80,
           "metrics": {
             "boll": "Orta-Üst",
-            "vol": 5.55
+            "vol": 5.56
           }
         },
         "setup": {
@@ -4936,7 +4936,7 @@
         }
       },
       "trade_setup": {
-        "entry": 512.2,
+        "entry": 511.92,
         "stop": 386.47,
         "target": 527.2,
         "rr": 0.12,
@@ -28565,8 +28565,8 @@
       "symbol": "TSLA",
       "name": "Tesla, Inc.",
       "exchange": "NASDAQ",
-      "price": 422.18,
-      "change_pct": 1.51,
+      "price": 421.9,
+      "change_pct": 1.45,
       "price_history": [
         {
           "t": 1773028800,
@@ -29045,8 +29045,8 @@
           "o": 418.08,
           "h": 423.47,
           "l": 413.65,
-          "c": 422.19,
-          "v": 22646031
+          "c": 421.9482,
+          "v": 22813122
         }
       ],
       "news": {
@@ -29072,10 +29072,10 @@
         "momentum": {
           "score": 58,
           "metrics": {
-            "rsi": 45.4,
-            "stoch": 47.8,
-            "ret_1w": -2.63,
-            "ret_1m": 8.03
+            "rsi": 45.3,
+            "stoch": 47.4,
+            "ret_1w": -2.68,
+            "ret_1m": 7.96
           }
         },
         "volatility": {
@@ -29088,15 +29088,15 @@
         "setup": {
           "score": 44,
           "metrics": {
-            "rr": 0.97
+            "rr": 0.98
           }
         }
       },
       "trade_setup": {
-        "entry": 422.19,
+        "entry": 421.95,
         "stop": 390.01,
         "target": 453.4,
-        "rr": 0.97,
+        "rr": 0.98,
         "support": 384.02,
         "resistance": 453.4,
         "atr": 14.47
@@ -29664,8 +29664,8 @@
       "symbol": "AMZN",
       "name": "Amazon.com, Inc.",
       "exchange": "NASDAQ",
-      "price": 258.3,
-      "change_pct": -1.13,
+      "price": 258.28,
+      "change_pct": -1.14,
       "price_history": [
         {
           "t": 1773028800,
@@ -30144,8 +30144,8 @@
           "o": 257.16,
           "h": 261.2025,
           "l": 254.37,
-          "c": 258.35,
-          "v": 22157315
+          "c": 258.28,
+          "v": 22328645
         }
       ],
       "news": {
@@ -30171,10 +30171,10 @@
         "momentum": {
           "score": 39,
           "metrics": {
-            "rsi": 43.0,
-            "stoch": 19.5,
-            "ret_1w": -2.62,
-            "ret_1m": -3.69
+            "rsi": 42.9,
+            "stoch": 19.2,
+            "ret_1w": -2.64,
+            "ret_1m": -3.72
           }
         },
         "volatility": {
@@ -30187,15 +30187,15 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 3.56
+            "rr": 3.61
           }
         }
       },
       "trade_setup": {
-        "entry": 258.35,
+        "entry": 258.28,
         "stop": 252.67,
         "target": 278.56,
-        "rr": 3.56,
+        "rr": 3.61,
         "support": 254.37,
         "resistance": 278.56,
         "atr": 6.8
@@ -30213,8 +30213,8 @@
       "symbol": "META",
       "name": "Meta Platforms, Inc.",
       "exchange": "NASDAQ",
-      "price": 606.98,
-      "change_pct": 1.08,
+      "price": 607.01,
+      "change_pct": 1.09,
       "price_history": [
         {
           "t": 1773028800,
@@ -30693,8 +30693,8 @@
           "o": 603.35,
           "h": 608.88,
           "l": 596.68,
-          "c": 606.98,
-          "v": 9577035
+          "c": 607.01,
+          "v": 9659768
         }
       ],
       "news": {
@@ -30714,7 +30714,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "AL",
-            "vol_x": 1.3
+            "vol_x": 1.31
           }
         },
         "momentum": {
@@ -30722,7 +30722,7 @@
           "metrics": {
             "rsi": 51.9,
             "stoch": 25.3,
-            "ret_1w": -0.88,
+            "ret_1w": -0.87,
             "ret_1m": -0.29
           }
         },
@@ -30741,7 +30741,7 @@
         }
       },
       "trade_setup": {
-        "entry": 606.98,
+        "entry": 607.01,
         "stop": 590.98,
         "target": 643.0,
         "rr": 2.25,
@@ -31311,8 +31311,8 @@
       "symbol": "GOOGL",
       "name": "Alphabet Inc.",
       "exchange": "NASDAQ",
-      "price": 366.95,
-      "change_pct": -2.5,
+      "price": 367.47,
+      "change_pct": -2.36,
       "price_history": [
         {
           "t": 1773028800,
@@ -31791,8 +31791,8 @@
           "o": 366.65,
           "h": 373.54,
           "l": 358.44,
-          "c": 366.98,
-          "v": 27685419
+          "c": 367.47,
+          "v": 27851091
         }
       ],
       "news": {
@@ -31800,7 +31800,7 @@
         "sentiment": "nötr",
         "pos": 0,
         "neg": 0,
-        "count": 2
+        "count": 3
       },
       "score": 48,
       "verdict": "SAT",
@@ -31818,31 +31818,31 @@
         "momentum": {
           "score": 38,
           "metrics": {
-            "rsi": 35.1,
-            "stoch": 17.0,
-            "ret_1w": -5.63,
-            "ret_1m": -4.85
+            "rsi": 35.3,
+            "stoch": 18.0,
+            "ret_1w": -5.51,
+            "ret_1m": -4.72
           }
         },
         "volatility": {
           "score": 34,
           "metrics": {
             "boll": "Alt Band",
-            "vol": 1.69
+            "vol": 1.68
           }
         },
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 3.75
+            "rr": 3.55
           }
         }
       },
       "trade_setup": {
-        "entry": 366.98,
+        "entry": 367.47,
         "stop": 355.87,
         "target": 408.61,
-        "rr": 3.75,
+        "rr": 3.55,
         "support": 358.44,
         "resistance": 408.61,
         "atr": 10.28
