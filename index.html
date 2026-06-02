@@ -1756,22 +1756,31 @@ function openStockModal(sym) {
   function indClass(label) {
     if (!label) return 'neu';
     var l = label.toLowerCase();
+    if (l.indexOf('golden') >= 0) return 'good';
+    if (l.indexOf('death') >= 0) return 'bad';
     if (l.indexOf('buy') >= 0 || l.indexOf('al') >= 0 || l.indexOf('yüksel') >= 0 || l.indexOf('alt') >= 0) return 'good';
     if (l.indexOf('sell') >= 0 || l.indexOf('sat') >= 0 || l.indexOf('düş') >= 0 || l.indexOf('üst') >= 0) return 'bad';
     return 'warn';
   }
-  var rsiClass = rsi >= 70 ? 'bad' : rsi <= 30 ? 'good' : 'neu';
-  // Stochastic — backend'den (momentum metriği), yoksa gizle
-  var stoch = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics)
-              ? s.dimensions.momentum.metrics.stoch : null;
+  // Tüm göstergeler backend dimensions'tan okunur (tek kaynak) — sinyal kutusuyla çelişmez.
+  // Eski raporlar için client-side hesap (rsi/mr/bol/ma) yedek olarak kalır.
+  var tm = (s.dimensions && s.dimensions.trend && s.dimensions.trend.metrics) || {};
+  var momM = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics) || {};
+  var volM = (s.dimensions && s.dimensions.volatility && s.dimensions.volatility.metrics) || {};
+  var rsiV = (momM.rsi != null) ? momM.rsi : rsi;
+  var rsiClass = rsiV >= 70 ? 'bad' : rsiV <= 30 ? 'good' : 'neu';
+  var macdLabel = tm.macd || mr.sig || '—';
+  var bolLabel  = volM.boll || bol || '—';
+  var maLabel   = tm.ma || ma || '—';
+  var stoch = (momM.stoch != null) ? momM.stoch : null;
   var stochHtml = (stoch != null)
     ? '<div class="sm-ind"><div class="sm-ind-lbl">Stochastic</div><div class="sm-ind-val ' + (stoch>80?'bad':stoch<20?'good':'neu') + '">' + stoch.toFixed(0) + (stoch>80?' — Aşırı Al.':stoch<20?' — Aşırı Sat.':'') + '</div></div>'
     : '';
   document.getElementById('sm-indicators').innerHTML =
-    '<div class="sm-ind"><div class="sm-ind-lbl">RSI (14)</div><div class="sm-ind-val ' + rsiClass + '">' + (rsi ? rsi.toFixed(1) : '—') + (rsi >= 70 ? ' — Aşırı Al.' : rsi <= 30 ? ' — Aşırı Sat.' : '') + '</div></div>' +
-    '<div class="sm-ind"><div class="sm-ind-lbl">MACD</div><div class="sm-ind-val ' + indClass(mr.sig) + '">' + (mr.sig || '—') + '</div></div>' +
-    '<div class="sm-ind"><div class="sm-ind-lbl">Bollinger</div><div class="sm-ind-val ' + indClass(bol) + '">' + (bol || '—') + '</div></div>' +
-    '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(ma) + '">' + (ma || '—') + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">RSI (14)</div><div class="sm-ind-val ' + rsiClass + '">' + (rsiV ? rsiV.toFixed(1) : '—') + (rsiV >= 70 ? ' — Aşırı Al.' : rsiV <= 30 ? ' — Aşırı Sat.' : '') + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">MACD</div><div class="sm-ind-val ' + indClass(macdLabel) + '">' + macdLabel + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">Bollinger</div><div class="sm-ind-val ' + indClass(bolLabel) + '">' + bolLabel + '</div></div>' +
+    '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(maLabel) + '">' + maLabel + '</div></div>' +
     stochHtml;
 
   // İşlem kurulumu (ATR bazlı) — backend trade_setup'tan
@@ -1794,36 +1803,35 @@ function openStockModal(sym) {
   }
 
   // ════════ BASİT SİNYAL — ne zaman al / ne zaman sat ════════
+  // Tek kaynak: backend'in ürettiği s.signal (yoksa düz mantıkla üret)
   (function(){
     var box = document.getElementById('sm-signal');
-    var mm  = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics) || {};
-    var stochV = mm.stoch;
-    var trendUp = (ma === 'Yükseliş' || ma === 'Golden Cross') && mr.sig === 'Buy';
-    var trendDn = (ma === 'Düşüş' || ma === 'Death Cross') || mr.sig === 'Sell';
-    var overbought = (rsi >= 75) || (stochV != null && stochV >= 85) || bol === 'Üst Band';
-    var oversold   = (rsi > 0 && rsi <= 30) || (stochV != null && stochV <= 15) || bol === 'Alt Band';
-
+    var sig = s.signal;
     var head, detail, bg, bd;
-    if (trendUp && !overbought) {
-      head = '🟢 AL BÖLGESİ';
-      detail = 'Trend yukarı ve momentum sağlıklı. Alım için uygun görünüyor.';
-      bg = 'rgba(0,212,170,.12)'; bd = 'var(--green)';
-    } else if (trendUp && overbought) {
-      head = '🟡 KÂR-AL / TEMKİNLİ';
-      detail = 'Trend yukarı ama hisse aşırı alımda — kısa vadeli düzeltme gelebilir. Yeni alımda acele etme, elindekinde kâr almayı düşünebilirsin.';
-      bg = 'rgba(245,166,35,.12)'; bd = 'var(--yellow)';
-    } else if (oversold && !trendDn) {
-      head = '🟡 DİP İZLE';
-      detail = 'Hisse aşırı satımda; tepki yükselişi olabilir. Trend yukarı dönmeden alım riskli — teyit bekle.';
-      bg = 'rgba(245,166,35,.12)'; bd = 'var(--yellow)';
-    } else if (trendDn) {
-      head = '🔴 SAT / UZAK DUR';
-      detail = 'Trend aşağı döndü. Yeni alım için uygun değil; elindekini gözden geçir.';
-      bg = 'rgba(255,77,109,.12)'; bd = 'var(--red)';
+    var colorByKey = {
+      strong_buy:{bg:'rgba(0,212,170,.12)',bd:'var(--green)'},
+      buy:       {bg:'rgba(0,212,170,.12)',bd:'var(--green)'},
+      hold:      {bg:'rgba(245,166,35,.12)',bd:'var(--yellow)'},
+      sell:      {bg:'rgba(255,77,109,.12)',bd:'var(--red)'},
+      strong_sell:{bg:'rgba(255,77,109,.12)',bd:'var(--red)'}
+    };
+    if (sig && sig.headline) {
+      head = sig.headline; detail = sig.detail;
+      var c = colorByKey[sig.key] || {bg:'rgba(136,153,170,.10)',bd:'var(--border2)'};
+      bg = c.bg; bd = c.bd;
     } else {
-      head = '⚪ BEKLE';
-      detail = 'Net bir sinyal yok. Kenarda kalıp daha belirgin bir kurulum beklemek mantıklı.';
-      bg = 'rgba(136,153,170,.10)'; bd = 'var(--border2)';
+      // Geriye dönük: eski raporlar için client-side hesap
+      var mm  = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics) || {};
+      var stochV = mm.stoch;
+      var trendUp = (ma === 'Yükseliş' || ma === 'Golden Cross') && mr.sig === 'Buy';
+      var trendDn = (ma === 'Düşüş' || ma === 'Death Cross') || mr.sig === 'Sell';
+      var overbought = (rsi >= 75) || (stochV != null && stochV >= 85) || bol === 'Üst Band';
+      var oversold   = (rsi > 0 && rsi <= 30) || (stochV != null && stochV <= 15) || bol === 'Alt Band';
+      if (trendUp && !overbought) { head='🟢 AL BÖLGESİ'; detail='Trend yukarı ve momentum sağlıklı.'; bg='rgba(0,212,170,.12)'; bd='var(--green)'; }
+      else if (trendUp && overbought) { head='🟡 KÂR-AL / TEMKİNLİ'; detail='Trend yukarı ama aşırı alımda.'; bg='rgba(245,166,35,.12)'; bd='var(--yellow)'; }
+      else if (oversold && !trendDn) { head='🟡 DİP İZLE'; detail='Aşırı satımda, teyit bekle.'; bg='rgba(245,166,35,.12)'; bd='var(--yellow)'; }
+      else if (trendDn) { head='🔴 SAT / UZAK DUR'; detail='Trend aşağı döndü.'; bg='rgba(255,77,109,.12)'; bd='var(--red)'; }
+      else { head='⚪ BEKLE'; detail='Net sinyal yok.'; bg='rgba(136,153,170,.10)'; bd='var(--border2)'; }
     }
 
     var rules = '';

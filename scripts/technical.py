@@ -168,19 +168,34 @@ def volume_trend(bars: list, short: int = 5, long: int = 20) -> Optional[float]:
 
 
 def trade_setup(bars: list) -> Optional[dict]:
-    """ATR'ye dayalı işlem kurulumu: giriş / stop / hedef / risk-ödül + destek-direnç.
+    """Long (alım) kurulumu: giriş / stop / hedef / risk-ödül + destek-direnç.
 
-    Long (alım) kurulumu varsayar: stop girişin 1.5×ATR altı, hedef 2×ATR üstü."""
+    Stop  = yakın dip (son 10 gün) altı  → her hissede farklı mesafe
+    Hedef = direnç (son 20 gün tepesi); fiyat dirençteyse kırılım hedefi
+    Böylece risk/ödül oranı fiyatın destek-dirence göre konumuna bağlı,
+    her hissede gerçekten değişir."""
     if len(bars) < 15:
         return None
     last = bars[-1]["c"]
     a = atr(bars)
     if a is None or a <= 0:
         return None
-    sup, res = support_resistance(bars)
-    stop = round(last - 1.5 * a, 2)
-    target = round(last + 2.0 * a, 2)
+    sup, res = support_resistance(bars, 20)          # 20 günlük destek/direnç
+    recent_low = min(b["l"] for b in bars[-10:])     # yakın dip → stop referansı
+
+    # Stop: yakın dibin biraz altı (0.25×ATR tampon)
+    stop = round(recent_low - 0.25 * a, 2)
+    if stop >= last:                                  # güvenlik: stop girişin altında olmalı
+        stop = round(last - 1.0 * a, 2)
+
+    # Hedef: direnç belirgin şekilde yukarıdaysa oraya; değilse (zirvede/kırılımda)
+    # risk kadar ölçülü hareket projeksiyonu (measured move)
     risk = last - stop
+    if res > last * 1.01:
+        target = round(res, 2)
+    else:
+        target = round(last + 1.5 * risk, 2)
+
     reward = target - last
     rr = round(reward / risk, 2) if risk > 0 else None
     return {
@@ -318,6 +333,54 @@ def _risk_from_vol(vol: Optional[float]) -> str:
     return "low"
 
 
+def simple_signal(closes: List[float], bars: list, score: Optional[int]) -> dict:
+    """Trend + aşırı alım/satım durumundan basit AL/SAT/BEKLE sinyali üretir.
+
+    Hem sinyal kutusu metnini hem de rozet etiketini (verdict) tek kaynaktan verir,
+    böylece ikisi asla çelişmez."""
+    ma = ma_signal(closes)
+    m = macd(closes)
+    r = rsi(closes)
+    st = stochastic(bars)
+    boll = boll_label(bollinger_pos(closes))
+    macd_sig = m["sig"] if m else "—"
+
+    trend_up = ma in ("Yükseliş", "Golden Cross") and macd_sig == "AL"
+    trend_dn = ma in ("Düşüş", "Death Cross") or macd_sig == "SAT"
+    overbought = (r is not None and r >= 75) or (st and st["k"] >= 85) or boll == "Üst Band"
+    oversold = (r is not None and 0 < r <= 30) or (st and st["k"] <= 15) or boll == "Alt Band"
+
+    if trend_up and not overbought:
+        action = "AL"
+        key = "strong_buy" if (score or 0) >= 75 else "buy"
+        head = "🟢 AL BÖLGESİ"
+        detail = "Trend yukarı ve momentum sağlıklı. Alım için uygun görünüyor."
+    elif trend_up and overbought:
+        action = "KÂR-AL"
+        key = "hold"
+        head = "🟡 KÂR-AL / TEMKİNLİ"
+        detail = ("Trend yukarı ama hisse aşırı alımda — kısa vadeli düzeltme gelebilir. "
+                  "Yeni alımda acele etme, elindekinde kâr almayı düşünebilirsin.")
+    elif oversold and not trend_dn:
+        action = "İZLE"
+        key = "hold"
+        head = "🟡 DİP İZLE"
+        detail = ("Hisse aşırı satımda; tepki yükselişi olabilir. "
+                  "Trend yukarı dönmeden alım riskli — teyit bekle.")
+    elif trend_dn:
+        action = "SAT"
+        key = "strong_sell" if (score or 100) < 32 else "sell"
+        head = "🔴 SAT / UZAK DUR"
+        detail = "Trend aşağı döndü. Yeni alım için uygun değil; elindekini gözden geçir."
+    else:
+        action = "BEKLE"
+        key = "hold"
+        head = "⚪ BEKLE"
+        detail = "Net bir sinyal yok. Kenarda kalıp daha belirgin bir kurulum beklemek mantıklı."
+
+    return {"action": action, "key": key, "headline": head, "detail": detail}
+
+
 def verdict_of(score: Optional[int]) -> tuple:
     if score is None:
         return ("VERİ YETERSİZ", "insufficient")
@@ -380,15 +443,20 @@ def score_from_history(price_history: list) -> Optional[dict]:
             weighted += s * w
             total_w += w
     overall = round(weighted / total_w) if total_w else None
-    label, key = verdict_of(overall)
+
+    # Rozet (verdict) artık basit sinyalle AYNI kaynaktan gelir → çelişmez
+    sig = simple_signal(closes, bars, overall)
+    LABELS = {"strong_buy": "GÜÇLÜ AL", "buy": "AL", "hold": "TUT / NÖTR",
+              "sell": "SAT", "strong_sell": "GÜÇLÜ SAT"}
 
     return {
         "score": overall,
-        "verdict": label,
-        "verdict_key": key,
+        "verdict": LABELS.get(sig["key"], "TUT / NÖTR"),
+        "verdict_key": sig["key"],
         "risk": _risk_from_vol(vol_pct),
         "dimensions": dims,
         "trade_setup": trade_setup(bars),
+        "signal": sig,
     }
 
 
