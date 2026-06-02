@@ -2,8 +2,12 @@ name: Daily Analysis & Notify
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # 09:00 TR (UTC+3 = UTC 06:00)
-    - cron: "0 13 * * *"  # 16:00 TR — kapanış sonrası ikinci güncelleme
+    # NOT: GitHub ücretsiz cron'u 15dk–birkaç saat gecikebilir/atlayabilir.
+    # Bu yüzden gün içinde birden çok saat tanımlandı — biri atlarsa diğeri yakalar.
+    - cron: "0 6 * * *"    # 09:00 TR — açılış
+    - cron: "0 10 * * *"   # 13:00 TR — öğle yedek
+    - cron: "0 13 * * *"   # 16:00 TR — kapanış sonrası
+    - cron: "0 16 * * *"   # 19:00 TR — akşam yedek
   workflow_dispatch:        # Manuel tetikleme
   push:
     branches: [main]
@@ -13,7 +17,8 @@ on:
       - 'docs/**'
 
 concurrency:
-  group: daily-analysis
+  # Tüm rapor yazan workflow'lar aynı grupta — aynı anda push edip çakışmasınlar
+  group: report-commit
   cancel-in-progress: false
 
 permissions:
@@ -65,8 +70,14 @@ jobs:
           git add data/report.json
           if git diff --staged --quiet; then
             echo "ℹ️  report.json değişmedi (fiyatlar aynı kalmış)"
-          else
-            git commit -m "chore: daily report $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
-            echo "✅ report.json güncellendi ve push edildi"
+            exit 0
           fi
+          git commit -m "chore: daily report $(date -u +%Y-%m-%dT%H:%MZ)"
+          # Dayanıklı push: başka workflow araya girdiyse pull --rebase + tekrar dene
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main && git push && { echo "✅ push başarılı (deneme $i)"; exit 0; }
+            echo "⚠️  push denemesi $i başarısız, tekrar deneniyor…"
+            sleep $((RANDOM % 8 + 4))
+          done
+          echo "::error::push 5 denemede başarısız oldu"
+          exit 1
