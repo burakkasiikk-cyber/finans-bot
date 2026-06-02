@@ -41,7 +41,12 @@ def run():
                 for ts, row in hist.iterrows()
                 if row["Close"] > 0
             ][-60:]
-            s["price_history"] = ph
+            if ph:
+                s["price_history"] = ph
+                # Fiyat ve günlük değişimi de grafikle tutarlı tut
+                s["price"] = round(ph[-1]["c"], 2)
+                if len(ph) >= 2 and ph[-2]["c"]:
+                    s["change_pct"] = round((ph[-1]["c"] / ph[-2]["c"] - 1) * 100, 2)
             updated += 1
             print(f"  {sym}: {len(ph)} bar")
         except Exception as e:
