@@ -42,6 +42,7 @@ def fetch_bist_stock(symbol: str) -> dict:
                 "h": round(float(row["High"]),  2),
                 "l": round(float(row["Low"]),   2),
                 "c": round(float(row["Close"]), 2),
+                "v": int(row["Volume"]) if row.get("Volume") == row.get("Volume") else 0,
             }
             for ts, row in hist.iterrows()
             if row["Close"] > 0

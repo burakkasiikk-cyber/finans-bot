@@ -123,6 +123,77 @@ def pct_return(closes: List[float], n: int) -> Optional[float]:
     return None
 
 
+def atr(bars: list, period: int = 14) -> Optional[float]:
+    """Average True Range — stop/hedef mesafesi için oynaklık ölçüsü."""
+    if len(bars) < period + 1:
+        return None
+    trs = []
+    for i in range(1, len(bars)):
+        h, l, pc = bars[i]["h"], bars[i]["l"], bars[i - 1]["c"]
+        trs.append(max(h - l, abs(h - pc), abs(l - pc)))
+    recent = trs[-period:]
+    return sum(recent) / len(recent)
+
+
+def stochastic(bars: list, k_period: int = 14, d_period: int = 3) -> Optional[dict]:
+    """Stochastic osilatörü (%K, %D). >80 aşırı alım, <20 aşırı satım."""
+    if len(bars) < k_period:
+        return None
+    ks = []
+    for i in range(k_period - 1, len(bars)):
+        window = bars[i - k_period + 1:i + 1]
+        hh = max(b["h"] for b in window)
+        ll = min(b["l"] for b in window)
+        c = bars[i]["c"]
+        ks.append(100 * (c - ll) / (hh - ll) if hh != ll else 50.0)
+    k_last = ks[-1]
+    d_last = sum(ks[-d_period:]) / min(d_period, len(ks))
+    return {"k": round(k_last, 1), "d": round(d_last, 1)}
+
+
+def support_resistance(bars: list, lookback: int = 20) -> tuple:
+    """Son `lookback` günün en düşük (destek) / en yüksek (direnç) seviyeleri."""
+    window = bars[-lookback:]
+    return (min(b["l"] for b in window), max(b["h"] for b in window))
+
+
+def volume_trend(bars: list, short: int = 5, long: int = 20) -> Optional[float]:
+    """Kısa/uzun ortalama hacim oranı. >1 = artan hacim (hareketi teyit eder)."""
+    vols = [b.get("v") for b in bars if b.get("v")]
+    if len(vols) < long:
+        return None
+    sv = sum(vols[-short:]) / short
+    lv = sum(vols[-long:]) / long
+    return round(sv / lv, 2) if lv else None
+
+
+def trade_setup(bars: list) -> Optional[dict]:
+    """ATR'ye dayalı işlem kurulumu: giriş / stop / hedef / risk-ödül + destek-direnç.
+
+    Long (alım) kurulumu varsayar: stop girişin 1.5×ATR altı, hedef 2×ATR üstü."""
+    if len(bars) < 15:
+        return None
+    last = bars[-1]["c"]
+    a = atr(bars)
+    if a is None or a <= 0:
+        return None
+    sup, res = support_resistance(bars)
+    stop = round(last - 1.5 * a, 2)
+    target = round(last + 2.0 * a, 2)
+    risk = last - stop
+    reward = target - last
+    rr = round(reward / risk, 2) if risk > 0 else None
+    return {
+        "entry": round(last, 2),
+        "stop": stop,
+        "target": target,
+        "rr": rr,
+        "support": round(sup, 2),
+        "resistance": round(res, 2),
+        "atr": round(a, 2),
+    }
+
+
 def volatility_pct(closes: List[float], n: int = 20) -> Optional[float]:
     """Son n günün günlük getiri standart sapması (% cinsinden)."""
     if len(closes) < n + 1:
@@ -171,7 +242,26 @@ def _trend_score(closes: List[float]) -> Optional[int]:
     return round(score)
 
 
-def _momentum_score(closes: List[float]) -> Optional[int]:
+def _stoch_score(st: Optional[dict]) -> Optional[int]:
+    if not st:
+        return None
+    k = st["k"]
+    # Yükselen momentum (K>D) ve sağlıklı bölge iyi; >80 aşırı alım, <20 aşırı satım
+    rising = k >= st["d"]
+    if k > 80:
+        base = 50          # aşırı alım — temkinli
+    elif k > 60:
+        base = 80
+    elif k > 40:
+        base = 62
+    elif k > 20:
+        base = 46
+    else:
+        base = 40          # aşırı satım — tepki ihtimali
+    return min(100, base + (8 if rising else -8))
+
+
+def _momentum_score(closes: List[float], bars: Optional[list] = None) -> Optional[int]:
     parts = []
     r = rsi(closes)
     if r is not None:
@@ -193,6 +283,10 @@ def _momentum_score(closes: List[float]) -> Optional[int]:
     s1w = _ret_score(pct_return(closes, 5), [4, 1, -1, -4])
     s1m = _ret_score(pct_return(closes, 21), [10, 3, -3, -10])
     parts += [p for p in (s1w, s1m) if p is not None]
+    if bars:
+        ss = _stoch_score(stochastic(bars))
+        if ss is not None:
+            parts.append(ss)
     return round(sum(parts) / len(parts)) if parts else None
 
 
@@ -238,25 +332,37 @@ def score_from_history(price_history: list) -> Optional[dict]:
     """price_history (OHLC bar listesi) → teknik skor + boyutlar.
 
     Yeterli veri yoksa None döner (çağıran eski skoru korumalı)."""
-    closes = [b["c"] for b in (price_history or []) if b.get("c")]
+    bars = [b for b in (price_history or []) if b.get("c")]
+    closes = [b["c"] for b in bars]
     if len(closes) < 20:
         return None
 
     trend = _trend_score(closes)
-    mom = _momentum_score(closes)
+    mom = _momentum_score(closes, bars)
     vol_sc = _volatility_score(closes)
     vol_pct = volatility_pct(closes)
 
+    # Hacim onayı: artan hacim yükseliş trendini güçlendirir
+    vt = volume_trend(bars)
+    if trend is not None and vt is not None:
+        if vt >= 1.3:
+            trend = min(100, trend + 6)
+        elif vt < 0.7:
+            trend = max(0, trend - 6)
+
     m = macd(closes)
+    st = stochastic(bars)
     dims = {
         "trend": {
             "score": trend,
-            "metrics": {"ma": ma_signal(closes), "macd": m["sig"] if m else "—"},
+            "metrics": {"ma": ma_signal(closes), "macd": m["sig"] if m else "—",
+                        "vol_x": vt},
         },
         "momentum": {
             "score": mom,
             "metrics": {
                 "rsi": rsi(closes),
+                "stoch": st["k"] if st else None,
                 "ret_1w": pct_return(closes, 5),
                 "ret_1m": pct_return(closes, 21),
             },
@@ -282,6 +388,7 @@ def score_from_history(price_history: list) -> Optional[dict]:
         "verdict_key": key,
         "risk": _risk_from_vol(vol_pct),
         "dimensions": dims,
+        "trade_setup": trade_setup(bars),
     }
 
 

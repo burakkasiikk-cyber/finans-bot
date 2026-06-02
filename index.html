@@ -1761,11 +1761,37 @@ function openStockModal(sym) {
     return 'warn';
   }
   var rsiClass = rsi >= 70 ? 'bad' : rsi <= 30 ? 'good' : 'neu';
+  // Stochastic — backend'den (momentum metriği), yoksa gizle
+  var stoch = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics)
+              ? s.dimensions.momentum.metrics.stoch : null;
+  var stochHtml = (stoch != null)
+    ? '<div class="sm-ind"><div class="sm-ind-lbl">Stochastic</div><div class="sm-ind-val ' + (stoch>80?'bad':stoch<20?'good':'neu') + '">' + stoch.toFixed(0) + (stoch>80?' — Aşırı Al.':stoch<20?' — Aşırı Sat.':'') + '</div></div>'
+    : '';
   document.getElementById('sm-indicators').innerHTML =
     '<div class="sm-ind"><div class="sm-ind-lbl">RSI (14)</div><div class="sm-ind-val ' + rsiClass + '">' + (rsi ? rsi.toFixed(1) : '—') + (rsi >= 70 ? ' — Aşırı Al.' : rsi <= 30 ? ' — Aşırı Sat.' : '') + '</div></div>' +
     '<div class="sm-ind"><div class="sm-ind-lbl">MACD</div><div class="sm-ind-val ' + indClass(mr.sig) + '">' + (mr.sig || '—') + '</div></div>' +
     '<div class="sm-ind"><div class="sm-ind-lbl">Bollinger</div><div class="sm-ind-val ' + indClass(bol) + '">' + (bol || '—') + '</div></div>' +
-    '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(ma) + '">' + (ma || '—') + '</div></div>';
+    '<div class="sm-ind"><div class="sm-ind-lbl">Hareketli Ort.</div><div class="sm-ind-val ' + indClass(ma) + '">' + (ma || '—') + '</div></div>' +
+    stochHtml;
+
+  // İşlem kurulumu (ATR bazlı) — backend trade_setup'tan
+  var ts = s.trade_setup;
+  var tradeSec = document.getElementById('sm-trade-section');
+  if (ts && ts.entry != null) {
+    var f = function(v){ return v.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}); };
+    var rrClass = (ts.rr != null && ts.rr >= 1.5) ? 'good' : (ts.rr != null && ts.rr < 1) ? 'bad' : 'neu';
+    document.getElementById('sm-trade').innerHTML =
+      '<div class="sm-ind"><div class="sm-ind-lbl">Giriş</div><div class="sm-ind-val neu">' + f(ts.entry) + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">Stop-Loss</div><div class="sm-ind-val bad">' + f(ts.stop) + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">Hedef</div><div class="sm-ind-val good">' + f(ts.target) + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">Risk/Ödül</div><div class="sm-ind-val ' + rrClass + '">' + (ts.rr != null ? '1 : ' + ts.rr : '—') + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">Destek</div><div class="sm-ind-val good">' + f(ts.support) + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">Direnç</div><div class="sm-ind-val bad">' + f(ts.resistance) + '</div></div>' +
+      '<div class="sm-ind"><div class="sm-ind-lbl">ATR (14)</div><div class="sm-ind-val neu">' + f(ts.atr) + '</div></div>';
+    tradeSec.style.display = '';
+  } else {
+    tradeSec.style.display = 'none';
+  }
 
   // Boyut skorları (yeni format: dimensions[k] = {score, metrics})
   var dims = s.dimensions || {};
@@ -1776,10 +1802,12 @@ function openStockModal(sym) {
                    valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
   var metricFmt = {
     rsi:          function(v){ return 'RSI: '   + v.toFixed(0); },
+    stoch:        function(v){ return 'Stoch: ' + v.toFixed(0); },
     ret_1w:       function(v){ return '1H: %'   + v.toFixed(1); },
     ret_1m:       function(v){ return '1A: %'   + v.toFixed(1); },
     ma:           function(v){ return 'MA: '    + v; },
     macd:         function(v){ return 'MACD: '  + v; },
+    vol_x:        function(v){ return 'Hacim: ' + v.toFixed(1) + 'x'; },
     boll:         function(v){ return 'Bollinger: ' + v; },
     vol:          function(v){ return 'Volat.: %' + v.toFixed(1); },
     pe:           function(v){ return 'F/K: '   + v.toFixed(1); },
@@ -2001,6 +2029,12 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="sm-section">
         <div class="sm-sec-title">Teknik Göstergeler</div>
         <div class="sm-grid4" id="sm-indicators"></div>
+      </div>
+      <!-- İşlem kurulumu (trader) -->
+      <div class="sm-section" id="sm-trade-section" style="display:none">
+        <div class="sm-sec-title">İşlem Kurulumu (ATR Bazlı)</div>
+        <div class="sm-grid4" id="sm-trade"></div>
+        <div style="font-size:10px;color:var(--t3);margin-top:6px">Long kurulum varsayımı · stop 1.5×ATR · hedef 2×ATR · yatırım tavsiyesi değildir</div>
       </div>
       <!-- Boyut skorları -->
       <div class="sm-section" id="sm-dims-section">
