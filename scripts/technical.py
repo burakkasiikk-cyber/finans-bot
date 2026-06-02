@@ -26,7 +26,7 @@ VERDICT_BANDS = [
     (0,  "GÜÇLÜ SAT",  "strong_sell"),
 ]
 
-WEIGHTS = {"trend": 0.40, "momentum": 0.40, "volatility": 0.20}
+WEIGHTS = {"trend": 0.35, "momentum": 0.35, "volatility": 0.15, "setup": 0.15}
 
 
 # ──────────────────────────── Göstergeler ────────────────────────────
@@ -323,6 +323,25 @@ def _volatility_score(closes: List[float]) -> Optional[int]:
     return 34
 
 
+def _setup_score(rr: Optional[float]) -> Optional[int]:
+    """Risk/ödül oranını 0-100 skora çevirir — iyi kurulum yüksek puan."""
+    if rr is None:
+        return None
+    if rr >= 2.5:
+        return 92
+    if rr >= 2.0:
+        return 84
+    if rr >= 1.5:
+        return 74
+    if rr >= 1.0:
+        return 58
+    if rr >= 0.7:
+        return 44
+    if rr >= 0.4:
+        return 32
+    return 18
+
+
 def _risk_from_vol(vol: Optional[float]) -> str:
     if vol is None:
         return "medium"
@@ -415,6 +434,8 @@ def score_from_history(price_history: list) -> Optional[dict]:
 
     m = macd(closes)
     st = stochastic(bars)
+    ts = trade_setup(bars)                       # risk/ödül → kurulum skoru için erken hesapla
+    rr = ts["rr"] if ts else None
     dims = {
         "trend": {
             "score": trend,
@@ -433,6 +454,10 @@ def score_from_history(price_history: list) -> Optional[dict]:
         "volatility": {
             "score": vol_sc,
             "metrics": {"boll": boll_label(bollinger_pos(closes)), "vol": vol_pct},
+        },
+        "setup": {
+            "score": _setup_score(rr),
+            "metrics": {"rr": rr},
         },
     }
 
@@ -455,7 +480,7 @@ def score_from_history(price_history: list) -> Optional[dict]:
         "verdict_key": sig["key"],
         "risk": _risk_from_vol(vol_pct),
         "dimensions": dims,
-        "trade_setup": trade_setup(bars),
+        "trade_setup": ts,
         "signal": sig,
     }
 

@@ -1856,9 +1856,9 @@ function openStockModal(sym) {
   // Boyut skorları (yeni format: dimensions[k] = {score, metrics})
   var dims = s.dimensions || {};
   // TRADER MODU boyutları (eski temel-veri boyutları da geriye dönük desteklenir)
-  var dimLabels = {trend:'Trend',momentum:'Momentum',volatility:'Volatilite / Bant',
+  var dimLabels = {trend:'Trend',momentum:'Momentum',volatility:'Volatilite / Bant',setup:'Kurulum (Risk/Ödül)',
                    valuation:'Değerleme',profit:'Kârlılık',growth:'Büyüme',health:'Finansal Sağlık',technical:'Teknik',analyst:'Analist'};
-  var dimColors = {trend:'#4a9eff',momentum:'#00d4aa',volatility:'#f5a623',
+  var dimColors = {trend:'#4a9eff',momentum:'#00d4aa',volatility:'#f5a623',setup:'#a78bfa',
                    valuation:'#4a9eff',profit:'#00d4aa',growth:'#f5a623',health:'#a78bfa',technical:'#f472b6',analyst:'#34d399'};
   var metricFmt = {
     rsi:          function(v){ return 'RSI: '   + v.toFixed(0); },
@@ -1870,6 +1870,7 @@ function openStockModal(sym) {
     vol_x:        function(v){ return 'Hacim: ' + v.toFixed(1) + 'x'; },
     boll:         function(v){ return 'Bollinger: ' + v; },
     vol:          function(v){ return 'Volat.: %' + v.toFixed(1); },
+    rr:           function(v){ return 'Risk/Ödül: 1 : ' + v.toFixed(2); },
     pe:           function(v){ return 'F/K: '   + v.toFixed(1); },
     pb:           function(v){ return 'F/DD: '  + v.toFixed(1); },
     ps:           function(v){ return 'F/S: '   + v.toFixed(1); },
