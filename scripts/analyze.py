@@ -8,6 +8,7 @@ from pathlib import Path
 from scripts.fetch_history import fetch_trader_stock
 from scripts.fetch_macro import fetch_macro
 from scripts.technical import rescore_report
+from scripts.news_sentiment import fetch_news_sentiment
 
 US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
 BIST_STOCKS = [
@@ -98,6 +99,18 @@ def run() -> dict:
     errors = [s for s in stocks if "error" in s]
     if errors:
         print(f"⚠️  {len(errors)} hisse atlandı: {[(e['symbol'], e['error']) for e in errors]}")
+
+    # Haber duygu analizi — skoru olumlu/olumsuz etkiler (haberler gösterilmez)
+    print("Haber duygu analizi...")
+    for s in stocks:
+        if "error" in s:
+            continue
+        yt = f"{s['symbol']}.IS" if s.get("exchange") == "BIST" else s["symbol"]
+        try:
+            s["news"] = fetch_news_sentiment(yt, s["symbol"], s.get("name", ""))
+        except Exception:
+            s["news"] = {"adjustment": 0, "sentiment": "nötr", "pos": 0, "neg": 0, "count": 0}
+        time.sleep(0.25)
 
     report = {
         "generated_at":   datetime.now(timezone.utc).isoformat(),

@@ -607,14 +607,10 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     </div>
   </div>
 
-  <!-- ── ROW 9: Haber Akışı + Ekonomik Takvim ── -->
-  <div class="g2">
-    <!-- Haber -->
-    <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--red)"></div>AI Haber Akışı</div><div class="chip">Duyarlılık Skorlu</div></div>
-      <div class="cb scroll-y" id="news-list"></div>
-    </div>
-    <!-- Ekonomik Takvim -->
+  <!-- ── ROW 9: Ekonomik Takvim ──
+       (Haber akışı kaldırıldı — haberler artık yalnızca arka planda skoru
+        olumlu/olumsuz etkiler, sitede gösterilmez) -->
+  <div style="margin-top:16px">
     <div class="card">
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--yellow)"></div>Ekonomik Takvim</div><span style="font-size:9.5px;color:var(--t3)">Önümüzdeki Olaylar</span></div>
       <div class="cb scroll-y" id="cal-list"></div>
@@ -946,7 +942,9 @@ function renderPortfolio(){
 
 
 function renderNews(){
-  document.getElementById('news-list').innerHTML=NEWS.map((n,i)=>`
+  var nl=document.getElementById('news-list');
+  if(!nl) return;   // Haber bölümü kaldırıldı — haberler arka planda skoru etkiler
+  nl.innerHTML=NEWS.map((n,i)=>`
     <div class="news-item" onclick="openNewsModal(${i})">
       <div class="news-sent" style="background:${n.sent==='pos'?'var(--green)':n.sent==='neg'?'var(--red)':'var(--yellow)'}"></div>
       <div class="news-body">
@@ -1842,6 +1840,16 @@ function openStockModal(sym) {
         '<div style="font-size:13px">🎯 <b>' + fmt2(ts.target) + unit + '</b>\'ye ulaşırsa → <b style="color:var(--green)">KÂR AL</b> (hedef)</div>' +
         '<div style="font-size:13px">🛑 <b>' + fmt2(ts.stop) + unit + '</b>\'nin altına inerse → <b style="color:var(--red)">SAT, ZARARI KES</b></div>' +
         '<div style="font-size:13px">🟢 <b>' + fmt2(ts.support) + unit + '</b> (destek) yakınında → alım için izlenebilir</div>';
+    }
+
+    // Haber etkisi (skora) — haberin kendisi değil, sadece etkisi gösterilir
+    var nw = s.news;
+    if (nw && nw.adjustment) {
+      var nclr = nw.adjustment > 0 ? 'var(--green)' : 'var(--red)';
+      var nico = nw.adjustment > 0 ? '📈' : '📉';
+      rules += '<div style="font-size:12px;margin-top:4px;color:var(--t2)">' + nico +
+        ' Haber etkisi: <b style="color:' + nclr + '">' +
+        (nw.adjustment > 0 ? '+' : '') + nw.adjustment + ' puan</b> (' + nw.sentiment + ')</div>';
     }
 
     document.getElementById('sm-signal-head').textContent = head;

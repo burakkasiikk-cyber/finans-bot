@@ -114,3 +114,34 @@ def test_rescore_report_skips_errors_and_short():
     assert "UP" in syms
     # top3 ve risk_alerts üretildi
     assert "top3" in report and "risk_alerts" in report
+
+
+# ── Haber duygu analizi ──
+from scripts.news_sentiment import analyze_titles, _relevance_keys
+
+
+def test_news_positive():
+    res = analyze_titles(["Company beats record profit", "Stock surges on upgrade"])
+    assert res["adjustment"] > 0 and res["sentiment"] == "olumlu"
+
+
+def test_news_negative():
+    res = analyze_titles(["Company misses estimates, stock plunges", "lawsuit and probe announced"])
+    assert res["adjustment"] < 0 and res["sentiment"] == "olumsuz"
+
+
+def test_news_capped_at_5():
+    res = analyze_titles(["beats record surge upgrade rally profit buyback dividend wins"] * 5)
+    assert -5 <= res["adjustment"] <= 5
+
+
+def test_news_relevance_filter():
+    # rel_keys 'apple' içeriyorsa sadece apple geçen başlık sayılır
+    titles = ["Apple beats record profit", "Generic market rally continues today"]
+    res = analyze_titles(titles, {"apple"})
+    assert res["count"] == 1  # sadece ilgili başlık sayıldı
+
+
+def test_relevance_keys_drops_generic():
+    keys = _relevance_keys("AAPL", "Apple Inc")
+    assert "aapl" in keys and "apple" in keys and "inc" not in keys

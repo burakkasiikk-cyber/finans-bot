@@ -496,6 +496,12 @@ def rescore_report(report: dict) -> int:
             continue
         res = score_from_history(s.get("price_history"))
         if res:
+            # Haber duygu düzeltmesini skora uygula (varsa) — teknik skoru ±5 nudge'lar
+            base = res["score"]
+            adj = (s.get("news") or {}).get("adjustment", 0) or 0
+            if base is not None and adj:
+                res["score"] = max(0, min(100, base + adj))
+                res["score_base"] = base   # haber öncesi teknik skor (şeffaflık)
             s.update(res)
             s["pros"] = []
             s["cons"] = []
