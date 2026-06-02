@@ -32,11 +32,37 @@ def fetch_bist_stock(symbol: str) -> dict:
     if price and high52 and low52 and high52 != low52:
         range_pos = round((price - low52) / (high52 - low52) * 100, 1)
 
+    # Fiyat geçmişi — skorlamadan ÖNCE çek ki kısa vadeli momentum hesaplanabilsin
+    try:
+        hist = ticker.history(period="3mo")
+        price_history = [
+            {
+                "t": int(ts.timestamp()),
+                "o": round(float(row["Open"]),  2),
+                "h": round(float(row["High"]),  2),
+                "l": round(float(row["Low"]),   2),
+                "c": round(float(row["Close"]), 2),
+            }
+            for ts, row in hist.iterrows()
+            if row["Close"] > 0
+        ][-60:]
+    except Exception:
+        price_history = []
+
+    # Kısa vadeli momentum (günlük güncellenir) — son kapanışa göre 1 hafta / 1 ay getiri
+    def _ret(closes, n):
+        if len(closes) > n and closes[-1-n]:
+            return round((closes[-1] / closes[-1-n] - 1) * 100, 2)
+        return None
+    closes = [b["c"] for b in price_history]
+    ret_1w = _ret(closes, 5)   # ~5 işlem günü
+    ret_1m = _ret(closes, 21)  # ~21 işlem günü
+
     val_raw  = {"pe": pe, "pb": pb}
     prof_raw = {"roe": roe}
     grow_raw = {"rev_growth": rev_g}
     hlth_raw = {"current_ratio": cur_ratio, "debt_equity": debt_equity}
-    tech_raw = {"ret52": ret52, "range_pos": range_pos}
+    tech_raw = {"ret52": ret52, "range_pos": range_pos, "ret_1m": ret_1m, "ret_1w": ret_1w}
 
     def score_dim(raw):
         return {k: score_metric(v, k) for k, v in raw.items()}
@@ -59,23 +85,6 @@ def fetch_bist_stock(symbol: str) -> dict:
     overall = round(weighted / total_w) if total_w else None
 
     verdict_label, verdict_key = verdict_of(overall)
-
-    # Son 60 işlem günü fiyat geçmişi (grafik için)
-    try:
-        hist = ticker.history(period="3mo")
-        price_history = [
-            {
-                "t": int(ts.timestamp()),
-                "o": round(float(row["Open"]),  2),
-                "h": round(float(row["High"]),  2),
-                "l": round(float(row["Low"]),   2),
-                "c": round(float(row["Close"]), 2),
-            }
-            for ts, row in hist.iterrows()
-            if row["Close"] > 0
-        ][-60:]
-    except Exception:
-        price_history = []
 
     return {
         "symbol":        symbol,

@@ -16,15 +16,17 @@ THRESHOLDS = {
     "quick_ratio":  {"dir": "up",   "t": [1.5, 1, 0.7, 0.4]},
     "ret52":        {"dir": "up",   "t": [25, 8, -5, -25]},
     "ret13":        {"dir": "up",   "t": [15, 3, -5, -15]},
+    "ret_1m":       {"dir": "up",   "t": [10, 3, -3, -10]},   # ~21 işlem günü momentum (günlük güncellenir)
+    "ret_1w":       {"dir": "up",   "t": [4, 1, -1, -4]},     # ~5 işlem günü momentum (günlük güncellenir)
     "range_pos":    {"dir": "up",   "t": [60, 40, 20, 5]},
 }
 
 WEIGHTS = {
-    "valuation": 0.20,
-    "profit":    0.20,
-    "growth":    0.20,
+    "valuation": 0.18,
+    "profit":    0.17,
+    "growth":    0.15,
     "health":    0.15,
-    "technical": 0.15,
+    "technical": 0.25,   # momentum ağırlığı artırıldı — kararlar fiyat hareketine daha duyarlı
     "analyst":   0.10,
 }
 

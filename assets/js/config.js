@@ -12,11 +12,11 @@ const CONFIG = {
   // Boyut ağırlıkları (toplam 1.00). Eksik veri olan boyut otomatik atlanır
   // ve kalan ağırlıklar yeniden normalize edilir.
   WEIGHTS: {
-    valuation: 0.20,   // Değerleme
-    profit:    0.20,   // Kârlılık
-    growth:    0.20,   // Büyüme
+    valuation: 0.18,   // Değerleme
+    profit:    0.17,   // Kârlılık
+    growth:    0.15,   // Büyüme
     health:    0.15,   // Finansal sağlık
-    technical: 0.15,   // Teknik / momentum
+    technical: 0.25,   // Teknik / momentum — fiyat hareketine duyarlılık için artırıldı
     analyst:   0.10,   // Analist görüşü
   },
 
@@ -48,6 +48,8 @@ const CONFIG = {
     quickRatio:{ dir: "up",   t: [1.5, 1, 0.7, 0.4]},
     ret52:     { dir: "up",   t: [25, 8, -5, -25]  },
     ret13:     { dir: "up",   t: [15, 3, -5, -15]  },
+    ret_1m:    { dir: "up",   t: [10, 3, -3, -10]  },
+    ret_1w:    { dir: "up",   t: [4, 1, -1, -4]    },
     rangePos:  { dir: "up",   t: [60, 40, 20, 5]   },
   },
 
