@@ -1793,6 +1793,58 @@ function openStockModal(sym) {
     tradeSec.style.display = 'none';
   }
 
+  // ════════ BASİT SİNYAL — ne zaman al / ne zaman sat ════════
+  (function(){
+    var box = document.getElementById('sm-signal');
+    var mm  = (s.dimensions && s.dimensions.momentum && s.dimensions.momentum.metrics) || {};
+    var stochV = mm.stoch;
+    var trendUp = (ma === 'Yükseliş' || ma === 'Golden Cross') && mr.sig === 'Buy';
+    var trendDn = (ma === 'Düşüş' || ma === 'Death Cross') || mr.sig === 'Sell';
+    var overbought = (rsi >= 75) || (stochV != null && stochV >= 85) || bol === 'Üst Band';
+    var oversold   = (rsi > 0 && rsi <= 30) || (stochV != null && stochV <= 15) || bol === 'Alt Band';
+
+    var head, detail, bg, bd;
+    if (trendUp && !overbought) {
+      head = '🟢 AL BÖLGESİ';
+      detail = 'Trend yukarı ve momentum sağlıklı. Alım için uygun görünüyor.';
+      bg = 'rgba(0,212,170,.12)'; bd = 'var(--green)';
+    } else if (trendUp && overbought) {
+      head = '🟡 KÂR-AL / TEMKİNLİ';
+      detail = 'Trend yukarı ama hisse aşırı alımda — kısa vadeli düzeltme gelebilir. Yeni alımda acele etme, elindekinde kâr almayı düşünebilirsin.';
+      bg = 'rgba(245,166,35,.12)'; bd = 'var(--yellow)';
+    } else if (oversold && !trendDn) {
+      head = '🟡 DİP İZLE';
+      detail = 'Hisse aşırı satımda; tepki yükselişi olabilir. Trend yukarı dönmeden alım riskli — teyit bekle.';
+      bg = 'rgba(245,166,35,.12)'; bd = 'var(--yellow)';
+    } else if (trendDn) {
+      head = '🔴 SAT / UZAK DUR';
+      detail = 'Trend aşağı döndü. Yeni alım için uygun değil; elindekini gözden geçir.';
+      bg = 'rgba(255,77,109,.12)'; bd = 'var(--red)';
+    } else {
+      head = '⚪ BEKLE';
+      detail = 'Net bir sinyal yok. Kenarda kalıp daha belirgin bir kurulum beklemek mantıklı.';
+      bg = 'rgba(136,153,170,.10)'; bd = 'var(--border2)';
+    }
+
+    var rules = '';
+    if (ts && ts.entry != null) {
+      var fmt2 = function(v){ return v.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}); };
+      var unit = s.exchange === 'BIST' ? ' TL' : ' $';
+      rules =
+        '<div style="font-size:13px">🎯 <b>' + fmt2(ts.target) + unit + '</b>\'ye ulaşırsa → <b style="color:var(--green)">KÂR AL</b> (hedef)</div>' +
+        '<div style="font-size:13px">🛑 <b>' + fmt2(ts.stop) + unit + '</b>\'nin altına inerse → <b style="color:var(--red)">SAT, ZARARI KES</b></div>' +
+        '<div style="font-size:13px">🟢 <b>' + fmt2(ts.support) + unit + '</b> (destek) yakınında → alım için izlenebilir</div>';
+    }
+
+    document.getElementById('sm-signal-head').textContent = head;
+    document.getElementById('sm-signal-head').style.color = bd;
+    document.getElementById('sm-signal-detail').textContent = detail;
+    document.getElementById('sm-signal-rules').innerHTML = rules;
+    box.style.background = bg;
+    box.style.borderColor = bd;
+    box.style.display = '';
+  })();
+
   // Boyut skorları (yeni format: dimensions[k] = {score, metrics})
   var dims = s.dimensions || {};
   // TRADER MODU boyutları (eski temel-veri boyutları da geriye dönük desteklenir)
@@ -2018,6 +2070,13 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     <div class="sm-body">
+      <!-- BASİT SİNYAL — ne zaman al / ne zaman sat -->
+      <div id="sm-signal" style="display:none;border-radius:14px;padding:16px 18px;margin-bottom:16px;border:1px solid var(--border2)">
+        <div id="sm-signal-head" style="font-size:20px;font-weight:800;margin-bottom:4px"></div>
+        <div id="sm-signal-detail" style="font-size:13px;color:var(--t1);margin-bottom:10px"></div>
+        <div id="sm-signal-rules" style="display:flex;flex-direction:column;gap:6px"></div>
+        <div style="font-size:10px;color:var(--t3);margin-top:10px">Mekanik teknik sinyal · yatırım tavsiyesi değildir, karar senindir</div>
+      </div>
       <!-- Fiyat grafiği -->
       <div class="sm-section">
         <div class="sm-sec-title">Fiyat Geçmişi</div>
