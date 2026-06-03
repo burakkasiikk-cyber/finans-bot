@@ -57,10 +57,11 @@ jobs:
           if not (os.environ.get('TELEGRAM_BOT_TOKEN') or os.environ.get('GMAIL_ADDRESS')):
               print('Notification secrets not set, skipping.')
           else:
-              from scripts.notify import notify_morning
+              from scripts.notify import notify_morning, notify_changes
               with open('data/report.json') as f:
                   report = json.load(f)
               notify_morning(report)
+              notify_changes(report)
           "
 
       - name: Commit report.json

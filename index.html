@@ -607,10 +607,15 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     </div>
   </div>
 
-  <!-- ── ROW 9: Ekonomik Takvim ──
-       (Haber akışı kaldırıldı — haberler artık yalnızca arka planda skoru
-        olumlu/olumsuz etkiler, sitede gösterilmez) -->
-  <div style="margin-top:16px">
+  <!-- ── ROW 9: Bugün Ne Değişti + Ekonomik Takvim ──
+       (Sahte haber akışı kaldırıldı; yerine düne göre gerçek karar değişimleri) -->
+  <div class="g2">
+    <!-- Bugün Ne Değişti -->
+    <div class="card">
+      <div class="ch"><div class="ct"><div class="dot" style="background:var(--green)"></div>Bugün Ne Değişti</div><div class="chip">Düne göre karar değişimi</div></div>
+      <div class="cb scroll-y" id="changes-list"></div>
+    </div>
+    <!-- Ekonomik Takvim -->
     <div class="card">
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--yellow)"></div>Ekonomik Takvim</div><span style="font-size:9.5px;color:var(--t3)">Önümüzdeki Olaylar</span></div>
       <div class="cb scroll-y" id="cal-list"></div>
@@ -894,9 +899,11 @@ function renderPortfolio(){
     const value= p.qty * cur;
     const pnl  = value - cost;
     const pnlPct = cost > 0 ? (pnl / cost * 100) : 0;
-    return { ...p, cur, isBist, cost, value, pnl, pnlPct, idx:i, nm: f ? (f.name||p.sym).split(' ').slice(0,2).join(' ') : p.sym };
+    return { ...p, cur, isBist, cost, value, pnl, pnlPct, idx:i, vkey: f ? f.verdict_key : null, nm: f ? (f.name||p.sym).split(' ').slice(0,2).join(' ') : p.sym };
   });
   const colors = ['#00d4aa','#4a9eff','#9b59b6','#f5a623','#e74c3c','#27ae60','#3498db','#e67e22','#f472b6','#a78bfa'];
+  const VLABEL = {strong_buy:'GÜÇLÜ AL',buy:'AL',hold:'TUT',sell:'SAT',strong_sell:'GÜÇLÜ SAT'};
+  const VCLR = {strong_buy:'var(--green)',buy:'var(--green)',hold:'var(--yellow)',sell:'var(--red)',strong_sell:'var(--red)'};
 
   list.innerHTML = rows.map((r, i) => {
     const fmt = v => r.isBist
@@ -904,9 +911,12 @@ function renderPortfolio(){
       : '$'+v.toFixed(2);
     const pctTxt = (r.pnlPct>=0?'+':'') + r.pnlPct.toFixed(2) + '%';
     const up = r.pnl >= 0;
-    return `<div class="port-item" style="cursor:pointer" data-sym="${r.sym}">
+    const isSell = r.vkey==='sell' || r.vkey==='strong_sell';
+    const badge = r.vkey ? `<span style="font-size:8.5px;font-weight:700;padding:1px 5px;border-radius:4px;background:${VCLR[r.vkey]}22;color:${VCLR[r.vkey]};white-space:nowrap">${VLABEL[r.vkey]}</span>` : '';
+    const warn = isSell ? `<div style="font-size:9px;color:var(--red);margin-top:2px">⚠ Bu hisse artık SAT — pozisyonu gözden geçir</div>` : '';
+    return `<div class="port-item" style="cursor:pointer${isSell?';border-left:2px solid var(--red);padding-left:6px':''}" data-sym="${r.sym}">
       <div class="pc" style="background:${colors[i % colors.length]}"></div>
-      <div class="pi"><div class="pis">${r.sym}</div><div class="pin">${r.nm} · ${r.qty} adet</div></div>
+      <div class="pi"><div class="pis">${r.sym} ${badge}</div><div class="pin">${r.nm} · ${r.qty} adet</div>${warn}</div>
       <div class="pw" style="text-align:right;font-size:10px;color:var(--t3)">${fmt(r.cur)}<br><span style="font-size:9px">alış: ${fmt(r.buy)}</span></div>
       <div class="pnl"><div class="pnlv ${up?'up':'down'}">${pctTxt}</div><div class="pnls">${(r.pnl>=0?'+':'')+Math.round(r.pnl).toLocaleString('tr-TR')}</div></div>
       <button class="wi-del" onclick="event.stopPropagation();removePortfolio(${r.idx})" style="margin-left:4px">✕</button>
@@ -940,6 +950,55 @@ function renderPortfolio(){
   buildPortChart(rows.map((r,i) => ({label:r.sym, value:r.value, color:colors[i % colors.length]})));
 }
 
+
+function renderChanges(){
+  var el=document.getElementById('changes-list');
+  if(!el) return;
+  var stocks=(_rawReport && _rawReport.stocks) || [];
+  var RANK={strong_buy:2,buy:1,hold:0,sell:-1,strong_sell:-2};
+  var LABEL={strong_buy:'GÜÇLÜ AL',buy:'AL',hold:'TUT',sell:'SAT',strong_sell:'GÜÇLÜ SAT'};
+  var changes=[];
+  stocks.forEach(function(s){
+    if(s.error||!s.prev||!s.prev.verdict_key) return;
+    var oldK=s.prev.verdict_key, newK=s.verdict_key;
+    if(oldK===newK) return;
+    var dir=(RANK[newK]||0)-(RANK[oldK]||0);
+    changes.push({sym:s.symbol, oldK:oldK, newK:newK, up:dir>0, dScore:(s.score||0)-(s.prev.score||0)});
+  });
+  // Yükselenler önce (yeşil), sonra düşenler (kırmızı)
+  changes.sort(function(a,b){ return (b.up-a.up) || (b.dScore-a.dScore); });
+
+  if(!changes.length){
+    // Değişen karar yoksa, skoru en çok oynayanları göster
+    var movers=stocks.filter(function(s){return !s.error && s.prev && s.prev.score!=null;})
+      .map(function(s){return {sym:s.symbol, d:(s.score||0)-(s.prev.score||0)};})
+      .filter(function(m){return Math.abs(m.d)>=1;})
+      .sort(function(a,b){return Math.abs(b.d)-Math.abs(a.d);}).slice(0,5);
+    if(!movers.length){
+      el.innerHTML='<div style="text-align:center;color:var(--t3);font-size:11.5px;padding:18px 8px">Düne göre kayda değer bir değişim yok.</div>';
+      return;
+    }
+    el.innerHTML='<div style="font-size:10px;color:var(--t3);padding:4px 2px 8px">Karar değişmedi — skoru en çok oynayanlar:</div>'+
+      movers.map(function(m){
+        var up=m.d>=0;
+        return '<div class="news-item" style="cursor:pointer" onclick="openStockModal(\''+m.sym+'\')">'+
+          '<div class="news-sent" style="background:'+(up?'var(--green)':'var(--red)')+'"></div>'+
+          '<div class="news-body"><div class="news-title" style="font-size:12px">'+m.sym+
+          ' <span style="color:'+(up?'var(--green)':'var(--red)')+'">'+(up?'▲':'▼')+' '+(up?'+':'')+m.d+' puan</span></div></div></div>';
+      }).join('');
+    return;
+  }
+
+  el.innerHTML=changes.map(function(c){
+    var clr=c.up?'var(--green)':'var(--red)';
+    var ico=c.up?'⬆':'⬇';
+    return '<div class="news-item" style="cursor:pointer" onclick="openStockModal(\''+c.sym+'\')">'+
+      '<div class="news-sent" style="background:'+clr+'"></div>'+
+      '<div class="news-body"><div class="news-title" style="font-size:12px">'+
+      '<b>'+c.sym+'</b> '+ico+' <span style="color:var(--t2)">'+LABEL[c.oldK]+'</span> → '+
+      '<b style="color:'+clr+'">'+LABEL[c.newK]+'</b></div></div></div>';
+  }).join('');
+}
 
 function renderNews(){
   var nl=document.getElementById('news-list');
@@ -1346,6 +1405,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderTech('us-tech',US);
   renderPortfolio();
   renderNews();
+  renderChanges();
   renderCalendar();
   renderWatches();
   renderAlarms();
@@ -1552,6 +1612,7 @@ async function loadReport() {
     renderTable('us-body',   US);
     renderTech('bist-tech',  BIST);
     renderTech('us-tech',    US);
+    renderChanges();   // düne göre karar değişimleri
 
     /* ── AI skor ring güncelle ── */
     var scores = rawStocks.map(function(s){return s.score||50;});

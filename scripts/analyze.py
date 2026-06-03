@@ -74,6 +74,12 @@ def run() -> dict:
         if not macro.get(k) and v is not None:
             macro[k] = v
 
+    # "Dünkü" skor + karar haritası — "bugün ne değişti" ve değişim bildirimleri için
+    prev_map = {
+        s["symbol"]: {"score": s.get("score"), "verdict_key": s.get("verdict_key")}
+        for s in old_report.get("stocks", []) if "error" not in s and s.get("symbol")
+    }
+
     stocks = []
 
     # TRADER MODU: tüm hisseler (ABD + BIST) tek kaynaktan — yfinance fiyat geçmişi.
@@ -110,6 +116,9 @@ def run() -> dict:
             s["news"] = fetch_news_sentiment(yt, s["symbol"], s.get("name", ""))
         except Exception:
             s["news"] = {"adjustment": 0, "sentiment": "nötr", "pos": 0, "neg": 0, "count": 0}
+        # Dünkü skor/karar — "bugün ne değişti" karşılaştırması için
+        if s["symbol"] in prev_map:
+            s["prev"] = prev_map[s["symbol"]]
         time.sleep(0.25)
 
     report = {

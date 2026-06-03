@@ -20,7 +20,7 @@ jobs:
 
       - name: Check alarms
         env:
-          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
+          # FINNHUB_KEY artık gerekmiyor — fiyatlar yfinance'den çekiliyor
           ALARMS: ${{ secrets.ALARMS }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

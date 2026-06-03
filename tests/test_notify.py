@@ -1,5 +1,5 @@
 from unittest.mock import patch, MagicMock
-from scripts.notify import build_morning_message, send_telegram
+from scripts.notify import build_morning_message, send_telegram, build_change_message
 
 SAMPLE_REPORT = {
     "generated_at": "2026-05-26T06:03:00Z",
@@ -27,6 +27,27 @@ def test_build_morning_message_contains_risk_alert():
 def test_build_morning_message_contains_macro():
     msg = build_morning_message(SAMPLE_REPORT)
     assert "32.45" in msg
+
+def test_change_message_detects_upgrade_and_downgrade():
+    report = {"stocks": [
+        {"symbol": "AAA", "verdict_key": "strong_buy", "prev": {"verdict_key": "buy"}},
+        {"symbol": "BBB", "verdict_key": "sell",       "prev": {"verdict_key": "hold"}},
+        {"symbol": "CCC", "verdict_key": "buy",        "prev": {"verdict_key": "buy"}},  # değişmedi
+    ]}
+    msg = build_change_message(report)
+    assert msg is not None
+    assert "AAA" in msg and "BBB" in msg and "CCC" not in msg
+    assert "Fırsat" in msg and "Dikkat" in msg
+
+
+def test_change_message_none_when_no_change():
+    report = {"stocks": [
+        {"symbol": "AAA", "verdict_key": "buy", "prev": {"verdict_key": "buy"}},
+        {"symbol": "ERR", "error": "x"},
+        {"symbol": "NOPREV", "verdict_key": "buy"},  # prev yok
+    ]}
+    assert build_change_message(report) is None
+
 
 @patch("scripts.notify.requests.post")
 def test_send_telegram_calls_api(mock_post):

@@ -42,6 +42,67 @@ def build_morning_message(report: dict) -> str:
     return "\n".join(lines)
 
 
+_RANK = {"strong_buy": 2, "buy": 1, "hold": 0, "sell": -1, "strong_sell": -2}
+_VLABEL = {"strong_buy": "GÜÇLÜ AL", "buy": "AL", "hold": "TUT",
+           "sell": "SAT", "strong_sell": "GÜÇLÜ SAT"}
+
+
+def build_change_message(report: dict, only_significant: bool = True, limit: int = 15):
+    """Düne göre karar değişimlerini özetleyen mesaj. Değişim yoksa None döner.
+
+    only_significant=True iken yalnızca trader için önemli olanlar bildirilir:
+    GÜÇLÜ AL'a yükselenler ve SAT/GÜÇLÜ SAT'a düşenler."""
+    ups, downs = [], []
+    for s in report.get("stocks", []):
+        if "error" in s:
+            continue
+        prev = s.get("prev") or {}
+        ok, nk = prev.get("verdict_key"), s.get("verdict_key")
+        if not ok or not nk or ok == nk:
+            continue
+        is_up = _RANK.get(nk, 0) > _RANK.get(ok, 0)
+        significant = (nk == "strong_buy") or (nk in ("sell", "strong_sell"))
+        if only_significant and not significant:
+            continue
+        entry = (abs(_RANK.get(nk, 0) - _RANK.get(ok, 0)),
+                 f"{s['symbol']}: {_VLABEL.get(ok, ok)} → {_VLABEL.get(nk, nk)}")
+        (ups if is_up else downs).append(entry)
+
+    if not ups and not downs:
+        return None
+
+    ups.sort(reverse=True)
+    downs.sort(reverse=True)
+    lines = ["🔔 Karar Değişimleri", ""]
+    if ups:
+        lines.append("⬆ Fırsat (GÜÇLÜ AL oldu):")
+        lines += [f"• {u[1]}" for u in ups[:limit]]
+    if downs:
+        if ups:
+            lines.append("")
+        lines.append("⬇ Dikkat (SAT'a döndü):")
+        lines += [f"• {d[1]}" for d in downs[:limit]]
+    return "\n".join(lines)
+
+
+def notify_changes(report: dict) -> None:
+    """Karar değişimi bildirimini Telegram/Gmail ile gönder (secret varsa)."""
+    message = build_change_message(report)
+    if not message:
+        print("Karar değişimi yok, bildirim atlandı.")
+        return
+    token    = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    chat_id  = os.environ.get("TELEGRAM_CHAT_ID", "")
+    gmail    = os.environ.get("GMAIL_ADDRESS", "")
+    gmail_pw = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if token and chat_id:
+        send_telegram(message, token, chat_id)
+        print("✅ Değişim bildirimi (Telegram) gönderildi")
+    if gmail and gmail_pw:
+        send_gmail("🔔 Hisse Karar Değişimleri", message, gmail, gmail_pw)
+        print("✅ Değişim bildirimi (Gmail) gönderildi")
+
+
 def send_telegram(message: str, bot_token: str, chat_id: str) -> None:
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     requests.post(url, json={"chat_id": chat_id, "text": message, "parse_mode": "HTML"}, timeout=10)
