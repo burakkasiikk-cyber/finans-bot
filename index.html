@@ -475,7 +475,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       <div style="display:flex;align-items:center;gap:16px">
         <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:3px;background:var(--green);border-radius:2px"></div><span style="font-size:10px;color:var(--t2)">Portföyüm</span></div>
         <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:3px;background:var(--blue);border-radius:2px"></div><span style="font-size:10px;color:var(--t2)">BIST 100</span></div>
-        <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:3px;background:var(--purple);border-radius:2px;opacity:.6"></div><span style="font-size:10px;color:var(--t2)">S&P 500 (TRY)</span></div>
       </div>
       <div class="tabs">
         <button class="tab active" onclick="updatePerfChart('1m',this)">1A</button>
@@ -488,10 +487,9 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <div class="cb" style="padding:12px 16px">
       <div style="position:relative;height:280px"><canvas id="perfChart"></canvas></div>
       <!-- Dönem istatistikleri -->
-      <div id="perf-stats" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+      <div id="perf-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
         <div class="pstat"><div class="pstat-lbl">Portföy Getirisi</div><div class="pstat-val up" id="ps-ret">—</div></div>
         <div class="pstat"><div class="pstat-lbl">BIST 100 Getirisi</div><div class="pstat-val" id="ps-bist">—</div></div>
-        <div class="pstat"><div class="pstat-lbl">S&P 500 Getirisi</div><div class="pstat-val" id="ps-sp">—</div></div>
         <div class="pstat"><div class="pstat-lbl">En İyi Gün</div><div class="pstat-val up" id="ps-best">—</div></div>
         <div class="pstat"><div class="pstat-lbl">En Kötü Gün</div><div class="pstat-val down" id="ps-worst">—</div></div>
       </div>
@@ -500,15 +498,15 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 
   <!-- ── ROW 4: Makro Göstergeler ── -->
   <div class="card mb16">
-    <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Makro Göstergeler</div><span style="font-size:9.5px;color:var(--t3)">Fed · TCMB · Emtia · Tahvil · Volatilite</span></div>
+    <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Makro Göstergeler</div><span style="font-size:9.5px;color:var(--t3)">TCMB · Döviz · Emtia · BIST</span></div>
     <div class="cb">
       <div class="mac-grid">
-        <div class="mac-item"><div class="mac-icon" style="background:var(--red2)">🏛️</div><div><div class="mac-lbl">FED FUNDS</div><div class="mac-val">%5,25</div><div class="mac-sub" style="color:var(--t3)">Sonraki: 12 Haz</div></div></div>
-        <div class="mac-item"><div class="mac-icon" style="background:var(--yellow2)">📊</div><div><div class="mac-lbl">ABD CPI (YoY)</div><div class="mac-val">%3,4</div><div class="mac-sub down">▼ Önceki: %3,8</div></div></div>
-        <div class="mac-item"><div class="mac-icon" style="background:var(--green2)">🇹🇷</div><div><div class="mac-lbl">TCMB FAİZİ</div><div class="mac-val">%50,0</div><div class="mac-sub" style="color:var(--t3)">Sonraki: 23 May</div></div></div>
-        <div class="mac-item"><div class="mac-icon" style="background:var(--yellow2)">🏅</div><div><div class="mac-lbl">ALTIN ($/oz)</div><div class="mac-val">2.328</div><div class="mac-sub up">▲ +0,6%</div></div></div>
+        <div class="mac-item"><div class="mac-icon" style="background:var(--green2)">💵</div><div><div class="mac-lbl">USD/TRY</div><div class="mac-val">—</div><div class="mac-sub" style="color:var(--t3)">Amerikan Doları</div></div></div>
+        <div class="mac-item"><div class="mac-icon" style="background:var(--blue2)">💶</div><div><div class="mac-lbl">EUR/TRY</div><div class="mac-val">—</div><div class="mac-sub" style="color:var(--t3)">Euro</div></div></div>
+        <div class="mac-item"><div class="mac-icon" style="background:var(--green2)">🇹🇷</div><div><div class="mac-lbl">TCMB FAİZİ</div><div class="mac-val">%46,0</div><div class="mac-sub" style="color:var(--t3)">Politika faizi</div></div></div>
+        <div class="mac-item"><div class="mac-icon" style="background:var(--yellow2)">🏅</div><div><div class="mac-lbl">ALTIN ($/oz)</div><div class="mac-val">—</div><div class="mac-sub" style="color:var(--t3)">Ons altın</div></div></div>
         <div class="mac-item"><div class="mac-icon" style="background:var(--blue2)">🛢️</div><div><div class="mac-lbl">BRENT PETROL</div><div class="mac-val">$84,2</div><div class="mac-sub down">▼ -1,2%</div></div></div>
-        <div class="mac-item"><div class="mac-icon" style="background:var(--purple2)">📈</div><div><div class="mac-lbl">10Y ABD</div><div class="mac-val">%4,48</div><div class="mac-sub up">▼ -4 bps</div></div></div>
+        <div class="mac-item"><div class="mac-icon" style="background:var(--purple2)">📊</div><div><div class="mac-lbl">BIST100</div><div class="mac-val" id="mac-bist">—</div><div class="mac-sub" style="color:var(--t3)">Borsa İstanbul</div></div></div>
       </div>
     </div>
   </div>
@@ -680,18 +678,7 @@ let BIST = [
   {sym:'PETKM',nm:'Petkim',px:'17,84',chg:'-1,1%',up:false,rec:'b-s',rl:'Sat',tgt:'15',tu:false,risk:4,conf:71,rsi:68,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
   {sym:'EKGYO',nm:'Emlak Konut GYO',px:'26,40',chg:'-0,8%',up:false,rec:'b-s',rl:'Sat',tgt:'22',tu:false,risk:4,conf:68,rsi:65,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
 ];
-let US = [
-  {sym:'NVDA',nm:'NVIDIA Corp',px:'$875,40',chg:'+4,6%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$1,050',tu:true,risk:3,conf:95,rsi:44,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta-Alt',ma:'Golden Cross'},
-  {sym:'META',nm:'Meta Platforms',px:'$488,70',chg:'+2,3%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$580',tu:true,risk:2,conf:88,rsi:48,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Golden Cross'},
-  {sym:'MSFT',nm:'Microsoft Corp',px:'$418,30',chg:'+1,2%',up:true,rec:'b-sb',rl:'Güçlü Al',tgt:'$500',tu:true,risk:1,conf:92,rsi:55,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Yükseliş'},
-  {sym:'GOOGL',nm:'Alphabet Inc',px:'$175,60',chg:'+1,9%',up:true,rec:'b-b',rl:'Al',tgt:'$200',tu:true,risk:2,conf:85,rsi:50,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Yükseliş'},
-  {sym:'AAPL',nm:'Apple Inc',px:'$189,20',chg:'+0,8%',up:true,rec:'b-b',rl:'Al',tgt:'$215',tu:true,risk:1,conf:82,rsi:52,rsiC:'rsi-n',macd:'Nötr',macdC:'mac-neu',bol:'Orta',ma:'Yükseliş'},
-  {sym:'AMZN',nm:'Amazon.com',px:'$186,40',chg:'+0,5%',up:true,rec:'b-b',rl:'Al',tgt:'$215',tu:true,risk:2,conf:80,rsi:53,rsiC:'rsi-n',macd:'Buy',macdC:'mac-buy',bol:'Orta',ma:'Yükseliş'},
-  {sym:'JPM',nm:'JPMorgan Chase',px:'$198,70',chg:'+0,6%',up:true,rec:'b-b',rl:'Al',tgt:'$225',tu:true,risk:2,conf:79,rsi:49,rsiC:'rsi-n',macd:'Nötr',macdC:'mac-neu',bol:'Orta',ma:'Yükseliş'},
-  {sym:'TSLA',nm:'Tesla Inc',px:'$178,50',chg:'-1,4%',up:false,rec:'b-h',rl:'Tut',tgt:'$185',tu:true,risk:5,conf:55,rsi:60,rsiC:'rsi-n',macd:'Sel',macdC:'mac-sel',bol:'Orta-Üst',ma:'Yatay'},
-  {sym:'XOM',nm:'ExxonMobil',px:'$113,40',chg:'-0,3%',up:false,rec:'b-h',rl:'Tut',tgt:'$118',tu:true,risk:3,conf:63,rsi:57,rsiC:'rsi-n',macd:'Nötr',macdC:'mac-neu',bol:'Orta',ma:'Yatay'},
-  {sym:'INTC',nm:'Intel Corp',px:'$30,12',chg:'-2,1%',up:false,rec:'b-s',rl:'Sat',tgt:'$25',tu:false,risk:4,conf:73,rsi:66,rsiC:'rsi-ob',macd:'Sel',macdC:'mac-sel',bol:'Üst Band',ma:'Death Cross'},
-];
+let US = [];   // ABD borsası kaldırıldı — sadece BIST
 /* ── Genel helper (modal/header/portföy hepsi kullanır) ── */
 function setH(id, val, color) {
   var el = document.getElementById(id);
@@ -742,50 +729,19 @@ function removePortfolio(i){
   if (typeof buildPerfChart === 'function') buildPerfChart(window._perfPts || 30);
 }
 const TICKER_DATA=[
-  {s:'BIST100',p:'9.847',c:'+1,31%',u:true},{s:'XU030',p:'10.122',c:'+1,54%',u:true},
-  {s:'S&P500',p:'5.342',c:'+0,82%',u:true},{s:'NASDAQ',p:'16.724',c:'+1,12%',u:true},
-  {s:'DOW',p:'39.082',c:'+0,44%',u:true},{s:'USD/TRY',p:'32,48',c:'-0,55%',u:false},
-  {s:'EUR/TRY',p:'35,12',c:'-0,31%',u:false},{s:'ALTIN/gr',p:'2.108',c:'+0,62%',u:true},
-  {s:'BRENT',p:'$84,2',c:'-1,2%',u:false},{s:'BTC',p:'$67.420',c:'+2,4%',u:true},
-  {s:'THYAO',p:'281,40',c:'+3,2%',u:true},{s:'ASELS',p:'66,45',c:'+4,1%',u:true},
-  {s:'NVDA',p:'$875',c:'+4,6%',u:true},{s:'MSFT',p:'$418',c:'+1,2%',u:true},
-  {s:'VIX',p:'13,2',c:'-5,4%',u:false},{s:'10Y-US',p:'%4,48',c:'-4bps',u:false},
+  {s:'BIST100',p:'—',c:'',u:true},{s:'USD/TRY',p:'—',c:'',u:false},
+  {s:'EUR/TRY',p:'—',c:'',u:false},{s:'ALTIN',p:'—',c:'',u:true},
+  {s:'BRENT',p:'$84,2',c:'-1,2%',u:false},{s:'TCMB',p:'%46',c:'',u:false},
 ];
-const NEWS=[
-  {sent:'pos',title:'NVDA beklentilerin üzerinde kazanç açıkladı, yapay zeka talebi rekor seviyede',src:'Bloomberg',time:'1sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff',
-   body:'NVIDIA, piyasa beklentilerini önemli ölçüde aşan çeyrek sonuçlarını açıkladı. Veri merkezi geliri yıllık bazda %%427 artarak <strong>22,6 milyar dolar</strong>a ulaştı. CEO Jensen Huang, yapay zeka chip talebinin 2025 yılına kadar arzın önünde kalacağını belirtti. H100 GPU siparişleri için bekleme süreleri hâlâ 6-8 ay.',
-   impact:[{lbl:'NVDA Hedef',val:'+12%',up:true},{lbl:'Sektör',val:'Pozitif',up:true},{lbl:'AI Teması',val:'Güçleniyor',up:true}]},
-  {sent:'pos',title:'TCMB enflasyon görünümünde iyileşme sinyali verdi, faiz indirimi beklentisi arttı',src:'Reuters',time:'2sa',tag:'Makro',tagC:'#00d4aa22',tagT:'#00d4aa',
-   body:'Türkiye Cumhuriyet Merkez Bankası yetkilileri, enflasyonun zirve yapacağı Mayıs-Haziran döneminin ardından <strong>belirgin bir düşüş trendi</strong> beklentisini dile getirdi. Piyasalar, yılın ikinci yarısında temkinli bir faiz indirim döngüsünü fiyatlamaya başladı. TL varlıkları için olumlu bir sinyal.',
-   impact:[{lbl:'TL Etkisi',val:'Pozitif',up:true},{lbl:'Banka Hisseleri',val:'İzle',up:true},{lbl:'Tahvil',val:'Alım Fırsatı',up:true}]},
-  {sent:'pos',title:'THYAO Mayıs yolcu trafiği geçen yılı %18 aştı, yükseliş devam ediyor',src:'AA Finans',time:'3sa',tag:'BIST',tagC:'#00d4aa22',tagT:'#00d4aa',
-   body:'Türk Hava Yolları, Mayıs ayında <strong>6,2 milyon yolcu</strong> taşıdığını açıkladı; bu rakam geçen yılın aynı dönemine göre %18 artış anlamına geliyor. Koltuk doluluk oranı %88,4 ile yüksek seyrediyor. Avrupa ve Körfez hatlarındaki kapasite artışı yaz sezonunda güçlü kârlılığa işaret ediyor.',
-   impact:[{lbl:'THYAO',val:'Güçlü Al',up:true},{lbl:'Hedef Fiyat',val:'₺340',up:true},{lbl:'Risk',val:'Düşük',up:true}]},
-  {sent:'neg',title:'İsrail-Hamas gerilimi petrol fiyatlarında belirsizliği artırıyor',src:'FT',time:'4sa',tag:'Jeopolitik',tagC:'#ff4d6d22',tagT:'#ff4d6d',
-   body:'Orta Doğu\'daki çatışmanın Lübnan\'a sıçrama riski, Brent ham petrol fiyatlarını <strong>yeniden 90 dolar eşiğine</strong> taşıdı. Süveyş Kanalı trafiği normal seyrediyor; ancak piyasalar olası bir genişleme senaryosunu fiyatlamaya başladı. Enerji hisseleri kısa vadede oynaklıkla karşılaşabilir.',
-   impact:[{lbl:'Brent Petrol',val:'+3,2%',up:true},{lbl:'TUPRS',val:'İzle',up:false},{lbl:'Portföy Riski',val:'Artıyor',up:false}]},
-  {sent:'pos',title:'S&P 500 Fed faiz indirim beklentileriyle 6 haftanın zirvesine çıktı',src:'WSJ',time:'5sa',tag:'ABD',tagC:'#4a9eff22',tagT:'#4a9eff',
-   body:'ABD Merkez Bankası üyelerinin Eylül\'de faiz indirimine kapı aralayan açıklamalarının ardından S&P 500 <strong>6 haftanın en yüksek kapanışına</strong> ulaştı. Teknoloji ve büyüme hisseleri liderliği sürdürüyor. Piyasa fiyatlamasına göre 2024 sonuna kadar iki indirim bekleniyor.',
-   impact:[{lbl:'S&P 500',val:'+0,9%',up:true},{lbl:'MSFT / AAPL',val:'Pozitif',up:true},{lbl:'ABD Hisseleri',val:'Al',up:true}]},
-  {sent:'neu',title:'ABD Hazine tahvil ihalesi beklenenden güçlü, piyasalar sakin seyrediyor',src:'Bloomberg',time:'6sa',tag:'Tahvil',tagC:'#f5a62322',tagT:'#f5a623',
-   body:'ABD Hazinesi\'nin 30 yıllık tahvil ihalesine beklenenden <strong>yüksek talep</strong> geldi; bu durum 10 yıllık faizlerin %4,45 düzeyinde stabilize olmasına katkı sağladı. Tahvil-hisse ayrışması devam ediyor; güvenli liman talebi orta düzeyde kalıyor.',
-   impact:[{lbl:'10Y Faiz',val:'%4,45',up:false},{lbl:'Dolar Endeksi',val:'Nötr',up:false},{lbl:'Altın',val:'Destekli',up:true}]},
-  {sent:'neg',title:'PETKM 1Ç2024 net karı %34 geriledi, marjlar baskı altında',src:'KAP',time:'8sa',tag:'BIST',tagC:'#ff4d6d22',tagT:'#ff4d6d',
-   body:'Petkim, yılın ilk çeyreğinde net karının <strong>yıllık %34 düştüğünü</strong> açıkladı. Yüksek hammadde maliyetleri ve düşen polietilen spread\'leri baskıyı sürdürüyor. Kapasite kullanım oranı %72\'ye geriledi. Analistler, bu yıl için kar tahminlerini aşağı yönlü revize ediyor.',
-   impact:[{lbl:'PETKM',val:'Sat',up:false},{lbl:'Kimya Sektörü',val:'Zayıf',up:false},{lbl:'Hedef',val:'₺28 ↓',up:false}]},
-  {sent:'pos',title:'META yapay zeka reklam gelirleri %40 arttı, analistler hedef fiyatı yükseltti',src:'CNBC',time:'10sa',tag:'Teknoloji',tagC:'#4a9eff22',tagT:'#4a9eff',
-   body:'Meta Platforms\'ın yapay zeka destekli reklam optimizasyon araçları, Q1 reklamlardaki harcama verimliliğini <strong>%40 artırdı</strong>. Reels reklam geliri Instagram Stories\'i geçti. Goldman Sachs ve Morgan Stanley hedef fiyatlarını 550-600 dolar bandına çekti. Llama 3 modelinin ticari lisanslanması ek gelir kapısı açıyor.',
-   impact:[{lbl:'META',val:'Güçlü Al',up:true},{lbl:'Hedef Fiyat',val:'$580',up:true},{lbl:'AI Reklam',val:'Büyüyor',up:true}]},
-];
+const NEWS=[];
 const CALENDAR=[
-  {d:'28',m:'May',name:'ABD Kişisel Tüketim Harcamaları (PCE)',prev:'Önceki: +0,3%',imp:3},
-  {d:'31',m:'May',name:'Türkiye Enflasyon (TÜFE) — Mayıs',prev:'Önceki: %69,8',imp:3},
-  {d:'5', m:'Haz',name:'ABD Tarım Dışı İstihdam (NFP)',prev:'Önceki: 175K',imp:3},
-  {d:'7', m:'Haz',name:'ASELS Bilanço Açıklaması',prev:'Beklenti: güçlü',imp:2},
-  {d:'12',m:'Haz',name:'FED Faiz Kararı (FOMC)',prev:'Beklenti: Sabit',imp:3},
-  {d:'15',m:'Haz',name:'THYAO Bilanço Açıklaması',prev:'Konsensüs: ↑',imp:2},
-  {d:'20',m:'Haz',name:'Türkiye Merkez Bankası Faiz Kararı',prev:'Beklenti: Sabit',imp:3},
-  {d:'25',m:'Haz',name:'ABD GDP Nihai (Q1 2024)',prev:'Önceki: %1,6',imp:2},
+  {d:'03',m:'Haz',name:'Türkiye Enflasyon (TÜFE) — Mayıs',prev:'Önceki: %37,9',imp:3},
+  {d:'05',m:'Haz',name:'Hazine Nakit Dengesi',prev:'Aylık veri',imp:2},
+  {d:'11',m:'Haz',name:'Sanayi Üretimi (Nisan)',prev:'Önceki: %4,3',imp:2},
+  {d:'19',m:'Haz',name:'TCMB Faiz Kararı (PPK)',prev:'Beklenti: Sabit',imp:3},
+  {d:'23',m:'Haz',name:'İmalat PMI / Güven Endeksleri',prev:'Aylık veri',imp:2},
+  {d:'26',m:'Haz',name:'Reel Kesim Güven Endeksi',prev:'Önceki: 100,4',imp:2},
+  {d:'30',m:'Haz',name:'Dış Ticaret Dengesi (Mayıs)',prev:'Aylık veri',imp:2},
 ];
 
 /* Watchlist & Alarmlar — localStorage'da kalıcı tutuluyor */
@@ -794,7 +750,7 @@ function loadWatches(){
   try{ const j=localStorage.getItem(WATCH_KEY); if(j) return JSON.parse(j); }catch(e){}
   return [
     {sym:'THYAO',nm:'Türk Hava Yolları',px:'—',chg:'—',up:true},
-    {sym:'NVDA', nm:'NVIDIA',           px:'—',chg:'—',up:true},
+    {sym:'ASELS',nm:'Aselsan',          px:'—',chg:'—',up:true},
   ];
 }
 function loadAlarms(){
@@ -1264,27 +1220,8 @@ function buildPerfChart(pts){
     bist = bistValues.map(v => (v / b0) * 100);
   }
 
-  // ABD tarafı
-  const usHist = enriched.filter(e => (stocks.find(s => s.symbol===e.sym)||{}).exchange!=='BIST');
-  let sp = null;
-  if (usHist.length) {
-    const usValues = [];
-    for (let i = 0; i < N; i++) {
-      let t = 0;
-      usHist.forEach(e => {
-        const offset = e.hist.length - N + i;
-        const px = e.hist[offset] ? e.hist[offset].c : e.cur;
-        t += e.qty * px * usdTry;
-      });
-      usValues.push(t);
-    }
-    const u0 = usValues[0] || 1;
-    sp = usValues.map(v => (v / u0) * 100);
-  }
-
   const datasets = [{label:'Portföyüm',data:port,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,.08)',borderWidth:2.5,pointRadius:0,tension:.3,fill:true}];
   if (bist) datasets.push({label:'BIST Bölümü',data:bist,borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,.03)',borderWidth:1.5,pointRadius:0,tension:.3,borderDash:[4,4]});
-  if (sp)   datasets.push({label:'ABD Bölümü',data:sp,borderColor:'#9b59b6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:.3,borderDash:[2,4]});
 
   perfChart = new Chart(ctx, {
     type:'line',
@@ -1530,7 +1467,6 @@ async function loadReport() {
     /* ── Makro kartları güncelle ── */
     var bv = document.getElementById('bist-val');
     var bc = document.getElementById('bist-chg');
-    var sv = document.getElementById('sp-val');
     var uv = document.getElementById('usd-val');
     if (bv && m.bist100) bv.textContent = Math.round(m.bist100).toLocaleString('tr-TR');
     if (bc) {
@@ -1542,17 +1478,6 @@ async function loadReport() {
         bc.className = 'sum-chg';
         bc.style.color = 'var(--t2)';
         bc.textContent = 'Borsa İstanbul Endeksi';
-      }
-    }
-    if (sv && m.sp500) sv.textContent = m.sp500.toFixed(2);
-    var spChg = document.getElementById('sp-chg');
-    if (spChg) {
-      if (m.sp500_change_pct != null) {
-        var sc = m.sp500_change_pct;
-        spChg.className = 'sum-chg ' + (sc>=0?'up':'down');
-        spChg.innerHTML = (sc>=0?'▲ +':'▼ ') + Math.abs(sc).toFixed(2) + '%';
-      } else {
-        spChg.textContent = 'ABD Geniş Endeks';
       }
     }
     if (uv && m.usd_try) {
@@ -1608,6 +1533,9 @@ async function loadReport() {
       var l = lbl.textContent.trim();
       if (l === 'TCMB FAİZİ' && m.tr_interest_rate) val.textContent = '%' + m.tr_interest_rate;
       if (l === 'ALTIN ($/oz)' && m.gold_usd)       val.textContent = Math.round(m.gold_usd).toLocaleString('tr-TR');
+      if (l === 'USD/TRY' && m.usd_try)             val.textContent = m.usd_try.toFixed(3);
+      if (l === 'EUR/TRY' && m.eur_try)             val.textContent = m.eur_try.toFixed(3);
+      if (l === 'BIST100' && m.bist100)             val.textContent = Math.round(m.bist100).toLocaleString('tr-TR');
     });
 
     /* ── Hisse tablolarını güncelle ── */
