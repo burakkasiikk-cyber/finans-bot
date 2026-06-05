@@ -92,7 +92,7 @@ def test_score_from_history_structure():
     res = score_from_history(_uptrend())
     assert res is not None
     assert 0 <= res["score"] <= 100
-    assert set(["trend", "momentum", "volatility", "setup"]).issubset(res["dimensions"])
+    assert set(["trend", "timing", "momentum", "setup"]).issubset(res["dimensions"])
     # Rozet ile sinyal AYNI kaynaktan → asla çelişmez
     assert res["verdict_key"] == res["signal"]["key"]
     assert res["trade_setup"] is not None
@@ -145,3 +145,25 @@ def test_news_relevance_filter():
 def test_relevance_keys_drops_generic():
     keys = _relevance_keys("AAPL", "Apple Inc")
     assert "aapl" in keys and "apple" in keys and "inc" not in keys
+
+
+# ── Giriş zamanı (timing) ──
+from scripts.technical import timing_state
+
+
+def test_timing_penalizes_overbought_parabolic():
+    # Hızlanan parabolik yükseliş → aşırı alım, düşük timing skoru
+    closes = [round(10 * (1.04 ** i), 2) for i in range(60)]
+    res = timing_state(closes, _bars(closes))
+    assert res["score"] is not None and res["score"] <= 40
+    assert "alım" in res["durum"].lower()
+
+
+def test_timing_pullback_beats_parabolic():
+    # Sağlıklı geri çekilme, parabolik aşırı alımdan DAHA İYİ giriş skoru almalı
+    parabolic = [round(10 * (1.04 ** i), 2) for i in range(60)]
+    pull = [round(10 + i * 0.2, 2) for i in range(55)]
+    pull += [round(pull[-1] - 0.25 * j, 2) for j in range(1, 6)]
+    s_par = timing_state(parabolic, _bars(parabolic))["score"]
+    s_pull = timing_state(pull, _bars(pull))["score"]
+    assert s_pull > s_par   # geri çekilme > parabolik kovalama

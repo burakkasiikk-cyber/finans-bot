@@ -26,7 +26,9 @@ VERDICT_BANDS = [
     (0,  "GÜÇLÜ SAT",  "strong_sell"),
 ]
 
-WEIGHTS = {"trend": 0.35, "momentum": 0.35, "volatility": 0.15, "setup": 0.15}
+# "Giriş zamanı" (timing) ana boyut: aşırı alımı cezalandırıp iyi girişi ödüllendirir.
+# Böylece skor "en çok pumplanmış" değil, "şu an girmek için iyi konumda" olanı öne çıkarır.
+WEIGHTS = {"trend": 0.30, "timing": 0.30, "momentum": 0.20, "setup": 0.20}
 
 
 # ──────────────────────────── Göstergeler ────────────────────────────
@@ -323,6 +325,51 @@ def _volatility_score(closes: List[float]) -> Optional[int]:
     return 34
 
 
+def timing_state(closes: List[float], bars: Optional[list] = None) -> dict:
+    """İYİ GİRİŞ ZAMANI değerlendirmesi.
+
+    Mantık: "en çok yükselmiş" değil, "şu an girmek için iyi konumda" olanı ödüllendirir.
+    - Yükseliş trendinde + aşırı alımda DEĞİL + geri çekilmiş → en iyi giriş (yüksek puan)
+    - Aşırı alım / parabolik / üst banda yapışık → kovalama, cezalandırılır (GÜÇLÜ AL olmaz)
+    - Düşüş trendinde aşırı satım + dipten dönüş → 'izle' (tepki ihtimali)
+    Döndürür: {score, durum, gerilim}
+    """
+    if len(closes) < 20:
+        return {"score": None, "durum": "—", "gerilim": None}
+    last = closes[-1]
+    ma20 = sum(closes[-20:]) / 20
+    ma50 = sum(closes[-50:]) / 50 if len(closes) >= 50 else ma20
+    r = rsi(closes)
+    st = stochastic(bars) if bars else None
+    k = st["k"] if st else None
+    boll = bollinger_pos(closes)
+    ext = round((last / ma20 - 1) * 100, 1) if ma20 else 0.0     # MA20 üstündeki gerilim %
+    uptrend = last > ma50
+    rising = len(closes) >= 2 and closes[-1] > closes[-2]
+
+    overbought = ((r is not None and r >= 72) or (k is not None and k >= 85)
+                  or (boll is not None and boll > 0.92) or ext > 12)
+
+    if uptrend:
+        if overbought:
+            return {"score": 32, "durum": "Aşırı alım — kovalama riski", "gerilim": ext}
+        if r is not None and 40 <= r <= 58 and ext < 7:
+            return {"score": 86, "durum": "Sağlıklı geri çekilme — iyi giriş", "gerilim": ext}
+        if r is not None and r < 40:
+            return {"score": 74, "durum": "Derin geri çekilme — uptrend sürüyor", "gerilim": ext}
+        if r is not None and 58 < r < 72:
+            return {"score": 58, "durum": "Yükselişte, biraz yüksek", "gerilim": ext}
+        return {"score": 56, "durum": "Yükseliş trendi", "gerilim": ext}
+    else:
+        oversold = ((r is not None and r <= 30) or (k is not None and k <= 15)
+                    or (boll is not None and boll < 0.08))
+        if oversold and rising:
+            return {"score": 56, "durum": "Dipten dönüş başlıyor? — izle", "gerilim": ext}
+        if oversold:
+            return {"score": 44, "durum": "Aşırı satım — dönüş teyidi bekle", "gerilim": ext}
+        return {"score": 26, "durum": "Düşüş trendi — uzak dur", "gerilim": ext}
+
+
 def _setup_score(rr: Optional[float]) -> Optional[int]:
     """Risk/ödül oranını 0-100 skora çevirir — iyi kurulum yüksek puan."""
     if rr is None:
@@ -425,7 +472,7 @@ def score_from_history(price_history: list) -> Optional[dict]:
 
     trend = _trend_score(closes)
     mom = _momentum_score(closes, bars)
-    vol_sc = _volatility_score(closes)
+    tim = timing_state(closes, bars)             # GİRİŞ ZAMANI — aşırı alımı cezalandırır
     vol_pct = volatility_pct(closes)
 
     # Hacim onayı: artan hacim yükseliş trendini güçlendirir
@@ -446,18 +493,18 @@ def score_from_history(price_history: list) -> Optional[dict]:
             "metrics": {"ma": ma_signal(closes), "macd": m["sig"] if m else "—",
                         "vol_x": vt},
         },
+        "timing": {
+            "score": tim["score"],
+            "metrics": {"durum": tim["durum"], "rsi": rsi(closes),
+                        "boll": boll_label(bollinger_pos(closes)), "gerilim": tim["gerilim"]},
+        },
         "momentum": {
             "score": mom,
             "metrics": {
-                "rsi": rsi(closes),
                 "stoch": st["k"] if st else None,
                 "ret_1w": pct_return(closes, 5),
                 "ret_1m": pct_return(closes, 21),
             },
-        },
-        "volatility": {
-            "score": vol_sc,
-            "metrics": {"boll": boll_label(bollinger_pos(closes)), "vol": vol_pct},
         },
         "setup": {
             "score": _setup_score(rr),
