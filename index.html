@@ -485,7 +485,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
       </div>
     </div>
     <div class="cb" style="padding:12px 16px">
-      <div style="position:relative;height:280px"><canvas id="perfChart"></canvas></div>
+      <div id="perf-wrap" style="position:relative;height:280px"><canvas id="perfChart"></canvas></div>
       <!-- Dönem istatistikleri -->
       <div id="perf-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
         <div class="pstat"><div class="pstat-lbl">Portföy Getirisi</div><div class="pstat-val up" id="ps-ret">—</div></div>
@@ -1136,23 +1136,31 @@ function buildPerfChart(pts){
 
   const stocks = (_rawReport && _rawReport.stocks) || [];
   const hasPortfolio = PORTFOLIO && PORTFOLIO.length > 0;
+  var wrap = document.getElementById('perf-wrap');
+  var statsRow = document.getElementById('perf-stats');
 
-  // Boş portföy → bilgilendirme mesajı çiz, istatistikleri sıfırla
+  // Boş portföy → kompakt, ortalanmış boş durum (büyük boşluk bırakma)
+  var emptyMsg = document.getElementById('perf-empty');
   if (!hasPortfolio) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(255,255,255,.4)';
-    ctx.font = '14px Segoe UI, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Portföyünüze hisse ekleyin', canvas.width / 2, 100);
-    ctx.font = '11px Segoe UI, sans-serif';
-    ctx.fillStyle = 'rgba(255,255,255,.25)';
-    ctx.fillText('Performans grafiği gerçek fiyat geçmişine göre çizilecek', canvas.width / 2, 124);
-    ['ps-ret','ps-bist','ps-sp','ps-best','ps-worst'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.textContent = '—'; el.className = 'pstat-val'; el.style.color = 'var(--t3)'; }
-    });
+    if (statsRow) statsRow.style.display = 'none';
+    if (canvas) canvas.style.display = 'none';
+    if (wrap) {
+      wrap.style.height = 'auto';
+      if (!emptyMsg) {
+        emptyMsg = document.createElement('div');
+        emptyMsg.id = 'perf-empty';
+        emptyMsg.style.cssText = 'text-align:center;color:var(--t3);font-size:13px;padding:28px 12px';
+        wrap.appendChild(emptyMsg);
+      }
+      emptyMsg.innerHTML = '📊 Portföyünüze hisse ekleyin — performansı ve kâr/zararı buradan takip edin';
+      emptyMsg.style.display = '';
+    }
     return;
   }
+  if (canvas) canvas.style.display = '';
+  if (emptyMsg) emptyMsg.style.display = 'none';
+  if (wrap) wrap.style.height = '280px';
+  if (statsRow) statsRow.style.display = 'grid';
 
   // Her hisse için price_history al, normalize et
   const enriched = PORTFOLIO.map(p => {
