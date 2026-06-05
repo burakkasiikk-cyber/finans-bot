@@ -423,15 +423,15 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
         <div class="mini-bar"><div class="mini-fill" style="width:78%;background:linear-gradient(90deg,var(--green),#00a888)"></div></div>
       </div>
     </div>
-    <!-- S&P 500 -->
+    <!-- Piyasa Rejimi (BIST) -->
     <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--blue)"></div>S&P 500</div><div class="live-badge"><div class="live-dot" style="background:var(--blue)"></div>CANLI</div></div>
+      <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Piyasa Rejimi</div><div class="chip">BIST100 trendi</div></div>
       <div class="cb">
-        <div style="font-size:10px;color:var(--t3)">ABD Geniş Endeks</div>
-        <div class="sum-main" id="sp-val">—</div>
-        <div class="sum-chg" id="sp-chg">Yükleniyor…</div>
-        <div class="sum-sub" id="sp-sub">ABD Geniş Endeks · Yapılan analizler</div>
-        <div class="mini-bar"><div class="mini-fill" style="width:65%;background:linear-gradient(90deg,#0066ff,var(--blue))"></div></div>
+        <div style="font-size:10px;color:var(--t3)">Genel piyasa yönü</div>
+        <div class="sum-main" id="regime-val">—</div>
+        <div class="sum-chg" id="regime-sub">Yükleniyor…</div>
+        <div class="sum-sub" id="regime-note">Düşen piyasada sinyaller temkinli değerlendirilir</div>
+        <div class="mini-bar"><div class="mini-fill" id="regime-bar" style="width:50%;background:linear-gradient(90deg,var(--purple),#7c4dca)"></div></div>
       </div>
     </div>
     <!-- USD/TRY -->
@@ -466,7 +466,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--green)"></div>En Çok Yükselen</div></div><div class="cb"><div class="rl" id="rs-up-nm">—</div><div class="rv" id="rs-up-val" style="color:var(--green)">—</div><div class="rs" id="rs-up-sub">—</div></div></div>
     <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--red)"></div>En Çok Düşen</div></div><div class="cb"><div class="rl" id="rs-dn-nm">—</div><div class="rv" id="rs-dn-val" style="color:var(--red)">—</div><div class="rs" id="rs-dn-sub">—</div></div></div>
     <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--blue)"></div>BIST Ort. Skor</div></div><div class="cb"><div class="rl">Borsa İstanbul</div><div class="rv" id="rs-bist-avg" style="color:var(--blue)">—</div><div class="rs" id="rs-bist-sub">—</div></div></div>
-    <div class="card risk-card"><div class="ch" style="padding:10px 14px"><div class="ct" style="font-size:9.5px"><div class="dot" style="background:var(--purple)"></div>ABD Ort. Skor</div></div><div class="cb"><div class="rl">NASDAQ + NYSE</div><div class="rv" id="rs-us-avg" style="color:var(--purple)">—</div><div class="rs" id="rs-us-sub">—</div></div></div>
   </div>
 
   <!-- ── ROW 3: Portföy Performans Grafiği ── -->
@@ -515,7 +514,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
   </div>
 
   <!-- ── ROW 5: Hisse Önerileri ── -->
-  <div class="g2">
+  <div>
     <!-- BIST -->
     <div class="card">
       <div class="ch">
@@ -532,41 +531,16 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
         <tbody id="bist-body"></tbody></table>
       </div>
     </div>
-    <!-- ABD -->
-    <div class="card">
-      <div class="ch">
-        <div class="ct"><div class="dot" style="background:var(--blue)"></div>AI Önerileri — ABD</div>
-        <div class="tabs">
-          <button class="tab active" onclick="filterTbl('us','all',this)">Tümü</button>
-          <button class="tab" onclick="filterTbl('us','buy',this)">Al</button>
-          <button class="tab" onclick="filterTbl('us','hold',this)">Tut</button>
-          <button class="tab" onclick="filterTbl('us','sell',this)">Sat</button>
-        </div>
-      </div>
-      <div class="scroll-y">
-        <table class="stk-tbl"><thead><tr><th>Hisse</th><th>Fiyat</th><th>Değişim</th><th>Karar</th><th>Hedef</th><th>Risk</th><th>Güven</th></tr></thead>
-        <tbody id="us-body"></tbody></table>
-      </div>
-    </div>
   </div>
 
-  <!-- ── ROW 6: Teknik Sinyaller ── -->
-  <div class="g2">
+  <!-- ── ROW 6: Teknik Sinyaller (BIST) ── -->
+  <div>
     <div class="card">
       <div class="ch"><div class="ct"><div class="dot" style="background:var(--yellow)"></div>Teknik Sinyaller — BIST</div><div class="chip">RSI · MACD · Bollinger</div></div>
       <div class="scroll-y">
         <table class="stk-tbl">
           <thead><tr><th>Hisse</th><th>RSI(14)</th><th>MACD</th><th>Bollinger</th><th>MA50/200</th><th>Genel Sinyal</th></tr></thead>
           <tbody id="bist-tech"></tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="ch"><div class="ct"><div class="dot" style="background:var(--yellow)"></div>Teknik Sinyaller — ABD</div><div class="chip">RSI · MACD · Bollinger</div></div>
-      <div class="scroll-y">
-        <table class="stk-tbl">
-          <thead><tr><th>Hisse</th><th>RSI(14)</th><th>MACD</th><th>Bollinger</th><th>MA50/200</th><th>Genel Sinyal</th></tr></thead>
-          <tbody id="us-tech"></tbody>
         </table>
       </div>
     </div>
@@ -981,7 +955,6 @@ function renderSysPerf(){
     return cell(name+' Rejimi', ico+' '+r.trend, rc, (r.ret_1m!=null?('1 ay: '+(r.ret_1m>=0?'+':'')+r.ret_1m+'%'):''));
   }
   cells.push(regCell('BIST', mr.bist));
-  cells.push(regCell('ABD', mr.sp));
   cells=cells.filter(Boolean);
   if(!cells.length){ card.style.display='none'; return; }
   body.innerHTML=cells.join('');
@@ -1181,7 +1154,7 @@ function updateScen(){
     row('İhracatçılar', exporter, 'THYAO · ASELS') +
     row('Enerji',       energyPct,'TUPRS · PETKM') +
     row('Perakende',    retailPct,'BIMAS · MGROS') +
-    row('ABD Teknoloji',usTech,   'NVDA · MSFT · GOOGL');
+    row('Sanayi',       (bistDelta*0.95)*100, 'EREGL · KRDMD · TKFEN');
 }
 
 /* ════════════════════════ CHARTS ════════════════════════ */
@@ -1437,9 +1410,7 @@ function simPrices(){
 document.addEventListener('DOMContentLoaded',()=>{
   buildTicker();
   renderTable('bist-body',BIST);
-  renderTable('us-body',US);
   renderTech('bist-tech',BIST);
-  renderTech('us-tech',US);
   renderPortfolio();
   renderNews();
   renderChanges();
@@ -1642,15 +1613,26 @@ async function loadReport() {
     /* ── Hisse tablolarını güncelle ── */
     var rawStocks = (report.stocks || []).filter(function(s){return !s.error;});
     BIST = rawStocks.filter(function(s){return s.exchange==='BIST';}).map(processStock);
-    US   = rawStocks.filter(function(s){return s.exchange!=='BIST';}).map(processStock);
+    US   = [];   // ABD borsası kaldırıldı — sadece BIST
     BIST.sort(function(a,b){return b.conf-a.conf;});
-    US.sort(function(a,b){return b.conf-a.conf;});
     renderTable('bist-body', BIST);
-    renderTable('us-body',   US);
     renderTech('bist-tech',  BIST);
-    renderTech('us-tech',    US);
     renderChanges();   // düne göre karar değişimleri
     renderSysPerf();   // backtest + piyasa rejimi
+
+    /* ── Piyasa Rejimi kartı (BIST) ── */
+    var reg = (report.market_regime && report.market_regime.bist) || null;
+    var rv = document.getElementById('regime-val');
+    if (rv && reg) {
+      var rc = reg.trend==='yükseliş'?'var(--green)':reg.trend==='düşüş'?'var(--red)':'var(--yellow)';
+      var rico = reg.trend==='yükseliş'?'▲':reg.trend==='düşüş'?'▼':'▬';
+      rv.textContent = rico+' '+(reg.trend||'—');
+      rv.style.color = rc;
+      var rs = document.getElementById('regime-sub');
+      if (rs){ rs.textContent = reg.ret_1m!=null?('1 ay: '+(reg.ret_1m>=0?'+':'')+reg.ret_1m+'%'):''; rs.className='sum-chg '+((reg.ret_1m||0)>=0?'up':'down'); }
+      var rb = document.getElementById('regime-bar');
+      if (rb){ rb.style.width = (reg.trend==='yükseliş'?'80':reg.trend==='düşüş'?'30':'55')+'%'; rb.style.background='linear-gradient(90deg,'+rc+','+rc+')'; }
+    }
 
     /* ── AI skor ring güncelle ── */
     var scores = rawStocks.map(function(s){return s.score||50;});
@@ -1719,7 +1701,7 @@ async function loadReport() {
       var marketBadge = avg >= 65 ? {c:'b-sb', t:'Güçlü Al'} : avg >= 55 ? {c:'b-b', t:'Al'} : avg >= 45 ? {c:'b-h', t:'Tut'} : {c:'b-s', t:'Sat'};
       var topNames  = byScore.slice(0, 3).map(function(s){return s.symbol;}).join(', ');
       var botNames  = byScore.slice(-3).map(function(s){return s.symbol;}).reverse().join(', ');
-      var bistTone  = bistAvg >= usAvg ? 'BIST tarafı ABD pazarına göre <strong style="color:var(--green)">daha güçlü</strong>' : 'ABD tarafı BIST pazarına göre <strong style="color:var(--blue)">daha güçlü</strong>';
+      var regm = (report.market_regime && report.market_regime.bist) || {};
       var html = '';
       // 1) Genel Piyasa Görünümü
       html += '<div class="ai-cmt">'+
@@ -1727,10 +1709,13 @@ async function loadReport() {
         '<div class="ai-body">Toplam <strong>'+rawStocks.length+'</strong> hisse analiz edildi. Ortalama AI skoru <strong style="color:var(--green)">'+avg+'/100</strong> — genel görünüm <strong>'+marketTone+'</strong>. Pozitif tavsiye oranı: <strong style="color:var(--green)">%'+posPct+'</strong> ('+pos+' hisse). En yüksek skorlu öneriler: <strong>'+topNames+'</strong>.</div>'+
         '<div class="sent-bar"><div style="flex:'+pos+';background:var(--green)"></div><div style="flex:'+counts.hold+';background:var(--yellow)"></div><div style="flex:'+(counts.sell+counts.strong_sell)+';background:var(--red)"></div></div>'+
         '</div>';
-      // 2) BIST vs ABD
+      // 2) Piyasa Rejimi (BIST)
+      var regTrend = regm.trend || '—';
+      var regClr = regTrend==='yükseliş'?'var(--green)':regTrend==='düşüş'?'var(--red)':'var(--yellow)';
+      var regMsg = regTrend==='düşüş' ? 'Genel piyasa zayıf — alım sinyalleri temkinli değerlendiriliyor, seçici olmak önemli.' : regTrend==='yükseliş' ? 'Genel piyasa güçlü — kaliteli kurulumlar daha yüksek başarı şansına sahip.' : 'Piyasa yatay — net trend yok.';
       html += '<div class="ai-cmt">'+
-        '<div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Pazar Karşılaştırması</div><div class="ai-when">Bugün</div></div><span class="badge b-b">Bilgi</span></div>'+
-        '<div class="ai-body">BIST ortalama skoru <strong style="color:var(--blue)">'+bistAvg+'</strong> ('+bistArr.length+' hisse), ABD ortalama skoru <strong style="color:var(--purple)">'+usAvg+'</strong> ('+usArr.length+' hisse). '+bistTone+'. USD/TRY: <strong>'+(m.usd_try?m.usd_try.toFixed(2):'—')+'</strong> · TCMB faizi: <strong>%'+(m.tr_interest_rate||'—')+'</strong>.</div>'+
+        '<div class="ai-cmt-hdr"><div class="ai-av">AI</div><div><div class="ai-who">Piyasa Rejimi (BIST)</div><div class="ai-when">Bugün</div></div><span class="badge b-b">Bilgi</span></div>'+
+        '<div class="ai-body">BIST100 trendi: <strong style="color:'+regClr+'">'+regTrend+'</strong>'+(regm.ret_1m!=null?(' (1 ay: '+(regm.ret_1m>=0?'+':'')+regm.ret_1m+'%)'):'')+'. '+regMsg+' BIST ortalama AI skoru <strong style="color:var(--blue)">'+bistAvg+'</strong> ('+bistArr.length+' hisse). USD/TRY: <strong>'+(m.usd_try?m.usd_try.toFixed(2):'—')+'</strong> · TCMB: <strong>%'+(m.tr_interest_rate||'—')+'</strong>.</div>'+
         '<div class="sent-bar"><div style="flex:6;background:var(--green)"></div><div style="flex:3;background:var(--yellow)"></div><div style="flex:1;background:var(--red)"></div></div>'+
         '</div>';
       // 3) Riskler
@@ -1751,12 +1736,11 @@ async function loadReport() {
     /* ── Ticker güncelle ── */
     var tickerData = [
       {s:'BIST100', p:m.bist100?Math.round(m.bist100).toLocaleString('tr-TR'):'—', c:m.bist100_change_pct?((m.bist100_change_pct>=0?'+':'')+m.bist100_change_pct.toFixed(2)+'%'):'', u:(m.bist100_change_pct||0)>=0},
-      {s:'S&P500',  p:m.sp500?m.sp500.toFixed(2):'—', c:m.sp500_change_pct?((m.sp500_change_pct>=0?'+':'')+m.sp500_change_pct.toFixed(2)+'%'):'', u:(m.sp500_change_pct||0)>=0},
       {s:'USD/TRY', p:m.usd_try?m.usd_try.toFixed(3):'—', c:'', u:false},
       {s:'EUR/TRY', p:m.eur_try?m.eur_try.toFixed(3):'—', c:'', u:false},
+      {s:'ALTIN',  p:m.gold_usd?('$'+Math.round(m.gold_usd)):'—', c:'', u:true},
       {s:'TCMB',   p:m.tr_interest_rate?'%'+m.tr_interest_rate:'—', c:'', u:false},
-    ].concat(BIST.slice(0,8).map(function(s){return {s:s.sym,p:s.px,c:s.chg,u:s.up};}))
-     .concat(US.slice(0,5).map(function(s){return {s:s.sym,p:s.px,c:s.chg,u:s.up};}));
+    ].concat(BIST.slice(0,12).map(function(s){return {s:s.sym,p:s.px,c:s.chg,u:s.up};}));
     var t = document.getElementById('ticker');
     if (t) t.innerHTML = tickerData.concat(tickerData).map(function(x){
       return '<div class="ti"><span class="s">'+x.s+'</span><span class="p">'+x.p+'</span>'+(x.c?'<span class="'+(x.u?'u':'d')+'">'+(x.u?'▲':'▼')+' '+x.c+'</span>':'')+'</div>';

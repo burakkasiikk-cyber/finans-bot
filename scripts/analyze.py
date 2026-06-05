@@ -36,10 +36,9 @@ def _index_context(yticker: str) -> dict:
 
 
 def compute_market_context() -> dict:
-    """BIST100 (XU100.IS) ve S&P500 (^GSPC) rejim + 1 aylık getirisi."""
-    return {"bist": _index_context("XU100.IS"), "sp": _index_context("^GSPC")}
+    """BIST100 (XU100.IS) rejim + 1 aylık getirisi. (Sadece BIST odağı.)"""
+    return {"bist": _index_context("XU100.IS")}
 
-US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
 BIST_STOCKS = [
     # Bankalar  (QNBFB delisted/halka kapandı — çıkarıldı)
     "AKBNK", "GARAN", "HALKB", "ISCTR", "VAKBN", "YKBNK", "ALBRK", "SKBNK",
@@ -111,17 +110,8 @@ def run() -> dict:
 
     stocks = []
 
-    # TRADER MODU: tüm hisseler (ABD + BIST) tek kaynaktan — yfinance fiyat geçmişi.
+    # TRADER MODU: yalnızca BIST hisseleri — yfinance fiyat geçmişi.
     # Skorlama tamamen teknik olduğu için Finnhub/temel veriye gerek yok.
-    print("ABD hisseleri (yfinance)...")
-    for sym in US_STOCKS:
-        print(f"  {sym}")
-        try:
-            stocks.append(fetch_trader_stock(sym, "NASDAQ"))
-        except Exception as e:
-            stocks.append({"symbol": sym, "error": str(e)})
-        time.sleep(0.4)
-
     print("BIST hisseleri (yfinance)...")
     for sym in BIST_STOCKS:
         print(f"  {sym}")
@@ -153,15 +143,15 @@ def run() -> dict:
     # Piyasa rejimi + endekse göreli güç (BIST→XU100, ABD→S&P500)
     print("Piyasa rejimi & göreli güç...")
     ctx = compute_market_context()
-    regime_adj = {"BIST": ctx["bist"]["adj"], "NASDAQ": ctx["sp"]["adj"]}
+    regime_adj = {"BIST": ctx["bist"]["adj"]}
+    idx = ctx["bist"]
     for s in stocks:
         if "error" in s:
             continue
-        idx = ctx["bist"] if s.get("exchange") == "BIST" else ctx["sp"]
         closes = [b["c"] for b in s.get("price_history", []) if b.get("c")]
         st_ret = round((closes[-1] / closes[-1 - 21] - 1) * 100, 1) if len(closes) > 21 else None
         if st_ret is not None and idx["ret_1m"] is not None:
-            rs = round(st_ret - idx["ret_1m"], 1)          # endeksi ne kadar yendi
+            rs = round(st_ret - idx["ret_1m"], 1)          # BIST100'ü ne kadar yendi
             s["rel_strength"] = rs
             s["rel_adj"] = 3 if rs > 5 else 1 if rs > 0 else -3 if rs < -5 else -1
         else:
@@ -175,7 +165,7 @@ def run() -> dict:
         "risk_alerts":    [],
         "weekly_summary": None,
         "mode":           "trader",
-        "market_regime":  {"bist": ctx["bist"], "sp": ctx["sp"]},
+        "market_regime":  {"bist": ctx["bist"]},
         "regime_adj":     regime_adj,
     }
 
