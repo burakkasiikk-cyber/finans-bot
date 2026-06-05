@@ -15,4 +15,3 @@ Thumbs.db
 
 # Bağımlılıklar (gerekmez ama güvenlik için)
 node_modules/
-__pycache__/
