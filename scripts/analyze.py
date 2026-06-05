@@ -7,8 +7,37 @@ from pathlib import Path
 
 from scripts.fetch_history import fetch_trader_stock
 from scripts.fetch_macro import fetch_macro
-from scripts.technical import rescore_report
+from scripts.technical import rescore_report, aggregate_backtest
 from scripts.news_sentiment import fetch_news_sentiment
+
+
+def _index_context(yticker: str) -> dict:
+    """Bir endeksin rejimini hesapla: MA50 üstünde mi, 1 aylık getiri, skor düzeltmesi.
+
+    adj: yükseliş piyasası → +2 (alımlar lehine), düşüş → -3 (temkin), nötr → 0."""
+    try:
+        import yfinance as yf
+        hist = yf.Ticker(yticker).history(period="6mo")
+        closes = [float(c) for c in hist["Close"] if c == c and c > 0]
+    except Exception:
+        closes = []
+    if len(closes) < 55:
+        return {"trend": "bilinmiyor", "ret_1m": None, "adj": 0, "above_ma50": None}
+    ma50 = sum(closes[-50:]) / 50
+    above = closes[-1] > ma50
+    ret_1m = round((closes[-1] / closes[-1 - 21] - 1) * 100, 1) if len(closes) > 21 else None
+    if above and (ret_1m or 0) > 1:
+        trend, adj = "yükseliş", 2
+    elif (not above) and (ret_1m or 0) < -1:
+        trend, adj = "düşüş", -3
+    else:
+        trend, adj = "yatay", 0
+    return {"trend": trend, "ret_1m": ret_1m, "adj": adj, "above_ma50": above}
+
+
+def compute_market_context() -> dict:
+    """BIST100 (XU100.IS) ve S&P500 (^GSPC) rejim + 1 aylık getirisi."""
+    return {"bist": _index_context("XU100.IS"), "sp": _index_context("^GSPC")}
 
 US_STOCKS   = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "AMD", "TSLA"]
 BIST_STOCKS = [
@@ -121,6 +150,23 @@ def run() -> dict:
             s["prev"] = prev_map[s["symbol"]]
         time.sleep(0.25)
 
+    # Piyasa rejimi + endekse göreli güç (BIST→XU100, ABD→S&P500)
+    print("Piyasa rejimi & göreli güç...")
+    ctx = compute_market_context()
+    regime_adj = {"BIST": ctx["bist"]["adj"], "NASDAQ": ctx["sp"]["adj"]}
+    for s in stocks:
+        if "error" in s:
+            continue
+        idx = ctx["bist"] if s.get("exchange") == "BIST" else ctx["sp"]
+        closes = [b["c"] for b in s.get("price_history", []) if b.get("c")]
+        st_ret = round((closes[-1] / closes[-1 - 21] - 1) * 100, 1) if len(closes) > 21 else None
+        if st_ret is not None and idx["ret_1m"] is not None:
+            rs = round(st_ret - idx["ret_1m"], 1)          # endeksi ne kadar yendi
+            s["rel_strength"] = rs
+            s["rel_adj"] = 3 if rs > 5 else 1 if rs > 0 else -3 if rs < -5 else -1
+        else:
+            s["rel_strength"], s["rel_adj"] = None, 0
+
     report = {
         "generated_at":   datetime.now(timezone.utc).isoformat(),
         "macro":          macro,
@@ -129,12 +175,17 @@ def run() -> dict:
         "risk_alerts":    [],
         "weekly_summary": None,
         "mode":           "trader",
+        "market_regime":  {"bist": ctx["bist"], "sp": ctx["sp"]},
+        "regime_adj":     regime_adj,
     }
 
-    # TRADER MODU: skoru tamamen teknik göstergelere dayandır (price_history'den).
-    # rescore_report skorlar, sıralar, top3 + risk_alerts'i tazeler.
+    # TRADER MODU: skoru teknik + haber + göreli güç + rejim ile üret.
     n = rescore_report(report)
-    print(f"⚡ Trader modu: {n} hisse teknik göstergelerle skorlandı, {len(report['stocks'])-n} atlandı.")
+    report["backtest"] = aggregate_backtest(report)
+    if report["backtest"]:
+        b = report["backtest"]
+        print(f"📊 Backtest: {b['trades']} işlem, başarı %{b['win_rate']}, ort {b['avg_ret']:+}% ({b['horizon']}g)")
+    print(f"⚡ Trader modu: {n} hisse skorlandı, {len(report['stocks'])-n} atlandı.")
     return report
 
 

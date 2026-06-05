@@ -535,24 +535,90 @@ def score_from_history(price_history: list) -> Optional[dict]:
     }
 
 
+def backtest_signals(bars: list, horizon: int = 10) -> Optional[dict]:
+    """Geçmiş 'iyi giriş' sinyallerinin gerçekte nasıl sonuçlandığını ölçer.
+
+    Strateji (sistemin mantığını yansıtır): yükseliş trendinde (fiyat>MA20>MA50)
+    + aşırı alımda değil (RSI 40-70) iken AL; `horizon` gün sonraki getiriyi ölç.
+    Döndürür: {n, win_rate, avg_ret, horizon} — yeterli işlem yoksa None."""
+    closes = [b["c"] for b in (bars or []) if b.get("c")]
+    if len(closes) < 60 + horizon:
+        return None
+    wins = 0
+    rets = []
+    i = 50
+    while i < len(closes) - horizon:
+        w = closes[: i + 1]
+        ma20 = sum(w[-20:]) / 20
+        ma50 = sum(w[-50:]) / 50
+        r = rsi(w)
+        last = w[-1]
+        if last > ma50 and last > ma20 and r is not None and 40 <= r < 70:
+            fwd = (closes[i + horizon] / closes[i] - 1) * 100
+            rets.append(fwd)
+            if fwd > 0:
+                wins += 1
+            i += horizon          # bir işlemden sonra ileri atla (çakışmasın)
+        else:
+            i += 1
+    if len(rets) < 3:
+        return None
+    return {
+        "n": len(rets),
+        "win_rate": round(wins / len(rets) * 100),
+        "avg_ret": round(sum(rets) / len(rets), 1),
+        "horizon": horizon,
+    }
+
+
+def aggregate_backtest(report: dict) -> Optional[dict]:
+    """Tüm hisselerin backtest sonuçlarını birleştir → sistem geneli başarı."""
+    n = wins_w = 0
+    all_ret = 0.0
+    cnt = 0
+    for s in report.get("stocks", []):
+        bt = s.get("backtest")
+        if not bt:
+            continue
+        n += bt["n"]
+        wins_w += bt["win_rate"] * bt["n"]
+        all_ret += bt["avg_ret"] * bt["n"]
+        cnt += 1
+    if n == 0:
+        return None
+    return {
+        "trades": n,
+        "stocks": cnt,
+        "win_rate": round(wins_w / n),
+        "avg_ret": round(all_ret / n, 1),
+        "horizon": 10,
+    }
+
+
 def rescore_report(report: dict) -> int:
     """Rapordaki her hisseyi price_history'den teknik olarak yeniden skorla.
 
     score / verdict / verdict_key / risk / dimensions alanlarını günceller.
     Döndürür: yeniden skorlanan hisse sayısı."""
+    # Piyasa rejimi düzeltmesi (borsa bazında) — analyze.py doldurur
+    regime = report.get("regime_adj", {}) or {}
     n = 0
     for s in report.get("stocks", []):
         if "error" in s:
             continue
         res = score_from_history(s.get("price_history"))
         if res:
-            # Haber duygu düzeltmesini skora uygula (varsa) — teknik skoru ±5 nudge'lar
             base = res["score"]
-            adj = (s.get("news") or {}).get("adjustment", 0) or 0
-            if base is not None and adj:
-                final = max(0, min(100, base + adj))
+            # Skoru etkileyen düzeltmeler: haber + endekse göreli güç + piyasa rejimi
+            news_adj = (s.get("news") or {}).get("adjustment", 0) or 0
+            rel_adj  = s.get("rel_adj", 0) or 0
+            reg_adj  = regime.get(s.get("exchange", ""), 0) or 0
+            total = news_adj + rel_adj + reg_adj
+            res["adjustments"] = {"news": news_adj, "rel": rel_adj, "regime": reg_adj}
+            if base is not None and total:
+                final = max(0, min(100, base + total))
                 res["score"] = final
-                res["score_base"] = base   # haber öncesi teknik skor (şeffaflık)
+                res["score_base"] = base   # düzeltme öncesi teknik skor (şeffaflık)
                 # Rozet/sinyali NİHAİ skora göre yeniden hesapla (band değişmiş olabilir)
                 bars = [b for b in s.get("price_history", []) if b.get("c")]
                 closes = [b["c"] for b in bars]

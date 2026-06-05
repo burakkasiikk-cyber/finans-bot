@@ -607,6 +607,13 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     </div>
   </div>
 
+  <!-- ── Sistem Performansı (Backtest) + Piyasa Rejimi ── -->
+  <div class="card" id="sysperf-card" style="margin-top:16px;display:none">
+    <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Sistem Performansı & Piyasa Rejimi</div><div class="chip" id="sysperf-chip">Backtest</div></div>
+    <div class="cb"><div id="sysperf-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px"></div>
+    <div style="font-size:10px;color:var(--t3);margin-top:10px">Backtest: son 1 yılda 'iyi giriş' sinyallerinin 10 gün sonraki gerçek sonucu. Geçmiş performans gelecek için garanti değildir.</div></div>
+  </div>
+
   <!-- ── ROW 9: Bugün Ne Değişti + Ekonomik Takvim ──
        (Sahte haber akışı kaldırıldı; yerine düne göre gerçek karar değişimleri) -->
   <div class="g2">
@@ -950,6 +957,36 @@ function renderPortfolio(){
   buildPortChart(rows.map((r,i) => ({label:r.sym, value:r.value, color:colors[i % colors.length]})));
 }
 
+
+function renderSysPerf(){
+  var card=document.getElementById('sysperf-card');
+  var body=document.getElementById('sysperf-body');
+  if(!card||!body||!_rawReport) return;
+  var bt=_rawReport.backtest;
+  var mr=_rawReport.market_regime||{};
+  var cells=[];
+  function cell(lbl,val,clr,sub){
+    return '<div style="background:var(--bg3);border-radius:10px;padding:12px"><div style="font-size:9.5px;color:var(--t3);margin-bottom:4px">'+lbl+'</div><div style="font-size:20px;font-weight:800;color:'+(clr||'var(--t1)')+'">'+val+'</div>'+(sub?'<div style="font-size:9px;color:var(--t3);margin-top:2px">'+sub+'</div>':'')+'</div>';
+  }
+  if(bt){
+    var wc = bt.win_rate>=55?'var(--green)':bt.win_rate>=45?'var(--yellow)':'var(--red)';
+    var ac = bt.avg_ret>=0?'var(--green)':'var(--red)';
+    cells.push(cell('Sinyal Başarı Oranı','%'+bt.win_rate, wc, bt.trades+' işlem · '+bt.horizon+' gün'));
+    cells.push(cell('Ortalama Getiri',(bt.avg_ret>=0?'+':'')+bt.avg_ret+'%', ac, 'işlem başına'));
+  }
+  function regCell(name,r){
+    if(!r) return '';
+    var rc = r.trend==='yükseliş'?'var(--green)':r.trend==='düşüş'?'var(--red)':'var(--yellow)';
+    var ico = r.trend==='yükseliş'?'▲':r.trend==='düşüş'?'▼':'▬';
+    return cell(name+' Rejimi', ico+' '+r.trend, rc, (r.ret_1m!=null?('1 ay: '+(r.ret_1m>=0?'+':'')+r.ret_1m+'%'):''));
+  }
+  cells.push(regCell('BIST', mr.bist));
+  cells.push(regCell('ABD', mr.sp));
+  cells=cells.filter(Boolean);
+  if(!cells.length){ card.style.display='none'; return; }
+  body.innerHTML=cells.join('');
+  card.style.display='';
+}
 
 function renderChanges(){
   var el=document.getElementById('changes-list');
@@ -1613,6 +1650,7 @@ async function loadReport() {
     renderTech('bist-tech',  BIST);
     renderTech('us-tech',    US);
     renderChanges();   // düne göre karar değişimleri
+    renderSysPerf();   // backtest + piyasa rejimi
 
     /* ── AI skor ring güncelle ── */
     var scores = rawStocks.map(function(s){return s.score||50;});
@@ -1903,14 +1941,29 @@ function openStockModal(sym) {
         '<div style="font-size:13px">🟢 <b>' + fmt2(ts.support) + unit + '</b> (destek) yakınında → alım için izlenebilir</div>';
     }
 
-    // Haber etkisi (skora) — haberin kendisi değil, sadece etkisi gösterilir
-    var nw = s.news;
-    if (nw && nw.adjustment) {
-      var nclr = nw.adjustment > 0 ? 'var(--green)' : 'var(--red)';
-      var nico = nw.adjustment > 0 ? '📈' : '📉';
-      rules += '<div style="font-size:12px;margin-top:4px;color:var(--t2)">' + nico +
-        ' Haber etkisi: <b style="color:' + nclr + '">' +
-        (nw.adjustment > 0 ? '+' : '') + nw.adjustment + ' puan</b> (' + nw.sentiment + ')</div>';
+    // Endekse göreli güç
+    if (s.rel_strength != null) {
+      var rsc = s.rel_strength >= 0 ? 'var(--green)' : 'var(--red)';
+      var rstxt = s.rel_strength > 3 ? 'endeksi geçiyor (güçlü)' : s.rel_strength >= 0 ? 'endeksle uyumlu' : 'endeksin gerisinde (zayıf)';
+      rules += '<div style="font-size:12px;margin-top:4px;color:var(--t2)">📊 Endekse göre: <b style="color:' + rsc + '">' +
+        (s.rel_strength >= 0 ? '+' : '') + s.rel_strength + '%</b> — ' + rstxt + '</div>';
+    }
+    // Skoru etkileyen düzeltmeler (haber + göreli güç + piyasa rejimi)
+    var adj = s.adjustments;
+    if (adj) {
+      var parts = [];
+      if (adj.news)   parts.push('haber ' + (adj.news>0?'+':'') + adj.news);
+      if (adj.rel)    parts.push('göreli güç ' + (adj.rel>0?'+':'') + adj.rel);
+      if (adj.regime) parts.push('piyasa ' + (adj.regime>0?'+':'') + adj.regime);
+      if (parts.length) rules += '<div style="font-size:11px;margin-top:2px;color:var(--t3)">Skor düzeltmeleri: ' + parts.join(' · ') + ' puan</div>';
+    }
+    // Düşük likidite uyarısı
+    if (s.liquidity === 'low') {
+      rules += '<div style="font-size:12px;margin-top:4px;color:var(--yellow)">⚠ Düşük işlem hacmi — bu hissede sinyaller daha az güvenilir olabilir</div>';
+    }
+    // Yaklaşan bilanço uyarısı
+    if (s.next_earnings && s.next_earnings.days != null) {
+      rules += '<div style="font-size:12px;margin-top:4px;color:var(--yellow)">📅 ' + s.next_earnings.days + ' gün sonra bilanço (' + s.next_earnings.date + ') — olay riski, pozisyona dikkat</div>';
     }
 
     document.getElementById('sm-signal-head').textContent = head;

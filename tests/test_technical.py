@@ -167,3 +167,30 @@ def test_timing_pullback_beats_parabolic():
     s_par = timing_state(parabolic, _bars(parabolic))["score"]
     s_pull = timing_state(pull, _bars(pull))["score"]
     assert s_pull > s_par   # geri çekilme > parabolik kovalama
+
+
+# ── Backtest ──
+from scripts.technical import backtest_signals, aggregate_backtest
+
+
+def test_backtest_returns_stats_on_uptrend():
+    closes = [round(10 + i * 0.1 + (i % 5) * 0.2, 2) for i in range(120)]
+    bt = backtest_signals(_bars(closes), horizon=10)
+    assert bt is not None
+    assert 0 <= bt["win_rate"] <= 100 and bt["n"] >= 3
+    assert isinstance(bt["avg_ret"], float)
+
+
+def test_backtest_insufficient_returns_none():
+    assert backtest_signals(_bars([10, 11, 12] * 5)) is None
+
+
+def test_aggregate_backtest_combines():
+    report = {"stocks": [
+        {"symbol": "A", "backtest": {"n": 10, "win_rate": 60, "avg_ret": 2.0}},
+        {"symbol": "B", "backtest": {"n": 30, "win_rate": 40, "avg_ret": -1.0}},
+        {"symbol": "C", "error": "x"},
+    ]}
+    agg = aggregate_backtest(report)
+    assert agg["trades"] == 40 and agg["stocks"] == 2
+    assert agg["win_rate"] == 45   # (60*10+40*30)/40

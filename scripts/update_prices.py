@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Grafik verisini güncelle — yfinance only, Finnhub key gerekmez.
-Her hissenin price_history alanını (son 60 işlem günü OHLCV) yeniler.
+Fiyat geçmişini ve teknik skorları tazele — yfinance only, Finnhub gerekmez.
+fetch_trader_stock'u yeniden kullanır (90 bar + backtest + likidite tutarlı kalır).
+Haber duygusu (news) ve dünkü skor (prev) korunur.
 """
 import json
 import time
 from pathlib import Path
 
-import yfinance as yf
-
-from scripts.technical import rescore_report
+from scripts.fetch_history import fetch_trader_stock
+from scripts.technical import rescore_report, aggregate_backtest
 
 
 def run():
@@ -26,35 +26,21 @@ def run():
     for s in stocks:
         sym = s["symbol"]
         exc = s.get("exchange", "BIST")
-        yticker = sym if exc != "BIST" else f"{sym}.IS"
-        try:
-            hist = yf.Ticker(yticker).history(period="3mo")
-            ph = [
-                {
-                    "t": int(ts.timestamp()),
-                    "o": round(float(row["Open"]),  2),
-                    "h": round(float(row["High"]),  2),
-                    "l": round(float(row["Low"]),   2),
-                    "c": round(float(row["Close"]), 2),
-                    "v": int(row["Volume"]) if row.get("Volume") == row.get("Volume") else 0,
-                }
-                for ts, row in hist.iterrows()
-                if row["Close"] > 0
-            ][-60:]
-            if ph:
-                s["price_history"] = ph
-                # Fiyat ve günlük değişimi de grafikle tutarlı tut
-                s["price"] = round(ph[-1]["c"], 2)
-                if len(ph) >= 2 and ph[-2]["c"]:
-                    s["change_pct"] = round((ph[-1]["c"] / ph[-2]["c"] - 1) * 100, 2)
+        fresh = fetch_trader_stock(sym, exc)
+        if "error" not in fresh:
+            # Haber ve prev'i koru; gerisini tazele
+            for k in ("price", "change_pct", "price_history", "backtest",
+                      "liquidity", "turnover", "name"):
+                if k in fresh:
+                    s[k] = fresh[k]
             updated += 1
-            print(f"  {sym}: {len(ph)} bar")
-        except Exception as e:
-            print(f"  {sym}: HATA {e}")
+            print(f"  {sym}: {len(fresh['price_history'])} bar")
+        else:
+            print(f"  {sym}: {fresh['error']}")
         time.sleep(0.35)   # yfinance 429 önlemi
 
-    # Fiyat geçmişi tazelendi — trader skorlarını da güncelle
     n = rescore_report(report)
+    report["backtest"] = aggregate_backtest(report)
     print(f"⚡ Trader modu: {n} hisse yeniden skorlandı.")
 
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2))
