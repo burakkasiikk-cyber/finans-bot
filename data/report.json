@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-05T16:17:16.566320+00:00",
+  "generated_at": "2026-06-05T17:30:29.398669+00:00",
   "macro": {
     "usd_try": 46.0345,
     "eur_try": 53.4974,
-    "gold_usd": 4356.2,
-    "sp500": 745.42,
-    "sp500_change_pct": -1.5414,
+    "gold_usd": 4363.6,
+    "sp500": 743.89,
+    "sp500_change_pct": -1.7435,
     "bist100": 13694.19,
     "bist100_change_pct": -1.2836,
     "tr_interest_rate": 46.0
@@ -8868,7 +8868,7 @@
         "count": 0
       },
       "prev": {
-        "score": 64,
+        "score": 66,
         "verdict_key": "buy"
       },
       "rel_strength": 0.1,
@@ -9680,7 +9680,7 @@
         "count": 0
       },
       "prev": {
-        "score": 66,
+        "score": 64,
         "verdict_key": "buy"
       },
       "rel_strength": 1.6,
@@ -16175,7 +16175,7 @@
         "count": 0
       },
       "prev": {
-        "score": 63,
+        "score": 61,
         "verdict_key": "buy"
       },
       "rel_strength": 4.4,
@@ -31600,7 +31600,7 @@
         "count": 2
       },
       "prev": {
-        "score": 43,
+        "score": 41,
         "verdict_key": "sell"
       },
       "rel_strength": -5.8,
@@ -40532,7 +40532,7 @@
         "count": 0
       },
       "prev": {
-        "score": 40,
+        "score": 38,
         "verdict_key": "sell"
       },
       "rel_strength": -7.2,
@@ -47028,7 +47028,7 @@
         "count": 0
       },
       "prev": {
-        "score": 34,
+        "score": 36,
         "verdict_key": "sell"
       },
       "rel_strength": 0.8,
@@ -49464,7 +49464,7 @@
         "count": 0
       },
       "prev": {
-        "score": 34,
+        "score": 36,
         "verdict_key": "sell"
       },
       "rel_strength": 0.2,
@@ -56772,7 +56772,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -1.1,
