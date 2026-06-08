@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-08T17:40:00.473752+00:00",
+  "generated_at": "2026-06-08T18:41:38.728520+00:00",
   "macro": {
     "usd_try": 46.1114,
     "eur_try": 53.1789,
-    "gold_usd": 4361.9,
-    "sp500": 741.23,
-    "sp500_change_pct": 0.4989,
+    "gold_usd": 4368.0,
+    "sp500": 741.38,
+    "sp500_change_pct": 0.5193,
     "bist100": 13860.59,
     "bist100_change_pct": 1.2151,
     "tr_interest_rate": 46.0
@@ -1567,7 +1567,7 @@
         "count": 0
       },
       "prev": {
-        "score": 84,
+        "score": 82,
         "verdict_key": "strong_buy"
       },
       "rel_strength": 3.5,
@@ -2379,7 +2379,7 @@
         "count": 0
       },
       "prev": {
-        "score": 80,
+        "score": 78,
         "verdict_key": "strong_buy"
       },
       "rel_strength": -3.6,
@@ -4814,8 +4814,8 @@
         "count": 0
       },
       "prev": {
-        "score": 75,
-        "verdict_key": "strong_buy"
+        "score": 73,
+        "verdict_key": "buy"
       },
       "rel_strength": 4.2,
       "rel_adj": 1,
@@ -6437,7 +6437,7 @@
         "count": 0
       },
       "prev": {
-        "score": 73,
+        "score": 71,
         "verdict_key": "buy"
       },
       "rel_strength": 0.0,
@@ -9683,7 +9683,7 @@
         "count": 0
       },
       "prev": {
-        "score": 67,
+        "score": 65,
         "verdict_key": "buy"
       },
       "rel_strength": 0.0,
@@ -12118,7 +12118,7 @@
         "count": 0
       },
       "prev": {
-        "score": 65,
+        "score": 63,
         "verdict_key": "buy"
       },
       "rel_strength": 3.5,
@@ -12930,7 +12930,7 @@
         "count": 0
       },
       "prev": {
-        "score": 64,
+        "score": 62,
         "verdict_key": "buy"
       },
       "rel_strength": -0.9,
@@ -13742,7 +13742,7 @@
         "count": 0
       },
       "prev": {
-        "score": 64,
+        "score": 62,
         "verdict_key": "buy"
       },
       "rel_strength": -0.3,
@@ -14554,7 +14554,7 @@
         "count": 0
       },
       "prev": {
-        "score": 63,
+        "score": 61,
         "verdict_key": "buy"
       },
       "rel_strength": -4.6,
@@ -17801,8 +17801,8 @@
         "count": 0
       },
       "prev": {
-        "score": 61,
-        "verdict_key": "buy"
+        "score": 59,
+        "verdict_key": "hold"
       },
       "rel_strength": 3.2,
       "rel_adj": 1,
@@ -20239,7 +20239,7 @@
         "count": 0
       },
       "prev": {
-        "score": 58,
+        "score": 56,
         "verdict_key": "hold"
       },
       "rel_strength": 2.0,
@@ -21863,7 +21863,7 @@
         "count": 0
       },
       "prev": {
-        "score": 56,
+        "score": 54,
         "verdict_key": "hold"
       },
       "rel_strength": -3.6,
@@ -22675,7 +22675,7 @@
         "count": 0
       },
       "prev": {
-        "score": 55,
+        "score": 53,
         "verdict_key": "hold"
       },
       "rel_strength": -7.4,
@@ -23487,7 +23487,7 @@
         "count": 2
       },
       "prev": {
-        "score": 53,
+        "score": 51,
         "verdict_key": "hold"
       },
       "rel_strength": -1.4,
@@ -25111,7 +25111,7 @@
         "count": 0
       },
       "prev": {
-        "score": 51,
+        "score": 49,
         "verdict_key": "hold"
       },
       "rel_strength": 0.0,
@@ -25923,7 +25923,7 @@
         "count": 0
       },
       "prev": {
-        "score": 51,
+        "score": 49,
         "verdict_key": "hold"
       },
       "rel_strength": -5.7,
@@ -27547,8 +27547,8 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
-        "verdict_key": "sell"
+        "score": 46,
+        "verdict_key": "hold"
       },
       "rel_strength": 1.4,
       "rel_adj": 1,
@@ -29983,7 +29983,7 @@
         "count": 1
       },
       "prev": {
-        "score": 40,
+        "score": 42,
         "verdict_key": "sell"
       },
       "rel_strength": -5.0,
@@ -30795,7 +30795,7 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
+        "score": 42,
         "verdict_key": "sell"
       },
       "rel_strength": -3.7,
@@ -31607,7 +31607,7 @@
         "count": 0
       },
       "prev": {
-        "score": 43,
+        "score": 41,
         "verdict_key": "sell"
       },
       "rel_strength": -4.5,
@@ -34855,7 +34855,7 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
+        "score": 40,
         "verdict_key": "sell"
       },
       "rel_strength": -4.4,
@@ -36479,7 +36479,7 @@
         "count": 0
       },
       "prev": {
-        "score": 41,
+        "score": 39,
         "verdict_key": "sell"
       },
       "rel_strength": -5.8,
@@ -39727,7 +39727,7 @@
         "count": 0
       },
       "prev": {
-        "score": 40,
+        "score": 38,
         "verdict_key": "sell"
       },
       "rel_strength": -5.1,
@@ -41351,7 +41351,7 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
+        "score": 37,
         "verdict_key": "sell"
       },
       "rel_strength": -6.2,
@@ -42163,7 +42163,7 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
+        "score": 37,
         "verdict_key": "sell"
       },
       "rel_strength": -7.0,
@@ -44599,7 +44599,7 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
+        "score": 35,
         "verdict_key": "sell"
       },
       "rel_strength": -7.2,
@@ -46223,7 +46223,7 @@
         "count": 0
       },
       "prev": {
-        "score": 37,
+        "score": 35,
         "verdict_key": "sell"
       },
       "rel_strength": -6.8,
@@ -47035,7 +47035,7 @@
         "count": 0
       },
       "prev": {
-        "score": 37,
+        "score": 35,
         "verdict_key": "sell"
       },
       "rel_strength": -6.9,
@@ -48659,7 +48659,7 @@
         "count": 0
       },
       "prev": {
-        "score": 37,
+        "score": 35,
         "verdict_key": "sell"
       },
       "rel_strength": -3.8,
@@ -51095,7 +51095,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -2.1,
@@ -52719,7 +52719,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -10.6,
@@ -53531,7 +53531,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -3.4,
@@ -54343,7 +54343,7 @@
         "count": 0
       },
       "prev": {
-        "score": 35,
+        "score": 33,
         "verdict_key": "sell"
       },
       "rel_strength": -5.8,
@@ -55967,8 +55967,8 @@
         "count": 1
       },
       "prev": {
-        "score": 30,
-        "verdict_key": "strong_sell"
+        "score": 32,
+        "verdict_key": "sell"
       },
       "rel_strength": -4.4,
       "rel_adj": -1,
@@ -56779,7 +56779,7 @@
         "count": 0
       },
       "prev": {
-        "score": 34,
+        "score": 32,
         "verdict_key": "sell"
       },
       "rel_strength": -7.1,
@@ -59215,7 +59215,7 @@
         "count": 0
       },
       "prev": {
-        "score": 34,
+        "score": 32,
         "verdict_key": "sell"
       },
       "rel_strength": -6.5,
@@ -60839,8 +60839,8 @@
         "count": 0
       },
       "prev": {
-        "score": 33,
-        "verdict_key": "sell"
+        "score": 31,
+        "verdict_key": "strong_sell"
       },
       "rel_strength": -9.2,
       "rel_adj": -3,
@@ -62463,8 +62463,8 @@
         "count": 0
       },
       "prev": {
-        "score": 32,
-        "verdict_key": "sell"
+        "score": 30,
+        "verdict_key": "strong_sell"
       },
       "rel_strength": -7.4,
       "rel_adj": -3,
