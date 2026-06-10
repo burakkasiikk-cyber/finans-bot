@@ -116,6 +116,82 @@ def test_rescore_report_skips_errors_and_short():
     assert "top3" in report and "risk_alerts" in report
 
 
+# ── Güvenlik kapıları: rejim freni + backtest kapısı ──
+def _healthy_uptrend():
+    """Yükseliş + yatay konsolidasyon — organik olarak AL/GÜÇLÜ AL üretir."""
+    closes = [round(10 + i * 0.25, 2) for i in range(50)]
+    closes += [22.5, 22.3, 22.4, 22.2, 22.3, 22.1, 22.2, 22.0, 22.1, 22.0]
+    return _bars(closes)
+
+
+def _one_stock_report(stock_extra=None, **report_extra):
+    """AL/GÜÇLÜ AL üreten tek hisselik rapor iskeleti."""
+    stock = {"symbol": "UP", "exchange": "BIST", "price_history": _healthy_uptrend()}
+    stock.update(stock_extra or {})
+    report = {"stocks": [stock]}
+    report.update(report_extra)
+    return report
+
+
+def test_regime_gate_buy_capped_in_downtrend():
+    # Endeks düşüş rejimindeyken teknik AL → TUT'a çekilir (kovalama önlenir)
+    report = _one_stock_report(
+        market_regime={"bist": {"trend": "düşüş", "above_ma50": False}},
+        regime_adj={"BIST": -3},
+    )
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] == "hold"
+    assert "regime" in s["gates"]
+    assert s["signal"]["action"] == "BEKLE"
+    # Rozet ile sinyal tutarlılığı korunur
+    assert s["verdict_key"] == s["signal"]["key"]
+
+
+def test_regime_gate_inactive_in_uptrend():
+    report = _one_stock_report(
+        market_regime={"bist": {"trend": "yükseliş", "above_ma50": True}},
+        regime_adj={"BIST": 2},
+    )
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] in ("buy", "strong_buy")
+    assert s["gates"] == []
+
+
+def test_backtest_gate_low_winrate_capped():
+    # Hissenin kendi geçmiş sinyal isabeti zayıfsa AL rozeti verilmez (BJKAS vakası)
+    report = _one_stock_report(
+        {"backtest": {"n": 8, "win_rate": 33, "avg_ret": -2.5, "horizon": 10}}
+    )
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] == "hold"
+    assert "backtest" in s["gates"]
+
+
+def test_backtest_gate_ignores_small_sample():
+    # 5'ten az işlem istatistiksel gürültü — kapı tetiklenmez
+    report = _one_stock_report(
+        {"backtest": {"n": 3, "win_rate": 33, "avg_ret": -2.5, "horizon": 10}}
+    )
+    rescore_report(report)
+    assert report["stocks"][0]["verdict_key"] in ("buy", "strong_buy")
+
+
+def test_gates_do_not_touch_sell_verdicts():
+    # Kapılar yalnızca AL/GÜÇLÜ AL'i kısıtlar; SAT olduğu gibi kalır
+    report = {
+        "stocks": [{"symbol": "DN", "exchange": "BIST", "price_history": _downtrend()}],
+        "market_regime": {"bist": {"trend": "düşüş", "above_ma50": False}},
+        "regime_adj": {"BIST": -3},
+    }
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] in ("sell", "strong_sell", "hold")
+    assert s["gates"] == []
+
+
 # ── Haber duygu analizi ──
 from scripts.news_sentiment import analyze_titles, _relevance_keys
 

@@ -595,6 +595,56 @@ def aggregate_backtest(report: dict) -> Optional[dict]:
     }
 
 
+def _regime_is_down(report: dict, exchange: str) -> bool:
+    """Borsa endeksi düşüş rejiminde mi? market_regime varsa trend'e, yoksa regime_adj'a bakar."""
+    mr = (report.get("market_regime") or {}).get((exchange or "").lower()) or {}
+    if mr.get("trend"):
+        return mr["trend"] == "düşüş"
+    return ((report.get("regime_adj") or {}).get(exchange or "", 0) or 0) < 0
+
+
+BACKTEST_GATE_MIN_TRADES = 5   # daha az işlem istatistiksel gürültü sayılır
+BACKTEST_GATE_MIN_WINRATE = 50  # bu isabetin altında AL rozeti verilmez
+
+
+def apply_safety_gates(res: dict, stock: dict, report: dict) -> None:
+    """AL/GÜÇLÜ AL rozetini hak etmeyen durumlarda TUT'a indirir (res'i yerinde değiştirir).
+
+    İki kapı:
+      • regime   — endeks düşüş rejimindeyken yeni alım önerilmez (momentum
+                   sistemleri düşen piyasada en çok yükselmişi alıp zarar eder)
+      • backtest — hissenin kendi geçmiş sinyal isabeti %50'nin altındaysa
+                   sistemin o hissede kanıtlanmış bir üstünlüğü yok demektir
+    Skor ve sıralama DEĞİŞMEZ (şeffaflık); yalnızca rozet/sinyal kısıtlanır.
+    """
+    res["gates"] = []
+    if res.get("verdict_key") not in ("buy", "strong_buy"):
+        return
+    notes = []
+    if _regime_is_down(report, stock.get("exchange", "")):
+        res["gates"].append("regime")
+        notes.append("⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım "
+                     "önerilmez; teknik AL sinyali TUT'a çekildi.")
+    bt = stock.get("backtest") or {}
+    if (bt.get("n", 0) >= BACKTEST_GATE_MIN_TRADES
+            and bt.get("win_rate") is not None
+            and bt["win_rate"] < BACKTEST_GATE_MIN_WINRATE):
+        res["gates"].append("backtest")
+        notes.append(f"⛔ Bu hissede stratejinin geçmiş isabeti zayıf "
+                     f"(%{bt['win_rate']} · {bt['n']} sinyal) — AL rozeti TUT'a çekildi.")
+    if not res["gates"]:
+        return
+    res["gated_from"] = res["verdict_key"]
+    res["verdict"], res["verdict_key"] = "TUT / NÖTR", "hold"
+    sig = dict(res.get("signal") or {})
+    sig.update({
+        "action": "BEKLE", "key": "hold", "headline": "🟡 TUT / NÖTR",
+        "verdict": "TUT / NÖTR",
+        "detail": (sig.get("detail", "") + " " + " ".join(notes)).strip(),
+    })
+    res["signal"] = sig
+
+
 def rescore_report(report: dict) -> int:
     """Rapordaki her hisseyi price_history'den teknik olarak yeniden skorla.
 
@@ -626,6 +676,8 @@ def rescore_report(report: dict) -> int:
                 res["signal"] = sig
                 res["verdict"] = sig["verdict"]
                 res["verdict_key"] = sig["key"]
+            # Güvenlik kapıları: düşüş rejimi / zayıf backtest → AL rozeti TUT'a iner
+            apply_safety_gates(res, s, report)
             s.update(res)
             s["pros"] = []
             s["cons"] = []
