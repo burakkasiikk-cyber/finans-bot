@@ -10,6 +10,7 @@ from pathlib import Path
 
 from scripts.fetch_history import fetch_trader_stock
 from scripts.technical import rescore_report, aggregate_backtest
+from scripts.track import update_track
 
 
 def run():
@@ -41,6 +42,8 @@ def run():
 
     n = rescore_report(report)
     report["backtest"] = aggregate_backtest(report)
+    # Gün içi: yeni karne kaydı üretme, yalnız ufku dolanları çözümle
+    report["karne"] = update_track(report, record=False)
     print(f"⚡ Trader modu: {n} hisse yeniden skorlandı.")
 
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2))

@@ -605,6 +605,10 @@ def _regime_is_down(report: dict, exchange: str) -> bool:
 
 BACKTEST_GATE_MIN_TRADES = 5   # daha az işlem istatistiksel gürültü sayılır
 BACKTEST_GATE_MIN_WINRATE = 50  # bu isabetin altında AL rozeti verilmez
+VOL_CONFIRM = 1.2               # AL için hacim teyidi eşiği (5g ort ≥ 1.2× 20g ort)
+                                # Lab kanıtı (2y, backtest_lab): isabet %51→%53,
+                                # her iki yarı dönemde de iyileşme — kabul kriterini
+                                # geçen TEK filtre (TF+hacim, 5g ufuk, n=858).
 
 
 def apply_safety_gates(res: dict, stock: dict, report: dict) -> None:
@@ -632,6 +636,12 @@ def apply_safety_gates(res: dict, stock: dict, report: dict) -> None:
         res["gates"].append("backtest")
         notes.append(f"⛔ Bu hissede stratejinin geçmiş isabeti zayıf "
                      f"(%{bt['win_rate']} · {bt['n']} sinyal) — AL rozeti TUT'a çekildi.")
+    bars = [b for b in (stock.get("price_history") or []) if b.get("c")]
+    vt = volume_trend(bars)
+    if vt is not None and vt < VOL_CONFIRM:
+        res["gates"].append("hacim")
+        notes.append(f"⛔ Hacim teyidi yok ({vt}× — eşik {VOL_CONFIRM}×): yükseliş "
+                     "hacimle desteklenmiyor, AL rozeti TUT'a çekildi.")
     if not res["gates"]:
         return
     res["gated_from"] = res["verdict_key"]
@@ -643,6 +653,36 @@ def apply_safety_gates(res: dict, stock: dict, report: dict) -> None:
         "detail": (sig.get("detail", "") + " " + " ".join(notes)).strip(),
     })
     res["signal"] = sig
+
+
+DIP_RSI_MAX = 30   # aşırı satım eşiği (dip adayı için)
+
+
+def dip_candidates(report: dict, limit: int = 8) -> list:
+    """Düşüş/yatay rejimde 'dip dönüşü' İZLEME listesi — AL rozeti DEĞİL.
+
+    Kural: RSI<30 + yeşil gün (dönüş teyidi). Lab (2y): bu girişin isabeti
+    son yıl %60/10g, önceki yıl %42 — rejime bağımlı olduğu için tavsiye değil,
+    izleme listesi olarak sunulur ve UI'da öyle etiketlenir."""
+    mr = (report.get("market_regime") or {}).get("bist") or {}
+    trend = mr.get("trend")
+    down = trend in ("düşüş", "yatay") if trend else _regime_is_down(report, "BIST")
+    if not down:
+        return []
+    out = []
+    for s in report.get("stocks", []):
+        if "error" in s:
+            continue
+        closes = [b["c"] for b in (s.get("price_history") or []) if b.get("c")]
+        if len(closes) < 16 or closes[-1] <= closes[-2]:
+            continue
+        r = rsi(closes)
+        if r is None or r >= DIP_RSI_MAX:
+            continue
+        out.append({"symbol": s["symbol"], "rsi": r,
+                    "ret_1w": pct_return(closes, 5), "price": closes[-1]})
+    out.sort(key=lambda d: d["rsi"])
+    return out[:limit]
 
 
 def rescore_report(report: dict) -> int:
@@ -689,6 +729,8 @@ def rescore_report(report: dict) -> int:
     report["stocks"] = valid + errors
     report["top3"] = [s["symbol"] for s in valid[:3]]
     report["risk_alerts"] = [s["symbol"] for s in valid if s.get("risk") == "high"]
+    # Düşüş/yatay rejimde dip dönüşü izleme listesi (AL değil — şeffaf etiket)
+    report["dip_adaylari"] = dip_candidates(report)
     return n
 
 

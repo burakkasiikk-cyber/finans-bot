@@ -583,7 +583,8 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
   <div class="card" id="sysperf-card" style="margin-top:16px;display:none">
     <div class="ch"><div class="ct"><div class="dot" style="background:var(--purple)"></div>Sistem Performansı & Piyasa Rejimi</div><div class="chip" id="sysperf-chip">Backtest</div></div>
     <div class="cb"><div id="sysperf-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px"></div>
-    <div style="font-size:10px;color:var(--t3);margin-top:10px">Backtest: son 1 yılda 'iyi giriş' sinyallerinin 10 gün sonraki gerçek sonucu. Geçmiş performans gelecek için garanti değildir.</div></div>
+    <div id="dip-list" style="display:none;margin-top:12px;padding:10px 12px;background:var(--bg3);border-radius:10px"></div>
+    <div style="font-size:10px;color:var(--t3);margin-top:10px">Backtest: son 1 yılda 'iyi giriş' sinyallerinin 10 gün sonraki simüle sonucu. 📒 Karne: sistemin YAYINLADIĞI önerilerin gerçek sonuçları (5 ve 10 işlem günü sonra ölçülür) — sistem kendi isabetini gizlemeden gösterir. Geçmiş performans gelecek için garanti değildir.</div></div>
   </div>
 
   <!-- ── ROW 9: Bugün Ne Değişti + Ekonomik Takvim ──
@@ -904,6 +905,18 @@ function renderSysPerf(){
     cells.push(cell('Sinyal Başarı Oranı','%'+bt.win_rate, wc, bt.trades+' işlem · '+bt.horizon+' gün'));
     cells.push(cell('Ortalama Getiri',(bt.avg_ret>=0?'+':'')+bt.avg_ret+'%', ac, 'işlem başına'));
   }
+  /* ── Karne: yayınlanan önerilerin GERÇEK sonuçları (simülasyon değil) ── */
+  var ka=((_rawReport.karne||{})['90g']||{}).overall||{};
+  var k10=ka.h10||{}, k5=ka.h5||{};
+  if(k10.n>=10){
+    var kc = k10.win_rate>=55?'var(--green)':k10.win_rate>=45?'var(--yellow)':'var(--red)';
+    var ke = k10.avg_ret>=0?'var(--green)':'var(--red)';
+    cells.push(cell('📒 Karne · 10g İsabet','%'+k10.win_rate, kc, k10.n+' kapanmış sinyal · son 90 gün'));
+    cells.push(cell('📒 Karne · Beklenti',(k10.avg_ret>=0?'+':'')+k10.avg_ret+'%', ke, 'sinyal başına (10 gün)'));
+    if(k5.n>=10) cells.push(cell('📒 Karne · 5g İsabet','%'+k5.win_rate, k5.win_rate>=55?'var(--green)':k5.win_rate>=45?'var(--yellow)':'var(--red)', k5.n+' kapanmış sinyal'));
+  } else {
+    cells.push(cell('📒 Karne','dolduruluyor','var(--t3)',(k10.n||0)+' kapanmış sinyal — sağlıklı ölçüm için 10+ gerekli'));
+  }
   function regCell(name,r){
     if(!r) return '';
     var rc = r.trend==='yükseliş'?'var(--green)':r.trend==='düşüş'?'var(--red)':'var(--yellow)';
@@ -915,6 +928,18 @@ function renderSysPerf(){
   if(!cells.length){ card.style.display='none'; return; }
   body.innerHTML=cells.join('');
   card.style.display='';
+  /* ── Dip dönüşü adayları: düşüş rejiminde izleme listesi (AL değil) ── */
+  var dl=document.getElementById('dip-list');
+  if(dl){
+    var dips=_rawReport.dip_adaylari||[];
+    if(dips.length){
+      var chips=dips.map(function(d){
+        return '<span style="display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;margin:3px 4px 0 0;font-size:10.5px"><b>'+d.symbol+'</b> <span style="color:var(--t3)">RSI '+d.rsi+(d.ret_1w!=null?' · 1h '+(d.ret_1w>=0?'+':'')+d.ret_1w+'%':'')+'</span></span>';
+      }).join('');
+      dl.innerHTML='<div style="font-size:10px;color:var(--t3);margin-bottom:4px">🔍 <b style="color:var(--t2)">Dip Dönüşü Adayları</b> — aşırı satım + yeşil gün. İZLEME listesidir, alım tavsiyesi DEĞİLDİR; dönüş teyidi (hacimli 2. yeşil gün / direnç kırılımı) beklenmeden girilmez.</div>'+chips;
+      dl.style.display='';
+    } else { dl.style.display='none'; }
+  }
 }
 
 function renderChanges(){

@@ -29,6 +29,15 @@ def build_morning_message(report: dict) -> str:
             s = stocks.get(sym, {})
             lines.append(f"• {sym} — {s.get('verdict','?')} ({s.get('score','?')}/100)")
 
+    # Karne: sistemin kendi ölçülmüş isabeti — dürüstlük katmanı
+    karne = (report.get("karne") or {}).get("90g", {}).get("overall", {})
+    k10, k5 = karne.get("h10") or {}, karne.get("h5") or {}
+    if k10.get("n"):
+        lines.append("")
+        lines.append(f"📒 Karne (90g): 10g isabet %{k10['win_rate']} · beklenti "
+                     f"{k10['avg_ret']:+}% ({k10['n']} sinyal)"
+                     + (f" | 5g isabet %{k5['win_rate']}" if k5.get("n") else ""))
+
     lines.append("")
     usd_try = macro.get("usd_try")
     gold    = macro.get("gold_usd")

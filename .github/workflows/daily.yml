@@ -13,6 +13,7 @@ on:
     branches: [main]
     paths-ignore:
       - 'data/report.json'  # raporun kendisi commit edilince tetikleme (sonsuz döngü)
+      - 'data/track.json'
       - '**.md'
       - 'docs/**'
 
@@ -68,7 +69,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/report.json
+          git add data/report.json data/track.json
           if git diff --staged --quiet; then
             echo "ℹ️  report.json değişmedi (fiyatlar aynı kalmış)"
             exit 0
@@ -81,7 +82,7 @@ jobs:
             echo "⚠️  push reddedildi, remote ile senkron (deneme $i)…"
             git fetch origin main
             git reset --soft origin/main   # üretilen dosya tree'de kalır, HEAD remote ucuna gelir
-            git add data/report.json
+            git add data/report.json data/track.json
             if git diff --staged --quiet; then echo "ℹ️  remote zaten güncel"; exit 0; fi
             git commit -m "$MSG"
             sleep $((RANDOM % 6 + 3))

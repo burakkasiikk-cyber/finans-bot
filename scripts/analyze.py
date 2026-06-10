@@ -9,6 +9,7 @@ from scripts.fetch_history import fetch_trader_stock
 from scripts.fetch_macro import fetch_macro
 from scripts.technical import rescore_report, aggregate_backtest
 from scripts.news_sentiment import fetch_news_sentiment
+from scripts.track import update_track
 
 
 def _index_context(yticker: str) -> dict:
@@ -172,6 +173,11 @@ def run() -> dict:
     # TRADER MODU: skoru teknik + haber + göreli güç + rejim ile üret.
     n = rescore_report(report)
     report["backtest"] = aggregate_backtest(report)
+    # Öneri karnesi: bugünün sinyallerini kaydet, ufku dolanları ölç
+    report["karne"] = update_track(report)
+    k = report["karne"]["90g"]["overall"]["h10"]
+    if k["n"]:
+        print(f"📒 Karne (90g/10g): %{k['win_rate']} isabet, beklenti {k['avg_ret']:+}% ({k['n']} sinyal)")
     if report["backtest"]:
         b = report["backtest"]
         print(f"📊 Backtest: {b['trades']} işlem, başarı %{b['win_rate']}, ort {b['avg_ret']:+}% ({b['horizon']}g)")

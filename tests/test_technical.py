@@ -116,12 +116,19 @@ def test_rescore_report_skips_errors_and_short():
     assert "top3" in report and "risk_alerts" in report
 
 
-# ── Güvenlik kapıları: rejim freni + backtest kapısı ──
-def _healthy_uptrend():
-    """Yükseliş + yatay konsolidasyon — organik olarak AL/GÜÇLÜ AL üretir."""
+# ── Güvenlik kapıları: rejim freni + backtest kapısı + hacim teyidi ──
+def _healthy_uptrend(strong_volume=True):
+    """Yükseliş + yatay konsolidasyon — organik olarak AL/GÜÇLÜ AL üretir.
+
+    strong_volume=True: son günler hacimli (hacim teyidi VAR) — AL kalabilir.
+    strong_volume=False: hacim sönük — hacim kapısına takılmalı."""
     closes = [round(10 + i * 0.25, 2) for i in range(50)]
     closes += [22.5, 22.3, 22.4, 22.2, 22.3, 22.1, 22.2, 22.0, 22.1, 22.0]
-    return _bars(closes)
+    bars = _bars(closes)
+    if strong_volume:
+        for b in bars[-5:]:
+            b["v"] = 3000   # 5g ort 3000 / 20g ort 1500 = 2.0 ≥ 1.2
+    return bars
 
 
 def _one_stock_report(stock_extra=None, **report_extra):
@@ -177,6 +184,74 @@ def test_backtest_gate_ignores_small_sample():
     )
     rescore_report(report)
     assert report["stocks"][0]["verdict_key"] in ("buy", "strong_buy")
+
+
+def test_volume_gate_blocks_buy_without_confirmation():
+    # Lab kanıtı (2y): hacim teyidi isabeti %51→%53 yükseltti — AL için şart
+    report = _one_stock_report(
+        {"price_history": _healthy_uptrend(strong_volume=False)},
+        market_regime={"bist": {"trend": "yükseliş", "above_ma50": True}},
+        regime_adj={"BIST": 2},
+    )
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] == "hold"
+    assert "hacim" in s["gates"]
+
+
+def test_volume_gate_passes_with_confirmation():
+    report = _one_stock_report(
+        market_regime={"bist": {"trend": "yükseliş", "above_ma50": True}},
+        regime_adj={"BIST": 2},
+    )
+    rescore_report(report)
+    s = report["stocks"][0]
+    assert s["verdict_key"] in ("buy", "strong_buy")
+    assert s["gates"] == []
+
+
+# ── Dip dönüşü adayları (düşüş/yatay rejimde izleme listesi) ──
+def _oversold_turning():
+    """Uzun düşüş + son gün yeşil — RSI<30 + dönüş teyidi."""
+    closes = [round(30 - i * 0.35, 2) for i in range(58)]
+    closes.append(round(closes[-1] + 0.3, 2))   # yeşil gün
+    return _bars(closes)
+
+
+def test_dip_candidates_listed_in_downtrend():
+    report = {
+        "stocks": [{"symbol": "DIP", "exchange": "BIST",
+                    "price_history": _oversold_turning()}],
+        "market_regime": {"bist": {"trend": "düşüş", "above_ma50": False}},
+        "regime_adj": {"BIST": -3},
+    }
+    rescore_report(report)
+    assert [d["symbol"] for d in report["dip_adaylari"]] == ["DIP"]
+    d = report["dip_adaylari"][0]
+    assert d["rsi"] is not None and d["rsi"] < 30
+
+
+def test_dip_candidates_empty_in_uptrend():
+    report = {
+        "stocks": [{"symbol": "DIP", "exchange": "BIST",
+                    "price_history": _oversold_turning()}],
+        "market_regime": {"bist": {"trend": "yükseliş", "above_ma50": True}},
+        "regime_adj": {"BIST": 2},
+    }
+    rescore_report(report)
+    assert report["dip_adaylari"] == []
+
+
+def test_dip_candidates_require_green_day():
+    closes = [round(30 - i * 0.35, 2) for i in range(59)]   # son gün de kırmızı
+    report = {
+        "stocks": [{"symbol": "DWN", "exchange": "BIST",
+                    "price_history": _bars(closes)}],
+        "market_regime": {"bist": {"trend": "düşüş", "above_ma50": False}},
+        "regime_adj": {"BIST": -3},
+    }
+    rescore_report(report)
+    assert report["dip_adaylari"] == []
 
 
 def test_gates_do_not_touch_sell_verdicts():

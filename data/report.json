@@ -811,7 +811,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%27 · 11 sinyal) — AL rozeti TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%27 · 11 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.6× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -821,7 +821,8 @@
       },
       "gates": [
         "regime",
-        "backtest"
+        "backtest",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -1627,7 +1628,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.94× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -1636,7 +1637,8 @@
         "regime": -3
       },
       "gates": [
-        "regime"
+        "regime",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -2442,7 +2444,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.81× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -2451,7 +2453,8 @@
         "regime": -3
       },
       "gates": [
-        "regime"
+        "regime",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -4073,7 +4076,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.88× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -4083,7 +4086,8 @@
       },
       "score_base": 70,
       "gates": [
-        "regime"
+        "regime",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -4889,7 +4893,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.66× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -4898,7 +4902,8 @@
         "regime": -3
       },
       "gates": [
-        "regime"
+        "regime",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -7335,7 +7340,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.63× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -7345,7 +7350,8 @@
       },
       "score_base": 65,
       "gates": [
-        "regime"
+        "regime",
+        "hacim"
       ],
       "gated_from": "buy",
       "pros": [],
@@ -62664,5 +62670,46 @@
     "win_rate": 48,
     "avg_ret": 0.3,
     "horizon": 10
-  }
+  },
+  "karne": {
+    "30g": {
+      "overall": {
+        "h5": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "h10": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      },
+      "by_verdict": {}
+    },
+    "90g": {
+      "overall": {
+        "h5": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "h10": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      },
+      "by_verdict": {}
+    }
+  },
+  "dip_adaylari": []
 }
