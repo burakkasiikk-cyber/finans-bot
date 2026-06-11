@@ -16,8 +16,13 @@ WINDOWS = {"30g": 30, "90g": 90}   # özet pencereleri (takvim günü)
 TRACK_PATH = "data/track.json"
 
 
+# BIST işlem günü etiketi: yfinance günlük barları 00:00 TR damgalar
+# (= önceki gün 21:00 UTC) — UTC'ye çevirmek işlem gününü 1 gün kaydırır.
+TR_TZ = datetime.timezone(datetime.timedelta(hours=3))
+
+
 def _bar_date(ts: int) -> str:
-    return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).date().isoformat()
+    return datetime.datetime.fromtimestamp(ts, TR_TZ).date().isoformat()
 
 
 def record_signals(report: dict, track: dict) -> int:

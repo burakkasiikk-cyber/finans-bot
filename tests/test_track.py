@@ -56,6 +56,19 @@ def test_record_skips_errors_and_missing_history():
     assert record_signals(report, track) == 0
 
 
+def test_record_labels_bars_with_tr_trading_day():
+    # yfinance BIST günlük barları 00:00 TR (=21:00 UTC önceki gün) damgalı.
+    # UTC ile etiketlemek işlem gününü 1 gün geri kaydırır — TR günü esastır.
+    midnight_tr = 10 * DAY - 3 * 3600   # gün-10'un 00:00 TR'si = gün-9 21:00 UTC
+    report = _report([{
+        "symbol": "AAA", "verdict_key": "buy", "score": 60,
+        "price_history": [{"t": midnight_tr, "o": 1, "h": 1, "l": 1, "c": 1.0, "v": 1}],
+    }])
+    track = {"signals": []}
+    record_signals(report, track)
+    assert track["signals"][0]["date"] == _date(10)   # gün-9 DEĞİL
+
+
 # ── resolve_signals ──
 def test_resolve_exact_trading_day_horizons():
     closes = [100 + i for i in range(16)]   # d0..d15
