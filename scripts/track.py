@@ -89,29 +89,43 @@ def resolve_signals(track: dict, report: dict) -> int:
                 continue
             fwd = round((closes[idx + h] / sig["price"] - 1) * 100, 2)
             sig[f"fwd{h}"] = fwd
-            sig[f"win{h}"] = fwd > 0
+            # İsabet YÖNLÜdür: AL için yükseliş, SAT için DÜŞÜŞ isabettir
+            if sig.get("verdict_key") in SHORTS:
+                sig[f"win{h}"] = fwd < 0
+            else:
+                sig[f"win{h}"] = fwd > 0
             resolved += 1
     return resolved
 
 
-def _stats(rets: list) -> dict:
-    n = len(rets)
+LONGS = ("strong_buy", "buy")
+SHORTS = ("sell", "strong_sell")
+
+
+def _stats(items: list) -> dict:
+    """items: (ileri_getiri, isabet_mi) çiftleri. avg_ret/avg_win/avg_loss ham
+    fiyat hareketidir; win_rate verdict yönüne göre hesaplanmış isabettir."""
+    n = len(items)
     if n == 0:
         return {"n": 0, "win_rate": None, "avg_ret": None,
                 "avg_win": None, "avg_loss": None}
-    wins = [r for r in rets if r > 0]
-    losses = [r for r in rets if r <= 0]
+    rets = [r for r, _ in items]
+    ups = [r for r in rets if r > 0]
+    downs = [r for r in rets if r <= 0]
     return {
         "n": n,
-        "win_rate": round(len(wins) / n * 100),
+        "win_rate": round(sum(1 for _, w in items if w) / n * 100),
         "avg_ret": round(sum(rets) / n, 2),    # beklenti (işlem başına ortalama)
-        "avg_win": round(sum(wins) / len(wins), 2) if wins else None,
-        "avg_loss": round(sum(losses) / len(losses), 2) if losses else None,
+        "avg_win": round(sum(ups) / len(ups), 2) if ups else None,
+        "avg_loss": round(sum(downs) / len(downs), 2) if downs else None,
     }
 
 
 def summarize(track: dict, today: str = None) -> dict:
-    """Pencere → {overall, by_verdict} → ufuk (h5/h10) → istatistik."""
+    """Pencere → {overall, by_verdict} → ufuk (h5/h10) → istatistik.
+
+    Genel (overall) isabet yalnızca YÖNLÜ çağrılardan hesaplanır (AL+SAT);
+    TUT yön iddiası taşımadığından by_verdict'te ayrı raporlanır."""
     today_d = (datetime.date.fromisoformat(today) if today
                else datetime.datetime.now(datetime.timezone.utc).date())
     out = {}
@@ -121,9 +135,12 @@ def summarize(track: dict, today: str = None) -> dict:
         overall, by_v = {}, {}
         for h in HORIZONS:
             done = [s for s in sigs if f"fwd{h}" in s]
-            overall[f"h{h}"] = _stats([s[f"fwd{h}"] for s in done])
+            directional = [(s[f"fwd{h}"], s.get(f"win{h}", s[f"fwd{h}"] > 0))
+                           for s in done if s.get("verdict_key") in LONGS + SHORTS]
+            overall[f"h{h}"] = _stats(directional)
             for s in done:
-                by_v.setdefault(s["verdict_key"], {}).setdefault(f"_r{h}", []).append(s[f"fwd{h}"])
+                by_v.setdefault(s["verdict_key"], {}).setdefault(f"_r{h}", []).append(
+                    (s[f"fwd{h}"], s.get(f"win{h}", s[f"fwd{h}"] > 0)))
         for v, d in by_v.items():
             by_v[v] = {f"h{h}": _stats(d.get(f"_r{h}", [])) for h in HORIZONS}
         out[wname] = {"overall": overall, "by_verdict": by_v}

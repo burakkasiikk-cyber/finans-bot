@@ -97,6 +97,17 @@ def test_resolve_negative_return_is_loss():
     assert s["fwd5"] < 0 and s["win5"] is False
 
 
+def test_resolve_sell_wins_when_price_falls():
+    # SAT sinyalinin isabeti fiyatın DÜŞMESİdir — yön verdict'e göre değerlendirilir
+    closes = [100] + [90] * 12
+    report = _report([{"symbol": "AAA", "price_history": _ph(closes)}])
+    track = {"signals": [{"date": _date(0), "symbol": "AAA",
+                          "verdict_key": "sell", "price": 100.0}]}
+    resolve_signals(track, report)
+    s = track["signals"][0]
+    assert s["fwd5"] < 0 and s["win5"] is True
+
+
 def test_resolve_leaves_unknown_symbol_untouched():
     report = _report([{"symbol": "AAA", "price_history": _ph([1, 2, 3])}])
     track = {"signals": [{"date": _date(0), "symbol": "ZZZ",
@@ -116,18 +127,26 @@ def test_summarize_math_by_hand():
         {"date": _date(17), "symbol": "C", "verdict_key": "buy",
          "price": 1, "fwd10": -4.0, "win10": False, "fwd5": -2.0, "win5": False},
         {"date": _date(18), "symbol": "D", "verdict_key": "sell",
-         "price": 1, "fwd10": -6.0, "win10": False},
+         "price": 1, "fwd10": -6.0, "win10": True},   # SAT + düşüş = isabet
+        {"date": _date(18), "symbol": "E", "verdict_key": "hold",
+         "price": 1, "fwd10": 3.0, "win10": True},
     ]}
     k = summarize(track, today=today)
     o = k["90g"]["overall"]["h10"]
-    # buy+sell hepsi: +10, +2, −4, −6 → n=4, isabet 2/4=%50, ort +0.5
-    assert o["n"] == 4 and o["win_rate"] == 50
+    # genel isabet YÖNLÜ çağrılardan (buy+sell): kazanan buy+10, buy+2, sell−6
+    # → 3/4 = %75. TUT yön iddiası olmadığından genel isabete girmez.
+    assert o["n"] == 4 and o["win_rate"] == 75
+    # avg_ret ham ileri getiri ortalamasıdır: (+10+2−4−6)/4 = +0.5
     assert abs(o["avg_ret"] - 0.5) < 1e-6
     b = k["90g"]["by_verdict"]["buy"]["h10"]
     # buy: +10, +2, −4 → isabet %67, ort +2.67, kazanç ort +6, kayıp ort −4
     assert b["n"] == 3 and b["win_rate"] == 67
     assert abs(b["avg_win"] - 6.0) < 1e-6 and abs(b["avg_loss"] + 4.0) < 1e-6
-    # 5g kolonu ayrı sayılır (sell'in fwd5'i yok → n=3)
+    # sell kendi yönüyle: düştü → %100 isabet
+    assert k["90g"]["by_verdict"]["sell"]["h10"]["win_rate"] == 100
+    # hold ayrı raporlanır ama genel isabete dahil değil
+    assert k["90g"]["by_verdict"]["hold"]["h10"]["n"] == 1
+    # 5g kolonu ayrı sayılır (sadece buy'ların fwd5'i var → n=3)
     assert k["90g"]["overall"]["h5"]["n"] == 3
 
 
