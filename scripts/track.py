@@ -31,6 +31,7 @@ def record_signals(report: dict, track: dict) -> int:
     Aynı gün + sembol zaten kayıtlıysa atlanır (gün içi tekrar çalıştırmalar
     ve hafta sonu çalıştırmaları doğal olarak teklenir). Döndürür: eklenen sayı."""
     existing = {(s["date"], s["symbol"]) for s in track["signals"]}
+    dips = {d["symbol"] for d in report.get("dip_adaylari") or []}
     added = 0
     for s in report.get("stocks", []):
         if "error" in s or not s.get("verdict_key"):
@@ -55,6 +56,8 @@ def record_signals(report: dict, track: dict) -> int:
             rec["target"] = ts["target"]
         if s.get("gates"):
             rec["gates"] = s["gates"]
+        if s["symbol"] in dips:
+            rec["dip"] = True   # dip dönüşü adayı — karnede ayrı satırda ölçülür
         track["signals"].append(rec)
         existing.add((date, s["symbol"]))
         added += 1
@@ -143,7 +146,13 @@ def summarize(track: dict, today: str = None) -> dict:
                     (s[f"fwd{h}"], s.get(f"win{h}", s[f"fwd{h}"] > 0)))
         for v, d in by_v.items():
             by_v[v] = {f"h{h}": _stats(d.get(f"_r{h}", [])) for h in HORIZONS}
-        out[wname] = {"overall": overall, "by_verdict": by_v}
+        # Dip adayları ayrı satır: uzun (yükseliş) tezidir — isabet = fwd > 0
+        dip = {}
+        for h in HORIZONS:
+            items = [(s[f"fwd{h}"], s[f"fwd{h}"] > 0)
+                     for s in sigs if s.get("dip") and f"fwd{h}" in s]
+            dip[f"h{h}"] = _stats(items)
+        out[wname] = {"overall": overall, "by_verdict": by_v, "dip": dip}
     return out
 
 

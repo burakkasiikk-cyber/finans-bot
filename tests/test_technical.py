@@ -231,6 +231,20 @@ def test_dip_candidates_listed_in_downtrend():
     assert d["rsi"] is not None and d["rsi"] < 30
 
 
+def test_dip_candidates_include_trade_levels():
+    # Tepki trade'i tanımlı riskle oynanır: giriş/stop/hedef/RR aday üstünde gelir
+    report = {
+        "stocks": [{"symbol": "DIP", "exchange": "BIST",
+                    "price_history": _oversold_turning()}],
+        "market_regime": {"bist": {"trend": "düşüş", "above_ma50": False}},
+        "regime_adj": {"BIST": -3},
+    }
+    rescore_report(report)
+    d = report["dip_adaylari"][0]
+    assert d["stop"] < d["entry"] < d["target"]
+    assert d["rr"] is None or d["rr"] > 0
+
+
 def test_dip_candidates_empty_in_uptrend():
     report = {
         "stocks": [{"symbol": "DIP", "exchange": "BIST",

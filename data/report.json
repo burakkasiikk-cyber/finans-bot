@@ -62695,31 +62695,51 @@
       "symbol": "GUBRF",
       "rsi": 19.2,
       "ret_1w": -2.89,
-      "price": 478.75
+      "price": 478.75,
+      "entry": 478.75,
+      "stop": 457.09,
+      "target": 613.5,
+      "rr": 6.22
     },
     {
       "symbol": "GOLTS",
       "rsi": 23.4,
       "ret_1w": -1.51,
-      "price": 327.0
+      "price": 327.0,
+      "entry": 327.0,
+      "stop": 317.96,
+      "target": 380.75,
+      "rr": 5.95
     },
     {
       "symbol": "ZOREN",
       "rsi": 23.8,
       "ret_1w": -5.28,
-      "price": 2.87
+      "price": 2.87,
+      "entry": 2.87,
+      "stop": 2.8,
+      "target": 3.27,
+      "rr": 5.71
     },
     {
       "symbol": "VESTL",
       "rsi": 25.9,
       "ret_1w": -4.23,
-      "price": 24.46
+      "price": 24.46,
+      "entry": 24.46,
+      "stop": 23.85,
+      "target": 29.1,
+      "rr": 7.61
     },
     {
       "symbol": "OTKAR",
       "rsi": 28.7,
       "ret_1w": -7.33,
-      "price": 347.75
+      "price": 347.75,
+      "entry": 347.75,
+      "stop": 341.57,
+      "target": 387.75,
+      "rr": 6.47
     }
   ],
   "backtest": {
@@ -62747,7 +62767,23 @@
           "avg_loss": null
         }
       },
-      "by_verdict": {}
+      "by_verdict": {},
+      "dip": {
+        "h5": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "h10": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      }
     },
     "90g": {
       "overall": {
@@ -62766,7 +62802,23 @@
           "avg_loss": null
         }
       },
-      "by_verdict": {}
+      "by_verdict": {},
+      "dip": {
+        "h5": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "h10": {
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      }
     }
   }
 }

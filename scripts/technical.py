@@ -673,14 +673,21 @@ def dip_candidates(report: dict, limit: int = 8) -> list:
     for s in report.get("stocks", []):
         if "error" in s:
             continue
-        closes = [b["c"] for b in (s.get("price_history") or []) if b.get("c")]
+        bars = [b for b in (s.get("price_history") or []) if b.get("c")]
+        closes = [b["c"] for b in bars]
         if len(closes) < 16 or closes[-1] <= closes[-2]:
             continue
         r = rsi(closes)
         if r is None or r >= DIP_RSI_MAX:
             continue
-        out.append({"symbol": s["symbol"], "rsi": r,
-                    "ret_1w": pct_return(closes, 5), "price": closes[-1]})
+        d = {"symbol": s["symbol"], "rsi": r,
+             "ret_1w": pct_return(closes, 5), "price": closes[-1]}
+        # Tepki trade'i tanımlı riskle oynanır: giriş/stop/hedef/RR ekle
+        ts = trade_setup(bars)
+        if ts:
+            d.update({"entry": ts["entry"], "stop": ts["stop"],
+                      "target": ts["target"], "rr": ts["rr"]})
+        out.append(d)
     out.sort(key=lambda d: d["rsi"])
     return out[:limit]
 

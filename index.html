@@ -917,6 +917,10 @@ function renderSysPerf(){
   } else {
     cells.push(cell('📒 Karne','dolduruluyor','var(--t3)',(k10.n||0)+' kapanmış sinyal — sağlıklı ölçüm için 10+ gerekli'));
   }
+  var kd=(((_rawReport.karne||{})['90g']||{}).dip||{}).h10||{};
+  if(kd.n>=5){
+    cells.push(cell('📒 Karne · Dip Adayı','%'+kd.win_rate, kd.win_rate>=55?'var(--green)':kd.win_rate>=45?'var(--yellow)':'var(--red)', kd.n+' aday · 10g sonrası yükselen oranı'));
+  }
   function regCell(name,r){
     if(!r) return '';
     var rc = r.trend==='yükseliş'?'var(--green)':r.trend==='düşüş'?'var(--red)':'var(--yellow)';
@@ -934,7 +938,8 @@ function renderSysPerf(){
     var dips=_rawReport.dip_adaylari||[];
     if(dips.length){
       var chips=dips.map(function(d){
-        return '<span style="display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;margin:3px 4px 0 0;font-size:10.5px"><b>'+d.symbol+'</b> <span style="color:var(--t3)">RSI '+d.rsi+(d.ret_1w!=null?' · 1h '+(d.ret_1w>=0?'+':'')+d.ret_1w+'%':'')+'</span></span>';
+        var lvl = d.entry!=null ? ' · giriş '+d.entry+' · stop <span style="color:var(--red)">'+d.stop+'</span> · hedef <span style="color:var(--green)">'+d.target+'</span>'+(d.rr!=null?' · R/R '+d.rr:'') : '';
+        return '<span style="display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;margin:3px 4px 0 0;font-size:10.5px"><b>'+d.symbol+'</b> <span style="color:var(--t3)">RSI '+d.rsi+(d.ret_1w!=null?' · 1h '+(d.ret_1w>=0?'+':'')+d.ret_1w+'%':'')+lvl+'</span></span>';
       }).join('');
       dl.innerHTML='<div style="font-size:10px;color:var(--t3);margin-bottom:4px">🔍 <b style="color:var(--t2)">Dip Dönüşü Adayları</b> — aşırı satım + yeşil gün. İZLEME listesidir, alım tavsiyesi DEĞİLDİR; dönüş teyidi (hacimli 2. yeşil gün / direnç kırılımı) beklenmeden girilmez.</div>'+chips;
       dl.style.display='';

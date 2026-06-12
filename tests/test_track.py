@@ -168,6 +168,38 @@ def test_summarize_empty_track():
     assert k["90g"]["overall"]["h10"]["n"] == 0
 
 
+def test_record_marks_dip_candidates():
+    report = _report([
+        {"symbol": "AAA", "verdict_key": "sell", "score": 40,
+         "price_history": _ph([10, 9, 8, 8.2])},
+        {"symbol": "BBB", "verdict_key": "hold", "score": 50,
+         "price_history": _ph([5, 5, 5, 5])},
+    ])
+    report["dip_adaylari"] = [{"symbol": "AAA", "rsi": 25.0}]
+    track = {"signals": []}
+    record_signals(report, track)
+    a = next(s for s in track["signals"] if s["symbol"] == "AAA")
+    b = next(s for s in track["signals"] if s["symbol"] == "BBB")
+    assert a.get("dip") is True and "dip" not in b
+
+
+def test_summarize_dip_row_uses_long_semantics():
+    # Dip adayı uzun (yükseliş) tezidir: verdict SAT olsa bile isabet = yükseliş
+    today = _date(20)
+    track = {"signals": [
+        {"date": _date(15), "symbol": "A", "verdict_key": "sell", "dip": True,
+         "price": 1, "fwd10": 4.0, "win10": False},   # SAT için ıska ama dip için isabet
+        {"date": _date(16), "symbol": "B", "verdict_key": "sell", "dip": True,
+         "price": 1, "fwd10": -2.0, "win10": True},   # SAT isabeti ama dip için ıska
+        {"date": _date(17), "symbol": "C", "verdict_key": "hold",
+         "price": 1, "fwd10": 9.0, "win10": True},    # dip değil — satıra girmez
+    ]}
+    k = summarize(track, today=today)
+    d = k["90g"]["dip"]["h10"]
+    assert d["n"] == 2 and d["win_rate"] == 50
+    assert abs(d["avg_ret"] - 1.0) < 1e-6
+
+
 # ── prune ──
 def test_prune_drops_old_records():
     track = {"signals": [
