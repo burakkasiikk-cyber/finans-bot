@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-13T17:56:15.169968+00:00",
+  "generated_at": "2026-06-13T20:50:49.695397+00:00",
   "macro": {
     "usd_try": 46.2771,
     "eur_try": 53.5367,
     "gold_usd": 4215.0,
-    "sp500": 741.77,
-    "sp500_change_pct": 0.5435,
+    "sp500": 741.75,
+    "sp500_change_pct": 0.5408,
     "bist100": 13938.48,
     "bist100_change_pct": 1.4187,
     "tr_interest_rate": 46.0
