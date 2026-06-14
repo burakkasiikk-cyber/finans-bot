@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-14T12:30:49.382565+00:00",
+  "generated_at": "2026-06-14T16:01:34.181725+00:00",
   "macro": {
     "usd_try": 46.2789,
     "eur_try": 53.5326,
     "gold_usd": 4238.8,
-    "sp500": 741.75,
-    "sp500_change_pct": 0.5408,
+    "sp500": 741.77,
+    "sp500_change_pct": 0.5435,
     "bist100": 13938.48,
     "bist100_change_pct": 1.4187,
     "tr_interest_rate": 46.0
@@ -25202,8 +25202,8 @@
         "count": 0
       },
       "prev": {
-        "score": 38,
-        "verdict_key": "sell"
+        "score": 49,
+        "verdict_key": "hold"
       },
       "rel_strength": -5.1,
       "rel_adj": -3,
