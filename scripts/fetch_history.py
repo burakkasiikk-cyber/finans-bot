@@ -6,8 +6,6 @@ Skorlama tamamen teknik (price_history) olduğundan Finnhub'a / temel verilere
 gerek yok. Bu modül her hisse için OHLCV bar listesi + güncel fiyat + günlük
 değişim + isim döndürür. Skorlamayı scripts/technical.rescore_report yapar.
 """
-import math
-
 import yfinance as yf
 
 from scripts.technical import backtest_signals
@@ -15,6 +13,21 @@ from scripts.technical import backtest_signals
 MIN_BARS = 30    # trader analizi için gereken asgari işlem günü (MA/MACD/ATR vb.)
 STORE_BARS = 90  # report.json'da saklanan bar sayısı (grafik + göstergeler)
 LIQ_MIN_TRY = 5_000_000   # BIST için asgari günlük işlem hacmi (TL) — altı 'düşük likidite'
+
+
+def daily_change_pct(price, bars):
+    """Günlük % değişim — önceki işlem gününün kapanışına göre, iç tutarlı.
+
+    yfinance'in info.regularMarketChangePercent alanı bazen bozuk (split/bedelsiz
+    artığı, ör. -49%) geliyor ve gerçek fiyat hareketiyle çelişiyor. Bu yüzden
+    değişim DAİMA bar verisinden hesaplanır; `price` canlıysa da önceki günün
+    kapanışına göre tutarlı kalır."""
+    if not bars:
+        return None
+    prev = bars[-2]["c"] if len(bars) >= 2 else None
+    if not prev:
+        return None
+    return round((price / prev - 1) * 100, 2)
 
 
 def fetch_trader_stock(symbol: str, exchange: str = "BIST") -> dict:
@@ -45,13 +58,12 @@ def fetch_trader_stock(symbol: str, exchange: str = "BIST") -> dict:
     backtest = backtest_signals(full)
     bars = full[-STORE_BARS:]
 
-    # Fiyat ve günlük değişim — bar verisinden güvenilir şekilde (her zaman var)
+    # Fiyat — bar verisinden güvenilir şekilde (her zaman var)
     price = bars[-1]["c"]
-    change_pct = None
-    if len(bars) >= 2 and bars[-2]["c"]:
-        change_pct = round((bars[-1]["c"] / bars[-2]["c"] - 1) * 100, 2)
 
-    # İsim ve (varsa) daha güncel anlık fiyat/değişim — info best-effort
+    # İsim ve (varsa) daha güncel anlık fiyat — info best-effort.
+    # NOT: info.regularMarketChangePercent KULLANILMAZ (bozuk gelebiliyor);
+    # değişim aşağıda daima bar verisinden iç tutarlı hesaplanır.
     name = symbol
     try:
         info = ticker.info
@@ -59,11 +71,10 @@ def fetch_trader_stock(symbol: str, exchange: str = "BIST") -> dict:
         live = info.get("currentPrice") or info.get("regularMarketPrice")
         if live and live == live:
             price = round(float(live), 4)
-        cp = info.get("regularMarketChangePercent")
-        if cp is not None and not (isinstance(cp, float) and math.isnan(cp)):
-            change_pct = round(float(cp), 2)
     except Exception:
         pass
+
+    change_pct = daily_change_pct(price, bars)
 
     # Yaklaşan bilanço tarihi (best-effort) — pozisyon için olay riski
     next_earnings = None
