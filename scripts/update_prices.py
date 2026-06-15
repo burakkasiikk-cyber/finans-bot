@@ -11,6 +11,7 @@ from pathlib import Path
 from scripts.fetch_history import fetch_trader_stock
 from scripts.technical import rescore_report, aggregate_backtest
 from scripts.track import update_track
+from scripts.analyze import apply_market_context
 
 
 def run():
@@ -39,6 +40,12 @@ def run():
         else:
             print(f"  {sym}: {fresh['error']}")
         time.sleep(0.35)   # yfinance 429 önlemi
+
+    # Piyasa rejimini TAZELE — yoksa fren bayat rejimle yanlış basılı kalır
+    try:
+        apply_market_context(report)
+    except Exception as e:
+        print(f"  ! rejim tazelenemedi, eski korunuyor: {e}")
 
     n = rescore_report(report)
     report["backtest"] = aggregate_backtest(report)

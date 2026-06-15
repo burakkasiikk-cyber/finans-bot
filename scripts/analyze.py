@@ -40,6 +40,33 @@ def compute_market_context() -> dict:
     """BIST100 (XU100.IS) rejim + 1 aylık getirisi. (Sadece BIST odağı.)"""
     return {"bist": _index_context("XU100.IS")}
 
+
+def apply_market_context(report: dict, ctx: dict = None) -> dict:
+    """Piyasa rejimi + endekse göreli güç hesaplar ve report'a yazar.
+
+    analyze.py ve update_prices.py ORTAK kullanır → rejim her güncellemede taze
+    kalır (yoksa gün içi güncelleme bayat rejimle çalışır ve fren yanlış basılı
+    kalır). Endeks verisi çekilemezse ('bilinmiyor') eski sağlam rejim korunur."""
+    if ctx is None:
+        ctx = compute_market_context()
+    bist = ctx.get("bist", {})
+    if bist.get("trend") and bist["trend"] != "bilinmiyor":
+        report["market_regime"] = {"bist": bist}
+        report["regime_adj"] = {"BIST": bist["adj"]}
+    idx = (report.get("market_regime") or {}).get("bist") or {}
+    for s in report.get("stocks", []):
+        if "error" in s:
+            continue
+        closes = [b["c"] for b in s.get("price_history", []) if b.get("c")]
+        st_ret = round((closes[-1] / closes[-1 - 21] - 1) * 100, 1) if len(closes) > 21 else None
+        if st_ret is not None and idx.get("ret_1m") is not None:
+            rs = round(st_ret - idx["ret_1m"], 1)          # BIST100'ü ne kadar yendi
+            s["rel_strength"] = rs
+            s["rel_adj"] = 3 if rs > 5 else 1 if rs > 0 else -3 if rs < -5 else -1
+        else:
+            s["rel_strength"], s["rel_adj"] = None, 0
+    return ctx
+
 BIST_STOCKS = [
     # Bankalar  (QNBFB delisted/halka kapandı — çıkarıldı)
     "AKBNK", "GARAN", "HALKB", "ISCTR", "VAKBN", "YKBNK", "ALBRK", "SKBNK",
@@ -141,23 +168,6 @@ def run() -> dict:
             s["prev"] = prev_map[s["symbol"]]
         time.sleep(0.25)
 
-    # Piyasa rejimi + endekse göreli güç (BIST→XU100, ABD→S&P500)
-    print("Piyasa rejimi & göreli güç...")
-    ctx = compute_market_context()
-    regime_adj = {"BIST": ctx["bist"]["adj"]}
-    idx = ctx["bist"]
-    for s in stocks:
-        if "error" in s:
-            continue
-        closes = [b["c"] for b in s.get("price_history", []) if b.get("c")]
-        st_ret = round((closes[-1] / closes[-1 - 21] - 1) * 100, 1) if len(closes) > 21 else None
-        if st_ret is not None and idx["ret_1m"] is not None:
-            rs = round(st_ret - idx["ret_1m"], 1)          # BIST100'ü ne kadar yendi
-            s["rel_strength"] = rs
-            s["rel_adj"] = 3 if rs > 5 else 1 if rs > 0 else -3 if rs < -5 else -1
-        else:
-            s["rel_strength"], s["rel_adj"] = None, 0
-
     report = {
         "generated_at":   datetime.now(timezone.utc).isoformat(),
         "macro":          macro,
@@ -166,9 +176,11 @@ def run() -> dict:
         "risk_alerts":    [],
         "weekly_summary": None,
         "mode":           "trader",
-        "market_regime":  {"bist": ctx["bist"]},
-        "regime_adj":     regime_adj,
     }
+
+    # Piyasa rejimi + endekse göreli güç (analyze ve update_prices ortak fonksiyon)
+    print("Piyasa rejimi & göreli güç...")
+    apply_market_context(report)
 
     # TRADER MODU: skoru teknik + haber + göreli güç + rejim ile üret.
     n = rescore_report(report)
