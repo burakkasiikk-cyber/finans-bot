@@ -1481,7 +1481,7 @@ function processStock(s) {
   var tgtU = s.verdict_key==='strong_buy'||s.verdict_key==='buy';
   var fmt  = function(p){return p.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2});};
   return {
-    sym:s.symbol, nm:shortName(s.name),
+    sym:s.symbol, nm:shortName(s.name), vk:s.verdict_key,
     px: isBist ? fmt(s.price) : '$'+s.price.toFixed(2),
     chg: (s.change_pct>=0?'+':'')+s.change_pct.toFixed(2).replace('.',',')+'%',
     up: s.change_pct>=0,
@@ -1580,7 +1580,9 @@ async function loadReport() {
     var rawStocks = (report.stocks || []).filter(function(s){return !s.error;});
     BIST = rawStocks.filter(function(s){return s.exchange==='BIST';}).map(processStock);
     US   = [];   // ABD borsası kaldırıldı — sadece BIST
-    BIST.sort(function(a,b){return b.conf-a.conf;});
+    // Önce karar önceliği (GÜÇLÜ AL → AL → TUT → SAT → GÜÇLÜ SAT), sonra skor
+    var VRANK={strong_buy:5,buy:4,hold:3,sell:2,strong_sell:1};
+    BIST.sort(function(a,b){return (VRANK[b.vk]||0)-(VRANK[a.vk]||0) || (b.conf-a.conf);});
     renderTable('bist-body', BIST);
     renderTech('bist-tech',  BIST);
     renderChanges();   // düne göre karar değişimleri
