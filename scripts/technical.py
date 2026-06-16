@@ -659,14 +659,15 @@ DIP_RSI_MAX = 30   # aşırı satım eşiği (dip adayı için)
 
 
 def dip_candidates(report: dict, limit: int = 8) -> list:
-    """Düşüş/yatay rejimde 'dip dönüşü' İZLEME listesi — AL rozeti DEĞİL.
+    """Yalnız DÜŞÜŞ rejiminde 'dip dönüşü' İZLEME listesi — AL rozeti DEĞİL.
 
-    Kural: RSI<30 + yeşil gün (dönüş teyidi). Lab (2y): bu girişin isabeti
-    son yıl %60/10g, önceki yıl %42 — rejime bağımlı olduğu için tavsiye değil,
-    izleme listesi olarak sunulur ve UI'da öyle etiketlenir."""
+    Kural: RSI<30 + yeşil gün (dönüş teyidi). Lab (2y, iki yarı): bu giriş
+    yatay/yükseliş rejimde tutarlı kaybediyor; sadece düşüş rejiminde lehte
+    (yine de yarılar arası tutarsız) → tavsiye değil, izleme listesi olarak
+    sunulur ve UI'da öyle etiketlenir."""
     mr = (report.get("market_regime") or {}).get("bist") or {}
     trend = mr.get("trend")
-    down = trend in ("düşüş", "yatay") if trend else _regime_is_down(report, "BIST")
+    down = trend == "düşüş" if trend else _regime_is_down(report, "BIST")
     if not down:
         return []
     out = []

@@ -245,6 +245,19 @@ def test_dip_candidates_include_trade_levels():
     assert d["rr"] is None or d["rr"] > 0
 
 
+def test_dip_candidates_empty_in_sideways():
+    # Lab kanıtı (2y, iki yarı): yatay rejimde dip adayı tutarlı şekilde KAYBEDİYOR
+    # (%39/-0.50%, %37/-0.74%) → yalnız düşüş rejiminde gösterilir
+    report = {
+        "stocks": [{"symbol": "DIP", "exchange": "BIST",
+                    "price_history": _oversold_turning()}],
+        "market_regime": {"bist": {"trend": "yatay", "above_ma50": True}},
+        "regime_adj": {"BIST": 0},
+    }
+    rescore_report(report)
+    assert report["dip_adaylari"] == []
+
+
 def test_dip_candidates_empty_in_uptrend():
     report = {
         "stocks": [{"symbol": "DIP", "exchange": "BIST",
