@@ -69,28 +69,42 @@ def resolve_signals(track: dict, report: dict) -> int:
 
     İleri getiri, sinyal tarihinden N İŞLEM GÜNÜ sonraki kapanışa göre hesaplanır
     (price_history zaten yalnızca işlem günlerini içerir)."""
+    # Her hissenin tarih→kapanış haritası + ORTAK piyasa takvimi.
+    # "N işlem günü sonra", hisseye özel index'le değil, tüm hisselerin barlarının
+    # birleşiminden kurulan ortak takvimle tanımlanır — böylece bir hissede gün
+    # eksik olsa bile ufuk her hissede aynı piyasa gününe denk gelir (tutarlı ölçüm).
     hist = {}
+    all_dates = set()
     for s in report.get("stocks", []):
         ph = s.get("price_history") or []
-        if "error" not in s and ph:
-            hist[s["symbol"]] = ([_bar_date(b["t"]) for b in ph],
-                                 [b["c"] for b in ph])
+        if "error" in s or not ph:
+            continue
+        dc = {_bar_date(b["t"]): b["c"] for b in ph}
+        hist[s["symbol"]] = dc
+        all_dates.update(dc)
+    calendar = sorted(all_dates)
+    cal_pos = {d: i for i, d in enumerate(calendar)}
+
     resolved = 0
     for sig in track["signals"]:
         if all(f"fwd{h}" in sig for h in HORIZONS):
             continue
-        dates_closes = hist.get(sig["symbol"])
-        if not dates_closes:
-            continue
-        dates, closes = dates_closes
-        try:
-            idx = dates.index(sig["date"])
-        except ValueError:
-            continue   # sinyal günü saklanan pencereden düşmüş — prune temizler
+        dc = hist.get(sig["symbol"])
+        if not dc or not sig.get("price") or sig["date"] not in cal_pos:
+            continue   # hisse yok / sinyal günü takvimden düşmüş — prune temizler
+        pos = cal_pos[sig["date"]]
         for h in HORIZONS:
-            if f"fwd{h}" in sig or idx + h >= len(closes) or not sig.get("price"):
-                continue
-            fwd = round((closes[idx + h] / sig["price"] - 1) * 100, 2)
+            if f"fwd{h}" in sig or pos + h >= len(calendar):
+                continue   # piyasa henüz N işlem günü ilerlemedi
+            target = calendar[pos + h]
+            close = dc.get(target)
+            if close is None:
+                # hisse o günü atlamış → sinyalden sonraki en yakın önceki kapanış
+                prior = [d for d in dc if sig["date"] < d <= target]
+                if not prior:
+                    continue
+                close = dc[max(prior)]
+            fwd = round((close / sig["price"] - 1) * 100, 2)
             sig[f"fwd{h}"] = fwd
             # İsabet YÖNLÜdür: AL için yükseliş, SAT için DÜŞÜŞ isabettir
             if sig.get("verdict_key") in SHORTS:

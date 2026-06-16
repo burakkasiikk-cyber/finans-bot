@@ -108,6 +108,43 @@ def test_resolve_sell_wins_when_price_falls():
     assert s["fwd5"] < 0 and s["win5"] is True
 
 
+def _ph_dates(pairs):
+    """[(gün_indeksi, kapanış)] → bar listesi (epoch = gün × 86400)."""
+    return [{"t": d * DAY, "o": c, "h": c, "l": c, "c": c, "v": 1000} for d, c in pairs]
+
+
+def test_resolve_uses_market_calendar_across_gaps():
+    # B hissesinde d4 eksik (likidite boşluğu). "5 gün sonra" ORTAK takvimde d5'tir;
+    # her hisse kendi index'iyle saymaz → ikisi de aynı piyasa gününe göre ölçülür.
+    report = _report([
+        {"symbol": "A", "price_history": _ph_dates(
+            [(0, 100), (1, 101), (2, 102), (3, 103), (4, 104), (5, 110)])},
+        {"symbol": "B", "price_history": _ph_dates(
+            [(0, 200), (1, 201), (2, 202), (3, 203), (5, 230)])},   # d4 yok
+    ])
+    track = {"signals": [
+        {"date": _date(0), "symbol": "A", "verdict_key": "buy", "price": 100.0},
+        {"date": _date(0), "symbol": "B", "verdict_key": "buy", "price": 200.0},
+    ]}
+    resolve_signals(track, report)
+    assert track["signals"][0]["fwd5"] == 10.0   # 100→110
+    assert track["signals"][1]["fwd5"] == 15.0   # 200→230 (d4 eksik olsa da d5'e göre)
+
+
+def test_resolve_missing_target_uses_nearest_prior():
+    # Hedef gün hissede yoksa, sinyalden sonraki en yakın önceki bar kullanılır
+    report = _report([
+        {"symbol": "C", "price_history": _ph_dates(
+            [(0, 100), (1, 101), (2, 102), (3, 103), (4, 108)])},     # d5 yok
+        {"symbol": "D", "price_history": _ph_dates(
+            [(0, 50), (1, 51), (2, 52), (3, 53), (4, 54), (5, 60)])},  # takvime d5 ekler
+    ])
+    track = {"signals": [{"date": _date(0), "symbol": "C",
+                          "verdict_key": "buy", "price": 100.0}]}
+    resolve_signals(track, report)
+    assert track["signals"][0]["fwd5"] == 8.0   # hedef d5 yok → d4 (108) kullanıldı
+
+
 def test_resolve_leaves_unknown_symbol_untouched():
     report = _report([{"symbol": "AAA", "price_history": _ph([1, 2, 3])}])
     track = {"signals": [{"date": _date(0), "symbol": "ZZZ",
