@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-19T20:55:08.236955+00:00",
+  "generated_at": "2026-06-20T12:18:08.133420+00:00",
   "macro": {
-    "usd_try": 46.4424,
-    "eur_try": 53.2719,
+    "usd_try": 46.4527,
+    "eur_try": 53.2776,
     "gold_usd": 4172.9,
     "sp500": 746.74,
     "sp500_change_pct": 0.7801,
@@ -17070,7 +17070,7 @@
         "count": 0
       },
       "prev": {
-        "score": 71,
+        "score": 69,
         "verdict_key": "hold"
       },
       "rel_strength": 4.0,
@@ -23598,7 +23598,7 @@
         "count": 0
       },
       "prev": {
-        "score": 65,
+        "score": 63,
         "verdict_key": "hold"
       },
       "rel_strength": -0.3,
@@ -26862,7 +26862,7 @@
         "count": 7
       },
       "prev": {
-        "score": 63,
+        "score": 61,
         "verdict_key": "hold"
       },
       "rel_strength": 4.4,
@@ -29289,7 +29289,7 @@
           "h": 333.25,
           "l": 323.75,
           "c": 326.75,
-          "v": 69582670
+          "v": 69617178
         }
       ],
       "backtest": {
@@ -29299,7 +29299,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 11606290972,
+      "turnover": 11606854746,
       "next_earnings": null,
       "news": {
         "adjustment": 2,
@@ -34187,7 +34187,7 @@
         "count": 0
       },
       "prev": {
-        "score": 57,
+        "score": 55,
         "verdict_key": "hold"
       },
       "rel_strength": 3.9,
@@ -38252,7 +38252,7 @@
         "count": 0
       },
       "prev": {
-        "score": 54,
+        "score": 52,
         "verdict_key": "hold"
       },
       "rel_strength": 3.9,
@@ -42317,7 +42317,7 @@
         "count": 1
       },
       "prev": {
-        "score": 52,
+        "score": 50,
         "verdict_key": "hold"
       },
       "rel_strength": 3.8,
@@ -46382,7 +46382,7 @@
         "count": 0
       },
       "prev": {
-        "score": 48,
+        "score": 46,
         "verdict_key": "hold"
       },
       "rel_strength": 4.8,
@@ -47988,7 +47988,7 @@
           "h": 20.84,
           "l": 19.92,
           "c": 20.12,
-          "v": 64856511
+          "v": 65856511
         }
       ],
       "backtest": {
@@ -47998,7 +47998,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1345636972,
+      "turnover": 1346642972,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -51240,7 +51240,7 @@
           "h": 50.5,
           "l": 49.6,
           "c": 49.76,
-          "v": 5180035
+          "v": 5730035
         }
       ],
       "backtest": {
@@ -51250,7 +51250,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 211587399,
+      "turnover": 212955799,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -51275,7 +51275,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "AL",
-            "vol_x": 0.94
+            "vol_x": 0.96
           }
         },
         "timing": {
@@ -58577,7 +58577,7 @@
         "count": 0
       },
       "prev": {
-        "score": 41,
+        "score": 39,
         "verdict_key": "sell"
       },
       "rel_strength": -1.1,
@@ -60996,7 +60996,7 @@
           "h": 513.0,
           "l": 488.75,
           "c": 490.0,
-          "v": 3262223
+          "v": 3302223
         }
       ],
       "backtest": {
@@ -61006,7 +61006,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1082295846,
+      "turnover": 1083275846,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
