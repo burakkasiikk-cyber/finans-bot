@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-27T16:55:45.729756+00:00",
+  "generated_at": "2026-06-28T09:18:50.572937+00:00",
   "macro": {
     "usd_try": 46.6304,
-    "eur_try": 53.1219,
-    "gold_usd": 4078.7,
-    "sp500": 729.03,
-    "sp500_change_pct": -0.7177,
+    "eur_try": 53.1098,
+    "gold_usd": 4096.3,
+    "sp500": 728.99,
+    "sp500_change_pct": -0.7231,
     "bist100": 14274.02,
     "bist100_change_pct": 0.1001,
     "tr_interest_rate": 46.0
@@ -10536,7 +10536,7 @@
       "turnover": 1189481829,
       "next_earnings": {
         "date": "2026-07-23",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -18696,7 +18696,10 @@
       },
       "liquidity": "ok",
       "turnover": 10054980705,
-      "next_earnings": null,
+      "next_earnings": {
+        "date": "2026-07-28",
+        "days": 30
+      },
       "news": {
         "adjustment": 0,
         "sentiment": "nötr",
