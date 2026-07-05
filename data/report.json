@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-04T16:52:37.041606+00:00",
+  "generated_at": "2026-07-05T09:13:27.977497+00:00",
   "macro": {
-    "usd_try": 46.8137,
-    "eur_try": 53.5442,
+    "usd_try": 46.8157,
+    "eur_try": 53.5465,
     "gold_usd": 4187.3,
     "sp500": 744.78,
     "sp500_change_pct": -0.1314,
@@ -7278,7 +7278,7 @@
       "turnover": 9361450343,
       "next_earnings": {
         "date": "2026-07-28",
-        "days": 24
+        "days": 23
       },
       "news": {
         "adjustment": 0,
@@ -13810,7 +13810,7 @@
       "turnover": 6880845530,
       "next_earnings": {
         "date": "2026-08-03",
-        "days": 30
+        "days": 29
       },
       "news": {
         "adjustment": 0,
@@ -14629,7 +14629,7 @@
       "turnover": 1187942918,
       "next_earnings": {
         "date": "2026-07-23",
-        "days": 19
+        "days": 18
       },
       "news": {
         "adjustment": 0,
@@ -38233,7 +38233,7 @@
       "turnover": 3764136597,
       "next_earnings": {
         "date": "2026-07-30",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
