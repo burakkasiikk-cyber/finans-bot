@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T14:19:04.137386+00:00",
+  "generated_at": "2026-07-11T16:42:22.470250+00:00",
   "macro": {
     "usd_try": 46.9792,
     "eur_try": 53.6537,
@@ -24381,7 +24381,10 @@
       },
       "liquidity": "ok",
       "turnover": 1623847172,
-      "next_earnings": null,
+      "next_earnings": {
+        "date": "2026-08-06",
+        "days": 26
+      },
       "news": {
         "adjustment": 0,
         "sentiment": "nötr",
