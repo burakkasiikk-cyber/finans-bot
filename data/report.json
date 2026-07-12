@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-12T14:24:01.891313+00:00",
+  "generated_at": "2026-07-12T16:45:28.105928+00:00",
   "macro": {
     "usd_try": 46.9834,
     "eur_try": 53.6646,
@@ -48868,7 +48868,7 @@
     },
     {
       "symbol": "TCELL",
-      "name": "Turkcell Iletisim Hizmetleri A.S.",
+      "name": "TCELL",
       "exchange": "BIST",
       "price": 107.0,
       "change_pct": 2.0,
@@ -49608,7 +49608,7 @@
         "sentiment": "nötr",
         "pos": 0,
         "neg": 0,
-        "count": 7
+        "count": 0
       },
       "prev": {
         "score": 40,
