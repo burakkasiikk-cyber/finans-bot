@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-31T17:17:32.100551+00:00",
+  "generated_at": "2026-08-01T08:28:31.997085+00:00",
   "macro": {
-    "usd_try": 47.4991,
-    "eur_try": 54.6784,
-    "gold_usd": 4100.2,
-    "sp500": 745.26,
-    "sp500_change_pct": 0.4813,
+    "usd_try": 47.536,
+    "eur_try": 54.7208,
+    "gold_usd": 4049.1,
+    "sp500": 747.03,
+    "sp500_change_pct": 0.72,
     "bist100": 13458.1,
     "bist100_change_pct": 1.2425,
     "tr_interest_rate": 46.0
@@ -736,7 +736,7 @@
           "h": 53.0,
           "l": 50.3,
           "c": 51.0,
-          "v": 6151413
+          "v": 6036738
         }
       ],
       "backtest": {
@@ -746,10 +746,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 327446204,
+      "turnover": 327153783,
       "next_earnings": {
         "date": "2026-08-17",
-        "days": 17
+        "days": 16
       },
       "news": {
         "adjustment": 0,
@@ -759,7 +759,7 @@
         "count": 0
       },
       "prev": {
-        "score": 77,
+        "score": 78,
         "verdict_key": "hold"
       },
       "rel_strength": 15.6,
@@ -774,7 +774,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "AL",
-            "vol_x": 0.8
+            "vol_x": 0.79
           }
         },
         "timing": {
@@ -814,7 +814,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.8× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Hacim teyidi yok (0.79× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -1555,7 +1555,7 @@
           "h": 45.66,
           "l": 43.92,
           "c": 45.56,
-          "v": 1941954
+          "v": 1934437
         }
       ],
       "backtest": {
@@ -1565,7 +1565,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 106460997,
+      "turnover": 106443873,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -1575,7 +1575,7 @@
         "count": 0
       },
       "prev": {
-        "score": 67,
+        "score": 78,
         "verdict_key": "hold"
       },
       "rel_strength": 12.3,
@@ -2372,7 +2372,7 @@
           "h": 196.9,
           "l": 191.6,
           "c": 196.9,
-          "v": 18546595
+          "v": 18259732
         }
       ],
       "backtest": {
@@ -2382,10 +2382,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 3817296795,
+      "turnover": 3814472629,
       "next_earnings": {
         "date": "2026-08-05",
-        "days": 5
+        "days": 4
       },
       "news": {
         "adjustment": 0,
@@ -2410,7 +2410,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "SAT",
-            "vol_x": 0.94
+            "vol_x": 0.93
           }
         },
         "timing": {
@@ -2450,7 +2450,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%42 · 12 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.94× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%42 · 12 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.93× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -3192,7 +3192,7 @@
           "h": 41.28,
           "l": 40.16,
           "c": 41.2,
-          "v": 34658735
+          "v": 34384936
         }
       ],
       "backtest": {
@@ -3202,7 +3202,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 2339565905,
+      "turnover": 2339001879,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -4028,7 +4028,7 @@
         "count": 0
       },
       "prev": {
-        "score": 68,
+        "score": 74,
         "verdict_key": "hold"
       },
       "rel_strength": 12.7,
@@ -4825,7 +4825,7 @@
           "h": 390.25,
           "l": 379.25,
           "c": 390.25,
-          "v": 10356323
+          "v": 10260904
         }
       ],
       "backtest": {
@@ -4835,10 +4835,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 4155574032,
+      "turnover": 4153712169,
       "next_earnings": {
         "date": "2026-08-17",
-        "days": 17
+        "days": 16
       },
       "news": {
         "adjustment": 0,
@@ -4848,7 +4848,7 @@
         "count": 0
       },
       "prev": {
-        "score": 83,
+        "score": 74,
         "verdict_key": "hold"
       },
       "rel_strength": 13.3,
@@ -5644,7 +5644,7 @@
           "h": 26.58,
           "l": 25.4,
           "c": 26.44,
-          "v": 1761125
+          "v": 1742270
         }
       ],
       "backtest": {
@@ -5654,7 +5654,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 123747549,
+      "turnover": 123722622,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -5664,7 +5664,7 @@
         "count": 0
       },
       "prev": {
-        "score": 61,
+        "score": 73,
         "verdict_key": "hold"
       },
       "rel_strength": 12.0,
@@ -6460,7 +6460,7 @@
           "h": 295.75,
           "l": 285.75,
           "c": 295.25,
-          "v": 22233122
+          "v": 22052293
         }
       ],
       "backtest": {
@@ -6470,10 +6470,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 7392925338,
+      "turnover": 7390255850,
       "next_earnings": {
         "date": "2026-08-05",
-        "days": 5
+        "days": 4
       },
       "news": {
         "adjustment": 0,
@@ -6483,7 +6483,7 @@
         "count": 0
       },
       "prev": {
-        "score": 74,
+        "score": 72,
         "verdict_key": "hold"
       },
       "rel_strength": 31.1,
@@ -7279,7 +7279,7 @@
           "h": 42.92,
           "l": 41.76,
           "c": 42.54,
-          "v": 94835946
+          "v": 94060059
         }
       ],
       "backtest": {
@@ -7289,10 +7289,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 5095082552,
+      "turnover": 5093432240,
       "next_earnings": {
         "date": "2026-08-06",
-        "days": 6
+        "days": 5
       },
       "news": {
         "adjustment": 0,
@@ -7302,7 +7302,7 @@
         "count": 0
       },
       "prev": {
-        "score": 81,
+        "score": 71,
         "verdict_key": "hold"
       },
       "rel_strength": 11.4,
@@ -8098,7 +8098,7 @@
           "h": 21.98,
           "l": 21.34,
           "c": 21.88,
-          "v": 40644479
+          "v": 40206033
         }
       ],
       "backtest": {
@@ -8108,10 +8108,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 758967744,
+      "turnover": 758488085,
       "next_earnings": {
         "date": "2026-08-11",
-        "days": 11
+        "days": 10
       },
       "news": {
         "adjustment": 0,
@@ -8121,7 +8121,7 @@
         "count": 0
       },
       "prev": {
-        "score": 68,
+        "score": 70,
         "verdict_key": "hold"
       },
       "rel_strength": 11.1,
@@ -8917,7 +8917,7 @@
           "h": 1.91,
           "l": 1.76,
           "c": 1.91,
-          "v": 158490440
+          "v": 157739301
         }
       ],
       "backtest": {
@@ -8927,7 +8927,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 223092717,
+      "turnover": 223020984,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -8952,7 +8952,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "AL",
-            "vol_x": 1.42
+            "vol_x": 1.41
           }
         },
         "timing": {
@@ -9733,7 +9733,7 @@
           "h": 91.05,
           "l": 88.4,
           "c": 91.05,
-          "v": 5742591
+          "v": 5725858
         }
       ],
       "backtest": {
@@ -9743,7 +9743,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 493458419,
+      "turnover": 493382242,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -9753,7 +9753,7 @@
         "count": 0
       },
       "prev": {
-        "score": 67,
+        "score": 69,
         "verdict_key": "hold"
       },
       "rel_strength": 17.3,
@@ -10549,7 +10549,7 @@
           "h": 115.0,
           "l": 108.2,
           "c": 115.0,
-          "v": 2767799
+          "v": 2636885
         }
       ],
       "backtest": {
@@ -10559,7 +10559,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 112616184,
+      "turnover": 111863429,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -10584,7 +10584,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "AL",
-            "vol_x": 1.92
+            "vol_x": 1.91
           }
         },
         "timing": {
@@ -11365,7 +11365,7 @@
           "h": 98.05,
           "l": 92.2,
           "c": 94.15,
-          "v": 6953490
+          "v": 6927072
         }
       ],
       "backtest": {
@@ -11375,7 +11375,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1101782200,
+      "turnover": 1101657837,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -12181,7 +12181,7 @@
           "h": 35.94,
           "l": 34.42,
           "c": 35.5,
-          "v": 3834807
+          "v": 3792335
         }
       ],
       "backtest": {
@@ -12191,10 +12191,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 156973991,
+      "turnover": 156898603,
       "next_earnings": {
         "date": "2026-08-13",
-        "days": 13
+        "days": 12
       },
       "news": {
         "adjustment": 0,
@@ -12204,7 +12204,7 @@
         "count": 1
       },
       "prev": {
-        "score": 58,
+        "score": 66,
         "verdict_key": "hold"
       },
       "rel_strength": 10.4,
@@ -13000,7 +13000,7 @@
           "h": 155.0,
           "l": 148.8,
           "c": 154.5,
-          "v": 4416553
+          "v": 4394356
         }
       ],
       "backtest": {
@@ -13010,7 +13010,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 639077641,
+      "turnover": 638906169,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -13816,7 +13816,7 @@
           "h": 274.25,
           "l": 266.75,
           "c": 271.75,
-          "v": 4255568
+          "v": 4216146
         }
       ],
       "backtest": {
@@ -13826,7 +13826,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 929584793,
+      "turnover": 929049147,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -14632,7 +14632,7 @@
           "h": 73.05,
           "l": 69.9,
           "c": 70.1,
-          "v": 524739
+          "v": 523945
         }
       ],
       "backtest": {
@@ -14642,7 +14642,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 33210202,
+      "turnover": 33207419,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -15449,7 +15449,7 @@
           "h": 7.42,
           "l": 6.99,
           "c": 7.04,
-          "v": 10306260
+          "v": 10228598
         }
       ],
       "backtest": {
@@ -15459,7 +15459,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 51625625,
+      "turnover": 51598288,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -15469,7 +15469,7 @@
         "count": 0
       },
       "prev": {
-        "score": 62,
+        "score": 60,
         "verdict_key": "hold"
       },
       "rel_strength": 13.7,
@@ -16265,7 +16265,7 @@
           "h": 24.16,
           "l": 22.12,
           "c": 22.2,
-          "v": 7026223
+          "v": 7003214
         }
       ],
       "backtest": {
@@ -16275,7 +16275,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 189163777,
+      "turnover": 189138237,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -17077,7 +17077,7 @@
           "h": 2.8,
           "l": 2.73,
           "c": 2.77,
-          "v": 18616344
+          "v": 18382387
         }
       ],
       "backtest": {
@@ -17087,7 +17087,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 36174787,
+      "turnover": 36142384,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -17097,7 +17097,7 @@
         "count": 1
       },
       "prev": {
-        "score": 68,
+        "score": 51,
         "verdict_key": "hold"
       },
       "rel_strength": 5.8,
@@ -17112,7 +17112,7 @@
           "metrics": {
             "ma": "Yükseliş",
             "macd": "AL",
-            "vol_x": 1.22
+            "vol_x": 1.21
           }
         },
         "timing": {
@@ -17889,7 +17889,7 @@
           "h": 98.1,
           "l": 96.5,
           "c": 97.25,
-          "v": 1163356
+          "v": 1137867
         }
       ],
       "backtest": {
@@ -17899,7 +17899,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 137978188,
+      "turnover": 137854248,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -17909,7 +17909,7 @@
         "count": 0
       },
       "prev": {
-        "score": 47,
+        "score": 50,
         "verdict_key": "hold"
       },
       "rel_strength": 3.6,
@@ -18702,7 +18702,7 @@
           "h": 315.25,
           "l": 308.75,
           "c": 314.0,
-          "v": 46711231
+          "v": 45799665
         }
       ],
       "backtest": {
@@ -18712,10 +18712,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 16887108068,
+      "turnover": 16872796481,
       "next_earnings": {
         "date": "2026-08-05",
-        "days": 5
+        "days": 4
       },
       "news": {
         "adjustment": 2,
@@ -19517,7 +19517,7 @@
           "h": 190.4,
           "l": 182.2,
           "c": 190.4,
-          "v": 975151
+          "v": 962491
         }
       ],
       "backtest": {
@@ -19527,7 +19527,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 141902746,
+      "turnover": 141782223,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -19537,7 +19537,7 @@
         "count": 0
       },
       "prev": {
-        "score": 50,
+        "score": 48,
         "verdict_key": "hold"
       },
       "rel_strength": 9.3,
@@ -20329,7 +20329,7 @@
           "h": 2.99,
           "l": 2.92,
           "c": 2.97,
-          "v": 64011477
+          "v": 63104528
         }
       ],
       "backtest": {
@@ -20339,7 +20339,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 371792780,
+      "turnover": 371658098,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -20349,7 +20349,7 @@
         "count": 0
       },
       "prev": {
-        "score": 47,
+        "score": 48,
         "verdict_key": "hold"
       },
       "rel_strength": 6.9,
@@ -21141,7 +21141,7 @@
           "h": 19.15,
           "l": 18.7,
           "c": 19.12,
-          "v": 90680653
+          "v": 89732176
         }
       ],
       "backtest": {
@@ -21151,10 +21151,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1783733773,
+      "turnover": 1782827029,
       "next_earnings": {
         "date": "2026-08-06",
-        "days": 6
+        "days": 5
       },
       "news": {
         "adjustment": 0,
@@ -21164,8 +21164,8 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
-        "verdict_key": "sell"
+        "score": 47,
+        "verdict_key": "hold"
       },
       "rel_strength": 6.8,
       "rel_adj": 3,
@@ -21956,7 +21956,7 @@
           "h": 64.45,
           "l": 61.05,
           "c": 64.45,
-          "v": 455230
+          "v": 447629
         }
       ],
       "backtest": {
@@ -21966,7 +21966,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 23635511,
+      "turnover": 23611017,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -21976,7 +21976,7 @@
         "count": 0
       },
       "prev": {
-        "score": 49,
+        "score": 47,
         "verdict_key": "hold"
       },
       "rel_strength": 4.7,
@@ -22769,7 +22769,7 @@
           "h": 6.35,
           "l": 6.17,
           "c": 6.29,
-          "v": 42467069
+          "v": 42263207
         }
       ],
       "backtest": {
@@ -22779,7 +22779,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 468250994,
+      "turnover": 468186879,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -22789,8 +22789,8 @@
         "count": 0
       },
       "prev": {
-        "score": 43,
-        "verdict_key": "sell"
+        "score": 47,
+        "verdict_key": "hold"
       },
       "rel_strength": 10.2,
       "rel_adj": 3,
@@ -23581,7 +23581,7 @@
           "h": 0.93,
           "l": 0.9,
           "c": 0.93,
-          "v": 451281858
+          "v": 451185633
         }
       ],
       "backtest": {
@@ -23591,7 +23591,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 174452119,
+      "turnover": 174447645,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -24393,7 +24393,7 @@
           "h": 0.99,
           "l": 0.97,
           "c": 0.98,
-          "v": 80855853
+          "v": 80643303
         }
       ],
       "backtest": {
@@ -24403,7 +24403,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 167805038,
+      "turnover": 167794623,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -24413,8 +24413,8 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
-        "verdict_key": "sell"
+        "score": 45,
+        "verdict_key": "hold"
       },
       "rel_strength": 2.3,
       "rel_adj": 1,
@@ -25206,7 +25206,7 @@
           "h": 5290.0,
           "l": 5212.5,
           "c": 5270.0,
-          "v": 6828
+          "v": 6710
         }
       ],
       "backtest": {
@@ -25216,7 +25216,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 57648052,
+      "turnover": 57616959,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -25241,7 +25241,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 0.84
+            "vol_x": 0.83
           }
         },
         "timing": {
@@ -26019,7 +26019,7 @@
           "h": 68.5,
           "l": 66.6,
           "c": 68.3,
-          "v": 2598135
+          "v": 2581243
         }
       ],
       "backtest": {
@@ -26029,7 +26029,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 231805189,
+      "turnover": 231747503,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -26039,7 +26039,7 @@
         "count": 0
       },
       "prev": {
-        "score": 43,
+        "score": 44,
         "verdict_key": "sell"
       },
       "rel_strength": -2.6,
@@ -26832,7 +26832,7 @@
           "h": 9.0,
           "l": 8.75,
           "c": 8.86,
-          "v": 1736825
+          "v": 1491510
         }
       ],
       "backtest": {
@@ -26842,7 +26842,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 19329402,
+      "turnover": 19220727,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -26852,7 +26852,7 @@
         "count": 0
       },
       "prev": {
-        "score": 41,
+        "score": 42,
         "verdict_key": "sell"
       },
       "rel_strength": -3.2,
@@ -26867,7 +26867,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 1.42
+            "vol_x": 1.4
           }
         },
         "timing": {
@@ -27645,7 +27645,7 @@
           "h": 348.75,
           "l": 339.75,
           "c": 342.25,
-          "v": 35496829
+          "v": 35132678
         }
       ],
       "backtest": {
@@ -27655,10 +27655,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 14966670483,
+      "turnover": 14960438949,
       "next_earnings": {
         "date": "2026-08-04",
-        "days": 4
+        "days": 3
       },
       "news": {
         "adjustment": 0,
@@ -28461,7 +28461,7 @@
           "h": 12.47,
           "l": 12.04,
           "c": 12.47,
-          "v": 696327883
+          "v": 686627710
         }
       ],
       "backtest": {
@@ -28471,10 +28471,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 7159985074,
+      "turnover": 7153937016,
       "next_earnings": {
         "date": "2026-08-03",
-        "days": 3
+        "days": 2
       },
       "news": {
         "adjustment": 0,
@@ -28484,7 +28484,7 @@
         "count": 1
       },
       "prev": {
-        "score": 40,
+        "score": 41,
         "verdict_key": "sell"
       },
       "rel_strength": -10.3,
@@ -29277,7 +29277,7 @@
           "h": 29.36,
           "l": 28.52,
           "c": 29.22,
-          "v": 41584387
+          "v": 40991349
         }
       ],
       "backtest": {
@@ -29287,10 +29287,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1165804670,
+      "turnover": 1164938241,
       "next_earnings": {
         "date": "2026-08-07",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -29315,7 +29315,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 0.93
+            "vol_x": 0.92
           }
         },
         "timing": {
@@ -30093,7 +30093,7 @@
           "h": 21.74,
           "l": 20.72,
           "c": 20.92,
-          "v": 18904469
+          "v": 18467258
         }
       ],
       "backtest": {
@@ -30103,7 +30103,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 214195030,
+      "turnover": 213737707,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -30128,7 +30128,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "AL",
-            "vol_x": 1.21
+            "vol_x": 1.2
           }
         },
         "timing": {
@@ -30905,7 +30905,7 @@
           "h": 407.0,
           "l": 395.0,
           "c": 398.5,
-          "v": 2302664
+          "v": 2328052
         }
       ],
       "backtest": {
@@ -30915,7 +30915,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 989318035,
+      "turnover": 989823891,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -31718,7 +31718,7 @@
           "h": 8.73,
           "l": 7.83,
           "c": 7.84,
-          "v": 121548533
+          "v": 117844148
         }
       ],
       "backtest": {
@@ -31728,7 +31728,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 630748129,
+      "turnover": 629296010,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -31738,7 +31738,7 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
+        "score": 41,
         "verdict_key": "sell"
       },
       "rel_strength": -1.8,
@@ -31753,7 +31753,7 @@
           "metrics": {
             "ma": "Düşüş",
             "macd": "SAT",
-            "vol_x": 1.15
+            "vol_x": 1.14
           }
         },
         "timing": {
@@ -32531,7 +32531,7 @@
           "h": 17.98,
           "l": 17.56,
           "c": 17.91,
-          "v": 97124172
+          "v": 95983304
         }
       ],
       "backtest": {
@@ -32541,10 +32541,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 2678646192,
+      "turnover": 2677624544,
       "next_earnings": {
         "date": "2026-08-06",
-        "days": 6
+        "days": 5
       },
       "news": {
         "adjustment": 0,
@@ -32554,7 +32554,7 @@
         "count": 0
       },
       "prev": {
-        "score": 40,
+        "score": 41,
         "verdict_key": "sell"
       },
       "rel_strength": -9.8,
@@ -33347,7 +33347,7 @@
           "h": 534.5,
           "l": 504.5,
           "c": 521.5,
-          "v": 2346224
+          "v": 2322238
         }
       ],
       "backtest": {
@@ -33357,7 +33357,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 773414447,
+      "turnover": 772789012,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -34160,7 +34160,7 @@
           "h": 46.52,
           "l": 44.44,
           "c": 44.84,
-          "v": 11402586
+          "v": 11256373
         }
       ],
       "backtest": {
@@ -34170,7 +34170,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 419190059,
+      "turnover": 418862249,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -34973,7 +34973,7 @@
           "h": 153.4,
           "l": 149.3,
           "c": 153.0,
-          "v": 10897362
+          "v": 10782986
         }
       ],
       "backtest": {
@@ -34983,10 +34983,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1848274314,
+      "turnover": 1847399338,
       "next_earnings": {
         "date": "2026-08-12",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -35011,7 +35011,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 1.07
+            "vol_x": 1.06
           }
         },
         "timing": {
@@ -35789,7 +35789,7 @@
           "h": 51.15,
           "l": 50.05,
           "c": 51.0,
-          "v": 38609393
+          "v": 38008011
         }
       ],
       "backtest": {
@@ -35799,7 +35799,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 2025168630,
+      "turnover": 2023635106,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -35809,7 +35809,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 40,
         "verdict_key": "sell"
       },
       "rel_strength": -9.7,
@@ -36602,7 +36602,7 @@
           "h": 39.54,
           "l": 38.54,
           "c": 39.12,
-          "v": 3097989
+          "v": 3085756
         }
       ],
       "backtest": {
@@ -36612,7 +36612,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 140084018,
+      "turnover": 140060090,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -36622,7 +36622,7 @@
         "count": 4
       },
       "prev": {
-        "score": 39,
+        "score": 40,
         "verdict_key": "sell"
       },
       "rel_strength": 8.0,
@@ -37414,7 +37414,7 @@
           "h": 10.11,
           "l": 9.85,
           "c": 10.05,
-          "v": 8445052
+          "v": 8388232
         }
       ],
       "backtest": {
@@ -37424,7 +37424,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 113674423,
+      "turnover": 113645871,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -38227,7 +38227,7 @@
           "h": 102.2,
           "l": 99.25,
           "c": 99.95,
-          "v": 30536230
+          "v": 29786987
         }
       ],
       "backtest": {
@@ -38237,10 +38237,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 2821225976,
+      "turnover": 2817481634,
       "next_earnings": {
         "date": "2026-08-13",
-        "days": 13
+        "days": 12
       },
       "news": {
         "adjustment": 0,
@@ -38250,7 +38250,7 @@
         "count": 7
       },
       "prev": {
-        "score": 38,
+        "score": 39,
         "verdict_key": "sell"
       },
       "rel_strength": -1.8,
@@ -39855,7 +39855,7 @@
           "h": 31.5,
           "l": 30.8,
           "c": 31.4,
-          "v": 757685
+          "v": 708174
         }
       ],
       "backtest": {
@@ -39865,7 +39865,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 41832727,
+      "turnover": 41754994,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -39890,7 +39890,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 0.77
+            "vol_x": 0.76
           }
         },
         "timing": {
@@ -40668,7 +40668,7 @@
           "h": 7.02,
           "l": 6.63,
           "c": 6.69,
-          "v": 10989073
+          "v": 10472236
         }
       ],
       "backtest": {
@@ -40678,7 +40678,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 50534810,
+      "turnover": 50361928,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -40688,7 +40688,7 @@
         "count": 0
       },
       "prev": {
-        "score": 34,
+        "score": 39,
         "verdict_key": "sell"
       },
       "rel_strength": -0.1,
@@ -40703,7 +40703,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 1.23
+            "vol_x": 1.22
           }
         },
         "timing": {
@@ -41481,7 +41481,7 @@
           "h": 8.04,
           "l": 7.82,
           "c": 7.93,
-          "v": 10950136
+          "v": 10869704
         }
       ],
       "backtest": {
@@ -41491,7 +41491,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 103030725,
+      "turnover": 102998834,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -41565,6 +41565,819 @@
         "regime": -3
       },
       "score_base": 40,
+      "gates": [],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "symbol": "SKBNK",
+      "name": "Sekerbank T.A.S.",
+      "exchange": "BIST",
+      "price": 6.97,
+      "change_pct": -9.95,
+      "price_history": [
+        {
+          "t": 1774299600,
+          "o": 10.3479,
+          "h": 10.3479,
+          "l": 10.0494,
+          "c": 10.1389,
+          "v": 26611442
+        },
+        {
+          "t": 1774386000,
+          "o": 10.2583,
+          "h": 10.5867,
+          "l": 10.2484,
+          "c": 10.2683,
+          "v": 27127134
+        },
+        {
+          "t": 1774472400,
+          "o": 10.2384,
+          "h": 10.3479,
+          "l": 10.0494,
+          "c": 10.0892,
+          "v": 19278004
+        },
+        {
+          "t": 1774558800,
+          "o": 10.1787,
+          "h": 10.3081,
+          "l": 9.9598,
+          "c": 10.0792,
+          "v": 22706321
+        },
+        {
+          "t": 1774818000,
+          "o": 10.0693,
+          "h": 10.4673,
+          "l": 9.8404,
+          "c": 10.3479,
+          "v": 36106508
+        },
+        {
+          "t": 1774904400,
+          "o": 10.3877,
+          "h": 10.8553,
+          "l": 10.3777,
+          "c": 10.5668,
+          "v": 38494227
+        },
+        {
+          "t": 1774990800,
+          "o": 10.7956,
+          "h": 10.8653,
+          "l": 10.517,
+          "c": 10.5469,
+          "v": 31544561
+        },
+        {
+          "t": 1775077200,
+          "o": 10.4275,
+          "h": 10.5369,
+          "l": 10.2981,
+          "c": 10.5369,
+          "v": 24993286
+        },
+        {
+          "t": 1775163600,
+          "o": 10.5369,
+          "h": 10.8155,
+          "l": 10.4673,
+          "c": 10.7757,
+          "v": 36670830
+        },
+        {
+          "t": 1775422800,
+          "o": 10.8056,
+          "h": 11.0444,
+          "l": 10.7757,
+          "c": 10.9349,
+          "v": 63310263
+        },
+        {
+          "t": 1775509200,
+          "o": 10.8653,
+          "h": 11.4324,
+          "l": 10.8653,
+          "c": 11.1936,
+          "v": 111232668
+        },
+        {
+          "t": 1775595600,
+          "o": 11.1936,
+          "h": 12.1389,
+          "l": 11.1936,
+          "c": 12.0195,
+          "v": 112567397
+        },
+        {
+          "t": 1775682000,
+          "o": 11.9996,
+          "h": 12.0394,
+          "l": 11.7011,
+          "c": 11.8503,
+          "v": 49219764
+        },
+        {
+          "t": 1775768400,
+          "o": 11.9399,
+          "h": 12.119,
+          "l": 11.8901,
+          "c": 12.0792,
+          "v": 58983841
+        },
+        {
+          "t": 1776027600,
+          "o": 11.9996,
+          "h": 12.4374,
+          "l": 11.7409,
+          "c": 12.4274,
+          "v": 75954052
+        },
+        {
+          "t": 1776114000,
+          "o": 12.4473,
+          "h": 12.7856,
+          "l": 12.4473,
+          "c": 12.6364,
+          "v": 46413962
+        },
+        {
+          "t": 1776200400,
+          "o": 12.6861,
+          "h": 12.9348,
+          "l": 12.517,
+          "c": 12.8652,
+          "v": 34319608
+        },
+        {
+          "t": 1776286800,
+          "o": 12.9348,
+          "h": 13.0443,
+          "l": 12.6961,
+          "c": 12.8353,
+          "v": 24162083
+        },
+        {
+          "t": 1776373200,
+          "o": 12.9149,
+          "h": 13.1537,
+          "l": 12.6662,
+          "c": 13.1338,
+          "v": 55932599
+        },
+        {
+          "t": 1776632400,
+          "o": 12.9846,
+          "h": 13.5915,
+          "l": 12.7955,
+          "c": 13.1338,
+          "v": 65174684
+        },
+        {
+          "t": 1776718800,
+          "o": 13.1836,
+          "h": 13.3925,
+          "l": 13.104,
+          "c": 13.1836,
+          "v": 56162240
+        },
+        {
+          "t": 1776805200,
+          "o": 13.2831,
+          "h": 13.303,
+          "l": 12.8851,
+          "c": 12.9448,
+          "v": 36094084
+        },
+        {
+          "t": 1776978000,
+          "o": 12.905,
+          "h": 12.905,
+          "l": 12.4772,
+          "c": 12.5866,
+          "v": 30031675
+        },
+        {
+          "t": 1777237200,
+          "o": 12.6165,
+          "h": 12.6264,
+          "l": 12.4175,
+          "c": 12.4672,
+          "v": 24232222
+        },
+        {
+          "t": 1777323600,
+          "o": 12.4573,
+          "h": 12.8055,
+          "l": 12.4075,
+          "c": 12.6364,
+          "v": 42376074
+        },
+        {
+          "t": 1777410000,
+          "o": 12.8353,
+          "h": 13.094,
+          "l": 12.1787,
+          "c": 12.1787,
+          "v": 71974999
+        },
+        {
+          "t": 1777496400,
+          "o": 12.1886,
+          "h": 12.3677,
+          "l": 12.0792,
+          "c": 12.2085,
+          "v": 29906875
+        },
+        {
+          "t": 1777842000,
+          "o": 12.3976,
+          "h": 12.5269,
+          "l": 12.0891,
+          "c": 12.3876,
+          "v": 37792882
+        },
+        {
+          "t": 1777928400,
+          "o": 12.4374,
+          "h": 12.8154,
+          "l": 12.3578,
+          "c": 12.7359,
+          "v": 30568863
+        },
+        {
+          "t": 1778014800,
+          "o": 12.9348,
+          "h": 13.094,
+          "l": 12.7557,
+          "c": 12.8353,
+          "v": 35049521
+        },
+        {
+          "t": 1778101200,
+          "o": 13.0841,
+          "h": 14.1189,
+          "l": 13.0542,
+          "c": 14.1189,
+          "v": 60420290
+        },
+        {
+          "t": 1778187600,
+          "o": 14.2681,
+          "h": 14.4273,
+          "l": 13.5318,
+          "c": 13.9597,
+          "v": 59166302
+        },
+        {
+          "t": 1778446800,
+          "o": 14.0393,
+          "h": 14.1089,
+          "l": 13.691,
+          "c": 13.7905,
+          "v": 34095761
+        },
+        {
+          "t": 1778533200,
+          "o": 13.8303,
+          "h": 13.9,
+          "l": 13.5915,
+          "c": 13.6015,
+          "v": 18573918
+        },
+        {
+          "t": 1778619600,
+          "o": 13.6711,
+          "h": 13.7109,
+          "l": 13.3328,
+          "c": 13.6612,
+          "v": 20773768
+        },
+        {
+          "t": 1778706000,
+          "o": 13.7308,
+          "h": 14.9248,
+          "l": 13.6114,
+          "c": 14.6761,
+          "v": 65897957
+        },
+        {
+          "t": 1778792400,
+          "o": 14.6661,
+          "h": 14.8154,
+          "l": 14.4572,
+          "c": 14.6562,
+          "v": 25931447
+        },
+        {
+          "t": 1779051600,
+          "o": 14.696,
+          "h": 14.7855,
+          "l": 14.1786,
+          "c": 14.3776,
+          "v": 28342001
+        },
+        {
+          "t": 1779224400,
+          "o": 14.1786,
+          "h": 14.3776,
+          "l": 13.89,
+          "c": 14.0293,
+          "v": 28376879
+        },
+        {
+          "t": 1779310800,
+          "o": 14.1288,
+          "h": 14.1288,
+          "l": 12.6264,
+          "c": 12.6264,
+          "v": 23106831
+        },
+        {
+          "t": 1779397200,
+          "o": 12.6165,
+          "h": 13.6313,
+          "l": 12.6165,
+          "c": 13.4721,
+          "v": 48313442
+        },
+        {
+          "t": 1779656400,
+          "o": 13.5517,
+          "h": 13.701,
+          "l": 13.4522,
+          "c": 13.5418,
+          "v": 17184799
+        },
+        {
+          "t": 1779742800,
+          "o": 13.5716,
+          "h": 13.5915,
+          "l": 13.0741,
+          "c": 13.104,
+          "v": 9913627
+        },
+        {
+          "t": 1779829200,
+          "o": 13.104,
+          "h": 13.104,
+          "l": 13.104,
+          "c": 13.104,
+          "v": 0
+        },
+        {
+          "t": 1779915600,
+          "o": 13.104,
+          "h": 13.104,
+          "l": 13.104,
+          "c": 13.104,
+          "v": 0
+        },
+        {
+          "t": 1780002000,
+          "o": 13.104,
+          "h": 13.104,
+          "l": 13.104,
+          "c": 13.104,
+          "v": 0
+        },
+        {
+          "t": 1780261200,
+          "o": 13.4124,
+          "h": 13.4622,
+          "l": 12.7358,
+          "c": 12.7756,
+          "v": 29729431
+        },
+        {
+          "t": 1780347600,
+          "o": 12.8055,
+          "h": 13.2831,
+          "l": 12.7955,
+          "c": 13.2035,
+          "v": 39522633
+        },
+        {
+          "t": 1780434000,
+          "o": 13.1836,
+          "h": 13.3328,
+          "l": 12.8154,
+          "c": 12.9348,
+          "v": 30317956
+        },
+        {
+          "t": 1780520400,
+          "o": 13.0343,
+          "h": 13.1537,
+          "l": 12.7259,
+          "c": 12.8751,
+          "v": 24446125
+        },
+        {
+          "t": 1780606800,
+          "o": 12.9348,
+          "h": 12.9547,
+          "l": 12.6065,
+          "c": 12.706,
+          "v": 16781522
+        },
+        {
+          "t": 1780866000,
+          "o": 12.7,
+          "h": 13.1,
+          "l": 12.56,
+          "c": 12.98,
+          "v": 35148501
+        },
+        {
+          "t": 1780952400,
+          "o": 12.98,
+          "h": 13.4,
+          "l": 12.97,
+          "c": 13.15,
+          "v": 31721606
+        },
+        {
+          "t": 1781038800,
+          "o": 13.22,
+          "h": 13.34,
+          "l": 12.99,
+          "c": 13.3,
+          "v": 26317252
+        },
+        {
+          "t": 1781125200,
+          "o": 13.36,
+          "h": 13.65,
+          "l": 13.08,
+          "c": 13.45,
+          "v": 26730858
+        },
+        {
+          "t": 1781211600,
+          "o": 13.63,
+          "h": 14.03,
+          "l": 13.55,
+          "c": 13.95,
+          "v": 33431876
+        },
+        {
+          "t": 1781470800,
+          "o": 14.49,
+          "h": 14.83,
+          "l": 14.2,
+          "c": 14.69,
+          "v": 41515489
+        },
+        {
+          "t": 1781557200,
+          "o": 14.63,
+          "h": 14.69,
+          "l": 14.34,
+          "c": 14.55,
+          "v": 24979762
+        },
+        {
+          "t": 1781643600,
+          "o": 14.6,
+          "h": 14.65,
+          "l": 14.03,
+          "c": 14.5,
+          "v": 26542648
+        },
+        {
+          "t": 1781730000,
+          "o": 14.57,
+          "h": 15.44,
+          "l": 14.51,
+          "c": 15.4,
+          "v": 47406332
+        },
+        {
+          "t": 1781816400,
+          "o": 15.2,
+          "h": 15.62,
+          "l": 15.12,
+          "c": 15.6,
+          "v": 40320739
+        },
+        {
+          "t": 1782075600,
+          "o": 15.66,
+          "h": 16.28,
+          "l": 15.58,
+          "c": 16.13,
+          "v": 27400564
+        },
+        {
+          "t": 1782162000,
+          "o": 16.11,
+          "h": 16.65,
+          "l": 16.01,
+          "c": 16.47,
+          "v": 26316910
+        },
+        {
+          "t": 1782248400,
+          "o": 16.6,
+          "h": 17.0,
+          "l": 16.32,
+          "c": 16.93,
+          "v": 29431175
+        },
+        {
+          "t": 1782334800,
+          "o": 16.99,
+          "h": 17.39,
+          "l": 16.57,
+          "c": 16.92,
+          "v": 60938611
+        },
+        {
+          "t": 1782421200,
+          "o": 16.97,
+          "h": 16.99,
+          "l": 15.23,
+          "c": 15.45,
+          "v": 78573390
+        },
+        {
+          "t": 1782680400,
+          "o": 15.55,
+          "h": 15.83,
+          "l": 15.1,
+          "c": 15.67,
+          "v": 38895241
+        },
+        {
+          "t": 1782766800,
+          "o": 15.67,
+          "h": 15.89,
+          "l": 15.47,
+          "c": 15.55,
+          "v": 23154024
+        },
+        {
+          "t": 1782853200,
+          "o": 15.55,
+          "h": 16.96,
+          "l": 15.33,
+          "c": 16.87,
+          "v": 56998900
+        },
+        {
+          "t": 1782939600,
+          "o": 16.9,
+          "h": 17.62,
+          "l": 16.88,
+          "c": 17.49,
+          "v": 42633242
+        },
+        {
+          "t": 1783026000,
+          "o": 17.6,
+          "h": 17.86,
+          "l": 17.41,
+          "c": 17.7,
+          "v": 29285668
+        },
+        {
+          "t": 1783285200,
+          "o": 17.7,
+          "h": 19.28,
+          "l": 17.7,
+          "c": 19.08,
+          "v": 52393062
+        },
+        {
+          "t": 1783371600,
+          "o": 19.05,
+          "h": 19.35,
+          "l": 18.73,
+          "c": 19.1,
+          "v": 30727255
+        },
+        {
+          "t": 1783458000,
+          "o": 19.29,
+          "h": 19.65,
+          "l": 18.77,
+          "c": 19.43,
+          "v": 41232950
+        },
+        {
+          "t": 1783544400,
+          "o": 17.51,
+          "h": 19.32,
+          "l": 17.51,
+          "c": 17.55,
+          "v": 79576743
+        },
+        {
+          "t": 1783630800,
+          "o": 17.55,
+          "h": 19.3,
+          "l": 17.32,
+          "c": 19.27,
+          "v": 48665797
+        },
+        {
+          "t": 1783890000,
+          "o": 19.29,
+          "h": 19.39,
+          "l": 18.41,
+          "c": 18.52,
+          "v": 32183722
+        },
+        {
+          "t": 1783976400,
+          "o": 18.64,
+          "h": 19.18,
+          "l": 18.11,
+          "c": 18.75,
+          "v": 24392393
+        },
+        {
+          "t": 1784149200,
+          "o": 18.8,
+          "h": 19.19,
+          "l": 18.64,
+          "c": 18.95,
+          "v": 24940408
+        },
+        {
+          "t": 1784235600,
+          "o": 19.1,
+          "h": 20.0,
+          "l": 18.91,
+          "c": 19.63,
+          "v": 45130314
+        },
+        {
+          "t": 1784494800,
+          "o": 19.63,
+          "h": 19.68,
+          "l": 17.8,
+          "c": 17.91,
+          "v": 57034351
+        },
+        {
+          "t": 1784581200,
+          "o": 17.91,
+          "h": 18.02,
+          "l": 16.12,
+          "c": 16.12,
+          "v": 30598974
+        },
+        {
+          "t": 1784667600,
+          "o": 14.51,
+          "h": 14.89,
+          "l": 14.51,
+          "c": 14.51,
+          "v": 61864175
+        },
+        {
+          "t": 1784754000,
+          "o": 13.06,
+          "h": 13.06,
+          "l": 13.06,
+          "c": 13.06,
+          "v": 5536436
+        },
+        {
+          "t": 1784840400,
+          "o": 11.76,
+          "h": 11.76,
+          "l": 11.76,
+          "c": 11.76,
+          "v": 3371616
+        },
+        {
+          "t": 1785099600,
+          "o": 10.59,
+          "h": 10.59,
+          "l": 10.59,
+          "c": 10.59,
+          "v": 21106870
+        },
+        {
+          "t": 1785186000,
+          "o": 9.54,
+          "h": 9.54,
+          "l": 9.54,
+          "c": 9.54,
+          "v": 2674017
+        },
+        {
+          "t": 1785272400,
+          "o": 8.59,
+          "h": 8.59,
+          "l": 8.59,
+          "c": 8.59,
+          "v": 9640131
+        },
+        {
+          "t": 1785358800,
+          "o": 7.74,
+          "h": 7.74,
+          "l": 7.74,
+          "c": 7.74,
+          "v": 13032941
+        },
+        {
+          "t": 1785445200,
+          "o": 6.97,
+          "h": 7.2,
+          "l": 6.97,
+          "c": 6.97,
+          "v": 354626162
+        }
+      ],
+      "backtest": {
+        "n": 13,
+        "win_rate": 46,
+        "avg_ret": 3.2,
+        "horizon": 10
+      },
+      "liquidity": "ok",
+      "turnover": 654057951,
+      "next_earnings": null,
+      "news": {
+        "adjustment": 0,
+        "sentiment": "nötr",
+        "pos": 0,
+        "neg": 0,
+        "count": 0
+      },
+      "prev": {
+        "score": 36,
+        "verdict_key": "sell"
+      },
+      "rel_strength": -52.5,
+      "rel_adj": -3,
+      "score": 38,
+      "verdict": "SAT",
+      "verdict_key": "sell",
+      "risk": "high",
+      "dimensions": {
+        "trend": {
+          "score": 18,
+          "metrics": {
+            "ma": "Düşüş",
+            "macd": "SAT",
+            "vol_x": 1.66
+          }
+        },
+        "timing": {
+          "score": 44,
+          "metrics": {
+            "durum": "Aşırı satım — dönüş teyidi bekle",
+            "rsi": 7.6,
+            "boll": "Alt Band",
+            "gerilim": -54.3
+          }
+        },
+        "momentum": {
+          "score": 34,
+          "metrics": {
+            "stoch": 0.0,
+            "ret_1w": -40.73,
+            "ret_1m": -58.68
+          }
+        },
+        "setup": {
+          "score": 92,
+          "metrics": {
+            "rr": 43.43
+          }
+        }
+      },
+      "trade_setup": {
+        "entry": 6.97,
+        "stop": 6.67,
+        "target": 20.0,
+        "rr": 43.43,
+        "support": 6.97,
+        "resistance": 20.0,
+        "atr": 1.19
+      },
+      "signal": {
+        "action": "SAT",
+        "key": "sell",
+        "headline": "🔴 SAT",
+        "detail": "Teknik görünüm zayıf — alım için uygun değil. Hisse aşırı satımda — kısa vadeli tepki yükselişi gelebilir.",
+        "verdict": "SAT"
+      },
+      "adjustments": {
+        "news": 0,
+        "rel": -3,
+        "regime": -3
+      },
+      "score_base": 44,
       "gates": [],
       "pros": [],
       "cons": []
@@ -42294,7 +43107,7 @@
           "h": 320.75,
           "l": 299.5,
           "c": 315.5,
-          "v": 598306
+          "v": 596784
         }
       ],
       "backtest": {
@@ -42304,7 +43117,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 167183000,
+      "turnover": 167158991,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -42314,7 +43127,7 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
+        "score": 38,
         "verdict_key": "sell"
       },
       "rel_strength": 8.0,
@@ -43106,7 +43919,7 @@
           "h": 628.0,
           "l": 611.0,
           "c": 625.5,
-          "v": 3838841
+          "v": 3813797
         }
       ],
       "backtest": {
@@ -43116,10 +43929,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1549621242,
+      "turnover": 1548837991,
       "next_earnings": {
         "date": "2026-08-12",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -43922,7 +44735,7 @@
           "h": 310.0,
           "l": 303.0,
           "c": 305.0,
-          "v": 345609
+          "v": 344284
         }
       ],
       "backtest": {
@@ -43932,7 +44745,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 231490966,
+      "turnover": 231470760,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -44735,7 +45548,7 @@
           "h": 23.24,
           "l": 22.08,
           "c": 22.8,
-          "v": 11493072
+          "v": 11324560
         }
       ],
       "backtest": {
@@ -44745,7 +45558,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 227460702,
+      "turnover": 227268599,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -44755,7 +45568,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 38,
         "verdict_key": "sell"
       },
       "rel_strength": -4.5,
@@ -45548,7 +46361,7 @@
           "h": 32.8,
           "l": 31.18,
           "c": 32.76,
-          "v": 281727667
+          "v": 279386134
         }
       ],
       "backtest": {
@@ -45558,11 +46371,8 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 9246794920,
-      "next_earnings": {
-        "date": "2026-07-31",
-        "days": 0
-      },
+      "turnover": 9242959489,
+      "next_earnings": null,
       "news": {
         "adjustment": 5,
         "sentiment": "olumlu",
@@ -46364,7 +47174,7 @@
           "h": 137.4,
           "l": 133.1,
           "c": 136.0,
-          "v": 746203
+          "v": 738410
         }
       ],
       "backtest": {
@@ -46374,7 +47184,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 76002666,
+      "turnover": 75949674,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -47176,7 +47986,7 @@
           "h": 24.0,
           "l": 23.36,
           "c": 23.76,
-          "v": 286068
+          "v": 285930
         }
       ],
       "backtest": {
@@ -47186,7 +47996,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 13644260,
+      "turnover": 13644096,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -47989,7 +48799,7 @@
           "h": 3.36,
           "l": 3.3,
           "c": 3.32,
-          "v": 19002798
+          "v": 18746339
         }
       ],
       "backtest": {
@@ -47999,7 +48809,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 153710100,
+      "turnover": 153667527,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -48009,7 +48819,7 @@
         "count": 0
       },
       "prev": {
-        "score": 41,
+        "score": 37,
         "verdict_key": "sell"
       },
       "rel_strength": -9.1,
@@ -48802,7 +49612,7 @@
           "h": 55.05,
           "l": 52.75,
           "c": 53.75,
-          "v": 1145373
+          "v": 1135527
         }
       ],
       "backtest": {
@@ -48812,7 +49622,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 76844902,
+      "turnover": 76818440,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -48822,7 +49632,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 37,
         "verdict_key": "sell"
       },
       "rel_strength": 1.7,
@@ -49615,7 +50425,7 @@
           "h": 6.63,
           "l": 6.19,
           "c": 6.56,
-          "v": 15493838
+          "v": 15446762
         }
       ],
       "backtest": {
@@ -49625,7 +50435,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 138639519,
+      "turnover": 138624078,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -49635,7 +50445,7 @@
         "count": 0
       },
       "prev": {
-        "score": 40,
+        "score": 37,
         "verdict_key": "sell"
       },
       "rel_strength": 7.7,
@@ -49698,819 +50508,6 @@
         "rel": 3,
         "regime": -3
       },
-      "gates": [],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "symbol": "SKBNK",
-      "name": "Sekerbank T.A.S.",
-      "exchange": "BIST",
-      "price": 6.97,
-      "change_pct": -9.95,
-      "price_history": [
-        {
-          "t": 1774299600,
-          "o": 10.3479,
-          "h": 10.3479,
-          "l": 10.0494,
-          "c": 10.1389,
-          "v": 26611442
-        },
-        {
-          "t": 1774386000,
-          "o": 10.2583,
-          "h": 10.5867,
-          "l": 10.2484,
-          "c": 10.2683,
-          "v": 27127134
-        },
-        {
-          "t": 1774472400,
-          "o": 10.2384,
-          "h": 10.3479,
-          "l": 10.0494,
-          "c": 10.0892,
-          "v": 19278004
-        },
-        {
-          "t": 1774558800,
-          "o": 10.1787,
-          "h": 10.3081,
-          "l": 9.9598,
-          "c": 10.0792,
-          "v": 22706321
-        },
-        {
-          "t": 1774818000,
-          "o": 10.0693,
-          "h": 10.4673,
-          "l": 9.8404,
-          "c": 10.3479,
-          "v": 36106508
-        },
-        {
-          "t": 1774904400,
-          "o": 10.3877,
-          "h": 10.8553,
-          "l": 10.3777,
-          "c": 10.5668,
-          "v": 38494227
-        },
-        {
-          "t": 1774990800,
-          "o": 10.7956,
-          "h": 10.8653,
-          "l": 10.517,
-          "c": 10.5469,
-          "v": 31544561
-        },
-        {
-          "t": 1775077200,
-          "o": 10.4275,
-          "h": 10.5369,
-          "l": 10.2981,
-          "c": 10.5369,
-          "v": 24993286
-        },
-        {
-          "t": 1775163600,
-          "o": 10.5369,
-          "h": 10.8155,
-          "l": 10.4673,
-          "c": 10.7757,
-          "v": 36670830
-        },
-        {
-          "t": 1775422800,
-          "o": 10.8056,
-          "h": 11.0444,
-          "l": 10.7757,
-          "c": 10.9349,
-          "v": 63310263
-        },
-        {
-          "t": 1775509200,
-          "o": 10.8653,
-          "h": 11.4324,
-          "l": 10.8653,
-          "c": 11.1936,
-          "v": 111232668
-        },
-        {
-          "t": 1775595600,
-          "o": 11.1936,
-          "h": 12.1389,
-          "l": 11.1936,
-          "c": 12.0195,
-          "v": 112567397
-        },
-        {
-          "t": 1775682000,
-          "o": 11.9996,
-          "h": 12.0394,
-          "l": 11.7011,
-          "c": 11.8503,
-          "v": 49219764
-        },
-        {
-          "t": 1775768400,
-          "o": 11.9399,
-          "h": 12.119,
-          "l": 11.8901,
-          "c": 12.0792,
-          "v": 58983841
-        },
-        {
-          "t": 1776027600,
-          "o": 11.9996,
-          "h": 12.4374,
-          "l": 11.7409,
-          "c": 12.4274,
-          "v": 75954052
-        },
-        {
-          "t": 1776114000,
-          "o": 12.4473,
-          "h": 12.7856,
-          "l": 12.4473,
-          "c": 12.6364,
-          "v": 46413962
-        },
-        {
-          "t": 1776200400,
-          "o": 12.6861,
-          "h": 12.9348,
-          "l": 12.517,
-          "c": 12.8652,
-          "v": 34319608
-        },
-        {
-          "t": 1776286800,
-          "o": 12.9348,
-          "h": 13.0443,
-          "l": 12.6961,
-          "c": 12.8353,
-          "v": 24162083
-        },
-        {
-          "t": 1776373200,
-          "o": 12.9149,
-          "h": 13.1537,
-          "l": 12.6662,
-          "c": 13.1338,
-          "v": 55932599
-        },
-        {
-          "t": 1776632400,
-          "o": 12.9846,
-          "h": 13.5915,
-          "l": 12.7955,
-          "c": 13.1338,
-          "v": 65174684
-        },
-        {
-          "t": 1776718800,
-          "o": 13.1836,
-          "h": 13.3925,
-          "l": 13.104,
-          "c": 13.1836,
-          "v": 56162240
-        },
-        {
-          "t": 1776805200,
-          "o": 13.2831,
-          "h": 13.303,
-          "l": 12.8851,
-          "c": 12.9448,
-          "v": 36094084
-        },
-        {
-          "t": 1776978000,
-          "o": 12.905,
-          "h": 12.905,
-          "l": 12.4772,
-          "c": 12.5866,
-          "v": 30031675
-        },
-        {
-          "t": 1777237200,
-          "o": 12.6165,
-          "h": 12.6264,
-          "l": 12.4175,
-          "c": 12.4672,
-          "v": 24232222
-        },
-        {
-          "t": 1777323600,
-          "o": 12.4573,
-          "h": 12.8055,
-          "l": 12.4075,
-          "c": 12.6364,
-          "v": 42376074
-        },
-        {
-          "t": 1777410000,
-          "o": 12.8353,
-          "h": 13.094,
-          "l": 12.1787,
-          "c": 12.1787,
-          "v": 71974999
-        },
-        {
-          "t": 1777496400,
-          "o": 12.1886,
-          "h": 12.3677,
-          "l": 12.0792,
-          "c": 12.2085,
-          "v": 29906875
-        },
-        {
-          "t": 1777842000,
-          "o": 12.3976,
-          "h": 12.5269,
-          "l": 12.0891,
-          "c": 12.3876,
-          "v": 37792882
-        },
-        {
-          "t": 1777928400,
-          "o": 12.4374,
-          "h": 12.8154,
-          "l": 12.3578,
-          "c": 12.7359,
-          "v": 30568863
-        },
-        {
-          "t": 1778014800,
-          "o": 12.9348,
-          "h": 13.094,
-          "l": 12.7557,
-          "c": 12.8353,
-          "v": 35049521
-        },
-        {
-          "t": 1778101200,
-          "o": 13.0841,
-          "h": 14.1189,
-          "l": 13.0542,
-          "c": 14.1189,
-          "v": 60420290
-        },
-        {
-          "t": 1778187600,
-          "o": 14.2681,
-          "h": 14.4273,
-          "l": 13.5318,
-          "c": 13.9597,
-          "v": 59166302
-        },
-        {
-          "t": 1778446800,
-          "o": 14.0393,
-          "h": 14.1089,
-          "l": 13.691,
-          "c": 13.7905,
-          "v": 34095761
-        },
-        {
-          "t": 1778533200,
-          "o": 13.8303,
-          "h": 13.9,
-          "l": 13.5915,
-          "c": 13.6015,
-          "v": 18573918
-        },
-        {
-          "t": 1778619600,
-          "o": 13.6711,
-          "h": 13.7109,
-          "l": 13.3328,
-          "c": 13.6612,
-          "v": 20773768
-        },
-        {
-          "t": 1778706000,
-          "o": 13.7308,
-          "h": 14.9248,
-          "l": 13.6114,
-          "c": 14.6761,
-          "v": 65897957
-        },
-        {
-          "t": 1778792400,
-          "o": 14.6661,
-          "h": 14.8154,
-          "l": 14.4572,
-          "c": 14.6562,
-          "v": 25931447
-        },
-        {
-          "t": 1779051600,
-          "o": 14.696,
-          "h": 14.7855,
-          "l": 14.1786,
-          "c": 14.3776,
-          "v": 28342001
-        },
-        {
-          "t": 1779224400,
-          "o": 14.1786,
-          "h": 14.3776,
-          "l": 13.89,
-          "c": 14.0293,
-          "v": 28376879
-        },
-        {
-          "t": 1779310800,
-          "o": 14.1288,
-          "h": 14.1288,
-          "l": 12.6264,
-          "c": 12.6264,
-          "v": 23106831
-        },
-        {
-          "t": 1779397200,
-          "o": 12.6165,
-          "h": 13.6313,
-          "l": 12.6165,
-          "c": 13.4721,
-          "v": 48313442
-        },
-        {
-          "t": 1779656400,
-          "o": 13.5517,
-          "h": 13.701,
-          "l": 13.4522,
-          "c": 13.5418,
-          "v": 17184799
-        },
-        {
-          "t": 1779742800,
-          "o": 13.5716,
-          "h": 13.5915,
-          "l": 13.0741,
-          "c": 13.104,
-          "v": 9913627
-        },
-        {
-          "t": 1779829200,
-          "o": 13.104,
-          "h": 13.104,
-          "l": 13.104,
-          "c": 13.104,
-          "v": 0
-        },
-        {
-          "t": 1779915600,
-          "o": 13.104,
-          "h": 13.104,
-          "l": 13.104,
-          "c": 13.104,
-          "v": 0
-        },
-        {
-          "t": 1780002000,
-          "o": 13.104,
-          "h": 13.104,
-          "l": 13.104,
-          "c": 13.104,
-          "v": 0
-        },
-        {
-          "t": 1780261200,
-          "o": 13.4124,
-          "h": 13.4622,
-          "l": 12.7358,
-          "c": 12.7756,
-          "v": 29729431
-        },
-        {
-          "t": 1780347600,
-          "o": 12.8055,
-          "h": 13.2831,
-          "l": 12.7955,
-          "c": 13.2035,
-          "v": 39522633
-        },
-        {
-          "t": 1780434000,
-          "o": 13.1836,
-          "h": 13.3328,
-          "l": 12.8154,
-          "c": 12.9348,
-          "v": 30317956
-        },
-        {
-          "t": 1780520400,
-          "o": 13.0343,
-          "h": 13.1537,
-          "l": 12.7259,
-          "c": 12.8751,
-          "v": 24446125
-        },
-        {
-          "t": 1780606800,
-          "o": 12.9348,
-          "h": 12.9547,
-          "l": 12.6065,
-          "c": 12.706,
-          "v": 16781522
-        },
-        {
-          "t": 1780866000,
-          "o": 12.7,
-          "h": 13.1,
-          "l": 12.56,
-          "c": 12.98,
-          "v": 35148501
-        },
-        {
-          "t": 1780952400,
-          "o": 12.98,
-          "h": 13.4,
-          "l": 12.97,
-          "c": 13.15,
-          "v": 31721606
-        },
-        {
-          "t": 1781038800,
-          "o": 13.22,
-          "h": 13.34,
-          "l": 12.99,
-          "c": 13.3,
-          "v": 26317252
-        },
-        {
-          "t": 1781125200,
-          "o": 13.36,
-          "h": 13.65,
-          "l": 13.08,
-          "c": 13.45,
-          "v": 26730858
-        },
-        {
-          "t": 1781211600,
-          "o": 13.63,
-          "h": 14.03,
-          "l": 13.55,
-          "c": 13.95,
-          "v": 33431876
-        },
-        {
-          "t": 1781470800,
-          "o": 14.49,
-          "h": 14.83,
-          "l": 14.2,
-          "c": 14.69,
-          "v": 41515489
-        },
-        {
-          "t": 1781557200,
-          "o": 14.63,
-          "h": 14.69,
-          "l": 14.34,
-          "c": 14.55,
-          "v": 24979762
-        },
-        {
-          "t": 1781643600,
-          "o": 14.6,
-          "h": 14.65,
-          "l": 14.03,
-          "c": 14.5,
-          "v": 26542648
-        },
-        {
-          "t": 1781730000,
-          "o": 14.57,
-          "h": 15.44,
-          "l": 14.51,
-          "c": 15.4,
-          "v": 47406332
-        },
-        {
-          "t": 1781816400,
-          "o": 15.2,
-          "h": 15.62,
-          "l": 15.12,
-          "c": 15.6,
-          "v": 40320739
-        },
-        {
-          "t": 1782075600,
-          "o": 15.66,
-          "h": 16.28,
-          "l": 15.58,
-          "c": 16.13,
-          "v": 27400564
-        },
-        {
-          "t": 1782162000,
-          "o": 16.11,
-          "h": 16.65,
-          "l": 16.01,
-          "c": 16.47,
-          "v": 26316910
-        },
-        {
-          "t": 1782248400,
-          "o": 16.6,
-          "h": 17.0,
-          "l": 16.32,
-          "c": 16.93,
-          "v": 29431175
-        },
-        {
-          "t": 1782334800,
-          "o": 16.99,
-          "h": 17.39,
-          "l": 16.57,
-          "c": 16.92,
-          "v": 60938611
-        },
-        {
-          "t": 1782421200,
-          "o": 16.97,
-          "h": 16.99,
-          "l": 15.23,
-          "c": 15.45,
-          "v": 78573390
-        },
-        {
-          "t": 1782680400,
-          "o": 15.55,
-          "h": 15.83,
-          "l": 15.1,
-          "c": 15.67,
-          "v": 38895241
-        },
-        {
-          "t": 1782766800,
-          "o": 15.67,
-          "h": 15.89,
-          "l": 15.47,
-          "c": 15.55,
-          "v": 23154024
-        },
-        {
-          "t": 1782853200,
-          "o": 15.55,
-          "h": 16.96,
-          "l": 15.33,
-          "c": 16.87,
-          "v": 56998900
-        },
-        {
-          "t": 1782939600,
-          "o": 16.9,
-          "h": 17.62,
-          "l": 16.88,
-          "c": 17.49,
-          "v": 42633242
-        },
-        {
-          "t": 1783026000,
-          "o": 17.6,
-          "h": 17.86,
-          "l": 17.41,
-          "c": 17.7,
-          "v": 29285668
-        },
-        {
-          "t": 1783285200,
-          "o": 17.7,
-          "h": 19.28,
-          "l": 17.7,
-          "c": 19.08,
-          "v": 52393062
-        },
-        {
-          "t": 1783371600,
-          "o": 19.05,
-          "h": 19.35,
-          "l": 18.73,
-          "c": 19.1,
-          "v": 30727255
-        },
-        {
-          "t": 1783458000,
-          "o": 19.29,
-          "h": 19.65,
-          "l": 18.77,
-          "c": 19.43,
-          "v": 41232950
-        },
-        {
-          "t": 1783544400,
-          "o": 17.51,
-          "h": 19.32,
-          "l": 17.51,
-          "c": 17.55,
-          "v": 79576743
-        },
-        {
-          "t": 1783630800,
-          "o": 17.55,
-          "h": 19.3,
-          "l": 17.32,
-          "c": 19.27,
-          "v": 48665797
-        },
-        {
-          "t": 1783890000,
-          "o": 19.29,
-          "h": 19.39,
-          "l": 18.41,
-          "c": 18.52,
-          "v": 32183722
-        },
-        {
-          "t": 1783976400,
-          "o": 18.64,
-          "h": 19.18,
-          "l": 18.11,
-          "c": 18.75,
-          "v": 24392393
-        },
-        {
-          "t": 1784149200,
-          "o": 18.8,
-          "h": 19.19,
-          "l": 18.64,
-          "c": 18.95,
-          "v": 24940408
-        },
-        {
-          "t": 1784235600,
-          "o": 19.1,
-          "h": 20.0,
-          "l": 18.91,
-          "c": 19.63,
-          "v": 45130314
-        },
-        {
-          "t": 1784494800,
-          "o": 19.63,
-          "h": 19.68,
-          "l": 17.8,
-          "c": 17.91,
-          "v": 57034351
-        },
-        {
-          "t": 1784581200,
-          "o": 17.91,
-          "h": 18.02,
-          "l": 16.12,
-          "c": 16.12,
-          "v": 30598974
-        },
-        {
-          "t": 1784667600,
-          "o": 14.51,
-          "h": 14.89,
-          "l": 14.51,
-          "c": 14.51,
-          "v": 61864175
-        },
-        {
-          "t": 1784754000,
-          "o": 13.06,
-          "h": 13.06,
-          "l": 13.06,
-          "c": 13.06,
-          "v": 5536436
-        },
-        {
-          "t": 1784840400,
-          "o": 11.76,
-          "h": 11.76,
-          "l": 11.76,
-          "c": 11.76,
-          "v": 3371616
-        },
-        {
-          "t": 1785099600,
-          "o": 10.59,
-          "h": 10.59,
-          "l": 10.59,
-          "c": 10.59,
-          "v": 21106870
-        },
-        {
-          "t": 1785186000,
-          "o": 9.54,
-          "h": 9.54,
-          "l": 9.54,
-          "c": 9.54,
-          "v": 2674017
-        },
-        {
-          "t": 1785272400,
-          "o": 8.59,
-          "h": 8.59,
-          "l": 8.59,
-          "c": 8.59,
-          "v": 9640131
-        },
-        {
-          "t": 1785358800,
-          "o": 7.74,
-          "h": 7.74,
-          "l": 7.74,
-          "c": 7.74,
-          "v": 13032941
-        },
-        {
-          "t": 1785445200,
-          "o": 6.97,
-          "h": 7.2,
-          "l": 6.97,
-          "c": 6.97,
-          "v": 159586406
-        }
-      ],
-      "backtest": {
-        "n": 13,
-        "win_rate": 46,
-        "avg_ret": 3.2,
-        "horizon": 10
-      },
-      "liquidity": "ok",
-      "turnover": 586086596,
-      "next_earnings": null,
-      "news": {
-        "adjustment": 0,
-        "sentiment": "nötr",
-        "pos": 0,
-        "neg": 0,
-        "count": 0
-      },
-      "prev": {
-        "score": 36,
-        "verdict_key": "sell"
-      },
-      "rel_strength": -52.5,
-      "rel_adj": -3,
-      "score": 36,
-      "verdict": "SAT",
-      "verdict_key": "sell",
-      "risk": "high",
-      "dimensions": {
-        "trend": {
-          "score": 12,
-          "metrics": {
-            "ma": "Düşüş",
-            "macd": "SAT",
-            "vol_x": 1.07
-          }
-        },
-        "timing": {
-          "score": 44,
-          "metrics": {
-            "durum": "Aşırı satım — dönüş teyidi bekle",
-            "rsi": 7.6,
-            "boll": "Alt Band",
-            "gerilim": -54.3
-          }
-        },
-        "momentum": {
-          "score": 34,
-          "metrics": {
-            "stoch": 0.0,
-            "ret_1w": -40.73,
-            "ret_1m": -58.68
-          }
-        },
-        "setup": {
-          "score": 92,
-          "metrics": {
-            "rr": 43.43
-          }
-        }
-      },
-      "trade_setup": {
-        "entry": 6.97,
-        "stop": 6.67,
-        "target": 20.0,
-        "rr": 43.43,
-        "support": 6.97,
-        "resistance": 20.0,
-        "atr": 1.19
-      },
-      "signal": {
-        "action": "SAT",
-        "key": "sell",
-        "headline": "🔴 SAT",
-        "detail": "Teknik görünüm zayıf — alım için uygun değil. Hisse aşırı satımda — kısa vadeli tepki yükselişi gelebilir.",
-        "verdict": "SAT"
-      },
-      "adjustments": {
-        "news": 0,
-        "rel": -3,
-        "regime": -3
-      },
-      "score_base": 42,
       "gates": [],
       "pros": [],
       "cons": []
@@ -51240,7 +51237,7 @@
           "h": 88.4,
           "l": 84.9,
           "c": 86.3,
-          "v": 8089232
+          "v": 8021901
         }
       ],
       "backtest": {
@@ -51250,10 +51247,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 518110540,
+      "turnover": 517820007,
       "next_earnings": {
         "date": "2026-08-18",
-        "days": 18
+        "days": 17
       },
       "news": {
         "adjustment": 0,
@@ -52056,7 +52053,7 @@
           "h": 2.38,
           "l": 2.3,
           "c": 2.33,
-          "v": 30749306
+          "v": 30671876
         }
       ],
       "backtest": {
@@ -52066,7 +52063,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 125987993,
+      "turnover": 125978973,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -52869,7 +52866,7 @@
           "h": 292.25,
           "l": 283.25,
           "c": 287.25,
-          "v": 71951
+          "v": 71771
         }
       ],
       "backtest": {
@@ -52879,7 +52876,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 23123028,
+      "turnover": 23120443,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -53682,7 +53679,7 @@
           "h": 37.46,
           "l": 35.58,
           "c": 37.44,
-          "v": 45134968
+          "v": 44089171
         }
       ],
       "backtest": {
@@ -53692,10 +53689,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1752018233,
+      "turnover": 1750060501,
       "next_earnings": {
         "date": "2026-08-07",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -53705,7 +53702,7 @@
         "count": 1
       },
       "prev": {
-        "score": 34,
+        "score": 35,
         "verdict_key": "sell"
       },
       "rel_strength": -9.1,
@@ -54498,7 +54495,7 @@
           "h": 124.3,
           "l": 120.0,
           "c": 123.4,
-          "v": 59281451
+          "v": 58603631
         }
       ],
       "backtest": {
@@ -54508,7 +54505,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 3805338179,
+      "turnover": 3801156029,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -54518,7 +54515,7 @@
         "count": 0
       },
       "prev": {
-        "score": 33,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -4.7,
@@ -54533,7 +54530,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 1.27
+            "vol_x": 1.26
           }
         },
         "timing": {
@@ -55311,7 +55308,7 @@
           "h": 10.12,
           "l": 9.66,
           "c": 10.1,
-          "v": 4741099
+          "v": 4649639
         }
       ],
       "backtest": {
@@ -55321,7 +55318,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 65118567,
+      "turnover": 65072379,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -55331,7 +55328,7 @@
         "count": 0
       },
       "prev": {
-        "score": 39,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -5.0,
@@ -56124,7 +56121,7 @@
           "h": 273.0,
           "l": 258.0,
           "c": 272.5,
-          "v": 5111576
+          "v": 5090149
         }
       ],
       "backtest": {
@@ -56134,7 +56131,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1124682992,
+      "turnover": 1124391049,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -56937,7 +56934,7 @@
           "h": 15.96,
           "l": 15.3,
           "c": 15.55,
-          "v": 1131234
+          "v": 1127117
         }
       ],
       "backtest": {
@@ -56947,7 +56944,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 38574073,
+      "turnover": 38570872,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -57750,7 +57747,7 @@
           "h": 41.82,
           "l": 41.02,
           "c": 41.74,
-          "v": 40137743
+          "v": 39419904
         }
       ],
       "backtest": {
@@ -57760,10 +57757,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1894788056,
+      "turnover": 1893289926,
       "next_earnings": {
         "date": "2026-08-14",
-        "days": 14
+        "days": 13
       },
       "news": {
         "adjustment": 0,
@@ -57773,7 +57770,7 @@
         "count": 1
       },
       "prev": {
-        "score": 42,
+        "score": 34,
         "verdict_key": "sell"
       },
       "rel_strength": -0.8,
@@ -58566,7 +58563,7 @@
           "h": 63.85,
           "l": 61.35,
           "c": 63.4,
-          "v": 183182273
+          "v": 181079262
         }
       ],
       "backtest": {
@@ -58576,7 +58573,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 9398217680,
+      "turnover": 9391551136,
       "next_earnings": null,
       "news": {
         "adjustment": 2,
@@ -59379,7 +59376,7 @@
           "h": 36.0,
           "l": 34.46,
           "c": 35.56,
-          "v": 3130493
+          "v": 3119624
         }
       ],
       "backtest": {
@@ -59389,7 +59386,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 150264849,
+      "turnover": 150245524,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -59399,8 +59396,8 @@
         "count": 0
       },
       "prev": {
-        "score": 31,
-        "verdict_key": "strong_sell"
+        "score": 33,
+        "verdict_key": "sell"
       },
       "rel_strength": 1.1,
       "rel_adj": 1,
@@ -60192,7 +60189,7 @@
           "h": 87.7,
           "l": 84.75,
           "c": 87.6,
-          "v": 15529030
+          "v": 15331035
         }
       ],
       "backtest": {
@@ -60202,10 +60199,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 949429284,
+      "turnover": 948562066,
       "next_earnings": {
         "date": "2026-08-17",
-        "days": 17
+        "days": 16
       },
       "news": {
         "adjustment": 0,
@@ -60215,7 +60212,7 @@
         "count": 0
       },
       "prev": {
-        "score": 44,
+        "score": 33,
         "verdict_key": "sell"
       },
       "rel_strength": -0.2,
@@ -61008,7 +61005,7 @@
           "h": 80.15,
           "l": 76.9,
           "c": 80.1,
-          "v": 24540930
+          "v": 24403582
         }
       ],
       "backtest": {
@@ -61018,10 +61015,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1765080729,
+      "turnover": 1764530650,
       "next_earnings": {
         "date": "2026-08-04",
-        "days": 4
+        "days": 3
       },
       "news": {
         "adjustment": 2,
@@ -61031,7 +61028,7 @@
         "count": 3
       },
       "prev": {
-        "score": 34,
+        "score": 33,
         "verdict_key": "sell"
       },
       "rel_strength": 0.2,
@@ -62636,7 +62633,7 @@
           "h": 84.65,
           "l": 82.35,
           "c": 84.5,
-          "v": 38305356
+          "v": 37955773
         }
       ],
       "backtest": {
@@ -62646,10 +62643,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 3004712141,
+      "turnover": 3003235153,
       "next_earnings": {
         "date": "2026-08-12",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -62659,8 +62656,8 @@
         "count": 1
       },
       "prev": {
-        "score": 41,
-        "verdict_key": "sell"
+        "score": 31,
+        "verdict_key": "strong_sell"
       },
       "rel_strength": -7.7,
       "rel_adj": -3,
@@ -62736,8 +62733,8 @@
   "risk_alerts": [
     "AKSEN",
     "KONTR",
-    "ECZYT",
-    "SKBNK"
+    "SKBNK",
+    "ECZYT"
   ],
   "weekly_summary": null,
   "mode": "trader",
@@ -62845,67 +62842,67 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 676,
+          "n": 634,
           "win_rate": 57,
-          "avg_ret": -0.12,
-          "avg_win": 5.05,
-          "avg_loss": -3.87
+          "avg_ret": -0.2,
+          "avg_win": 4.96,
+          "avg_loss": -3.92
         },
         "h10": {
-          "n": 483,
+          "n": 441,
           "win_rate": 54,
-          "avg_ret": 0.59,
-          "avg_win": 6.95,
-          "avg_loss": -4.65
+          "avg_ret": 0.23,
+          "avg_win": 6.39,
+          "avg_loss": -4.83
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 633,
-            "win_rate": 34,
-            "avg_ret": -1.5,
-            "avg_win": 5.13,
-            "avg_loss": -4.89
+            "n": 598,
+            "win_rate": 35,
+            "avg_ret": -1.47,
+            "avg_win": 5.07,
+            "avg_loss": -4.98
           },
           "h10": {
-            "n": 441,
-            "win_rate": 37,
-            "avg_ret": -1.66,
-            "avg_win": 6.82,
-            "avg_loss": -6.73
+            "n": 406,
+            "win_rate": 38,
+            "avg_ret": -1.64,
+            "avg_win": 6.94,
+            "avg_loss": -6.93
           }
         },
         "buy": {
           "h5": {
-            "n": 4,
-            "win_rate": 75,
-            "avg_ret": 7.04,
-            "avg_win": 10.58,
+            "n": 3,
+            "win_rate": 67,
+            "avg_ret": 6.33,
+            "avg_win": 11.28,
             "avg_loss": -3.55
           },
           "h10": {
-            "n": 4,
+            "n": 3,
             "win_rate": 100,
-            "avg_ret": 9.97,
-            "avg_win": 9.97,
+            "avg_ret": 9.88,
+            "avg_win": 9.88,
             "avg_loss": null
           }
         },
         "sell": {
           "h5": {
-            "n": 650,
+            "n": 609,
             "win_rate": 57,
-            "avg_ret": -0.29,
-            "avg_win": 4.84,
-            "avg_loss": -3.9
+            "avg_ret": -0.37,
+            "avg_win": 4.75,
+            "avg_loss": -3.95
           },
           "h10": {
-            "n": 464,
+            "n": 423,
             "win_rate": 53,
-            "avg_ret": 0.41,
-            "avg_win": 6.68,
-            "avg_loss": -4.64
+            "avg_ret": 0.05,
+            "avg_win": 6.08,
+            "avg_loss": -4.82
           }
         },
         "strong_buy": {
