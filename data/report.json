@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T08:28:31.997085+00:00",
+  "generated_at": "2026-08-01T11:13:30.641792+00:00",
   "macro": {
     "usd_try": 47.536,
     "eur_try": 54.7208,
@@ -42314,7 +42314,7 @@
         "count": 0
       },
       "prev": {
-        "score": 36,
+        "score": 38,
         "verdict_key": "sell"
       },
       "rel_strength": -52.5,
