@@ -1559,9 +1559,9 @@
         }
       ],
       "backtest": {
-        "n": 9,
-        "win_rate": 67,
-        "avg_ret": 2.8,
+        "n": 8,
+        "win_rate": 62,
+        "avg_ret": 1.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -4830,7 +4830,7 @@
       "backtest": {
         "n": 11,
         "win_rate": 45,
-        "avg_ret": 2.6,
+        "avg_ret": 2.7,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -17069,7 +17069,7 @@
       "backtest": {
         "n": 12,
         "win_rate": 58,
-        "avg_ret": -0.3,
+        "avg_ret": -0.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -34148,9 +34148,9 @@
         }
       ],
       "backtest": {
-        "n": 13,
-        "win_rate": 38,
-        "avg_ret": -0.5,
+        "n": 12,
+        "win_rate": 42,
+        "avg_ret": -0.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -34961,9 +34961,9 @@
         }
       ],
       "backtest": {
-        "n": 10,
-        "win_rate": 30,
-        "avg_ret": -2.0,
+        "n": 9,
+        "win_rate": 33,
+        "avg_ret": -1.8,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -47164,7 +47164,7 @@
       "backtest": {
         "n": 9,
         "win_rate": 67,
-        "avg_ret": 6.7,
+        "avg_ret": 7.4,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -51229,7 +51229,7 @@
       "backtest": {
         "n": 10,
         "win_rate": 30,
-        "avg_ret": -0.0,
+        "avg_ret": 0.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -52042,7 +52042,7 @@
       "backtest": {
         "n": 7,
         "win_rate": 43,
-        "avg_ret": -0.4,
+        "avg_ret": 1.1,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -60180,8 +60180,8 @@
       ],
       "backtest": {
         "n": 5,
-        "win_rate": 20,
-        "avg_ret": -3.1,
+        "win_rate": 40,
+        "avg_ret": -2.8,
         "horizon": 10
       },
       "liquidity": "low",
@@ -62812,9 +62812,9 @@
     }
   ],
   "backtest": {
-    "trades": 779,
+    "trades": 776,
     "stocks": 77,
-    "win_rate": 49,
+    "win_rate": 50,
     "avg_ret": 0.7,
     "horizon": 10
   },
@@ -62822,83 +62822,35 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 653,
+          "n": 620,
           "win_rate": 57,
-          "avg_ret": -0.72,
-          "avg_win": 4.01,
-          "avg_loss": -4.21
+          "avg_ret": -0.83,
+          "avg_win": 3.97,
+          "avg_loss": -4.22
         },
         "h10": {
-          "n": 420,
-          "win_rate": 70,
-          "avg_ret": -2.72,
+          "n": 387,
+          "win_rate": 73,
+          "avg_ret": -3.11,
           "avg_win": 5.43,
-          "avg_loss": -6.06
+          "avg_loss": -6.17
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 502,
-            "win_rate": 39,
-            "avg_ret": -1.22,
+            "n": 458,
+            "win_rate": 37,
+            "avg_ret": -1.46,
             "avg_win": 4.78,
-            "avg_loss": -5.06
+            "avg_loss": -5.17
           },
           "h10": {
-            "n": 350,
-            "win_rate": 29,
-            "avg_ret": -3.42,
-            "avg_win": 5.91,
-            "avg_loss": -7.31
-          }
-        },
-        "strong_buy": {
-          "h5": {
-            "n": 1,
-            "win_rate": 100,
-            "avg_ret": 16.65,
-            "avg_win": 16.65,
-            "avg_loss": null
-          },
-          "h10": {
-            "n": 1,
-            "win_rate": 100,
-            "avg_ret": 13.82,
-            "avg_win": 13.82,
-            "avg_loss": null
-          }
-        },
-        "sell": {
-          "h5": {
-            "n": 626,
-            "win_rate": 57,
-            "avg_ret": -0.86,
-            "avg_win": 3.84,
-            "avg_loss": -4.25
-          },
-          "h10": {
-            "n": 399,
-            "win_rate": 70,
-            "avg_ret": -2.94,
-            "avg_win": 5.1,
-            "avg_loss": -6.12
-          }
-        },
-        "strong_sell": {
-          "h5": {
-            "n": 25,
-            "win_rate": 48,
-            "avg_ret": 1.49,
-            "avg_win": 5.52,
-            "avg_loss": -2.89
-          },
-          "h10": {
-            "n": 19,
-            "win_rate": 63,
-            "avg_ret": -0.14,
-            "avg_win": 7.72,
-            "avg_loss": -4.72
+            "n": 306,
+            "win_rate": 28,
+            "avg_ret": -3.76,
+            "avg_win": 5.75,
+            "avg_loss": -7.53
           }
         },
         "buy": {
@@ -62915,6 +62867,38 @@
             "avg_ret": 18.64,
             "avg_win": 18.64,
             "avg_loss": null
+          }
+        },
+        "sell": {
+          "h5": {
+            "n": 595,
+            "win_rate": 57,
+            "avg_ret": -0.93,
+            "avg_win": 3.86,
+            "avg_loss": -4.27
+          },
+          "h10": {
+            "n": 368,
+            "win_rate": 73,
+            "avg_ret": -3.28,
+            "avg_win": 5.21,
+            "avg_loss": -6.23
+          }
+        },
+        "strong_sell": {
+          "h5": {
+            "n": 24,
+            "win_rate": 50,
+            "avg_ret": 1.17,
+            "avg_win": 5.22,
+            "avg_loss": -2.89
+          },
+          "h10": {
+            "n": 18,
+            "win_rate": 67,
+            "avg_ret": -0.94,
+            "avg_win": 6.63,
+            "avg_loss": -4.72
           }
         }
       },
