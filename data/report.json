@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-23T16:12:49.145126+00:00",
+  "generated_at": "2026-08-24T06:43:04.920758+00:00",
   "macro": {
-    "usd_try": 48.071,
-    "eur_try": 56.1577,
-    "gold_usd": 4680.6,
+    "usd_try": 48.087,
+    "eur_try": 56.1633,
+    "gold_usd": 4701.3,
     "sp500": 765.72,
     "sp500_change_pct": 0.4091,
     "bist100": 14514.82,
-    "bist100_change_pct": 0.8216,
+    "bist100_change_pct": 0.8219,
     "tr_interest_rate": 46.0
   },
   "stocks": [
@@ -1558,7 +1558,7 @@
       "backtest": {
         "n": 7,
         "win_rate": 29,
-        "avg_ret": -2.6,
+        "avg_ret": -3.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -2375,7 +2375,7 @@
       "backtest": {
         "n": 12,
         "win_rate": 67,
-        "avg_ret": 6.0,
+        "avg_ret": 6.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -4821,7 +4821,7 @@
       "backtest": {
         "n": 13,
         "win_rate": 46,
-        "avg_ret": -0.8,
+        "avg_ret": -0.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -6449,9 +6449,9 @@
         }
       ],
       "backtest": {
-        "n": 13,
-        "win_rate": 62,
-        "avg_ret": 2.4,
+        "n": 12,
+        "win_rate": 58,
+        "avg_ret": 2.7,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -8082,8 +8082,8 @@
       ],
       "backtest": {
         "n": 12,
-        "win_rate": 42,
-        "avg_ret": -0.8,
+        "win_rate": 50,
+        "avg_ret": -0.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -8152,7 +8152,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%42 · 12 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.66× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Hacim teyidi yok (0.66× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -8162,7 +8162,6 @@
       },
       "score_base": 68,
       "gates": [
-        "backtest",
         "hacim"
       ],
       "gated_from": "buy",
@@ -9716,7 +9715,7 @@
       "backtest": {
         "n": 15,
         "win_rate": 60,
-        "avg_ret": 0.8,
+        "avg_ret": 1.3,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -11342,7 +11341,7 @@
       "backtest": {
         "n": 11,
         "win_rate": 55,
-        "avg_ret": -0.3,
+        "avg_ret": -0.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -14599,9 +14598,9 @@
         }
       ],
       "backtest": {
-        "n": 12,
-        "win_rate": 50,
-        "avg_ret": -0.2,
+        "n": 11,
+        "win_rate": 55,
+        "avg_ret": 0.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -16231,9 +16230,9 @@
         }
       ],
       "backtest": {
-        "n": 12,
-        "win_rate": 50,
-        "avg_ret": 0.1,
+        "n": 11,
+        "win_rate": 55,
+        "avg_ret": 0.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -17864,8 +17863,8 @@
       ],
       "backtest": {
         "n": 12,
-        "win_rate": 50,
-        "avg_ret": -1.1,
+        "win_rate": 67,
+        "avg_ret": -1.3,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -18677,8 +18676,8 @@
       ],
       "backtest": {
         "n": 10,
-        "win_rate": 40,
-        "avg_ret": 0.8,
+        "win_rate": 50,
+        "avg_ret": 1.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -19491,7 +19490,7 @@
       "backtest": {
         "n": 12,
         "win_rate": 50,
-        "avg_ret": -0.6,
+        "avg_ret": -0.3,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -22741,9 +22740,9 @@
         }
       ],
       "backtest": {
-        "n": 9,
-        "win_rate": 56,
-        "avg_ret": 1.5,
+        "n": 8,
+        "win_rate": 62,
+        "avg_ret": 1.4,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -25180,9 +25179,9 @@
         }
       ],
       "backtest": {
-        "n": 8,
-        "win_rate": 38,
-        "avg_ret": 0.1,
+        "n": 7,
+        "win_rate": 43,
+        "avg_ret": 1.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -27621,7 +27620,7 @@
       "backtest": {
         "n": 9,
         "win_rate": 44,
-        "avg_ret": -0.7,
+        "avg_ret": -0.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -29247,7 +29246,7 @@
       "backtest": {
         "n": 6,
         "win_rate": 17,
-        "avg_ret": -4.8,
+        "avg_ret": -5.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -30060,7 +30059,7 @@
       "backtest": {
         "n": 12,
         "win_rate": 33,
-        "avg_ret": -2.8,
+        "avg_ret": -2.7,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -31684,9 +31683,9 @@
         }
       ],
       "backtest": {
-        "n": 8,
-        "win_rate": 38,
-        "avg_ret": -2.8,
+        "n": 7,
+        "win_rate": 43,
+        "avg_ret": -0.6,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -35749,9 +35748,9 @@
         }
       ],
       "backtest": {
-        "n": 11,
-        "win_rate": 36,
-        "avg_ret": 0.7,
+        "n": 10,
+        "win_rate": 40,
+        "avg_ret": 1.4,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -37377,7 +37376,7 @@
       "backtest": {
         "n": 11,
         "win_rate": 36,
-        "avg_ret": 1.5,
+        "avg_ret": 1.6,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -38188,9 +38187,9 @@
         }
       ],
       "backtest": {
-        "n": 10,
-        "win_rate": 50,
-        "avg_ret": -0.4,
+        "n": 9,
+        "win_rate": 56,
+        "avg_ret": 1.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -41442,7 +41441,7 @@
       "backtest": {
         "n": 11,
         "win_rate": 45,
-        "avg_ret": -1.0,
+        "avg_ret": -0.4,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -49572,7 +49571,7 @@
       "backtest": {
         "n": 6,
         "win_rate": 33,
-        "avg_ret": -4.5,
+        "avg_ret": -5.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -51198,7 +51197,7 @@
       "backtest": {
         "n": 14,
         "win_rate": 43,
-        "avg_ret": 1.4,
+        "avg_ret": 1.5,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -52824,7 +52823,7 @@
       "backtest": {
         "n": 13,
         "win_rate": 46,
-        "avg_ret": 1.8,
+        "avg_ret": 1.9,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -54448,9 +54447,9 @@
         }
       ],
       "backtest": {
-        "n": 13,
-        "win_rate": 69,
-        "avg_ret": 2.6,
+        "n": 12,
+        "win_rate": 75,
+        "avg_ret": 4.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -56076,7 +56075,7 @@
       "backtest": {
         "n": 4,
         "win_rate": 25,
-        "avg_ret": -16.3,
+        "avg_ret": -16.1,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -56889,7 +56888,7 @@
       "backtest": {
         "n": 16,
         "win_rate": 56,
-        "avg_ret": 4.2,
+        "avg_ret": 4.0,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -57700,9 +57699,9 @@
         }
       ],
       "backtest": {
-        "n": 14,
-        "win_rate": 36,
-        "avg_ret": -0.8,
+        "n": 13,
+        "win_rate": 15,
+        "avg_ret": -1.3,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -58515,7 +58514,7 @@
       "backtest": {
         "n": 11,
         "win_rate": 82,
-        "avg_ret": 6.0,
+        "avg_ret": 7.7,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -60141,14 +60140,14 @@
       "backtest": {
         "n": 10,
         "win_rate": 50,
-        "avg_ret": -0.8,
+        "avg_ret": -0.7,
         "horizon": 10
       },
       "liquidity": "ok",
       "turnover": 143097187,
       "next_earnings": {
         "date": "2026-09-16",
-        "days": 24
+        "days": 23
       },
       "news": {
         "adjustment": 0,
@@ -60955,9 +60954,9 @@
         }
       ],
       "backtest": {
-        "n": 12,
-        "win_rate": 50,
-        "avg_ret": 2.1,
+        "n": 11,
+        "win_rate": 55,
+        "avg_ret": 2.6,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -62583,7 +62582,7 @@
       "backtest": {
         "n": 10,
         "win_rate": 50,
-        "avg_ret": 3.1,
+        "avg_ret": 3.2,
         "horizon": 10
       },
       "liquidity": "ok",
@@ -62694,10 +62693,10 @@
   },
   "dip_adaylari": [],
   "backtest": {
-    "trades": 786,
+    "trades": 775,
     "stocks": 77,
-    "win_rate": 48,
-    "avg_ret": 0.5,
+    "win_rate": 49,
+    "avg_ret": 0.7,
     "horizon": 10
   },
   "karne": {
