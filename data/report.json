@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-11T18:51:42.278247+00:00",
+  "generated_at": "2026-09-12T10:24:17.676652+00:00",
   "macro": {
-    "usd_try": 48.5596,
-    "eur_try": 56.4122,
-    "gold_usd": 4389.4,
-    "sp500": 765.06,
-    "sp500_change_pct": 0.954,
+    "usd_try": 48.6079,
+    "eur_try": 56.3831,
+    "gold_usd": 4366.2,
+    "sp500": 764.29,
+    "sp500_change_pct": 0.8524,
     "bist100": 14467.25,
     "bist100_change_pct": 0.5099,
     "tr_interest_rate": 46.0
@@ -7258,7 +7258,7 @@
           "h": 421.0,
           "l": 410.5,
           "c": 413.5,
-          "v": 20062288
+          "v": 20262288
         }
       ],
       "backtest": {
@@ -7268,7 +7268,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 12385878326,
+      "turnover": 12390013326,
       "next_earnings": null,
       "news": {
         "adjustment": 2,
@@ -7293,7 +7293,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "SAT",
-            "vol_x": 0.99
+            "vol_x": 1.0
           }
         },
         "timing": {
@@ -7333,7 +7333,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Hacim teyidi yok (0.99× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik tablo güçlü — alım için en olumlu grup. ⛔ Hacim teyidi yok (1.0× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -8074,7 +8074,7 @@
           "h": 73.6,
           "l": 71.9,
           "c": 72.7,
-          "v": 195945068
+          "v": 198445068
         }
       ],
       "backtest": {
@@ -8084,7 +8084,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 12513752421,
+      "turnover": 12522839921,
       "next_earnings": null,
       "news": {
         "adjustment": 2,
@@ -10516,7 +10516,7 @@
           "h": 508.5,
           "l": 498.25,
           "c": 502.5,
-          "v": 1956487
+          "v": 2009487
         }
       ],
       "backtest": {
@@ -10526,7 +10526,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1856268700,
+      "turnover": 1857600325,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -12964,7 +12964,7 @@
           "h": 437.5,
           "l": 428.25,
           "c": 434.75,
-          "v": 7202728
+          "v": 7576616
         }
       ],
       "backtest": {
@@ -12974,7 +12974,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 4152736315,
+      "turnover": 4160863706,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -12999,7 +12999,7 @@
           "metrics": {
             "ma": "Golden Cross",
             "macd": "AL",
-            "vol_x": 0.85
+            "vol_x": 0.86
           }
         },
         "timing": {
@@ -13039,7 +13039,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. Ancak hisse AŞIRI ALIMDA — şu an tepe bölgesinde; geri çekilmede (destek yakınında) girmek daha mantıklı, elindekinde kâr-al düşünülebilir. ⛔ Hacim teyidi yok (0.85× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. Ancak hisse AŞIRI ALIMDA — şu an tepe bölgesinde; geri çekilmede (destek yakınında) girmek daha mantıklı, elindekinde kâr-al düşünülebilir. ⛔ Hacim teyidi yok (0.86× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -21937,7 +21937,7 @@
           "h": 299.75,
           "l": 286.0,
           "c": 299.75,
-          "v": 4853403
+          "v": 5453403
         }
       ],
       "backtest": {
@@ -21947,7 +21947,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1000316429,
+      "turnover": 1009308929,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -21972,7 +21972,7 @@
           "metrics": {
             "ma": "Yükseliş",
             "macd": "AL",
-            "vol_x": 1.17
+            "vol_x": 1.19
           }
         },
         "timing": {
@@ -22012,7 +22012,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. Ancak hisse AŞIRI ALIMDA — şu an tepe bölgesinde; geri çekilmede (destek yakınında) girmek daha mantıklı, elindekinde kâr-al düşünülebilir. ⛔ Hacim teyidi yok (1.17× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. Ancak hisse AŞIRI ALIMDA — şu an tepe bölgesinde; geri çekilmede (destek yakınında) girmek daha mantıklı, elindekinde kâr-al düşünülebilir. ⛔ Hacim teyidi yok (1.19× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -62633,7 +62633,7 @@
       "turnover": 162865137,
       "next_earnings": {
         "date": "2026-09-16",
-        "days": 5
+        "days": 4
       },
       "news": {
         "adjustment": 0,
@@ -62752,67 +62752,35 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 582,
-          "win_rate": 45,
-          "avg_ret": 1.05,
-          "avg_win": 5.17,
-          "avg_loss": -3.84
+          "n": 531,
+          "win_rate": 46,
+          "avg_ret": 0.89,
+          "avg_win": 5.18,
+          "avg_loss": -3.97
         },
         "h10": {
-          "n": 404,
-          "win_rate": 47,
-          "avg_ret": 1.2,
-          "avg_win": 7.67,
-          "avg_loss": -5.74
+          "n": 353,
+          "win_rate": 51,
+          "avg_ret": 0.61,
+          "avg_win": 7.75,
+          "avg_loss": -5.96
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 727,
-            "win_rate": 53,
-            "avg_ret": 1.46,
-            "avg_win": 5.96,
-            "avg_loss": -3.57
+            "n": 701,
+            "win_rate": 52,
+            "avg_ret": 1.37,
+            "avg_win": 5.82,
+            "avg_loss": -3.54
           },
           "h10": {
-            "n": 520,
-            "win_rate": 49,
-            "avg_ret": 1.59,
-            "avg_win": 7.64,
-            "avg_loss": -4.27
-          }
-        },
-        "sell": {
-          "h5": {
-            "n": 504,
-            "win_rate": 44,
-            "avg_ret": 1.1,
-            "avg_win": 4.73,
-            "avg_loss": -3.34
-          },
-          "h10": {
-            "n": 351,
+            "n": 494,
             "win_rate": 48,
-            "avg_ret": 1.3,
-            "avg_win": 7.55,
-            "avg_loss": -5.28
-          }
-        },
-        "strong_sell": {
-          "h5": {
-            "n": 7,
-            "win_rate": 43,
-            "avg_ret": 2.09,
-            "avg_win": 4.5,
-            "avg_loss": -1.13
-          },
-          "h10": {
-            "n": 7,
-            "win_rate": 0,
-            "avg_ret": 12.23,
-            "avg_win": 12.23,
-            "avg_loss": null
+            "avg_ret": 1.31,
+            "avg_win": 7.29,
+            "avg_loss": -4.25
           }
         },
         "buy": {
@@ -62829,6 +62797,38 @@
             "avg_ret": -1.25,
             "avg_win": 7.36,
             "avg_loss": -9.12
+          }
+        },
+        "sell": {
+          "h5": {
+            "n": 457,
+            "win_rate": 45,
+            "avg_ret": 0.93,
+            "avg_win": 4.68,
+            "avg_loss": -3.44
+          },
+          "h10": {
+            "n": 304,
+            "win_rate": 52,
+            "avg_ret": 0.72,
+            "avg_win": 7.62,
+            "avg_loss": -5.49
+          }
+        },
+        "strong_sell": {
+          "h5": {
+            "n": 3,
+            "win_rate": 67,
+            "avg_ret": 0.72,
+            "avg_win": 5.44,
+            "avg_loss": -1.65
+          },
+          "h10": {
+            "n": 3,
+            "win_rate": 0,
+            "avg_ret": 18.22,
+            "avg_win": 18.22,
+            "avg_loss": null
           }
         },
         "strong_buy": {
@@ -62850,18 +62850,18 @@
       },
       "dip": {
         "h5": {
-          "n": 5,
-          "win_rate": 80,
-          "avg_ret": 5.03,
-          "avg_win": 6.41,
-          "avg_loss": -0.48
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
         },
         "h10": {
-          "n": 5,
-          "win_rate": 80,
-          "avg_ret": 7.85,
-          "avg_win": 10.14,
-          "avg_loss": -1.33
+          "n": 0,
+          "win_rate": null,
+          "avg_ret": null,
+          "avg_win": null,
+          "avg_loss": null
         }
       }
     },
