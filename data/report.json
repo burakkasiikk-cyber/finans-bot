@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-12T17:58:20.293775+00:00",
+  "generated_at": "2026-09-13T11:26:29.745280+00:00",
   "macro": {
-    "usd_try": 48.6079,
-    "eur_try": 56.3831,
-    "gold_usd": 4366.2,
+    "usd_try": 48.5981,
+    "eur_try": 56.3914,
+    "gold_usd": 4408.9,
     "sp500": 764.29,
     "sp500_change_pct": 0.8524,
     "bist100": 14467.25,
@@ -62633,7 +62633,7 @@
       "turnover": 162865137,
       "next_earnings": {
         "date": "2026-09-16",
-        "days": 4
+        "days": 3
       },
       "news": {
         "adjustment": 0,
@@ -62752,82 +62752,82 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 531,
-          "win_rate": 46,
-          "avg_ret": 0.89,
-          "avg_win": 5.18,
-          "avg_loss": -3.97
+          "n": 493,
+          "win_rate": 45,
+          "avg_ret": 0.88,
+          "avg_win": 5.12,
+          "avg_loss": -4.14
         },
         "h10": {
-          "n": 353,
-          "win_rate": 51,
-          "avg_ret": 0.61,
-          "avg_win": 7.75,
-          "avg_loss": -5.96
+          "n": 315,
+          "win_rate": 53,
+          "avg_ret": 0.45,
+          "avg_win": 7.96,
+          "avg_loss": -6.12
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 701,
+            "n": 662,
             "win_rate": 52,
-            "avg_ret": 1.37,
-            "avg_win": 5.82,
-            "avg_loss": -3.54
+            "avg_ret": 1.26,
+            "avg_win": 5.66,
+            "avg_loss": -3.6
           },
           "h10": {
-            "n": 494,
-            "win_rate": 48,
-            "avg_ret": 1.31,
-            "avg_win": 7.29,
-            "avg_loss": -4.25
+            "n": 455,
+            "win_rate": 46,
+            "avg_ret": 0.96,
+            "avg_win": 7.11,
+            "avg_loss": -4.31
           }
         },
         "buy": {
           "h5": {
-            "n": 63,
-            "win_rate": 51,
-            "avg_ret": 0.75,
+            "n": 61,
+            "win_rate": 52,
+            "avg_ret": 0.89,
             "avg_win": 8.95,
-            "avg_loss": -7.71
+            "avg_loss": -7.99
           },
           "h10": {
-            "n": 44,
-            "win_rate": 48,
-            "avg_ret": -1.25,
+            "n": 42,
+            "win_rate": 50,
+            "avg_ret": -0.78,
             "avg_win": 7.36,
-            "avg_loss": -9.12
+            "avg_loss": -8.92
           }
         },
         "sell": {
           "h5": {
-            "n": 457,
+            "n": 422,
             "win_rate": 45,
-            "avg_ret": 0.93,
-            "avg_win": 4.68,
-            "avg_loss": -3.44
+            "avg_ret": 0.89,
+            "avg_win": 4.58,
+            "avg_loss": -3.57
           },
           "h10": {
-            "n": 304,
-            "win_rate": 52,
-            "avg_ret": 0.72,
-            "avg_win": 7.62,
-            "avg_loss": -5.49
+            "n": 269,
+            "win_rate": 54,
+            "avg_ret": 0.54,
+            "avg_win": 7.96,
+            "avg_loss": -5.71
           }
         },
         "strong_sell": {
           "h5": {
-            "n": 3,
-            "win_rate": 67,
-            "avg_ret": 0.72,
+            "n": 2,
+            "win_rate": 50,
+            "avg_ret": 2.23,
             "avg_win": 5.44,
-            "avg_loss": -1.65
+            "avg_loss": -0.98
           },
           "h10": {
-            "n": 3,
+            "n": 2,
             "win_rate": 0,
-            "avg_ret": 18.22,
-            "avg_win": 18.22,
+            "avg_ret": 16.82,
+            "avg_win": 16.82,
             "avg_loss": null
           }
         },
