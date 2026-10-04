@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-03T18:53:39.459958+00:00",
+  "generated_at": "2026-10-04T12:04:58.631836+00:00",
   "macro": {
-    "usd_try": 49.1398,
-    "eur_try": 55.2878,
+    "usd_try": 49.1366,
+    "eur_try": 55.2842,
     "gold_usd": 4162.3,
     "sp500": 769.64,
     "sp500_change_pct": 0.7395,
@@ -854,7 +854,7 @@
           "t": 1780347600,
           "o": 369.8249,
           "h": 377.7356,
-          "l": 366.1167,
+          "l": 366.1168,
           "c": 376.4995,
           "v": 11495125
         },
@@ -901,16 +901,16 @@
         {
           "t": 1781038800,
           "o": 378.23,
-          "h": 383.1741,
+          "h": 383.1742,
           "l": 375.5107,
           "c": 376.2523,
           "v": 11935037
         },
         {
           "t": 1781125200,
-          "o": 377.7355,
+          "o": 377.7356,
           "h": 381.1965,
-          "l": 369.3304,
+          "l": 369.3305,
           "c": 376.2523,
           "v": 12160034
         },
@@ -924,7 +924,7 @@
         },
         {
           "t": 1781470800,
-          "o": 385.6462,
+          "o": 385.6463,
           "h": 394.5458,
           "l": 380.7021,
           "c": 389.6016,
@@ -4013,7 +4013,7 @@
       "turnover": 10316558824,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -16212,7 +16212,7 @@
       "turnover": 153007479,
       "next_earnings": {
         "date": "2026-10-23",
-        "days": 20
+        "days": 19
       },
       "news": {
         "adjustment": 0,
@@ -26774,7 +26774,7 @@
       "turnover": 4445844016,
       "next_earnings": {
         "date": "2026-10-28",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -38147,7 +38147,7 @@
       "turnover": 7180336381,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -44649,7 +44649,7 @@
       "turnover": 13265416102,
       "next_earnings": {
         "date": "2026-10-27",
-        "days": 24
+        "days": 23
       },
       "news": {
         "adjustment": 0,
@@ -52779,7 +52779,7 @@
       "turnover": 4655812826,
       "next_earnings": {
         "date": "2026-10-19",
-        "days": 16
+        "days": 15
       },
       "news": {
         "adjustment": 0,
@@ -54404,7 +54404,10 @@
       },
       "liquidity": "ok",
       "turnover": 12692283380,
-      "next_earnings": null,
+      "next_earnings": {
+        "date": "2026-11-03",
+        "days": 30
+      },
       "news": {
         "adjustment": 0,
         "sentiment": "nötr",
@@ -62737,67 +62740,67 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 644,
-          "win_rate": 60,
-          "avg_ret": -3.59,
-          "avg_win": 4.71,
-          "avg_loss": -7.69
+          "n": 605,
+          "win_rate": 63,
+          "avg_ret": -4.05,
+          "avg_win": 4.58,
+          "avg_loss": -7.77
         },
         "h10": {
-          "n": 419,
+          "n": 380,
           "win_rate": 66,
-          "avg_ret": -8.35,
-          "avg_win": 3.31,
-          "avg_loss": -11.59
+          "avg_ret": -8.65,
+          "avg_win": 3.32,
+          "avg_loss": -11.89
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 665,
-            "win_rate": 33,
-            "avg_ret": -2.91,
-            "avg_win": 5.07,
-            "avg_loss": -6.77
+            "n": 627,
+            "win_rate": 29,
+            "avg_ret": -3.42,
+            "avg_win": 4.79,
+            "avg_loss": -6.81
           },
           "h10": {
-            "n": 505,
-            "win_rate": 20,
-            "avg_ret": -6.64,
-            "avg_win": 4.41,
-            "avg_loss": -9.37
+            "n": 467,
+            "win_rate": 19,
+            "avg_ret": -6.85,
+            "avg_win": 4.25,
+            "avg_loss": -9.54
           }
         },
         "buy": {
           "h5": {
-            "n": 43,
-            "win_rate": 16,
-            "avg_ret": -8.93,
-            "avg_win": 6.18,
-            "avg_loss": -11.86
+            "n": 40,
+            "win_rate": 12,
+            "avg_ret": -9.5,
+            "avg_win": 6.83,
+            "avg_loss": -11.84
           },
           "h10": {
-            "n": 43,
+            "n": 40,
             "win_rate": 0,
-            "avg_ret": -12.79,
+            "avg_ret": -12.93,
             "avg_win": null,
-            "avg_loss": -12.79
+            "avg_loss": -12.93
           }
         },
         "sell": {
           "h5": {
-            "n": 554,
-            "win_rate": 64,
-            "avg_ret": -3.29,
-            "avg_win": 4.74,
-            "avg_loss": -7.54
+            "n": 518,
+            "win_rate": 68,
+            "avg_ret": -3.79,
+            "avg_win": 4.59,
+            "avg_loss": -7.64
           },
           "h10": {
-            "n": 358,
+            "n": 322,
             "win_rate": 76,
-            "avg_ret": -8.0,
-            "avg_win": 3.43,
-            "avg_loss": -11.66
+            "avg_ret": -8.33,
+            "avg_win": 3.45,
+            "avg_loss": -12.03
           }
         },
         "strong_sell": {
