@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-09T20:24:35.438900+00:00",
+  "generated_at": "2026-10-10T12:12:41.894628+00:00",
   "macro": {
-    "usd_try": 49.2782,
-    "eur_try": 55.226,
-    "gold_usd": 4220.4,
+    "usd_try": 49.3169,
+    "eur_try": 55.2694,
+    "gold_usd": 4216.3,
     "sp500": 778.57,
     "sp500_change_pct": 0.5995,
     "bist100": 12265.98,
@@ -749,7 +749,7 @@
       "turnover": 1697325748,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -1555,7 +1555,7 @@
           "h": 146.9,
           "l": 142.5,
           "c": 142.5,
-          "v": 498537
+          "v": 498557
         }
       ],
       "backtest": {
@@ -1565,7 +1565,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 96490661,
+      "turnover": 96490803,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -2384,7 +2384,7 @@
       "turnover": 178575046,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -4133,8 +4133,8 @@
           "t": 1781038800,
           "o": 253.6475,
           "h": 260.0627,
-          "l": 252.6605,
-          "c": 257.1018,
+          "l": 252.6606,
+          "c": 257.1019,
           "v": 3661121
         },
         {
@@ -4163,9 +4163,9 @@
         },
         {
           "t": 1781557200,
-          "o": 286.2171,
+          "o": 286.217,
           "h": 306.2029,
-          "l": 286.2171,
+          "l": 286.217,
           "c": 298.0605,
           "v": 7494257
         },
@@ -4259,18 +4259,18 @@
         },
         {
           "t": 1782939600,
-          "o": 282.516,
+          "o": 282.5159,
           "h": 283.9964,
-          "l": 277.3345,
-          "c": 278.0747,
+          "l": 277.3344,
+          "c": 278.0746,
           "v": 2878044
         },
         {
           "t": 1783026000,
-          "o": 279.3084,
+          "o": 279.3083,
           "h": 280.0486,
-          "l": 272.8932,
-          "c": 272.8932,
+          "l": 272.8931,
+          "c": 272.8931,
           "v": 1941964
         },
         {
@@ -4318,7 +4318,7 @@
           "o": 261.7899,
           "h": 263.5171,
           "l": 255.6214,
-          "c": 256.3616,
+          "c": 256.3617,
           "v": 2584606
         },
         {
@@ -4331,18 +4331,18 @@
         },
         {
           "t": 1784149200,
-          "o": 256.3617,
-          "h": 264.0106,
-          "l": 255.128,
-          "c": 264.0106,
+          "o": 256.3616,
+          "h": 264.0105,
+          "l": 255.1279,
+          "c": 264.0105,
           "v": 2157753
         },
         {
           "t": 1784235600,
-          "o": 267.2181,
-          "h": 269.192,
+          "o": 267.2182,
+          "h": 269.1921,
           "l": 257.3486,
-          "c": 262.0366,
+          "c": 262.0367,
           "v": 4231386
         },
         {
@@ -4823,7 +4823,7 @@
           "h": 280.5,
           "l": 272.75,
           "c": 274.75,
-          "v": 2592472
+          "v": 3292472
         }
       ],
       "backtest": {
@@ -4833,10 +4833,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 863772986,
+      "turnover": 873389236,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -4861,7 +4861,7 @@
           "metrics": {
             "ma": "Yükseliş",
             "macd": "AL",
-            "vol_x": 0.64
+            "vol_x": 0.68
           }
         },
         "timing": {
@@ -4901,7 +4901,7 @@
         "action": "BEKLE",
         "key": "hold",
         "headline": "🟡 TUT / NÖTR",
-        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%46 · 13 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.64× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
+        "detail": "Teknik görünüm olumlu. ⛔ Endeks düşüş rejiminde (MA50 altı) — düşen piyasada yeni alım önerilmez; teknik AL sinyali TUT'a çekildi. ⛔ Bu hissede stratejinin geçmiş isabeti zayıf (%46 · 13 sinyal) — AL rozeti TUT'a çekildi. ⛔ Hacim teyidi yok (0.68× — eşik 1.2×): yükseliş hacimle desteklenmiyor, AL rozeti TUT'a çekildi.",
         "verdict": "TUT / NÖTR"
       },
       "adjustments": {
@@ -7288,7 +7288,7 @@
       "turnover": 2324380796,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -9726,7 +9726,7 @@
           "h": 393.5,
           "l": 381.25,
           "c": 386.25,
-          "v": 14693030
+          "v": 14929700
         }
       ],
       "backtest": {
@@ -9736,10 +9736,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 8504459256,
+      "turnover": 8509029945,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 21
+        "days": 20
       },
       "news": {
         "adjustment": 0,
@@ -10558,7 +10558,7 @@
       "turnover": 1519431375,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 28
+        "days": 27
       },
       "news": {
         "adjustment": 0,
@@ -12998,7 +12998,7 @@
       "turnover": 377023984,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 28
+        "days": 27
       },
       "news": {
         "adjustment": 0,
@@ -14625,7 +14625,7 @@
       "turnover": 3877276584,
       "next_earnings": {
         "date": "2026-10-19",
-        "days": 10
+        "days": 9
       },
       "news": {
         "adjustment": 0,
@@ -15424,7 +15424,7 @@
         {
           "t": 1791493200,
           "o": 5.67,
-          "h": 6.17,
+          "h": 6.18,
           "l": 5.6,
           "c": 6.18,
           "v": 32673710
@@ -16240,7 +16240,7 @@
           "h": 407.75,
           "l": 401.0,
           "c": 402.75,
-          "v": 6590120
+          "v": 6930120
         }
       ],
       "backtest": {
@@ -16250,8 +16250,11 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 3838519853,
-      "next_earnings": null,
+      "turnover": 3845366603,
+      "next_earnings": {
+        "date": "2026-11-09",
+        "days": 30
+      },
       "news": {
         "adjustment": 0,
         "sentiment": "nötr",
@@ -16275,7 +16278,7 @@
           "metrics": {
             "ma": "Düşüş",
             "macd": "SAT",
-            "vol_x": 0.86
+            "vol_x": 0.87
           }
         },
         "timing": {
@@ -17065,7 +17068,7 @@
       "turnover": 618766846,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -21129,7 +21132,7 @@
       "turnover": 5655186627,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -21931,7 +21934,7 @@
           "h": 12.14,
           "l": 11.81,
           "c": 11.85,
-          "v": 671733
+          "v": 671833
         }
       ],
       "backtest": {
@@ -21941,7 +21944,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 15171086,
+      "turnover": 15171145,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -25194,7 +25197,7 @@
       "turnover": 132435978,
       "next_earnings": {
         "date": "2026-10-23",
-        "days": 14
+        "days": 13
       },
       "news": {
         "adjustment": 0,
@@ -26823,7 +26826,7 @@
       "turnover": 3186115271,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -30888,7 +30891,7 @@
       "turnover": 11047935381,
       "next_earnings": {
         "date": "2026-10-27",
-        "days": 18
+        "days": 17
       },
       "news": {
         "adjustment": 0,
@@ -33328,7 +33331,7 @@
       "turnover": 1285456316,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -37396,7 +37399,7 @@
       "turnover": 5492479448,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 21
+        "days": 20
       },
       "news": {
         "adjustment": 0,
@@ -38211,7 +38214,7 @@
       "turnover": 10502460425,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -39838,7 +39841,7 @@
       "turnover": 1590632376,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -42279,7 +42282,7 @@
       "turnover": 908880745,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 28
+        "days": 27
       },
       "news": {
         "adjustment": 0,
@@ -43094,7 +43097,7 @@
       "turnover": 1499978395,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -47161,7 +47164,7 @@
       "turnover": 138236641,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 28
+        "days": 27
       },
       "news": {
         "adjustment": 0,
@@ -50401,7 +50404,7 @@
           "h": 38.26,
           "l": 37.72,
           "c": 38.04,
-          "v": 22618852
+          "v": 24118852
         }
       ],
       "backtest": {
@@ -50411,10 +50414,10 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1978542912,
+      "turnover": 1981395912,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 28
+        "days": 27
       },
       "news": {
         "adjustment": 0,
@@ -50439,7 +50442,7 @@
           "metrics": {
             "ma": "Death Cross",
             "macd": "SAT",
-            "vol_x": 0.56
+            "vol_x": 0.57
           }
         },
         "timing": {
@@ -52043,7 +52046,7 @@
       "turnover": 6956617986,
       "next_earnings": {
         "date": "2026-11-03",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -54471,7 +54474,7 @@
           "h": 26.06,
           "l": 25.18,
           "c": 25.7,
-          "v": 345873
+          "v": 347586
         }
       ],
       "backtest": {
@@ -54481,7 +54484,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 11587271,
+      "turnover": 11589472,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -55297,7 +55300,7 @@
       "turnover": 3667305451,
       "next_earnings": {
         "date": "2026-10-28",
-        "days": 19
+        "days": 18
       },
       "news": {
         "adjustment": 0,
@@ -56099,7 +56102,7 @@
           "h": 420.0,
           "l": 412.0,
           "c": 418.0,
-          "v": 1612721
+          "v": 1652721
         }
       ],
       "backtest": {
@@ -56109,7 +56112,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1286261782,
+      "turnover": 1287097782,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -58546,7 +58549,7 @@
       "turnover": 1784419172,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -60174,7 +60177,7 @@
       "turnover": 13081090097,
       "next_earnings": {
         "date": "2026-11-03",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -62818,67 +62821,35 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 804,
+          "n": 785,
           "win_rate": 61,
-          "avg_ret": -3.24,
+          "avg_ret": -3.08,
           "avg_win": 3.84,
-          "avg_loss": -6.78
+          "avg_loss": -6.67
         },
         "h10": {
-          "n": 506,
+          "n": 487,
           "win_rate": 70,
-          "avg_ret": -7.37,
-          "avg_win": 4.26,
-          "avg_loss": -10.61
+          "avg_ret": -7.18,
+          "avg_win": 4.25,
+          "avg_loss": -10.48
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 582,
-            "win_rate": 22,
-            "avg_ret": -4.3,
+            "n": 524,
+            "win_rate": 24,
+            "avg_ret": -3.99,
             "avg_win": 3.77,
-            "avg_loss": -6.62
+            "avg_loss": -6.45
           },
           "h10": {
-            "n": 495,
-            "win_rate": 15,
-            "avg_ret": -6.41,
-            "avg_win": 3.98,
-            "avg_loss": -8.27
-          }
-        },
-        "buy": {
-          "h5": {
-            "n": 31,
-            "win_rate": 3,
-            "avg_ret": -12.16,
-            "avg_win": 0.29,
-            "avg_loss": -12.58
-          },
-          "h10": {
-            "n": 31,
-            "win_rate": 0,
-            "avg_ret": -13.09,
-            "avg_win": null,
-            "avg_loss": -13.09
-          }
-        },
-        "sell": {
-          "h5": {
-            "n": 710,
-            "win_rate": 64,
-            "avg_ret": -3.01,
-            "avg_win": 3.91,
-            "avg_loss": -6.62
-          },
-          "h10": {
-            "n": 429,
-            "win_rate": 77,
-            "avg_ret": -7.47,
-            "avg_win": 4.36,
-            "avg_loss": -10.79
+            "n": 437,
+            "win_rate": 16,
+            "avg_ret": -6.35,
+            "avg_win": 3.74,
+            "avg_loss": -8.21
           }
         },
         "strong_buy": {
@@ -62895,6 +62866,38 @@
             "avg_ret": -6.59,
             "avg_win": null,
             "avg_loss": -6.59
+          }
+        },
+        "buy": {
+          "h5": {
+            "n": 25,
+            "win_rate": 4,
+            "avg_ret": -11.87,
+            "avg_win": 0.29,
+            "avg_loss": -12.37
+          },
+          "h10": {
+            "n": 25,
+            "win_rate": 0,
+            "avg_ret": -14.46,
+            "avg_win": null,
+            "avg_loss": -14.46
+          }
+        },
+        "sell": {
+          "h5": {
+            "n": 697,
+            "win_rate": 64,
+            "avg_ret": -2.91,
+            "avg_win": 3.91,
+            "avg_loss": -6.58
+          },
+          "h10": {
+            "n": 416,
+            "win_rate": 77,
+            "avg_ret": -7.25,
+            "avg_win": 4.34,
+            "avg_loss": -10.59
           }
         },
         "strong_sell": {
