@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-10T19:38:39.464541+00:00",
+  "generated_at": "2026-10-11T12:26:34.795900+00:00",
   "macro": {
-    "usd_try": 49.3169,
-    "eur_try": 55.2694,
+    "usd_try": 49.3331,
+    "eur_try": 55.2814,
     "gold_usd": 4216.3,
     "sp500": 778.57,
     "sp500_change_pct": 0.5995,
@@ -749,7 +749,7 @@
       "turnover": 1697325748,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -2384,7 +2384,7 @@
       "turnover": 178575046,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -4133,8 +4133,8 @@
           "t": 1781038800,
           "o": 253.6475,
           "h": 260.0627,
-          "l": 252.6606,
-          "c": 257.1019,
+          "l": 252.6605,
+          "c": 257.1018,
           "v": 3661121
         },
         {
@@ -4163,9 +4163,9 @@
         },
         {
           "t": 1781557200,
-          "o": 286.217,
+          "o": 286.2171,
           "h": 306.2029,
-          "l": 286.217,
+          "l": 286.2171,
           "c": 298.0605,
           "v": 7494257
         },
@@ -4259,18 +4259,18 @@
         },
         {
           "t": 1782939600,
-          "o": 282.5159,
+          "o": 282.516,
           "h": 283.9964,
-          "l": 277.3344,
-          "c": 278.0746,
+          "l": 277.3345,
+          "c": 278.0747,
           "v": 2878044
         },
         {
           "t": 1783026000,
-          "o": 279.3083,
+          "o": 279.3084,
           "h": 280.0486,
-          "l": 272.8931,
-          "c": 272.8931,
+          "l": 272.8932,
+          "c": 272.8932,
           "v": 1941964
         },
         {
@@ -4318,7 +4318,7 @@
           "o": 261.7899,
           "h": 263.5171,
           "l": 255.6214,
-          "c": 256.3617,
+          "c": 256.3616,
           "v": 2584606
         },
         {
@@ -4331,18 +4331,18 @@
         },
         {
           "t": 1784149200,
-          "o": 256.3616,
-          "h": 264.0105,
-          "l": 255.1279,
-          "c": 264.0105,
+          "o": 256.3617,
+          "h": 264.0106,
+          "l": 255.128,
+          "c": 264.0106,
           "v": 2157753
         },
         {
           "t": 1784235600,
-          "o": 267.2182,
-          "h": 269.1921,
+          "o": 267.2181,
+          "h": 269.192,
           "l": 257.3486,
-          "c": 262.0367,
+          "c": 262.0366,
           "v": 4231386
         },
         {
@@ -4836,7 +4836,7 @@
       "turnover": 873389236,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -7288,7 +7288,7 @@
       "turnover": 2324380796,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -9739,7 +9739,7 @@
       "turnover": 8509029945,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 20
+        "days": 19
       },
       "news": {
         "adjustment": 0,
@@ -10558,7 +10558,7 @@
       "turnover": 1519431375,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -12998,7 +12998,7 @@
       "turnover": 377023984,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -14625,7 +14625,7 @@
       "turnover": 3877276584,
       "next_earnings": {
         "date": "2026-10-19",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
@@ -15549,16 +15549,16 @@
         {
           "t": 1781038800,
           "o": 378.23,
-          "h": 383.1741,
+          "h": 383.1742,
           "l": 375.5107,
           "c": 376.2523,
           "v": 11935037
         },
         {
           "t": 1781125200,
-          "o": 377.7355,
+          "o": 377.7356,
           "h": 381.1965,
-          "l": 369.3304,
+          "l": 369.3305,
           "c": 376.2523,
           "v": 12160034
         },
@@ -15572,7 +15572,7 @@
         },
         {
           "t": 1781470800,
-          "o": 385.6462,
+          "o": 385.6463,
           "h": 394.5458,
           "l": 380.7021,
           "c": 389.6016,
@@ -16253,7 +16253,7 @@
       "turnover": 3845366603,
       "next_earnings": {
         "date": "2026-11-09",
-        "days": 30
+        "days": 29
       },
       "news": {
         "adjustment": 0,
@@ -17068,7 +17068,7 @@
       "turnover": 618766846,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -21132,7 +21132,7 @@
       "turnover": 5655186627,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -25197,7 +25197,7 @@
       "turnover": 132435978,
       "next_earnings": {
         "date": "2026-10-23",
-        "days": 13
+        "days": 12
       },
       "news": {
         "adjustment": 0,
@@ -26826,7 +26826,7 @@
       "turnover": 3186115271,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -30891,7 +30891,7 @@
       "turnover": 11047935381,
       "next_earnings": {
         "date": "2026-10-27",
-        "days": 17
+        "days": 16
       },
       "news": {
         "adjustment": 0,
@@ -33331,7 +33331,7 @@
       "turnover": 1285456316,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -37399,7 +37399,7 @@
       "turnover": 5492479448,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 20
+        "days": 19
       },
       "news": {
         "adjustment": 0,
@@ -38214,7 +38214,7 @@
       "turnover": 10502460425,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -39841,7 +39841,7 @@
       "turnover": 1590632376,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -42282,7 +42282,7 @@
       "turnover": 908880745,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -43097,7 +43097,7 @@
       "turnover": 1499978395,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -47164,7 +47164,7 @@
       "turnover": 138236641,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -50417,7 +50417,7 @@
       "turnover": 1981395912,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 27
+        "days": 26
       },
       "news": {
         "adjustment": 0,
@@ -52046,7 +52046,7 @@
       "turnover": 6956617986,
       "next_earnings": {
         "date": "2026-11-03",
-        "days": 24
+        "days": 23
       },
       "news": {
         "adjustment": 0,
@@ -55300,7 +55300,7 @@
       "turnover": 3667305451,
       "next_earnings": {
         "date": "2026-10-28",
-        "days": 18
+        "days": 17
       },
       "news": {
         "adjustment": 0,
@@ -58549,7 +58549,7 @@
       "turnover": 1784419172,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 26
+        "days": 25
       },
       "news": {
         "adjustment": 0,
@@ -60177,7 +60177,7 @@
       "turnover": 13081090097,
       "next_earnings": {
         "date": "2026-11-03",
-        "days": 24
+        "days": 23
       },
       "news": {
         "adjustment": 0,
@@ -62821,83 +62821,83 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 785,
-          "win_rate": 61,
-          "avg_ret": -3.08,
-          "avg_win": 3.84,
-          "avg_loss": -6.67
+          "n": 763,
+          "win_rate": 60,
+          "avg_ret": -2.95,
+          "avg_win": 3.85,
+          "avg_loss": -6.61
         },
         "h10": {
-          "n": 487,
+          "n": 465,
           "win_rate": 70,
-          "avg_ret": -7.18,
-          "avg_win": 4.25,
-          "avg_loss": -10.48
+          "avg_ret": -7.09,
+          "avg_win": 4.23,
+          "avg_loss": -10.51
         }
       },
       "by_verdict": {
-        "hold": {
-          "h5": {
-            "n": 524,
-            "win_rate": 24,
-            "avg_ret": -3.99,
-            "avg_win": 3.77,
-            "avg_loss": -6.45
-          },
-          "h10": {
-            "n": 437,
-            "win_rate": 16,
-            "avg_ret": -6.35,
-            "avg_win": 3.74,
-            "avg_loss": -8.21
-          }
-        },
         "strong_buy": {
           "h5": {
-            "n": 9,
+            "n": 6,
             "win_rate": 0,
-            "avg_ret": -7.25,
+            "avg_ret": -7.14,
             "avg_win": null,
-            "avg_loss": -7.25
+            "avg_loss": -7.14
           },
           "h10": {
-            "n": 9,
+            "n": 6,
             "win_rate": 0,
-            "avg_ret": -6.59,
+            "avg_ret": -7.7,
             "avg_win": null,
-            "avg_loss": -6.59
+            "avg_loss": -7.7
+          }
+        },
+        "hold": {
+          "h5": {
+            "n": 469,
+            "win_rate": 26,
+            "avg_ret": -3.59,
+            "avg_win": 3.63,
+            "avg_loss": -6.18
+          },
+          "h10": {
+            "n": 382,
+            "win_rate": 16,
+            "avg_ret": -6.06,
+            "avg_win": 3.52,
+            "avg_loss": -7.89
           }
         },
         "buy": {
           "h5": {
-            "n": 25,
-            "win_rate": 4,
-            "avg_ret": -11.87,
+            "n": 22,
+            "win_rate": 5,
+            "avg_ret": -11.94,
             "avg_win": 0.29,
-            "avg_loss": -12.37
+            "avg_loss": -12.53
           },
           "h10": {
-            "n": 25,
+            "n": 22,
             "win_rate": 0,
-            "avg_ret": -14.46,
+            "avg_ret": -14.99,
             "avg_win": null,
-            "avg_loss": -14.46
+            "avg_loss": -14.99
           }
         },
         "sell": {
           "h5": {
-            "n": 697,
-            "win_rate": 64,
-            "avg_ret": -2.91,
-            "avg_win": 3.91,
-            "avg_loss": -6.58
+            "n": 681,
+            "win_rate": 63,
+            "avg_ret": -2.81,
+            "avg_win": 3.92,
+            "avg_loss": -6.55
           },
           "h10": {
-            "n": 416,
-            "win_rate": 77,
-            "avg_ret": -7.25,
-            "avg_win": 4.34,
-            "avg_loss": -10.59
+            "n": 400,
+            "win_rate": 76,
+            "avg_ret": -7.15,
+            "avg_win": 4.33,
+            "avg_loss": -10.57
           }
         },
         "strong_sell": {
