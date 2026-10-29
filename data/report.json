@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-28T20:40:55.180034+00:00",
+  "generated_at": "2026-10-29T12:37:47.643741+00:00",
   "macro": {
-    "usd_try": 49.8068,
-    "eur_try": 55.5012,
-    "gold_usd": 4072.7,
+    "usd_try": 49.8656,
+    "eur_try": 55.5791,
+    "gold_usd": 4035.4,
     "sp500": 772.31,
     "sp500_change_pct": 0.3443,
     "bist100": 11165.44,
@@ -3186,7 +3186,7 @@
       "turnover": 3070594483,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -4813,7 +4813,7 @@
       "turnover": 1672941817,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -7255,7 +7255,7 @@
       "turnover": 264549978,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
@@ -8884,7 +8884,7 @@
       "turnover": 1044550465,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
@@ -10513,7 +10513,7 @@
       "turnover": 5792132716,
       "next_earnings": {
         "date": "2026-10-30",
-        "days": 2
+        "days": 1
       },
       "news": {
         "adjustment": 0,
@@ -11329,7 +11329,7 @@
       "turnover": 1396582868,
       "next_earnings": {
         "date": "2026-11-09",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -13771,7 +13771,7 @@
       "turnover": 1000538525,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -14719,18 +14719,18 @@
         },
         {
           "t": 1782939600,
-          "o": 282.5159,
+          "o": 282.516,
           "h": 283.9964,
-          "l": 277.3344,
-          "c": 278.0746,
+          "l": 277.3345,
+          "c": 278.0747,
           "v": 2878044
         },
         {
           "t": 1783026000,
-          "o": 279.3083,
+          "o": 279.3084,
           "h": 280.0486,
-          "l": 272.8931,
-          "c": 272.8931,
+          "l": 272.8932,
+          "c": 272.8932,
           "v": 1941964
         },
         {
@@ -14778,7 +14778,7 @@
           "o": 261.7899,
           "h": 263.5171,
           "l": 255.6214,
-          "c": 256.3617,
+          "c": 256.3616,
           "v": 2584606
         },
         {
@@ -14791,18 +14791,18 @@
         },
         {
           "t": 1784149200,
-          "o": 256.3616,
-          "h": 264.0105,
-          "l": 255.1279,
-          "c": 264.0105,
+          "o": 256.3617,
+          "h": 264.0106,
+          "l": 255.128,
+          "c": 264.0106,
           "v": 2157753
         },
         {
           "t": 1784235600,
-          "o": 267.2182,
-          "h": 269.1921,
+          "o": 267.2181,
+          "h": 269.192,
           "l": 257.3486,
-          "c": 262.0367,
+          "c": 262.0366,
           "v": 4231386
         },
         {
@@ -15400,7 +15400,7 @@
       "turnover": 854076229,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -16216,7 +16216,7 @@
       "turnover": 3723856416,
       "next_earnings": {
         "date": "2026-11-09",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -17032,7 +17032,7 @@
       "turnover": 1169293871,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -17848,7 +17848,7 @@
       "turnover": 181948506,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -20290,7 +20290,7 @@
       "turnover": 5016545282,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -22731,7 +22731,7 @@
       "turnover": 1073690245,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -27612,7 +27612,7 @@
       "turnover": 5582910436,
       "next_earnings": {
         "date": "2026-11-03",
-        "days": 6
+        "days": 5
       },
       "news": {
         "adjustment": 0,
@@ -29240,7 +29240,7 @@
       "turnover": 128313591,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
@@ -30869,7 +30869,7 @@
       "turnover": 7508204018,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -33311,7 +33311,7 @@
       "turnover": 506153012,
       "next_earnings": {
         "date": "2026-11-04",
-        "days": 7
+        "days": 6
       },
       "news": {
         "adjustment": 0,
@@ -39818,7 +39818,7 @@
       "turnover": 1164381500,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -45512,7 +45512,7 @@
       "turnover": 723195246,
       "next_earnings": {
         "date": "2026-11-05",
-        "days": 8
+        "days": 7
       },
       "news": {
         "adjustment": 0,
@@ -54449,10 +54449,7 @@
       },
       "liquidity": "ok",
       "turnover": 2753354878,
-      "next_earnings": {
-        "date": "2026-10-28",
-        "days": 0
-      },
+      "next_earnings": null,
       "news": {
         "adjustment": 0,
         "sentiment": "nötr",
@@ -56079,7 +56076,7 @@
       "turnover": 741975135,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
@@ -60147,7 +60144,7 @@
       "turnover": 4130841797,
       "next_earnings": {
         "date": "2026-11-09",
-        "days": 12
+        "days": 11
       },
       "news": {
         "adjustment": 0,
@@ -60963,7 +60960,7 @@
       "turnover": 701130235,
       "next_earnings": {
         "date": "2026-11-06",
-        "days": 9
+        "days": 8
       },
       "news": {
         "adjustment": 0,
