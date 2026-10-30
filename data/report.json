@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-30T18:20:34.484025+00:00",
+  "generated_at": "2026-10-30T20:16:10.885841+00:00",
   "macro": {
     "usd_try": 49.9158,
     "eur_try": 55.7158,
-    "gold_usd": 3889.0,
-    "sp500": 752.53,
-    "sp500_change_pct": -2.1875,
+    "gold_usd": 3892.2,
+    "sp500": 755.72,
+    "sp500_change_pct": -1.7729,
     "bist100": 10759.56,
     "bist100_change_pct": -3.6352,
     "tr_interest_rate": 46.0
@@ -3982,9 +3982,9 @@
           "t": 1793307600,
           "o": 307.25,
           "h": 307.25,
-          "l": 297.75,
+          "l": 297.5,
           "c": 300.0,
-          "v": 243751
+          "v": 243777
         }
       ],
       "backtest": {
@@ -3994,7 +3994,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 179617372,
+      "turnover": 179617762,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -4053,7 +4053,7 @@
         "rr": 5.58,
         "support": 293.0,
         "resistance": 357.0,
-        "atr": 12.82
+        "atr": 12.84
       },
       "signal": {
         "action": "SAT",
@@ -12126,7 +12126,7 @@
           "h": 360.5,
           "l": 343.25,
           "c": 343.5,
-          "v": 16808141
+          "v": 16807950
         }
       ],
       "backtest": {
@@ -12136,7 +12136,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 5639578860,
+      "turnover": 5639575580,
       "next_earnings": {
         "date": "2026-10-30",
         "days": 0
@@ -16191,7 +16191,7 @@
           "t": 1793307600,
           "o": 192.9,
           "h": 194.7,
-          "l": 183.3,
+          "l": 183.4,
           "c": 191.4,
           "v": 4076471
         }
@@ -16262,7 +16262,7 @@
         "rr": 2.9,
         "support": 165.8,
         "resistance": 277.75,
-        "atr": 16.74
+        "atr": 16.73
       },
       "signal": {
         "action": "SAT",
@@ -17006,7 +17006,7 @@
           "h": 91.75,
           "l": 89.5,
           "c": 90.1,
-          "v": 19451338
+          "v": 19501348
         }
       ],
       "backtest": {
@@ -17016,7 +17016,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 1401382214,
+      "turnover": 1401607509,
       "next_earnings": {
         "date": "2026-11-09",
         "days": 10
@@ -17822,7 +17822,7 @@
           "h": 357.75,
           "l": 336.5,
           "c": 347.0,
-          "v": 44793081
+          "v": 44793028
         }
       ],
       "backtest": {
@@ -17832,7 +17832,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 12653699205,
+      "turnover": 12653698285,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -18634,7 +18634,7 @@
           "h": 24.0,
           "l": 22.66,
           "c": 22.84,
-          "v": 324279
+          "v": 324097
         }
       ],
       "backtest": {
@@ -18644,7 +18644,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 7706395,
+      "turnover": 7706187,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -19444,10 +19444,10 @@
         {
           "t": 1793307600,
           "o": 17.9,
-          "h": 18.02,
+          "h": 18.04,
           "l": 17.55,
           "c": 17.92,
-          "v": 862472
+          "v": 862920
         }
       ],
       "backtest": {
@@ -19457,7 +19457,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 19692195,
+      "turnover": 19692596,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -25143,7 +25143,7 @@
           "h": 4.69,
           "l": 4.54,
           "c": 4.57,
-          "v": 6938259
+          "v": 6942684
         }
       ],
       "backtest": {
@@ -25153,7 +25153,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 39470953,
+      "turnover": 39471964,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -28401,7 +28401,7 @@
           "h": 16.45,
           "l": 15.85,
           "c": 15.85,
-          "v": 12040023
+          "v": 12040913
         }
       ],
       "backtest": {
@@ -28411,7 +28411,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 148973025,
+      "turnover": 148973730,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -40614,7 +40614,7 @@
           "h": 4.35,
           "l": 3.92,
           "c": 3.92,
-          "v": 16990216
+          "v": 16997403
         }
       ],
       "backtest": {
@@ -40624,7 +40624,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 165007112,
+      "turnover": 165008521,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -44679,7 +44679,7 @@
           "h": 6.6,
           "l": 5.96,
           "c": 5.97,
-          "v": 2644449
+          "v": 2645670
         }
       ],
       "backtest": {
@@ -44689,7 +44689,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 7871738,
+      "turnover": 7872103,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -52004,7 +52004,7 @@
           "h": 11.83,
           "l": 11.02,
           "c": 11.02,
-          "v": 6523398
+          "v": 6523428
         }
       ],
       "backtest": {
@@ -52014,7 +52014,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 111190951,
+      "turnover": 111190967,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -61758,9 +61758,9 @@
           "t": 1793307600,
           "o": 118.5,
           "h": 118.9,
-          "l": 113.5,
+          "l": 113.8,
           "c": 114.4,
-          "v": 308355
+          "v": 308282
         }
       ],
       "backtest": {
@@ -61770,7 +61770,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 62264641,
+      "turnover": 62264223,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -61818,18 +61818,18 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 7.9
+            "rr": 7.91
           }
         }
       },
       "trade_setup": {
         "entry": 114.4,
-        "stop": 109.6,
+        "stop": 109.61,
         "target": 152.3,
-        "rr": 7.9,
+        "rr": 7.91,
         "support": 111.0,
         "resistance": 152.3,
-        "atr": 5.59
+        "atr": 5.56
       },
       "signal": {
         "action": "SAT",
