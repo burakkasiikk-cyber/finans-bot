@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-14T20:13:59.889454+00:00",
+  "generated_at": "2026-11-15T13:44:14.305849+00:00",
   "macro": {
-    "usd_try": 50.3693,
-    "eur_try": 55.5953,
+    "usd_try": 50.3812,
+    "eur_try": 55.6084,
     "gold_usd": 3886.3,
     "sp500": 754.37,
     "sp500_change_pct": -0.3632,
@@ -3294,7 +3294,7 @@
           "o": 261.7899,
           "h": 263.5171,
           "l": 255.6214,
-          "c": 256.3617,
+          "c": 256.3616,
           "v": 2584606
         },
         {
@@ -3307,18 +3307,18 @@
         },
         {
           "t": 1784149200,
-          "o": 256.3616,
-          "h": 264.0105,
-          "l": 255.1279,
-          "c": 264.0105,
+          "o": 256.3617,
+          "h": 264.0106,
+          "l": 255.128,
+          "c": 264.0106,
           "v": 2157753
         },
         {
           "t": 1784235600,
-          "o": 267.2182,
-          "h": 269.1921,
+          "o": 267.2181,
+          "h": 269.192,
           "l": 257.3486,
-          "c": 262.0367,
+          "c": 262.0366,
           "v": 4231386
         },
         {
@@ -8061,7 +8061,7 @@
       "turnover": 200006467,
       "next_earnings": {
         "date": "2026-12-09",
-        "days": 25
+        "days": 24
       },
       "news": {
         "adjustment": 0,
@@ -62665,84 +62665,84 @@
     "30g": {
       "overall": {
         "h5": {
-          "n": 1061,
-          "win_rate": 54,
-          "avg_ret": -0.46,
-          "avg_win": 7.11,
-          "avg_loss": -6.74
+          "n": 1006,
+          "win_rate": 51,
+          "avg_ret": -0.04,
+          "avg_win": 7.13,
+          "avg_loss": -6.56
         },
         "h10": {
-          "n": 758,
-          "win_rate": 46,
-          "avg_ret": 0.62,
-          "avg_win": 9.05,
-          "avg_loss": -9.09
+          "n": 703,
+          "win_rate": 41,
+          "avg_ret": 1.79,
+          "avg_win": 9.07,
+          "avg_loss": -8.1
         }
       },
       "by_verdict": {
         "hold": {
           "h5": {
-            "n": 171,
-            "win_rate": 37,
-            "avg_ret": -1.49,
-            "avg_win": 5.74,
-            "avg_loss": -5.71
+            "n": 149,
+            "win_rate": 40,
+            "avg_ret": -1.04,
+            "avg_win": 5.96,
+            "avg_loss": -5.76
           },
           "h10": {
-            "n": 89,
-            "win_rate": 27,
-            "avg_ret": -4.01,
-            "avg_win": 6.09,
-            "avg_loss": -7.74
+            "n": 67,
+            "win_rate": 34,
+            "avg_ret": -2.03,
+            "avg_win": 6.12,
+            "avg_loss": -6.28
           }
         },
         "sell": {
           "h5": {
-            "n": 1000,
-            "win_rate": 55,
-            "avg_ret": -0.55,
-            "avg_win": 7.34,
-            "avg_loss": -6.78
+            "n": 946,
+            "win_rate": 52,
+            "avg_ret": -0.12,
+            "avg_win": 7.36,
+            "avg_loss": -6.6
           },
           "h10": {
-            "n": 739,
-            "win_rate": 46,
-            "avg_ret": 0.62,
-            "avg_win": 9.11,
-            "avg_loss": -9.08
+            "n": 685,
+            "win_rate": 42,
+            "avg_ret": 1.8,
+            "avg_win": 9.14,
+            "avg_loss": -8.08
           }
         },
         "strong_sell": {
           "h5": {
-            "n": 61,
-            "win_rate": 34,
-            "avg_ret": 1.11,
+            "n": 60,
+            "win_rate": 33,
+            "avg_ret": 1.23,
             "avg_win": 4.61,
-            "avg_loss": -5.55
+            "avg_loss": -5.52
           },
           "h10": {
-            "n": 19,
-            "win_rate": 37,
-            "avg_ret": 0.7,
+            "n": 18,
+            "win_rate": 33,
+            "avg_ret": 1.62,
             "avg_win": 6.9,
-            "avg_loss": -9.93
+            "avg_loss": -8.93
           }
         }
       },
       "dip": {
         "h5": {
-          "n": 88,
-          "win_rate": 56,
-          "avg_ret": 2.58,
+          "n": 80,
+          "win_rate": 61,
+          "avg_ret": 3.77,
           "avg_win": 10.43,
-          "avg_loss": -7.29
+          "avg_loss": -6.76
         },
         "h10": {
-          "n": 57,
-          "win_rate": 61,
-          "avg_ret": 1.06,
+          "n": 49,
+          "win_rate": 71,
+          "avg_ret": 4.94,
           "avg_win": 9.42,
-          "avg_loss": -12.25
+          "avg_loss": -6.26
         }
       }
     },
