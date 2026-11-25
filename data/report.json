@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-25T16:59:49.955284+00:00",
+  "generated_at": "2026-11-25T19:42:43.366767+00:00",
   "macro": {
     "usd_try": 50.6742,
     "eur_try": 55.5334,
-    "gold_usd": 3482.8,
-    "sp500": 700.6,
-    "sp500_change_pct": -2.5293,
+    "gold_usd": 3576.7,
+    "sp500": 718.06,
+    "sp500_change_pct": -0.1002,
     "bist100": 10655.74,
     "bist100_change_pct": -2.8287,
     "tr_interest_rate": 46.0
@@ -2369,7 +2369,7 @@
           "h": 289.5,
           "l": 279.25,
           "c": 280.5,
-          "v": 3808683
+          "v": 3808569
         }
       ],
       "backtest": {
@@ -2379,7 +2379,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 994061523,
+      "turnover": 994059924,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -8063,7 +8063,7 @@
           "h": 10.51,
           "l": 9.88,
           "c": 9.96,
-          "v": 331153
+          "v": 331146
         }
       ],
       "backtest": {
@@ -8073,7 +8073,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 7799488,
+      "turnover": 7799484,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -12123,7 +12123,7 @@
           "t": 1795554000,
           "o": 4350.0,
           "h": 4390.0,
-          "l": 4197.5,
+          "l": 4195.0,
           "c": 4205.0,
           "v": 14695
         }
@@ -12175,7 +12175,7 @@
         "momentum": {
           "score": 43,
           "metrics": {
-            "stoch": 0.9,
+            "stoch": 1.2,
             "ret_1w": -7.02,
             "ret_1m": 8.8
           }
@@ -12183,18 +12183,18 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 12.38
+            "rr": 11.94
           }
         }
       },
       "trade_setup": {
         "entry": 4205.0,
-        "stop": 4135.76,
+        "stop": 4133.21,
         "target": 5062.5,
-        "rr": 12.38,
+        "rr": 11.94,
         "support": 3512.5,
         "resistance": 5062.5,
-        "atr": 246.96
+        "atr": 247.14
       },
       "signal": {
         "action": "SAT",
@@ -15376,7 +15376,7 @@
           "h": 116.0,
           "l": 110.3,
           "c": 112.3,
-          "v": 512836
+          "v": 512835
         }
       ],
       "backtest": {
@@ -15386,7 +15386,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 38579347,
+      "turnover": 38579341,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -41390,7 +41390,7 @@
           "t": 1795554000,
           "o": 68.55,
           "h": 68.7,
-          "l": 66.7,
+          "l": 66.75,
           "c": 68.05,
           "v": 139994
         }
@@ -41442,7 +41442,7 @@
         "momentum": {
           "score": 39,
           "metrics": {
-            "stoch": 6.6,
+            "stoch": 6.4,
             "ret_1w": -5.88,
             "ret_1m": -7.35
           }
@@ -41450,18 +41450,18 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 8.99
+            "rr": 9.21
           }
         }
       },
       "trade_setup": {
         "entry": 68.05,
-        "stop": 65.92,
+        "stop": 65.97,
         "target": 87.2,
-        "rr": 8.99,
+        "rr": 9.21,
         "support": 66.65,
         "resistance": 87.2,
-        "atr": 3.14
+        "atr": 3.13
       },
       "signal": {
         "action": "SAT",
@@ -43016,9 +43016,9 @@
           "t": 1795554000,
           "o": 143.5,
           "h": 144.4,
-          "l": 137.7,
+          "l": 137.6,
           "c": 137.9,
-          "v": 178150
+          "v": 178156
         }
       ],
       "backtest": {
@@ -43028,7 +43028,7 @@
         "horizon": 10
       },
       "liquidity": "ok",
-      "turnover": 51617082,
+      "turnover": 51617123,
       "next_earnings": null,
       "news": {
         "adjustment": 0,
@@ -43068,7 +43068,7 @@
         "momentum": {
           "score": 30,
           "metrics": {
-            "stoch": 0.7,
+            "stoch": 1.1,
             "ret_1w": -11.32,
             "ret_1m": -15.66
           }
@@ -43076,18 +43076,18 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 15.19
+            "rr": 14.4
           }
         }
       },
       "trade_setup": {
         "entry": 137.9,
-        "stop": 136.09,
+        "stop": 135.99,
         "target": 165.4,
-        "rr": 15.19,
+        "rr": 14.4,
         "support": 132.2,
         "resistance": 165.4,
-        "atr": 6.42
+        "atr": 6.43
       },
       "signal": {
         "action": "SAT",
@@ -49520,7 +49520,7 @@
           "t": 1795554000,
           "o": 84.7,
           "h": 84.9,
-          "l": 82.7,
+          "l": 82.6,
           "c": 83.15,
           "v": 565432
         }
@@ -49591,7 +49591,7 @@
         "rr": 7.94,
         "support": 81.9,
         "resistance": 98.4,
-        "atr": 2.68
+        "atr": 2.69
       },
       "signal": {
         "action": "SAT",
@@ -54398,7 +54398,7 @@
           "t": 1795554000,
           "o": 5.78,
           "h": 5.78,
-          "l": 5.51,
+          "l": 5.5,
           "c": 5.5,
           "v": 1334431
         }
@@ -54450,7 +54450,7 @@
         "momentum": {
           "score": 30,
           "metrics": {
-            "stoch": -0.7,
+            "stoch": 0.0,
             "ret_1w": -9.54,
             "ret_1m": -13.39
           }
@@ -54458,16 +54458,16 @@
         "setup": {
           "score": 92,
           "metrics": {
-            "rr": 25.17
+            "rr": 21.57
           }
         }
       },
       "trade_setup": {
         "entry": 5.5,
-        "stop": 5.44,
+        "stop": 5.43,
         "target": 7.01,
-        "rr": 25.17,
-        "support": 5.51,
+        "rr": 21.57,
+        "support": 5.5,
         "resistance": 7.01,
         "atr": 0.26
       },
